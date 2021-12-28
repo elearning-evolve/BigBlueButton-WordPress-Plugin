@@ -49,7 +49,7 @@ class Bigbluebutton_Admin_Api {
 				$viewer_code = Bigbluebutton_Admin_Helper::generate_random_code();
 			}
 
-			// Ensure the moderator code is not the same as the viewer code.
+			// Ensure the Moderator Access Code is not the same as the Viewer Access Code.
 			if ( $moderator_code === $viewer_code ) {
 				$viewer_code = $moderator_code . Bigbluebutton_Admin_Helper::generate_random_code( 1 );
 			}

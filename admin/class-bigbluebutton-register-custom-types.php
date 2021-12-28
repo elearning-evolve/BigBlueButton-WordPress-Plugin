@@ -94,13 +94,13 @@ class Bigbluebutton_Register_Custom_Types {
 	}
 
 	/**
-	 * Create moderator and viewer code metaboxes on room creation and edit.
+	 * Create moderator and Viewer Access Code metaboxes on room creation and edit.
 	 *
 	 * @since   3.0.0
 	 */
 	public function register_room_code_metaboxes() {
-		add_meta_box( 'bbb-moderator-code', __( 'Moderator Code', 'bigbluebutton' ), array( $this, 'display_moderator_code_metabox' ), 'bbb-room' );
-		add_meta_box( 'bbb-viewer-code', __( 'Viewer Code', 'bigbluebutton' ), array( $this, 'display_viewer_code_metabox' ), 'bbb-room' );
+		add_meta_box( 'bbb-moderator-code', __( 'Moderator Access Code', 'bigbluebutton' ), array( $this, 'display_moderator_code_metabox' ), 'bbb-room' );
+		add_meta_box( 'bbb-viewer-code', __( 'Viewer Access Code', 'bigbluebutton' ), array( $this, 'display_viewer_code_metabox' ), 'bbb-room' );
 	}
 
 	/**
@@ -124,7 +124,7 @@ class Bigbluebutton_Register_Custom_Types {
 	}
 
 	/**
-	 * Display moderator code metabox.
+	 * Display Moderator Access Code metabox.
 	 *
 	 * @since   3.0.0
 	 *
@@ -132,7 +132,7 @@ class Bigbluebutton_Register_Custom_Types {
 	 */
 	public function display_moderator_code_metabox( $object ) {
 		$entry_code       = Bigbluebutton_Admin_Helper::generate_random_code();
-		$entry_code_label = __( 'Moderator Code', 'bigbluebutton' );
+		$entry_code_label = __( 'Moderator Access Code', 'bigbluebutton' );
 		$entry_code_name  = 'bbb-moderator-code';
 		$existing_value   = get_post_meta( $object->ID, 'bbb-room-moderator-code', true );
 		wp_nonce_field( 'bbb-room-moderator-code-nonce', 'bbb-room-moderator-code-nonce' );
@@ -140,7 +140,7 @@ class Bigbluebutton_Register_Custom_Types {
 	}
 
 	/**
-	 * Display viewer code metabox.
+	 * Display Viewer Access Code metabox.
 	 *
 	 * @since   3.0.0
 	 *
@@ -148,7 +148,7 @@ class Bigbluebutton_Register_Custom_Types {
 	 */
 	public function display_viewer_code_metabox( $object ) {
 		$entry_code       = Bigbluebutton_Admin_Helper::generate_random_code();
-		$entry_code_label = __( 'Viewer Code', 'bigbluebutton' );
+		$entry_code_label = __( 'Viewer Access Code', 'bigbluebutton' );
 		$entry_code_name  = 'bbb-viewer-code';
 		$existing_value   = get_post_meta( $object->ID, 'bbb-room-viewer-code', true );
 		wp_nonce_field( 'bbb-room-viewer-code-nonce', 'bbb-room-viewer-code-nonce' );

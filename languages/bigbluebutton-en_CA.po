@@ -120,11 +120,11 @@ msgstr "Room scheduled"
 msgid "Room updated"
 msgstr "Room updated"
 
-msgid "Moderator Code"
-msgstr "Moderator Code"
+msgid "Moderator Access Code"
+msgstr "Moderator Access Code"
 
-msgid "Viewer Code"
-msgstr "Viewer Code"
+msgid "Viewer Access Code"
+msgstr "Viewer Access Code"
 
 msgid "Recordable"
 msgstr "Recordable"

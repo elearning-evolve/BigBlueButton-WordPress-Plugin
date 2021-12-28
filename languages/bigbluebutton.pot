@@ -114,10 +114,10 @@ msgstr ""
 msgid "Room updated"
 msgstr ""
 
-msgid "Moderator Code"
+msgid "Moderator Access Code"
 msgstr ""
 
-msgid "Viewer Code"
+msgid "Viewer Access Code"
 msgstr ""
 
 msgid "Recordable"

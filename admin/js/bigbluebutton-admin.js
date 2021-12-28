@@ -1,6 +1,6 @@
-( function( $ ) {
-	'use strict';
+const { __, _x, _n, _nx } = wp.i18n;
 
+( function( $ ) {
 	/**
 	 * All of the code for your admin-facing JavaScript source
 	 * should reside in this file.
@@ -54,3 +54,14 @@
 		});
 	});
 }( jQuery ) );
+
+function copyToClipboard(elem) {
+    /* Copy the text inside the text field */
+    navigator.clipboard.writeText(elem.getAttribute('data-value'));
+
+    var tooltip = jQuery(elem).find('.shortcode-tooltip').html( __('Copied:', 'bigbluebutton') );
+}
+
+function copyClipboardExit(elem) {
+    var tooltip = jQuery(elem).find('.shortcode-tooltip').html( __('Copy Shortcode', 'bigbluebutton') );
+}

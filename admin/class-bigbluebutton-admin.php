@@ -98,7 +98,7 @@ class Bigbluebutton_Admin {
 		$translations = array(
 			'ajax_url' => admin_url( 'admin-ajax.php' ),
 		);
-		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/bigbluebutton-admin.js', array( 'jquery' ), $this->version, false );
+		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/bigbluebutton-admin.js', array( 'jquery', 'wp-i18n' ), $this->version, false );
 		wp_localize_script( $this->plugin_name, 'php_vars', $translations );
 	}
 
@@ -109,20 +109,32 @@ class Bigbluebutton_Admin {
 	 */
 	public function create_admin_menu() {
 		add_menu_page(
-			__( 'Rooms', 'bigbluebutton' ), __( 'Rooms', 'bigbluebutton' ), 'activate_plugins', 'bbb_room',
-			'', 'dashicons-video-alt2'
+			__( 'BBB Rooms', 'bigbluebutton' ),
+			__( 'BBB Rooms', 'bigbluebutton' ),
+			'activate_plugins',
+			'bbb_room',
+			'',
+			'dashicons-video-alt2'
 		);
 
 		if ( current_user_can( 'manage_categories' ) ) {
 			add_submenu_page(
-				'bbb_room', __( 'Rooms', 'bigbluebutton' ), __( 'Categories' ), 'activate_plugins',
-				'edit-tags.php?taxonomy=bbb-room-category', ''
+				'bbb_room',
+				__( 'Rooms', 'bigbluebutton' ),
+				__( 'Categories' ),
+				'activate_plugins',
+				'edit-tags.php?taxonomy=bbb-room-category',
+				''
 			);
 		}
 
 		add_submenu_page(
-			'bbb_room', __( 'Rooms', 'bigbluebutton' ), __( 'Settings' ), 'activate_plugins',
-			'bbb-room-server-settings', array( $this, 'display_room_server_settings' )
+			'bbb_room',
+			__( 'Rooms', 'bigbluebutton' ),
+			__( 'Settings' ),
+			'activate_plugins',
+			'bbb-room-server-settings',
+			array( $this, 'display_room_server_settings' )
 		);
 	}
 
@@ -158,8 +170,9 @@ class Bigbluebutton_Admin {
 			'category'       => __( 'Category' ),
 			'permalink'      => __( 'Permalink' ),
 			'token'          => __( 'Token', 'bigbluebutton' ),
-			'moderator-code' => __( 'Moderator Code', 'bigbluebutton' ),
-			'viewer-code'    => __( 'Viewer Code', 'bigbluebutton' ),
+			'shortcode'      => __( 'Shortcode', 'bigbluebutton' ),
+			'moderator-code' => __( 'Moderator Access Code', 'bigbluebutton' ),
+			'viewer-code'    => __( 'Viewer Access Code', 'bigbluebutton' ),
 		);
 
 		$columns = array_merge( $columns, $custom_columns );
@@ -194,6 +207,18 @@ class Bigbluebutton_Admin {
 					$token = 'z' . esc_attr( $post_id );
 				}
 				echo esc_attr( $token );
+				break;
+			case 'shortcode':
+				if ( metadata_exists( 'post', $post_id, 'bbb-room-token' ) ) {
+					$token = get_post_meta( $post_id, 'bbb-room-token', true );
+				} else {
+					$token = 'z' . $post_id;
+				}
+				echo '<div class="tooltip" onclick="copyToClipboard(this)" onmouseout="copyClipboardExit(this)"
+						data-value="[bigbluebutton token=' . esc_attr( $token ) . ']">
+						<span class="tooltiptext shortcode-tooltip">' . __( 'Copy Shortcode', 'bigbluebutton' ) . '</span>
+						<span class="dashicons dashicons-clipboard"></span>
+					</div>';
 				break;
 			case 'moderator-code':
 				echo esc_attr( get_post_meta( $post_id, 'bbb-room-moderator-code', true ) );

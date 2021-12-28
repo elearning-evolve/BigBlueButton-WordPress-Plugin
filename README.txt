@@ -1,11 +1,11 @@
 === BigBlueButton ===
-Contributors: blindsidenetworks, jfederico, yfngdu
+Contributors: blindsidenetworks, jfederico, yfngdu, elearningevolve
 Donate link: https://blindsidenetworks.com
 Tags: blindsidenetworks, bigbluebutton, opensource, open source, web, conferencing, webconferencing
 Requires at least: 5.1
-Tested up to: 5.3.2
+Tested up to: 5.8.2
 Requires PHP: 7.2
-Stable tag: 3.0.0-beta.4
+Stable tag: 3.1.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -119,7 +119,10 @@ If a user has the capability to manage recordings, they will see a pencil icon n
 6. Rooms can also be organized using Categories.
 
 == Changelog ==
-
+= 3.1.0 =
+* Improvement. Security enhancement on room join page.
+* Improvement. Tested with WP version 5.8.2.
+* Improvement. Ability to copy shortcode from the Rooms listing page.
 
 = 3.0.0-beta.4 =
 * Bug. Fixed issue with plugin permission capability that prevented rooms to be accessed after upgrade.

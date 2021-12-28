@@ -58,7 +58,7 @@ class Bigbluebutton_Public_Room_Api {
 	 */
 	public function bbb_user_join_room() {
 		if ( ! empty( $_POST['action'] ) && 'join_room' == $_POST['action'] && wp_verify_nonce( $_POST['bbb_join_room_meta_nonce'], 'bbb_join_room_meta_nonce' ) ) {
-			$room_id             = $_POST['room_id'];
+			$room_id             = sanitize_text_field( $_POST['room_id'] );
 			$user                = wp_get_current_user();
 			$entry_code          = '';
 			$username            = $this->get_meeting_username( $user );
@@ -68,7 +68,7 @@ class Bigbluebutton_Public_Room_Api {
 			$access_using_code   = BigBlueButton_Permissions_Helper::user_has_bbb_cap( 'join_with_access_code_bbb_room' );
 			$access_as_moderator = BigBlueButton_Permissions_Helper::user_has_bbb_cap( 'join_as_moderator_bbb_room' );
 			$access_as_viewer    = BigBlueButton_Permissions_Helper::user_has_bbb_cap( 'join_as_viewer_bbb_room' );
-			$return_url          = esc_url( $_POST['REQUEST_URI'] );
+			$return_url          = esc_url_raw( $_POST['REQUEST_URI'] );
 
 			if ( $access_as_moderator || get_post( $room_id )->post_author == $user->ID ) {
 				$entry_code = $moderator_code;

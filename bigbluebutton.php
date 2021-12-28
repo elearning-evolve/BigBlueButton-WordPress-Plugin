@@ -14,11 +14,11 @@
  *
  * @wordpress-plugin
  * Plugin Name:       BigBlueButton
- * Plugin URI:        https://github.com/blindsidenetworks/wordpress-plugin_bigbluebutton
+ * Plugin URI:        https://github.com/elearning-evolve/wordpress-plugin_bigbluebutton
  * Description:       BigBlueButton is an open source web conferencing system. This plugin integrates BigBlueButton into WordPress allowing bloggers to create and manage meetings rooms by using a Custom Post Type. For more information on setting up your own BigBlueButton server or for using an external hosting provider visit http://bigbluebutton.org/support.
- * Version:           3.0.0-beta.4
- * Author:            Blindside Networks
- * Author URI:        https://blindsidenetworks.com
+ * Version:           3.1.0
+ * Author:            eLearning evolve <info@elearningevolve.com>
+ * Author URI:        https://elearningevolve.com/
  * License:           GPL-2.0+
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
  * Text Domain:       bigbluebutton
@@ -30,12 +30,24 @@ if ( ! defined( 'WPINC' ) ) {
 	die;
 }
 
-/**
- * Currently plugin version.
- * Start at version 3.0.0 and use SemVer - https://semver.org
- * Rename this for your plugin and update it as you release new versions.
- */
-define( 'BIGBLUEBUTTON_VERSION', '3.0.0' );
+if ( ! function_exists( 'get_plugin_data' ) ) {
+	include_once ABSPATH . 'wp-admin' . DIRECTORY_SEPARATOR . 'includes' . DIRECTORY_SEPARATOR . 'plugin.php';
+}
+
+if ( function_exists( 'get_plugin_data' ) ) {
+	$plugin_data = get_plugin_data( __FILE__ );
+
+	$eevolve_constants = array(
+		'BIGBLUEBUTTON_VERSION'     => esc_html( $plugin_data['Version'] ),
+		'BIGBLUEBUTTON_PLUGIN_NAME' => esc_html( $plugin_data['Name'] ),
+	);
+
+	foreach ( $eevolve_constants as $constant => $value ) {
+		if ( ! defined( $constant ) ) {
+			define( $constant, $value );
+		}
+	}
+}
 
 /**
  * The code that runs during plugin activation.
