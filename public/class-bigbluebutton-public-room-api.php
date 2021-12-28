@@ -123,7 +123,7 @@ class Bigbluebutton_Public_Room_Api {
 	 *
 	 * @return  Array $response   Response that says if the admin has entered the meeting or not.
 	 */
-	public function bbb_check_meeting_state( $response, $data = [] ) {
+	public function bbb_check_meeting_state( $response, $data = array() ) {
 		if ( empty( $data['check_bigbluebutton_meeting_state'] ) || empty( $data['bigbluebutton_room_id'] ) ) {
 			return $response;
 		}
@@ -169,7 +169,11 @@ class Bigbluebutton_Public_Room_Api {
 	 * @param   Boolean $wait_for_mod   Boolean value for if the room requires a moderator to join before any viewers.
 	 */
 	private function join_meeting( $return_url, $room_id, $username, $entry_code, $viewer_code, $wait_for_mod ) {
-		$join_url = Bigbluebutton_Api::get_join_meeting_url( $room_id, $username, $entry_code, $return_url );
+		$join_url = apply_filters(
+			'bbb_join_room_url',
+			Bigbluebutton_Api::get_join_meeting_url( $room_id, $username, $entry_code, $return_url ),
+			$return_url
+		);
 
 		if ( $entry_code == $viewer_code && 'true' == $wait_for_mod ) {
 			if ( Bigbluebutton_Api::is_meeting_running( $room_id ) ) {

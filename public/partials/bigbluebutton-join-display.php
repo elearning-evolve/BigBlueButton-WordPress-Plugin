@@ -1,3 +1,6 @@
+<?php if ( isset( $_REQUEST['join'] ) ) : ?>
+	<?php do_action( 'bbb_after_room_join' ); ?>
+<?php else : ?>
 <form id="joinroom" method="post" action="<?php echo admin_url( 'admin-post.php' ); ?>" class="validate">
 	<input type="hidden" name="action" value="join_room">
 	<input id="bbb_join_room_id" type="hidden" name="room_id" value="<?php echo esc_attr( $room_id ); ?>">
@@ -43,3 +46,4 @@
 	<?php } ?>
 	<input class="bbb-button" type="submit" class="button button-primary" value="<?php esc_html_e( 'Join', 'bigbluebutton' ); ?>">
 </form>
+<?php endif; ?>

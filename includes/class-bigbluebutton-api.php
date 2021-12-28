@@ -25,10 +25,10 @@ class Bigbluebutton_Api {
 	 * Create new meeting.
 	 *
 	 * @since   3.0.0
-	 * 
+	 *
 	 * @param   Integer $room_id            Custom post id of the room the user is creating a meeting for.
 	 * @param   String  $logout_url         URL to return to after logging out.
-	 * 
+	 *
 	 * @return  Integer $return_code|404    HTML response of the bigbluebutton server.
 	 */
 	public static function create_meeting( $room_id, $logout_url ) {
@@ -43,13 +43,16 @@ class Bigbluebutton_Api {
 		$viewer_code    = get_post_meta( $rid, 'bbb-room-viewer-code', true );
 		$recordable     = get_post_meta( $rid, 'bbb-room-recordable', true );
 		$meeting_id     = get_post_meta( $rid, 'bbb-room-meeting-id', true );
-		$arr_params     = array(
-			'name'        => esc_attr( $name ),
-			'meetingID'   => rawurlencode( $meeting_id ),
-			'attendeePW'  => rawurlencode( $viewer_code ),
-			'moderatorPW' => rawurlencode( $moderator_code ),
-			'logoutURL'   => esc_url( $logout_url ),
-			'record'      => $recordable,
+		$arr_params     = apply_filters(
+			'bbb_create_room_params',
+			array(
+				'name'        => esc_attr( $name ),
+				'meetingID'   => rawurlencode( $meeting_id ),
+				'attendeePW'  => rawurlencode( $viewer_code ),
+				'moderatorPW' => rawurlencode( $moderator_code ),
+				'logoutURL'   => esc_url( $logout_url ),
+				'record'      => $recordable,
+			)
 		);
 
 		$url = self::build_url( 'create', $arr_params );
@@ -81,14 +84,14 @@ class Bigbluebutton_Api {
 	 * @param   String  $username   Full name of the user trying to join the room.
 	 * @param   String  $password   Entry code of the meeting that the user is attempting to join with.
 	 * @param   String  $logout_url URL to return to after logging out.
-	 * 
+	 *
 	 * @return  String  $url|null   URL to enter the meeting.
 	 */
-	public static function get_join_meeting_url( $room_id, $username, $password, $logout_url = null) {
+	public static function get_join_meeting_url( $room_id, $username, $password, $logout_url = null ) {
 
-		$rid   = intval( $room_id );
-		$uname = sanitize_text_field( $username );
-		$pword = sanitize_text_field( $password );
+		$rid    = intval( $room_id );
+		$uname  = sanitize_text_field( $username );
+		$pword  = sanitize_text_field( $password );
 		$lo_url = ( $logout_url ? esc_url( $logout_url ) : get_permalink( $rid ) );
 
 		if ( get_post( $rid ) === false || 'bbb-room' != get_post_type( $rid ) ) {
@@ -103,10 +106,13 @@ class Bigbluebutton_Api {
 		}
 
 		$meeting_id = get_post_meta( $rid, 'bbb-room-meeting-id', true );
-		$arr_params = array(
-			'meetingID' => rawurlencode( $meeting_id ),
-			'fullName'  => $uname,
-			'password'  => rawurlencode( $pword ),
+		$arr_params = apply_filters(
+			'bbb_join_room_params',
+			array(
+				'meetingID' => rawurlencode( $meeting_id ),
+				'fullName'  => $uname,
+				'password'  => rawurlencode( $pword ),
+			)
 		);
 
 		$url = self::build_url( 'join', $arr_params );
@@ -162,7 +168,7 @@ class Bigbluebutton_Api {
 	 */
 	public static function get_recordings( $room_ids, $recording_state = 'published' ) {
 		$state       = sanitize_text_field( $recording_state );
-		$recordings  = [];
+		$recordings  = array();
 		$meeting_ids = '';
 
 		foreach ( $room_ids as $rid ) {
@@ -395,7 +401,7 @@ class Bigbluebutton_Api {
 	private static function build_url( $request_type, $args ) {
 		$type = sanitize_text_field( $request_type );
 
-		$url_val  = strval( get_option( 'bigbluebutton_url', 'http://test-install.blindsidenetworks.com/bigbluebutton/' ) );
+		$url_val  = strval( get_option( 'bigbluebutton_url', 'https://test-install.blindsidenetworks.com/bigbluebutton/' ) );
 		$salt_val = strval( get_option( 'bigbluebutton_salt', '8cd8ef52e8e101574e400365b55e11a6' ) );
 
 		$url = $url_val . 'api/' . $type . '?';

@@ -123,6 +123,7 @@ If a user has the capability to manage recordings, they will see a pencil icon n
 * Improvement. Security enhancement on room join page.
 * Improvement. Tested with WP version 5.8.2.
 * Improvement. Ability to copy shortcode from the Rooms listing page.
+* Improvement. Use HTTPS version of the test bigbluebutton endpoint
 
 = 3.0.0-beta.4 =
 * Bug. Fixed issue with plugin permission capability that prevented rooms to be accessed after upgrade.
