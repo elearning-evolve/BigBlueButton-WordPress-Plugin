@@ -1,7 +1,7 @@
-=== BigBlueButton ===
+=== Video Conferencing with BBB ===
 Contributors: blindsidenetworks, jfederico, yfngdu, elearningevolve
 Donate link: https://elearningevolve.com/products/donate/
-Tags: blindsidenetworks, bigbluebutton, opensource, open source, web, conferencing, webconferencing
+Tags: bigbluebutton, opensource, open source, web, conferencing, webconferencing, videoconferencing, lms, online teacher
 Requires at least: 5.1
 Tested up to: 5.8.2
 Requires PHP: 7.2
@@ -13,7 +13,9 @@ This lightweight plugin integrates BigBlueButton functionality into Wordpress.
 
 == Description ==
 
-[BigBlueButton](http://bigbluebutton.org/ "BigBlueButton") is an open source web conferencing system. This plugin integrates BigBlueButton into WordPress allowing bloggers to create and manage meetings rooms to interact with their readers. It was developed and is maintained by <a href="http://blindsidenetworks.com/" target="_blank">Blindside Networks</a>.
+[BigBlueButton](http://bigbluebutton.org/ "BigBlueButton") is an open source video conferencing system. This plugin integrates it into WordPress allowing teachers & instructors to manage their virtual classrooms.
+
+This plugin is a fork from the BigBlueButton plugin released and maintained by <a href="http://blindsidenetworks.com/" target="_blank">Blindside Networks</a>.
 
 For more information on setting up your own BigBlueButton server or for using an external hosting provider visit [https://elearningevolve.com/contact/](https://elearningevolve.com/contact/ "https://elearningevolve.com/contact/").
 
@@ -113,7 +115,7 @@ If a user has the capability to manage recordings, they will see a pencil icon n
 
 1. Rooms are a Content Type that has its own view.
 2. Rooms can be embedded into Posts, Pages and other Content Types using shortcodes.
-3. Multiple rooms can be accessed frome the same Page or Post.
+3. Multiple rooms can be accessed from the same Page or Post.
 4. Server settings define where the meetings are hosted.
 5. Rooms can be managed through the Administrator Dashboard.
 6. Rooms can also be organized using Categories.
@@ -123,7 +125,7 @@ If a user has the capability to manage recordings, they will see a pencil icon n
 * Improvement. Security enhancement on room join page.
 * Improvement. Tested with WP version 5.8.2.
 * Improvement. Ability to copy shortcode from the Rooms listing page.
-* Improvement. Use HTTPS version of the test bigbluebutton endpoint
+* Improvement. Use HTTPS version for the test bigbluebutton endpoint
 
 = 3.0.0-beta.4 =
 * Bug. Fixed issue with plugin permission capability that prevented rooms to be accessed after upgrade.
