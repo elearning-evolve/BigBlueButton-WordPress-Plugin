@@ -1,6 +1,6 @@
 === BigBlueButton ===
 Contributors: blindsidenetworks, jfederico, yfngdu, elearningevolve
-Donate link: https://blindsidenetworks.com
+Donate link: https://elearningevolve.com/products/donate/
 Tags: blindsidenetworks, bigbluebutton, opensource, open source, web, conferencing, webconferencing
 Requires at least: 5.1
 Tested up to: 5.8.2
@@ -15,7 +15,7 @@ This lightweight plugin integrates BigBlueButton functionality into Wordpress.
 
 [BigBlueButton](http://bigbluebutton.org/ "BigBlueButton") is an open source web conferencing system. This plugin integrates BigBlueButton into WordPress allowing bloggers to create and manage meetings rooms to interact with their readers. It was developed and is maintained by <a href="http://blindsidenetworks.com/" target="_blank">Blindside Networks</a>.
 
-For more information on setting up your own BigBlueButton server or for using an external hosting provider visit [http://bigbluebutton.org/support](http://bigbluebutton.org/support "http://bigbluebutton.org/support").
+For more information on setting up your own BigBlueButton server or for using an external hosting provider visit [https://elearningevolve.com/contact/](https://elearningevolve.com/contact/ "https://elearningevolve.com/contact/").
 
 == Installation ==
 

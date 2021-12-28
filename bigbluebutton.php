@@ -8,7 +8,7 @@
  * registers the activation and deactivation functions, and defines a function
  * that starts the plugin.
  *
- * @link              https://blindsidenetworks.com
+ * @link              https://elearningevolve.com/
  * @since             3.0.0
  * @package           Bigbluebutton
  *
