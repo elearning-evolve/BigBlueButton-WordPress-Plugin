@@ -4,12 +4,18 @@
 			<div class="bbb-settings-card">
 				<h1><?php esc_html_e( 'Room Settings', 'bigbluebutton' ); ?></h1>
 				<h2><?php esc_html_e( 'Server', 'bigbluebutton' ); ?></h2>
-				<p><?php esc_html_e( 'The server settings explanation.', 'bigbluebutton' ); ?></p>
+				<p><?php esc_html_e( 'There are 3 methods to get the BigBlueButton server details needed below.', 'bigbluebutton' ); ?></p>
+				<ol>
+					<li><?php echo sprintf( __( '%1$s You can use the default test install server hosted by Blindside Networks.', 'bigbluebutton' ), '<strong>' . esc_html( 'Default', 'bigbluebutton' ) . ':</strong>' ); ?></li>
+					<li><?php echo sprintf( __( '%1$s You can host and %2$s BBB on your own server.', 'bigbluebutton' ), '<strong>' . esc_html( 'Fairly Technical', 'bigbluebutton' ) . ':</strong>', '<a target="_blank" href="https://bigbluebutton.org/2018/03/28/install-bigbluebutton-in-15-minutes/">' . esc_html( 'install', 'bigbluebutton' ) . '</a>' ); ?></li>
+					<li><?php echo sprintf( __( '%1$s You can purchase a BigBlueButton cloud hosting service. Please %2$s for more details.', 'bigbluebutton' ), '<strong>' . esc_html( 'Recommended', 'bigbluebutton' ) . ':</strong>', '<a target="_blank" href="https://elearningevolve.com/contact/">' . esc_html( 'contact us', 'bigbluebutton' ) . '</a>' ); ?></li>
+				</ol>
+				
 				<form id="bbb-general-settings-form" method="POST" action="">
 					<input type="hidden" name="action" value="bbb_general_settings">
 					<input type="hidden" id="bbb_edit_server_settings_meta_nonce" name="bbb_edit_server_settings_meta_nonce" value="<?php echo $meta_nonce; ?>">
 					<div class="bbb-row">
-						<p id="bbb_endpoint_label" class="bbb-col-left bbb-important-label"><?php esc_html_e( 'EndPoint', 'bigbluebutton' ); ?>: </p>
+						<p id="bbb_endpoint_label" class="bbb-col-left bbb-important-label"><?php esc_html_e( 'EndPoint URL', 'bigbluebutton' ); ?>: </p>
 						<input class="bbb-col-right" type="text" name="bbb_url" size=50 value="<?php echo $bbb_settings['bbb_url']; ?>" aria-labelledby="bbb_endpoint_label">
 					</div>
 					<div class="bbb-row">
@@ -17,7 +23,7 @@
 						<label aria-labelledby="bbb_endpoint_label" class="bbb-col-right"><?php esc_html_e( 'Example', 'bigbluebutton' ); ?>: <?php echo $bbb_settings['bbb_default_url']; ?></label>
 					</div>
 					<div class="bbb-row">
-						<p id="bbb_shared_secret_label" class="bbb-col-left bbb-important-label"><?php esc_html_e( 'Shared Secret', 'bigbluebutton' ); ?>: </p>
+						<p id="bbb_shared_secret_label" class="bbb-col-left bbb-important-label"><?php esc_html_e( 'Shared Secret/Salt', 'bigbluebutton' ); ?>: </p>
 						<input class="bbb-col-right" type="text" name="bbb_salt" size=50 value="<?php echo $bbb_settings['bbb_salt']; ?>" aria-labelledby="bbb_shared_secret_label">
 					</div>
 					<div class="bbb-row">
@@ -66,7 +72,7 @@
 				</ol>
 			</div> -->
 			<div class="zvc-information-sec">
-				<h3>Additional offerings</h3>
+				<h3>Our Plugins</h3>
 				<ol>
 					<li>
 						<p>Create & join Zoom meetings directly from your WordPress site with our powerful <a target="_blank" href="https://elearningevolve.com/products/zoom-wordpress-plugin">Zoom WordPress Plugin</a></p>

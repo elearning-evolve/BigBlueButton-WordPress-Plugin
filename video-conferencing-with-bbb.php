@@ -102,7 +102,7 @@ function video_conf_bbb_check_conflict( $is_echo = true ) {
 				deactivate_plugins( $basename );
 
 				if ( $is_echo ) {
-					set_transient( 'video_conf_bbb_conflict_notice', $plugin['msg'] );
+					set_transient( 'video_conf_bbb_conflict_notice', $plugin['msg'], 3 );
 				}
 
 				return $plugin['msg'];

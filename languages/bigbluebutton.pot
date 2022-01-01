@@ -25,13 +25,10 @@ msgstr ""
 msgid "Server"
 msgstr ""
 
-msgid "The server settings explanation."
+msgid "EndPoint URL"
 msgstr ""
 
-msgid "EndPoint"
-msgstr ""
-
-msgid "Shared Secret"
+msgid "Shared Secret/Salt"
 msgstr ""
 
 msgid "Example"

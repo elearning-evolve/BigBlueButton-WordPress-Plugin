@@ -9,7 +9,7 @@ Stable tag: 1.0.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-This lightweight plugin integrates BigBlueButton functionality into Wordpress.
+This lightweight plugin integrates BigBlueButton, allowing teachers to manage their virtual classrooms & Video conferencing sessions on Wordpress.
 
 == Description ==
 
@@ -25,17 +25,17 @@ Here's an overview of the installation.
 
    1. Log in as an admin and click on the Plugins menu on the sidebar.
    1. Click Add new.
-   1. In the search bar enter "bigbluebutton" and click search plugins.
-   1. When you find the plugin called BigBlueButton by Blindside Networks click the install now link.
+   1. In the search bar enter "Video Conferencing with BBB" and click search plugins.
+   1. When you find the plugin called Video Conferencing with BBB by eLearning evolve click the install now link.
    1. Activate the Plugin.
+   1. Click on BBB Rooms in the sidebar and click on Server Settings.
+   1. Fill out the URL of where the BigBlueButton server is running (be sure to add /bigbluebutton/ to the end of the URL) and its salt. Then click on Save.
    1. Click on BBB Rooms in the sidebar.
    1. Add a new room and publish it.
    1. Click on BBB Rooms in the sidebar again and copy the token of your new room.
    1. Click on widgets under the Appearance menu.
-   1. Find the BBB Rooms Widget. Then click and drag it to either the right, content, or footer windows on the right of the screen depending on where you wish the BigBlueButton widget to appear.
+   1. Find the BBB Rooms Widget. Then click and drag it to either the right, content, or footer windows on the right of the screen depending on where you wish the BBB Rooms widget to appear.
    1. Enter the token you copied earlier into the widget and save.
-   1. Click on BBB Rooms in the sidebar and click on Server Settings.
-   1. Fill out the URL of where the BigBlueButton server is running (be sure to add /bigbluebutton/ to the end of the URL) and its salt. Then click on Save.
    1. You are ready to begin creating meetings, and holding conferences.
 
 == Frequently Asked Questions ==

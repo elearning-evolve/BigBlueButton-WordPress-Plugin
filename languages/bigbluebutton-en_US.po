@@ -25,16 +25,11 @@ msgstr "Room Settings"
 msgid "Server"
 msgstr "Server"
 
-msgid "The server settings explanation."
-msgstr ""
-"The settings listed below determine the BigBlueButton server that will be used for the live "
-"sessions."
+msgid "EndPoint URL"
+msgstr "EndPoint URL"
 
-msgid "EndPoint"
-msgstr "EndPoint"
-
-msgid "Shared Secret"
-msgstr "Shared Secret"
+msgid "Shared Secret/Salt"
+msgstr "Shared Secret/Salt"
 
 msgid "Example"
 msgstr "Example"
