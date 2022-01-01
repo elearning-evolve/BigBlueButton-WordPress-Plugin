@@ -29,7 +29,7 @@ class Bigbluebutton_Public_Widget extends WP_Widget {
 	public function __construct() {
 		parent::__construct(
 			'bigbluebuttonwidget',
-			__( 'Rooms', 'bigbluebutton' ),
+			__( 'BBB Rooms', 'bigbluebutton' ),
 			array(
 				'customize_selective_refresh' => true,
 				'description'                 => __( 'Displays a BigBlueButton login form.', 'bigbluebutton' ),

@@ -47,7 +47,9 @@ class Bigbluebutton_Activator {
 		}
 		if ( get_role( 'anonymous' ) === null ) {
 			add_role(
-				'anonymous', __( 'Anonymous' ), array(
+				'anonymous',
+				__( 'Anonymous' ),
+				array(
 					'read' => true,
 				)
 			);

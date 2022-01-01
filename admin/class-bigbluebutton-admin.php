@@ -114,7 +114,8 @@ class Bigbluebutton_Admin {
 			'activate_plugins',
 			'bbb_room',
 			'',
-			'dashicons-video-alt2'
+			'dashicons-video-alt2',
+			6
 		);
 
 		if ( current_user_can( 'manage_categories' ) ) {
@@ -136,6 +137,16 @@ class Bigbluebutton_Admin {
 			'bbb-room-server-settings',
 			array( $this, 'display_room_server_settings' )
 		);
+
+		add_submenu_page(
+			'bbb_room',
+			__( 'Rooms', 'bigbluebutton' ),
+			__( 'Stay Updated', 'bigbluebutton' ),
+			'activate_plugins',
+			'bbb-room-subscribe-updates',
+			array( $this, 'display_room_subscribe_updates' )
+		);
+
 	}
 
 	/**
@@ -239,6 +250,15 @@ class Bigbluebutton_Admin {
 		$bbb_settings   = $this->fetch_room_server_settings();
 		$meta_nonce     = wp_create_nonce( 'bbb_edit_server_settings_meta_nonce' );
 		require_once 'partials/bigbluebutton-settings-display.php';
+	}
+
+	/**
+	 * Render the stay updated page for plugin.
+	 *
+	 * @since   3.0.0
+	 */
+	public function display_room_subscribe_updates() {
+		require_once 'partials/bigbluebutton-stay-updated.php';
 	}
 
 	/**

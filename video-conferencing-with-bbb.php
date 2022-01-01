@@ -16,7 +16,7 @@
  * Plugin Name:       Video Conferencing with BBB
  * Plugin URI:        https://github.com/elearning-evolve/wordpress-plugin_bigbluebutton
  * Description:       BigBlueButton is an open source video conferencing system. This plugin integrates it into WordPress allowing teachers & instructors to manage their virtual classrooms. For setting up your own BigBlueButton server or for using an external hosting provider reach us at https://elearningevolve.com/contact/.
- * Version:           3.1.0
+ * Version:           1.0.0
  * Author:            eLearning evolve <info@elearningevolve.com>
  * Author URI:        https://elearningevolve.com/
  * License:           GPL-2.0+
@@ -38,8 +38,8 @@ if ( function_exists( 'get_plugin_data' ) ) {
 	$plugin_data = get_plugin_data( __FILE__ );
 
 	$eevolve_constants = array(
-		'BIGBLUEBUTTON_VERSION'     => esc_html( $plugin_data['Version'] ),
-		'BIGBLUEBUTTON_PLUGIN_NAME' => esc_html( $plugin_data['Name'] ),
+		'VIDEO_CONF VIDEO_CONF_WITH_BBB_VERSION' => esc_html( $plugin_data['Version'] ),
+		'VIDEO_CONF_WITH_BBB_PLUGIN_NAME'        => esc_html( $plugin_data['Name'] ),
 	);
 
 	foreach ( $eevolve_constants as $constant => $value ) {
@@ -49,11 +49,75 @@ if ( function_exists( 'get_plugin_data' ) ) {
 	}
 }
 
+// Show plugin conflict notice
+add_action(
+	'admin_notices',
+	function() {
+		$notice = get_transient( 'video_conf_bbb_conflict_notice' );
+		if ( $notice ) {
+			echo '<div class="error"><p>' . $notice . '</p></div>';
+		}
+	}
+);
+
+/**
+ * Check plugin conflicts.
+ *
+ */
+function video_conf_bbb_check_conflict( $is_echo = true ) {
+	if ( ! function_exists( 'wp_get_current_user' ) ) {
+		include( ABSPATH . 'wp-includes/pluggable.php' );
+	}
+
+	if ( current_user_can( 'activate_plugins' ) ) {
+
+		$conflict_basenames = array( 'bigbluebutton/bigbluebutton.php', 'bbb-administration-panel/bigbluebutton-plugin.php' );
+
+		if ( ! function_exists( 'get_plugin_data' ) ) {
+			include_once ABSPATH . 'wp-admin' . DIRECTORY_SEPARATOR . 'includes' . DIRECTORY_SEPARATOR . 'plugin.php';
+		}
+
+		foreach ( $conflict_basenames as $basename ) {
+			$conf_plugin_file = WP_PLUGIN_DIR . DIRECTORY_SEPARATOR . $basename;
+			if ( file_exists( $conf_plugin_file ) ) {
+				$plugin_data                   = get_plugin_data( $conf_plugin_file );
+				$plugins[ $basename ]['msg']   = sprintf( __( '%1$s is not compatible with %2$s. Please deactivate %1$s before activating %2$s.', 'bigbluebutton' ), '<strong>' . esc_html( VIDEO_CONF_WITH_BBB_PLUGIN_NAME ) . '</strong>', '<strong> ' . esc_html( $plugin_data['Name'] ) . ' </strong>' );
+				$plugins[ $basename ]['class'] = $plugin_data['Name'];
+			}
+		}
+
+		// Makes sure the plugin is defined before trying to use it
+		if ( ! function_exists( 'is_plugin_active' ) ) {
+			require_once( ABSPATH . '/wp-admin/includes/plugin.php' );
+		}
+
+		foreach ( $plugins as $basename => $plugin ) {
+			if ( is_plugin_active( $basename ) || is_plugin_active_for_network( $basename )
+				|| defined( $plugin['class'] ) || ( isset( $_REQUEST['action'] ) && 'activate' == $_REQUEST['action'] && $basename == $_REQUEST['plugin'] ) ) {
+
+				if ( isset( $_GET['activate'] ) ) {
+					unset( $_GET['activate'] );
+				}
+
+				deactivate_plugins( $basename );
+
+				if ( $is_echo ) {
+					set_transient( 'video_conf_bbb_conflict_notice', $plugin['msg'] );
+				}
+
+				return $plugin['msg'];
+			}
+		}
+	}
+
+	return false;
+}
+
 /**
  * The code that runs during plugin activation.
  * This action is documented in includes/class-bigbluebutton-activator.php
  */
-function activate_bigbluebutton() {
+function activate_video_conf_bbb() {
 	require_once plugin_dir_path( __FILE__ ) . 'includes/class-bigbluebutton-activator.php';
 	Bigbluebutton_Activator::activate();
 }
@@ -62,13 +126,13 @@ function activate_bigbluebutton() {
  * The code that runs during plugin deactivation.
  * This action is documented in includes/class-bigbluebutton-deactivator.php
  */
-function deactivate_bigbluebutton() {
+function deactivate_video_conf_bbb() {
 	require_once plugin_dir_path( __FILE__ ) . 'includes/class-bigbluebutton-deactivator.php';
 	Bigbluebutton_Deactivator::deactivate();
 }
 
-register_activation_hook( __FILE__, 'activate_bigbluebutton' );
-register_deactivation_hook( __FILE__, 'deactivate_bigbluebutton' );
+register_activation_hook( __FILE__, 'activate_video_conf_bbb' );
+register_deactivation_hook( __FILE__, 'deactivate_video_conf_bbb' );
 
 /**
  * The core plugin class that is used to define internationalization,
@@ -85,10 +149,12 @@ require plugin_dir_path( __FILE__ ) . 'includes/class-bigbluebutton.php';
  *
  * @since    3.0.0
  */
-function run_bigbluebutton() {
+if ( ! function_exists( 'run_video_conf_bbb' ) && ! video_conf_bbb_check_conflict() ) {
+	function run_video_conf_bbb() {
 
-	$plugin = new Bigbluebutton();
-	$plugin->run();
+		$plugin = new VideoConferencingWithBBB();
+		$plugin->run();
 
+	}
+	run_video_conf_bbb();
 }
-run_bigbluebutton();

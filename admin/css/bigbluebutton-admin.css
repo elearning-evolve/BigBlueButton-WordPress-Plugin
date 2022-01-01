@@ -97,3 +97,122 @@
   visibility: visible;
   opacity: 1;
 }
+
+.zvc_listing_table table.dataTable tbody th, .zvc_listing_table table.dataTable tbody td {
+    padding: 8px 0 12px 0;
+    text-align: center;
+}
+
+.zvc_listing_table .meeting-button {
+    margin: 5px 0 0 5px;
+    padding: 0 4px;
+    font-size: 0.9em;
+}
+.zvc-row {
+    display: flex;
+    flex-wrap: wrap;
+    place-items: flex-start;
+    margin-top: 5px;
+}
+.zvc-row .addon-wrap {
+    display: flex;
+    flex-wrap: wrap;
+    background: #f1f1f1;
+    border: none;
+    padding: 0;
+    width: 75%;
+    height: auto;
+}
+
+.addon-image {
+    width: 500px;
+    height: 500px;
+}
+
+.zvc-row .zvc-addons {
+    border: 1px solid #ccc;
+    background: #fff;
+    padding: 30px 30px 10px 30px;
+    margin: 10px 10px 0 10px;
+    height: fit-content;
+    flex: 1 1;
+    max-width: 40%;
+}
+
+.select2-container {
+	min-width:100px;
+}
+
+.is_recurring_wrap {
+    display: none;
+}
+
+.zvc_listing_table {
+    margin-top: 20px;
+}
+
+.select_zvc_user_listings_wrapp {
+    margin: 20px 0px;
+}
+
+.zvc-text-left {
+    text-align: left;
+}
+
+.zvc-text-center {
+    text-align: center;
+}
+
+#zvc-cover {
+    background: url("../images/ajax-loader.gif") no-repeat scroll center center #f1f1f1;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    z-index: 1;
+    opacity: 0.5;
+}
+
+.zvc_getting_user_info_content p {
+    padding: 0px !important;
+}
+
+.zvc_daily_reports_check_form {
+    padding: 20px 0px;
+}
+
+.zvc_accounts_reports_check_form {
+    padding-bottom: 20px;
+}
+
+.zvc-position-floater-left {
+    width: 65%;
+    padding: 30px;
+    border: 1px solid #ccc;
+    background: #fff;
+    margin-right:10px;
+}
+
+.zvc-position-floater-right {
+    width: 24%;
+    margin-top: 16px;
+}
+
+.zvc-position-floater-right .zvc-information-sec {
+    background: #fff;
+    padding: 20px;
+    border: 1px solid #ccc;
+    margin: 0 0 16px 0;
+}
+
+.zvc-position-clear {
+    clear: both;
+}
+
+.wrap .report-download-btn {
+    float: right;
+    margin-bottom: 15px;
+}
+
+.form-table .zvc-multi-select {
+    min-height: 30vh;
+}

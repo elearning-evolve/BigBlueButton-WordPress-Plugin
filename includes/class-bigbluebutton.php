@@ -26,7 +26,7 @@
  * @subpackage Bigbluebutton/includes
  * @author     Blindside Networks <contact@blindsidenetworks.com>
  */
-class Bigbluebutton {
+class VideoConferencingWithBBB {
 
 	/**
 	 * The loader that's responsible for maintaining and registering all hooks that power
@@ -66,13 +66,12 @@ class Bigbluebutton {
 	 * @since    3.0.0
 	 */
 	public function __construct() {
-		if ( defined( 'BIGBLUEBUTTON_VERSION' ) ) {
-			$this->version = BIGBLUEBUTTON_VERSION;
+		if ( defined( 'VIDEO_CONF_WITH_BBB_VERSION' ) ) {
+			$this->version = VIDEO_CONF_WITH_BBB_VERSION;
 		} else {
 			$this->version = '3.0.0';
 		}
 		$this->plugin_name = 'bigbluebutton';
-
 		$this->load_dependencies();
 		$this->set_locale();
 		$this->define_admin_hooks();
@@ -118,7 +117,6 @@ class Bigbluebutton {
 	 * @access   private
 	 */
 	private function load_dependencies() {
-
 		/**
 		 * The class responsible for orchestrating the actions and filters of the
 		 * core plugin.

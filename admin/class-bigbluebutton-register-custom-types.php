@@ -32,7 +32,7 @@ class Bigbluebutton_Register_Custom_Types {
 				'public'          => true,
 				'show_ui'         => true,
 				'labels'          => array(
-					'name'                     => __( 'Rooms', 'bigbluebutton' ),
+					'name'                     => __( 'BBB Rooms', 'bigbluebutton' ),
 					'add_new'                  => __( 'Add New', 'bigbluebutton' ),
 					'add_new_item'             => __( 'Add New Room', 'bigbluebutton' ),
 					'edit_item'                => __( 'Edit Room', 'bigbluebutton' ),
