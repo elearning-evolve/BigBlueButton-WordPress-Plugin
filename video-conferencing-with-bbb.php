@@ -55,7 +55,7 @@ add_action(
 	function() {
 		$notice = get_transient( 'video_conf_bbb_conflict_notice' );
 		if ( $notice ) {
-			echo '<div class="error"><p>' . $notice . '</p></div>';
+			echo '<div class="error"><p>' . esc_html( $notice ) . '</p></div>';
 		}
 	}
 );

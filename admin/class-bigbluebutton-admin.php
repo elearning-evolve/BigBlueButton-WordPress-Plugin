@@ -131,7 +131,7 @@ class Bigbluebutton_Admin {
 
 		add_submenu_page(
 			'bbb_room',
-			__( 'Rooms', 'bigbluebutton' ),
+			__( 'Rooms Settings', 'bigbluebutton' ),
 			__( 'Settings' ),
 			'activate_plugins',
 			'bbb-room-server-settings',
