@@ -16,7 +16,7 @@
  * Plugin Name:       Video Conferencing with BBB
  * Plugin URI:        https://github.com/elearning-evolve/wordpress-plugin_bigbluebutton
  * Description:       BigBlueButton is an open source video conferencing system. This plugin integrates it into WordPress allowing teachers & instructors to manage their virtual classrooms. For setting up your own BigBlueButton server or for using an external hosting provider reach us at https://elearningevolve.com/contact/.
- * Version:           1.0.0
+ * Version:           1.0.1
  * Author:            eLearning evolve <info@elearningevolve.com>
  * Author URI:        https://elearningevolve.com/
  * License:           GPL-2.0+
@@ -55,7 +55,7 @@ add_action(
 	function() {
 		$notice = get_transient( 'video_conf_bbb_conflict_notice' );
 		if ( $notice ) {
-			echo '<div class="error"><p>' . esc_html( $notice ) . '</p></div>';
+			echo '<div class="error"><p>' . wp_kses( $notice, 'br' ) . '</p></div>';
 		}
 	}
 );
@@ -91,21 +91,23 @@ function video_conf_bbb_check_conflict( $is_echo = true ) {
 			require_once( ABSPATH . '/wp-admin/includes/plugin.php' );
 		}
 
-		foreach ( $plugins as $basename => $plugin ) {
-			if ( is_plugin_active( $basename ) || is_plugin_active_for_network( $basename )
-				|| defined( $plugin['class'] ) || ( isset( $_REQUEST['action'] ) && 'activate' == $_REQUEST['action'] && $basename == $_REQUEST['plugin'] ) ) {
+		if ( isset( $plugins ) ) {
+			foreach ( $plugins as $basename => $plugin ) {
+				if ( is_plugin_active( $basename ) || is_plugin_active_for_network( $basename )
+					|| defined( $plugin['class'] ) || ( isset( $_REQUEST['action'] ) && 'activate' == $_REQUEST['action'] && $basename == $_REQUEST['plugin'] ) ) {
 
-				if ( isset( $_GET['activate'] ) ) {
-					unset( $_GET['activate'] );
+					if ( isset( $_GET['activate'] ) ) {
+						unset( $_GET['activate'] );
+					}
+
+					deactivate_plugins( $basename );
+
+					if ( $is_echo ) {
+						set_transient( 'video_conf_bbb_conflict_notice', $plugin['msg'], 3 );
+					}
+
+					return $plugin['msg'];
 				}
-
-				deactivate_plugins( $basename );
-
-				if ( $is_echo ) {
-					set_transient( 'video_conf_bbb_conflict_notice', $plugin['msg'], 3 );
-				}
-
-				return $plugin['msg'];
 			}
 		}
 	}
