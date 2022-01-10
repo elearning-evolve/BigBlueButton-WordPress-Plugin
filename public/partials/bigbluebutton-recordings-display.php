@@ -62,7 +62,7 @@
 							<?php foreach ( $recording->playback->format as $format ) { ?>
 								<?php if ( $format->type == $default_bbb_recording_format || $view_extended_recording_formats ) { ?>
 									<div class="bbb-recording-link">
-										<a href="<?php echo $format->url; ?>"><?php esc_html_e( ucfirst( $format->type ), 'bigbluebutton' ); ?></a>
+										<a href="<?php echo esc_url( apply_filters( 'bbb_recording_url_display', $format->url ) ); ?>"><?php esc_html_e( ucfirst( $format->type ), 'bigbluebutton' ); ?></a>
 									</div>
 								<?php } ?>
 							<?php } ?>

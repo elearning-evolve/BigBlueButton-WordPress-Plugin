@@ -249,6 +249,11 @@ class Bigbluebutton_Admin {
 		$change_success = $this->room_server_settings_change();
 		$bbb_settings   = $this->fetch_room_server_settings();
 		$meta_nonce     = wp_create_nonce( 'bbb_edit_server_settings_meta_nonce' );
+
+		//Get the active tab from the $_GET param
+		$default_tab = null;
+		$tab         = isset( $_GET['tab'] ) ? $_GET['tab'] : $default_tab;
+
 		require_once 'partials/bigbluebutton-settings-display.php';
 	}
 
@@ -276,7 +281,7 @@ class Bigbluebutton_Admin {
 			'bbb_default_salt' => '8cd8ef52e8e101574e400365b55e11a6',
 		);
 
-		return $settings;
+		return apply_filters( 'bbb_room_server_settings_display', $settings );
 	}
 
 	/**
@@ -328,21 +333,25 @@ class Bigbluebutton_Admin {
 	 */
 	private function room_server_settings_change() {
 		if ( ! empty( $_POST['action'] ) && 'bbb_general_settings' == $_POST['action'] && wp_verify_nonce( sanitize_text_field( $_POST['bbb_edit_server_settings_meta_nonce'] ), 'bbb_edit_server_settings_meta_nonce' ) ) {
-			$bbb_url  = sanitize_text_field( $_POST['bbb_url'] );
-			$bbb_salt = sanitize_text_field( $_POST['bbb_salt'] );
+			if ( isset( $_POST['bbb_url'] ) ) {
+				$bbb_url  = sanitize_text_field( $_POST['bbb_url'] );
+				$bbb_salt = sanitize_text_field( $_POST['bbb_salt'] );
 
-			$bbb_url .= ( substr( $bbb_url, -1 ) == '/' ? '' : '/' );
+				$bbb_url .= ( substr( $bbb_url, -1 ) == '/' ? '' : '/' );
 
-			if ( ! Bigbluebutton_Api::test_bigbluebutton_server( $bbb_url, $bbb_salt ) ) {
-				return 3;
+				if ( ! Bigbluebutton_Api::test_bigbluebutton_server( $bbb_url, $bbb_salt ) ) {
+					return 3;
+				}
+
+				if ( substr_compare( $bbb_url, 'bigbluebutton/', strlen( $bbb_url ) - 14 ) !== 0 ) {
+					return 2;
+				}
+
+				update_option( 'bigbluebutton_url', $bbb_url, false );
+				update_option( 'bigbluebutton_salt', $bbb_salt, false );
 			}
 
-			if ( substr_compare( $bbb_url, 'bigbluebutton/', strlen( $bbb_url ) - 14 ) !== 0 ) {
-				return 2;
-			}
-
-			update_option( 'bigbluebutton_url', $bbb_url );
-			update_option( 'bigbluebutton_salt', $bbb_salt );
+			do_action( 'bbb_settings_form_save' );
 
 			return 1;
 		}

@@ -15,8 +15,8 @@
  * @wordpress-plugin
  * Plugin Name:       Video Conferencing with BBB
  * Plugin URI:        https://github.com/elearning-evolve/wordpress-plugin_bigbluebutton
- * Description:       BigBlueButton is an open source video conferencing system. This plugin integrates it into WordPress allowing teachers & instructors to manage their virtual classrooms. For setting up your own BigBlueButton server or for using an external hosting provider reach us at https://elearningevolve.com/contact/.
- * Version:           1.0.1
+ * Description:       BigBlueButton is an open source video conferencing system. This plugin integrates it into WordPress allowing teachers to manage their virtual classrooms. For setting up your own BigBlueButton server or for using an external hosting provider reach us at https://elearningevolve.com/contact/.
+ * Version:           1.0.2
  * Author:            eLearning evolve <info@elearningevolve.com>
  * Author URI:        https://elearningevolve.com/
  * License:           GPL-2.0+

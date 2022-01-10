@@ -1,5 +1,5 @@
 ( function( $ ) {
-	'use strict';
+	
 
 	/**
 	 * All of the code for your public-facing JavaScript source
@@ -28,6 +28,16 @@
 	 * Although scripts in the WordPress core, Plugins and Themes may be
 	 * practising this, we should strive to set a better example in our own work.
 	 */
+    
+    // Scroll to BBB window after page load
+    //if (1 != zvc_array.no_scroll_window) {
+        window.addEventListener("load", function () {
+            const iframe_container = document.getElementsByClassName("bbb-iframe");
+            if (iframe_container[0].length != 0) {
+                iframe_container[0].scrollIntoView({ behavior: 'smooth', block: 'end' });
+            }
+        });
+    //}
 
 	$( window ).load( function() {
 
@@ -56,7 +66,7 @@
 					.text( php_vars.collapse_recordings );
 			}
 		});
-
+        
 		// show sorting indicator on hover and hide on mouse away
 		$( '.bbb-recordings-unselected-sortable-column' ).hover(
 			function() {

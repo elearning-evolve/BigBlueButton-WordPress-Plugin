@@ -3,9 +3,9 @@ Contributors: blindsidenetworks, jfederico, yfngdu, elearningevolve, adeelraza_7
 Donate link: https://elearningevolve.com/products/donate/
 Tags: bigbluebutton, videoconferencing, virtual classroom, web conferencing, online teaching, learning management system. lms
 Requires at least: 5.1
-Tested up to: 5.8.2
+Tested up to: 5.8.3
 Requires PHP: 7.2
-Stable tag: 1.0.1
+Stable tag: 1.0.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -13,7 +13,7 @@ BigBlueButton (BBB) is an open-source video conferencing tool built "by teachers
 
 == Description ==
 
-[BigBlueButton](http://bigbluebutton.org/ "BigBlueButton") (BBB) is an open-source video conferencing system built "by teachers, for teachers". This plugin integrates BBB into WordPress through which teachers & instructors can manage their virtual classrooms right from the WP dashboard.
+[BigBlueButton](http://bigbluebutton.org/ "BigBlueButton") (BBB) is an open-source video conferencing system built "by teachers, for teachers". This plugin integrates BBB into WordPress through which teachers can manage their virtual classrooms right from the WP dashboard.
 
 This plugin is a fork of the BigBlueButton plugin released and maintained by <a href="http://blindsidenetworks.com/" target="_blank">Blindside Networks</a>.
 
@@ -125,6 +125,11 @@ If a user has the capability to manage recordings, they will see a pencil icon n
 6. BBB Rooms can also be organized using Categories.
 
 == Changelog ==
+= 1.0.2 =
+* Tested. compatibility with WordPress v5.8.3.
+* Improvement. Added new hooks in plugin.
+* Improvement. Security enhancement on recordings section.
+
 = 1.0.1 =
 * Fixed. plugin warning messages on WP dashboard.
 * Improvement. Readability of plugin conflict messages.
