@@ -47,5 +47,6 @@
 		</div>
 	<?php } ?>
 	<input class="bbb-button" type="submit" class="button button-primary" value="<?php esc_html_e( 'Join', 'bigbluebutton' ); ?>">
+	<?php do_action( 'bbb_join_form_buttons' ); ?>
 </form>
 <?php endif; ?>

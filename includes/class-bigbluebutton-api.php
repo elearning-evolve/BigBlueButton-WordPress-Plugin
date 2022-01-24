@@ -50,8 +50,8 @@ class Bigbluebutton_Api {
 				'meetingID'   => rawurlencode( $meeting_id ),
 				'attendeePW'  => rawurlencode( $viewer_code ),
 				'moderatorPW' => rawurlencode( $moderator_code ),
-				'logoutURL'   => esc_url( $logout_url ),
-				'record'      => $recordable,
+				'logoutURL'   => esc_url_raw( $logout_url ),
+				'record'      => esc_attr( $recordable ),
 			)
 		);
 
@@ -68,11 +68,13 @@ class Bigbluebutton_Api {
 		if ( property_exists( $response, 'returncode' ) && 'SUCCESS' == $response->returncode ) {
 			return 200;
 		} elseif ( property_exists( $response, 'returncode' ) && 'FAILURE' == $response->returncode ) {
-			return 403;
+			// 403
 		}
 
-		return 500;
+		$error_msg  = ( isset( $response->messageKey ) ? $response->messageKey . ': ' : '' );
+		$error_msg .= ( isset( $response->message ) ? $response->message : '' );
 
+		return $error_msg;
 	}
 
 	/**
@@ -101,7 +103,7 @@ class Bigbluebutton_Api {
 		if ( ! self::is_meeting_running( $rid ) ) {
 			$code = self::create_meeting( $rid, $lo_url );
 			if ( 200 !== $code ) {
-				wp_die( esc_html__( 'It is currently not possible to create rooms on the server. Please contact support for help.', 'bigbluebutton' ) );
+				wp_die( esc_html__( $code, 'bigbluebutton' ) );
 			}
 		}
 
@@ -368,7 +370,13 @@ class Bigbluebutton_Api {
 	 * @return  Array|WP_Error  $response   Server response in array format.
 	 */
 	private static function get_response( $url ) {
-		$result = wp_remote_get( esc_url_raw( $url ) );
+		$result = wp_remote_get(
+			esc_url_raw( $url ),
+			array(
+				'timeout' => 60,
+			)
+		);
+
 		return $result;
 	}
 
@@ -408,7 +416,7 @@ class Bigbluebutton_Api {
 
 		$params = http_build_query( $args );
 
-		$url .= $params . '&checksum=' . sha1( $type . $params . $salt_val );
+		$url .= 'checksum=' . sha1( $type . $params . $salt_val ) . '&' . $params;
 
 		return $url;
 	}

@@ -5,15 +5,15 @@ Tags: bigbluebutton, videoconferencing, virtual classroom, web conferencing, onl
 Requires at least: 5.1
 Tested up to: 5.8.3
 Requires PHP: 7.2
-Stable tag: 1.0.2
+Stable tag: 1.0.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-BigBlueButton (BBB) is an open-source video conferencing tool built "by teachers, for teachers". This plugin integrates BBB into WP to create virtual classrooms
+This plugin integrates BBB into WP to create virtual classrooms, BigBlueButton (BBB) is an open-source video conferencing tool built "by teachers, for teachers".
 
 == Description ==
 
-[BigBlueButton](http://bigbluebutton.org/ "BigBlueButton") (BBB) is an open-source video conferencing system built "by teachers, for teachers". This plugin integrates BBB into WordPress through which teachers can manage their virtual classrooms right from the WP dashboard.
+This plugin integrates BBB into WordPress through which teachers can manage their virtual classrooms right from the WP dashboard. [BigBlueButton](http://bigbluebutton.org/ "BigBlueButton") (BBB) is an open-source video conferencing system built "by teachers, for teachers".
 
 This plugin is a fork of the BigBlueButton plugin released and maintained by <a href="http://blindsidenetworks.com/" target="_blank">Blindside Networks</a>.
 
@@ -125,17 +125,22 @@ If a user has the capability to manage recordings, they will see a pencil icon n
 6. BBB Rooms can also be organized using Categories.
 
 == Changelog ==
+= 1.0.3 =
+* Fixed: EndPoint URL & Shared Secret/Salt settings not saved and shows error sometimes.
+* Improvement: Make error messages & recording page button text more user-friendly.
+* Improvement: Added new hooks in plugin.
+
 = 1.0.2 =
-* Tested. compatibility with WordPress v5.8.3.
-* Improvement. Added new hooks in plugin.
-* Improvement. Security enhancement on recordings section.
+* Tested: compatibility with WordPress v5.8.3.
+* Improvement: Added new hooks in plugin.
+* Improvement: Security enhancement on recordings section.
 
 = 1.0.1 =
-* Fixed. plugin warning messages on WP dashboard.
-* Improvement. Readability of plugin conflict messages.
+* Fixed: plugin warning messages on WP dashboard.
+* Improvement: Readability of plugin conflict messages.
 
 = 1.0.0 =
-* Improvement. Security enhancement on room join page.
-* Improvement. Tested with WP version 5.8.2.
-* Improvement. Ability to copy the shortcode from the BBB Rooms listing page.
-* Improvement. Use HTTPS version for the test bigbluebutton endpoint
+* Improvement: Security enhancement on room join page.
+* Improvement: Tested with WP version 5.8.2.
+* Improvement: Ability to copy the shortcode from the BBB Rooms listing page.
+* Improvement: Use HTTPS version for the test bigbluebutton endpoint

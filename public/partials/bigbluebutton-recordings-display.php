@@ -60,9 +60,10 @@
 					<div class="flex-row flex-row-<?php echo $columns; ?>" role="cell">
 						<div id="bbb-recording-links-block-<?php echo $recording->recordID; ?>" class="bbb-recording-link-block" style="<?php echo ( $recording->published == 'false' ? 'display:none;' : '' ); ?>">
 							<?php foreach ( $recording->playback->format as $format ) { ?>
-								<?php if ( $format->type == $default_bbb_recording_format || $view_extended_recording_formats ) { ?>
+								<?php
+								if ( $format->type == $default_bbb_recording_format || $view_extended_recording_formats ) { ?>
 									<div class="bbb-recording-link">
-										<a href="<?php echo esc_url( apply_filters( 'bbb_recording_url_display', $format->url ) ); ?>"><?php esc_html_e( ucfirst( $format->type ), 'bigbluebutton' ); ?></a>
+										<a href="<?php echo esc_url( apply_filters( 'bbb_recording_url_display', $format->url, $format->type ) ); ?>"><?php echo esc_html( $bbb_recording_display_text->{$format->type} ); ?></a>
 									</div>
 								<?php } ?>
 							<?php } ?>
@@ -86,7 +87,7 @@
 							&nbsp;
 							<i data-record-id="<?php echo $recording->recordID; ?>"
 								data-meta-nonce="<?php echo $meta_nonce; ?>"
-								class="<?php echo $recording->trash_icon_classes ?>"
+								class="<?php echo $recording->trash_icon_classes; ?>"
 								title="<?php _ex( 'Trash', 'post status' ); ?>"
 								aria-label="<?php _ex( 'Trash', 'post status' ); ?>"></i>
 						</div>

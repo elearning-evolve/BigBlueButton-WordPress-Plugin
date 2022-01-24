@@ -28,19 +28,15 @@
 	 * Although scripts in the WordPress core, Plugins and Themes may be
 	 * practising this, we should strive to set a better example in our own work.
 	 */
-    
-    // Scroll to BBB window after page load
-    //if (1 != zvc_array.no_scroll_window) {
-        window.addEventListener("load", function () {
-            const iframe_container = document.getElementsByClassName("bbb-iframe");
-            if (iframe_container[0].length != 0) {
-                iframe_container[0].scrollIntoView({ behavior: 'smooth', block: 'end' });
-            }
-        });
-    //}
+    window.addEventListener('DOMContentLoaded', (event) => {
+         // Scroll to BBB window after page load
+        const iframe_container = document.getElementsByClassName("bbb-iframe-wrap");
+        if ( iframe_container[0] && iframe_container[0].length != 0) {
+            iframe_container[0].scrollIntoView({ behavior: 'smooth', block: 'end' });
+        }
+    });
 
-	$( window ).load( function() {
-
+	window.addEventListener("load", function() {
 		// display/hide recordings
 		$( '.bbb-recordings-display' ).click( function() {
 			let room_id = $( this )[0].id.substring( 23 );

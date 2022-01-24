@@ -106,6 +106,10 @@ class Bigbluebutton_Display_Helper {
 		$meta_nonce                   = wp_create_nonce( 'bbb_manage_recordings_nonce' );
 		$date_format                  = ( get_option( 'date_format' ) ? get_option( 'date_format' ) : 'Y-m-d' );
 		$default_bbb_recording_format = 'presentation';
+		$bbb_recording_display_text   = new stdClass();
+		$bbb_recording_display_text->presentation   = __( 'View', 'bigbluebutton' );
+		$bbb_recording_display_text->presentation_video   = __( 'Download', 'bigbluebutton' );
+
 		include $this->file . 'partials/bigbluebutton-recordings-display.php';
 		$html_recordings = ob_get_contents();
 		ob_end_clean();

@@ -17,13 +17,13 @@
 				<input type="hidden" id="bbb_edit_server_settings_meta_nonce" name="bbb_edit_server_settings_meta_nonce" value="<?php echo $meta_nonce; ?>">
 				 <div class="tab-content">
 					<?php if ( null === $tab ) : ?>
-						<p><?php esc_html_e( 'There are 3 methods to get the BigBlueButton server details needed below.', 'bigbluebutton' ); ?></p>
+						<?php do_action( 'bbb_setup_tab_content' ); ?>
+						<h4><?php esc_html_e( 'There are 3 methods to get the BBB server EndPoint URL and Salt required below:', 'bigbluebutton' ); ?></h4>
 						<ol>
 							<li><?php echo sprintf( __( '%1$s You can use the default test install server hosted by Blindside Networks.', 'bigbluebutton' ), '<strong>' . esc_html( 'Default', 'bigbluebutton' ) . ':</strong>' ); ?></li>
 							<li><?php echo sprintf( __( '%1$s You can host and %2$s BBB on your own server.', 'bigbluebutton' ), '<strong>' . esc_html( 'Fairly Technical', 'bigbluebutton' ) . ':</strong>', '<a target="_blank" href="https://bigbluebutton.org/2018/03/28/install-bigbluebutton-in-15-minutes/">' . esc_html( 'install', 'bigbluebutton' ) . '</a>' ); ?></li>
 							<li><?php echo sprintf( __( '%1$s You can purchase a BigBlueButton cloud hosting service. Please %2$s for more details.', 'bigbluebutton' ), '<strong>' . esc_html( 'Recommended', 'bigbluebutton' ) . ':</strong>', '<a target="_blank" href="https://elearningevolve.com/contact/">' . esc_html( 'contact us', 'bigbluebutton' ) . '</a>' ); ?></li>
 						</ol>
-						<hr />	
 						<div class="bbb-row">
 							<p id="bbb_endpoint_label" class="bbb-col-left bbb-important-label"><?php esc_html_e( 'EndPoint URL', 'bigbluebutton' ); ?>: </p>
 							<input class="bbb-col-right" type="text" name="bbb_url" size=50 value="<?php echo $bbb_settings['bbb_url']; ?>" aria-labelledby="bbb_endpoint_label">
