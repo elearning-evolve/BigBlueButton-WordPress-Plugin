@@ -9,11 +9,11 @@ Stable tag: 1.0.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-A <a target="_blank" rel="nofollow noopener noreferrer" href="https://bigbluebutton.org/">BigBlueButton</a> (BBB) WordPress plugin that enables you to create virtual classrooms on your WP site. BigBlueButton (BBB) is an open-source video conferencing tool built "by teachers, for teachers".
+A BigBlueButton (BBB) WordPress plugin that enables you to create virtual classrooms on your WP site. BigBlueButton is an open-source video conferencing tool built "by teachers, for teachers".
 
 == Description ==
 
-This plugin integrates <a target="_blank" rel="nofollow noopener noreferrer" href="https://bigbluebutton.org/">BigBlueButton</a> (BBB) into WordPress through which teachers can manage their virtual classrooms right from the WP dashboard.
+This plugin integrates [BigBlueButton](https://bigbluebutton.org/) (BBB) into WordPress through which teachers can manage their virtual classrooms right from the WP dashboard.
 
 BigBlueButton has all the core features you would expect in a web conferencing system.
 
@@ -21,13 +21,13 @@ Unlike generic web conferencing systems, BigBlueButton is designed for online le
 
 For example, a tutor can engage students using the multi-user whiteboard to help a student with solving a difficult math problem.
 
-<a href="https://support.blindsidenetworks.com/hc/en-us/articles/360052738972-What-are-the-features-in-BigBlueButton-" rel="nofollow noopener noreferrer" target="_blank">View All BBB Features</a>
+[View All BBB Features](https://support.blindsidenetworks.com/hc/en-us/articles/360052738972-What-are-the-features-in-BigBlueButton-)
 
-This plugin is a fork of the <a href="https://wordpress.org/plugins/bigbluebutton/" rel="nofollow noopener noreferrer" target="_blank">BigBlueButton plugin</a> released and maintained by Blindside Networks.
+This plugin is a fork of the [BigBlueButton plugin](https://wordpress.org/plugins/bigbluebutton/) released and maintained by Blindside Networks.
 
-To get up and running in no time with a managed BigBlueButton hosting provider please refer to our <a href="https://elearningevolve.com/blog/bigbluebutton-hosting" rel="noopener" target="_blank">Recommended BBB hosting providers</a>.
+To get up and running in no time with a managed BigBlueButton hosting provider please refer to our [Recommended BBB hosting providers](https://elearningevolve.com/blog/bigbluebutton-hosting).
 
-For further queries feel free to <a href="https://elearningevolve.com/contact/" rel="noopener" target="_blank">reach out to us</a>.
+For further queries feel free to [reach out to us](https://elearningevolve.com/contact/).
 
 == Installation ==
 
