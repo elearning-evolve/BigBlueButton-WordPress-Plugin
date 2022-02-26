@@ -1,4 +1,4 @@
-# [Video Conferencing with BBB](https://wordpress.org/plugins/video-conferencing-with-bbb) #
+# Video Conferencing with BigBlueButton (BBB)  #
 
 
 Contributors: blindsidenetworks, jfederico, yfngdu, elearningevolve, adeelraza_786@hotmail.com  
@@ -15,7 +15,7 @@ A [BigBlueButton (BBB) WordPress plugin](https://wordpress.org/plugins/video-con
 
 ## Description ##
 
-This plugin integrates [BigBlueButton](https://bigbluebutton.org/) (BBB) into WordPress through which teachers can manage their virtual classrooms right from the WP dashboard.
+[Video Conferencing with BBB](https://wordpress.org/plugins/video-conferencing-with-bbb) integrates [BigBlueButton](https://bigbluebutton.org/) into WordPress through which teachers can manage their virtual classrooms right from the WP dashboard.
 
 BigBlueButton has all the core features you would expect in a web conferencing system.
 
