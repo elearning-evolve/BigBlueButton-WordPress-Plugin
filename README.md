@@ -1,17 +1,17 @@
-# [Video Conferencing with BBB](https://wordpress.org/plugins/video-conferencing-with-bbb) #
+# [Video Conferencing with BBB](https://wordpress.org/plugins/video-conferencing-with-bbb){:target="_blank"} #
 
 
-Contributors: blindsidenetworks, jfederico, yfngdu, elearningevolve, adeelraza_786@hotmail.com
-Donate link: https://elearningevolve.com/products/donate/
-Tags: bigbluebutton, videoconferencing, virtual classroom, web conferencing, online teaching, learning management system. lms
-Requires at least: 5.1
-Tested up to: 5.9.1
-Requires PHP: 7.2
-Stable tag: 1.0.4
-License: GPLv2 or later
-License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Contributors: blindsidenetworks, jfederico, yfngdu, elearningevolve, adeelraza_786@hotmail.com  
+Donate link: https://elearningevolve.com/products/donate/  
+Tags: bigbluebutton, videoconferencing, virtual classroom, web conferencing, online teaching, learning management system. lms  
+Requires at least: 5.1  
+Tested up to: 5.9.1  
+Requires PHP: 7.2  
+Stable tag: 1.0.4  
+License: GPLv2 or later  
+License URI: http://www.gnu.org/licenses/gpl-2.0.html  
 
-A [BigBlueButton (BBB) WordPress plugin](https://wordpress.org/plugins/video-conferencing-with-bbb) that enables you to create virtual classrooms on your WP site. BigBlueButton is an open-source video conferencing tool built "by teachers, for teachers".
+A [BigBlueButton (BBB) WordPress plugin](https://wordpress.org/plugins/video-conferencing-with-bbb){:target="_blank"} that enables you to create virtual classrooms on your WP site. BigBlueButton is an open-source video conferencing tool built "by teachers, for teachers".
 
 ## Description ##
 
