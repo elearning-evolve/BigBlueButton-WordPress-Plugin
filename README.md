@@ -1,4 +1,6 @@
-=== Video Conferencing with BBB ===
+# Video Conferencing with BBB #
+
+
 Contributors: blindsidenetworks, jfederico, yfngdu, elearningevolve, adeelraza_786@hotmail.com
 Donate link: https://elearningevolve.com/products/donate/
 Tags: bigbluebutton, videoconferencing, virtual classroom, web conferencing, online teaching, learning management system. lms
@@ -11,7 +13,7 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 A BigBlueButton (BBB) WordPress plugin that enables you to create virtual classrooms on your WP site. BigBlueButton is an open-source video conferencing tool built "by teachers, for teachers".
 
-== Description ==
+## Description ##
 
 This plugin integrates [BigBlueButton](https://bigbluebutton.org/) (BBB) into WordPress through which teachers can manage their virtual classrooms right from the WP dashboard.
 
@@ -29,7 +31,7 @@ To get up and running in no time with a managed BigBlueButton hosting provider p
 
 For further queries feel free to [reach out to us](https://elearningevolve.com/contact/).
 
-== Installation ==
+## Installation ##
 
 Here's an overview of the installation.
 
@@ -48,7 +50,7 @@ Here's an overview of the installation.
    1. Enter the token you copied earlier into the widget and save it.
    1. You are ready to begin creating meetings and holding conferences.
 
-== Frequently Asked Questions ==
+## Frequently Asked Questions ##
 
 **How do I create meetings?**
 After activating the BigBlueButton plugin, click on "BBB Rooms" and "Add New" and give the meeting a title and fill out the room details.
@@ -89,23 +91,23 @@ For anonymous users, the Name will be always required, but again the Password re
 
 **How can I change the permissions of the users?**
 
-You should install and activate the "Members" plugin by Justin Tadlock and in the Dashboard under the "Users" > "Roles", update the permissions.
+You should install and activate the **"Members" plugin by Justin Tadlock** and in the Dashboard under the **"Users" > "Roles",** update the permissions.
 
-To allow another user to create and edit rooms, assign them a role that has the permissions, activate_plugins and edit_bbb_rooms, publish_bbb_rooms, delete_bbb_rooms, delete_published_bbb_rooms, and edit_published_bbb_rooms. The permission structure is similar for posts and pages.
+To allow another user to create and edit rooms, assign them a role that has the permissions, **activate_plugins and edit_bbb_rooms, publish_bbb_rooms, delete_bbb_rooms, delete_published_bbb_rooms, and edit_published_bbb_rooms.** The permission structure is similar for posts and pages.
 
-To allow another user to create and edit room categories, assign them a role that has the permissions, activate_plugins, and manage_categories. This does not give them permission to create rooms. They can only manage room categories.
+To allow another user to create and edit room categories, assign them a role that has the permissions, **activate_plugins, and manage_categories.** This does not give them permission to create rooms. They can only manage room categories.
 
-To allow another user to join as moderator, viewer, or with a code, assign them to a role with one of the corresponding permissions, join_as_moderator_bbb_room, join_as_viewer_bbb_room, or join_with_password_bbb_room. By default, the owner of the room will always join their rooms as a moderator. The default does not apply to others' rooms.
+To allow another user to join as moderator, viewer, or with a code, assign them to a role with one of the corresponding permissions, **join_as_moderator_bbb_room, join_as_viewer_bbb_room, or join_with_password_bbb_room.** By default, the owner of the room will always join their rooms as a moderator. The default does not apply to others' rooms.
 
-To allow another user to manage recordings, assign them to a role that has the permissions, manage_bbb_room_recordings.
+To allow another user to manage recordings, assign them to a role that has the permission, **manage_bbb_room_recordings.**
 
-To allow another user to use shortcodes or the widget, assign them to a role that has the permissions, edit_bbb_rooms.
+To allow another user to use shortcodes or the widget, assign them to a role that has the permission, **edit_bbb_rooms.**
 
-If there are no roles with the corresponding permissions, please create a custom role using the "Members" plugin and assign the permission to that role.
+If there are no roles with the corresponding permissions, please create a custom role using the **"Members" plugin** and assign the permission to that role.
 
 **Is there any way users can go directly into a meeting?**
 
-Since version 1.3.4 it is possible to provide direct access to the meeting rooms by adding the meeting token ID to the shortcode: (eg. [bigbluebutton token="aa2817f3a1e1"]).
+Since version 1.3.4 it is possible to provide direct access to the meeting rooms by adding the meeting token ID to the shortcode: **(eg. [bigbluebutton token="aa2817f3a1e1"]).**
 
 The joining form is the same, so with the right permission configuration users would be able to join meetings with one click.
 
@@ -125,7 +127,7 @@ BBB Rooms may not be viewed until they are published. Please try again after pub
 
 If a user has the capability to manage recordings, they will see a pencil icon next to the recording name and description. Click on the icon to start editing, and press enter to submit. A user can cancel editing by pressing the ESC key.
 
-== Screenshots ==
+## Screenshots ##
 
 1. Features: Audio - built-in and dial-in numbers (in some regions), Video - low, medium, and high resolution, Screen sharing, Chat (public/private), Upload slides (any PDF, Microsoft PowerPoint, Word, or Excel), Whiteboard annotation, Multi-user whiteboard, Breakout rooms, Shared notes, Raise hand, Emojis, Polling, Share external video, Recordings, Browser and Mobile Friendly HTML5 interface, runs on desktop, laptop, and mobile devices using iOS 12.2+ and Android 6.0+.
 2. BBB Meeting Room.
@@ -136,26 +138,26 @@ If a user has the capability to manage recordings, they will see a pencil icon n
 7. BBB Rooms can be managed through the Administrator Dashboard.
 8. BBB Rooms can also be organized using Categories.
 
-== Changelog ==
-= 1.0.4 =
+## Changelog ##
+### 1.0.4 ###
 * Added: [Our Recommended BBB hosting providers](https://elearningevolve.com/blog/bigbluebutton-hosting) blog in plugin settings.
 * Compatibility: Tested with WP version 5.9.1.
 
-= 1.0.3 =
+### 1.0.3 ###
 * Fixed: EndPoint URL & Shared Secret/Salt settings not saved and shows error sometimes.
 * Improvement: Make error messages & recording page button text more user-friendly.
 * Improvement: Added new hooks in plugin.
 
-= 1.0.2 =
+### 1.0.2 ###
 * Tested: compatibility with WordPress v5.8.3.
 * Improvement: Added new hooks in plugin.
 * Improvement: Security enhancement on recordings section.
 
-= 1.0.1 =
+### 1.0.1 ###
 * Fixed: plugin warning messages on WP dashboard.
 * Improvement: Readability of plugin conflict messages.
 
-= 1.0.0 =
+### 1.0.0 ###
 * Improvement: Security enhancement on room join page.
 * Improvement: Tested with WP version 5.8.2.
 * Improvement: Ability to copy the shortcode from the BBB Rooms listing page.
