@@ -3,21 +3,31 @@ Contributors: blindsidenetworks, jfederico, yfngdu, elearningevolve, adeelraza_7
 Donate link: https://elearningevolve.com/products/donate/
 Tags: bigbluebutton, videoconferencing, virtual classroom, web conferencing, online teaching, learning management system. lms
 Requires at least: 5.1
-Tested up to: 5.8.3
+Tested up to: 5.9.1
 Requires PHP: 7.2
-Stable tag: 1.0.3
+Stable tag: 1.0.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-This plugin integrates BBB into WP to create virtual classrooms, BigBlueButton (BBB) is an open-source video conferencing tool built "by teachers, for teachers".
+A <a target="_blank" rel="nofollow noopener noreferrer" href="https://bigbluebutton.org/">BigBlueButton</a> (BBB) WordPress plugin that enables you to create virtual classrooms on your WP site. BigBlueButton (BBB) is an open-source video conferencing tool built "by teachers, for teachers".
 
 == Description ==
 
-This plugin integrates BBB into WordPress through which teachers can manage their virtual classrooms right from the WP dashboard. [BigBlueButton](http://bigbluebutton.org/ "BigBlueButton") (BBB) is an open-source video conferencing system built "by teachers, for teachers".
+This plugin integrates <a target="_blank" rel="nofollow noopener noreferrer" href="https://bigbluebutton.org/">BigBlueButton</a> (BBB) into WordPress through which teachers can manage their virtual classrooms right from the WP dashboard.
 
-This plugin is a fork of the BigBlueButton plugin released and maintained by <a href="http://blindsidenetworks.com/" target="_blank">Blindside Networks</a>.
+BigBlueButton has all the core features you would expect in a web conferencing system.
 
-For more information on setting up your own BigBlueButton server or for using an external hosting provider visit [https://elearningevolve.com/contact/](https://elearningevolve.com/contact/ "https://elearningevolve.com/contact/").
+Unlike generic web conferencing systems, BigBlueButton is designed for online learning; it extends these core features to enable a teacher to engage students in virtual office hours, group collaboration, and fully online classes.
+
+For example, a tutor can engage students using the multi-user whiteboard to help a student with solving a difficult math problem.
+
+<a href="https://support.blindsidenetworks.com/hc/en-us/articles/360052738972-What-are-the-features-in-BigBlueButton-" rel="nofollow noopener noreferrer" target="_blank">View All BBB Features</a>
+
+This plugin is a fork of the <a href="https://wordpress.org/plugins/bigbluebutton/" rel="nofollow noopener noreferrer" target="_blank">BigBlueButton plugin</a> released and maintained by Blindside Networks.
+
+To get up and running in no time with a managed BigBlueButton hosting provider please refer to our <a href="https://elearningevolve.com/blog/bigbluebutton-hosting" rel="noopener" target="_blank">Recommended BBB hosting providers</a>.
+
+For further queries feel free to <a href="https://elearningevolve.com/contact/" rel="noopener" target="_blank">reach out to us</a>.
 
 == Installation ==
 
@@ -117,14 +127,20 @@ If a user has the capability to manage recordings, they will see a pencil icon n
 
 == Screenshots ==
 
-1. BBB Rooms are a Content Type that has its own view.
-2. BBB Rooms can be embedded into Posts, Pages, and other Content Types using shortcodes.
-3. Multiple rooms can be accessed from the same Page or Post.
-4. Server settings define where the meetings are hosted.
-5. BBB Rooms can be managed through the Administrator Dashboard.
-6. BBB Rooms can also be organized using Categories.
+1. Features: Audio - built-in and dial-in numbers (in some regions), Video - low, medium, and high resolution, Screen sharing, Chat (public/private), Upload slides (any PDF, Microsoft PowerPoint, Word, or Excel), Whiteboard annotation, Multi-user whiteboard, Breakout rooms, Shared notes, Raise hand, Emojis, Polling, Share external video, Recordings, Browser and Mobile Friendly HTML5 interface, runs on desktop, laptop, and mobile devices using iOS 12.2+ and Android 6.0+.
+2. BBB Meeting Room.
+3. BBB Rooms are a Content Type that has its own view.
+4. BBB Rooms can be embedded into Posts, Pages, and other Content Types using shortcodes.
+5. Multiple rooms can be accessed from the same Page or Post.
+6. Server settings define where the meetings are hosted.
+7. BBB Rooms can be managed through the Administrator Dashboard.
+8. BBB Rooms can also be organized using Categories.
 
 == Changelog ==
+= 1.0.4 =
+* Added: [Our Recommended BBB hosting providers](https://elearningevolve.com/blog/bigbluebutton-hosting) blog in plugin settings.
+* Compatibility: Tested with WP version 5.9.1.
+
 = 1.0.3 =
 * Fixed: EndPoint URL & Shared Secret/Salt settings not saved and shows error sometimes.
 * Improvement: Make error messages & recording page button text more user-friendly.

@@ -22,7 +22,7 @@
 						<ol>
 							<li><?php echo sprintf( __( '%1$s You can use the default test install server hosted by Blindside Networks.', 'bigbluebutton' ), '<strong>' . esc_html( 'Default', 'bigbluebutton' ) . ':</strong>' ); ?></li>
 							<li><?php echo sprintf( __( '%1$s You can host and %2$s BBB on your own server.', 'bigbluebutton' ), '<strong>' . esc_html( 'Fairly Technical', 'bigbluebutton' ) . ':</strong>', '<a target="_blank" href="https://bigbluebutton.org/2018/03/28/install-bigbluebutton-in-15-minutes/">' . esc_html( 'install', 'bigbluebutton' ) . '</a>' ); ?></li>
-							<li><?php echo sprintf( __( '%1$s You can purchase a BigBlueButton cloud hosting service. Please %2$s for more details.', 'bigbluebutton' ), '<strong>' . esc_html( 'Recommended', 'bigbluebutton' ) . ':</strong>', '<a target="_blank" href="https://elearningevolve.com/contact/">' . esc_html( 'contact us', 'bigbluebutton' ) . '</a>' ); ?></li>
+							<li><?php echo sprintf( __( '%1$s You can choose one of our recommended managed %2$s.', 'bigbluebutton' ), '<strong>' . esc_html( 'Recommended', 'bigbluebutton' ) . ':</strong>', '<a target="_blank" href="https://elearningevolve.com/blog/bigbluebutton-hosting">' . esc_html( 'BBB hosting providers', 'bigbluebutton' ) . '</a>' ); ?></li>
 						</ol>
 						<div class="bbb-row">
 							<p id="bbb_endpoint_label" class="bbb-col-left bbb-important-label"><?php esc_html_e( 'EndPoint URL', 'bigbluebutton' ); ?>: </p>
@@ -40,8 +40,9 @@
 							<p class="bbb-col-left"></p>
 							<label class="bbb-col-right" aria-labelledby="bbb_shared_secret_label"><?php esc_html_e( 'Example', 'bigbluebutton' ); ?>: <?php echo $bbb_settings['bbb_default_salt']; ?></label>
 						</div>
+						<br />
 						<?php if ( $bbb_settings['bbb_url'] == $bbb_settings['bbb_default_url'] ) { ?>
-						<label><?php esc_html_e( 'Default server settings 1. Default server settings 2.', 'bigbluebutton' ); ?></label>
+						<strong><label><?php echo apply_filters( 'bbb_room_default_server_notice', esc_html__( 'Default server settings 1. Default server settings 2.', 'bigbluebutton' ) ); ?></label></strong>
 						<?php } ?>
 						<?php if ( $change_success == 1 ) { ?>
 							<div class="updated">
@@ -74,6 +75,7 @@
 				<li><a target="_blank" href="https://wordpress.org/plugins/video-conferencing-with-bbb#reviews">Write a Review</a></li>
 				<li><a target="_blank" href="https://elearningevolve.com/contact/">Contact Us</a></li>
 				<li><a href="<?php echo esc_url( admin_url( 'admin.php?page=bbb-room-subscribe-updates' ) ); ?>">Subscribe: Catch All Plugin Updates</a></li>
+				<li><a target="_blank" href="https://elearningevolve.com/blog/bigbluebutton-hosting/">Recommended BigBlueButton Hosting</a></li>
 			</ol>
 		</div>
 		<!-- <div class="zvc-information-sec">
