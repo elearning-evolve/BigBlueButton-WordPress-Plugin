@@ -63,7 +63,7 @@
 								<?php
 								if ( $format->type == $default_bbb_recording_format || $view_extended_recording_formats ) { ?>
 									<div class="bbb-recording-link">
-										<a href="<?php echo esc_url( apply_filters( 'bbb_recording_url_display', $format->url, $format->type ) ); ?>"><?php echo esc_html( $bbb_recording_display_text->{$format->type} ); ?></a>
+										<a target="_blank" rel="noopener" href="<?php echo esc_url( apply_filters( 'bbb_recording_url_display', $format->url, $format->type ) ); ?>"><?php esc_html_e( 'View Recording', 'bigbluebutton' ); ?></a>
 									</div>
 								<?php } ?>
 							<?php } ?>

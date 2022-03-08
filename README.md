@@ -1,4 +1,4 @@
-# Video Conferencing with BigBlueButton (BBB)  #
+# Video Conferencing with BigBlueButton (BBB) #
 
 
 Contributors: blindsidenetworks, jfederico, yfngdu, elearningevolve, adeelraza_786@hotmail.com  
@@ -7,7 +7,7 @@ Tags: bigbluebutton, videoconferencing, virtual classroom, web conferencing, onl
 Requires at least: 5.1  
 Tested up to: 5.9.1  
 Requires PHP: 7.2  
-Stable tag: 1.0.4  
+Stable tag: 1.1.0  
 License: GPLv2 or later  
 License URI: http://www.gnu.org/licenses/gpl-2.0.html  
 
@@ -139,6 +139,11 @@ If a user has the capability to manage recordings, they will see a pencil icon n
 8. BBB Rooms can also be organized using Categories.
 
 ## Changelog ##
+### 1.1.0 ###
+* Updated: Replaced the older test server credentials of Blindside Networks by [Bigbluebutton.host](https://bigbluebutton.host/) test server in plugin settings.
+* Fixed: Blindside Networks test server not working anymore, not able to join rooms.
+* Updated: Minor style changes, room join form center aligned with the page.
+
 ### 1.0.4 ###
 * Added: [Our Recommended BBB hosting providers](https://elearningevolve.com/blog/bigbluebutton-hosting) blog in plugin settings.
 * Compatibility: Tested with WP version 5.9.1.

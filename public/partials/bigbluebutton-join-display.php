@@ -3,7 +3,7 @@
 <?php elseif ( isset( $_REQUEST['rec_url'] ) ) : ?>
 	<?php do_action( 'bbb_recording_display' ); ?>
 <?php else : ?>
-<form id="joinroom" method="post" action="<?php echo admin_url( 'admin-post.php' ); ?>" class="validate">
+<form id="joinroom" method="post" action="<?php echo admin_url( 'admin-post.php' ); ?>" class="bbb-form validate">
 	<input type="hidden" name="action" value="join_room">
 	<input id="bbb_join_room_id" type="hidden" name="room_id" value="<?php echo esc_attr( $room_id ); ?>">
 	<input type="hidden" id="bbb_join_room_meta_nonce" name="bbb_join_room_meta_nonce" value="<?php echo $meta_nonce; ?>">
@@ -46,7 +46,7 @@
 			</label>
 		</div>
 	<?php } ?>
-	<input class="bbb-button" type="submit" class="button button-primary" value="<?php esc_html_e( 'Join', 'bigbluebutton' ); ?>">
+	<input class="bbb-button" type="submit" class="button button-primary" value="<?php esc_html_e( 'Join Here', 'bigbluebutton' ); ?>">
 	<?php do_action( 'bbb_join_form_buttons' ); ?>
 </form>
 <?php endif; ?>

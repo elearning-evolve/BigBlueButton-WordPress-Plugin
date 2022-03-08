@@ -269,14 +269,14 @@ class Bigbluebutton_Migration {
 
 			// Update settings.
 			if ( ! get_option( 'mt_bbb_url' ) ) {
-				update_option( 'bigbluebutton_url', 'https://test-install.blindsidenetworks.com/bigbluebutton/' );
+				update_option( 'bigbluebutton_url', 'https://test.bymond.live/bigbluebutton/' );
 			} else {
 				update_option( 'bigbluebutton_url', get_option( 'mt_bbb_url' ) );
 				delete_option( 'mt_bbb_url' );
 			}
 
 			if ( ! get_option( 'mt_salt' ) ) {
-				update_option( 'bigbluebutton_salt', '8cd8ef52e8e101574e400365b55e11a6' );
+				update_option( 'bigbluebutton_salt', 'jcBmHVuxJcd1LFvMQrI179uiDqpXrnNGKbNjYl0uCM' );
 			} else {
 				update_option( 'bigbluebutton_salt', get_option( 'mt_salt' ) );
 				delete_option( 'mt_salt' );

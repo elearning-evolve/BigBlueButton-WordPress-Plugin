@@ -209,7 +209,7 @@ class Bigbluebutton_Admin {
 				break;
 			case 'permalink':
 				$permalink = ( get_permalink( $post_id ) ? get_permalink( $post_id ) : '' );
-				echo '<a href="' . esc_url( $permalink ) . '" target="_blank">' . esc_url( $permalink ) . '</a>';
+				echo '<a href="' . esc_url( $permalink ) . '" target="_blank" rel="noopener">' . esc_url( $permalink ) . '</a>';
 				break;
 			case 'token':
 				if ( metadata_exists( 'post', $post_id, 'bbb-room-token' ) ) {
@@ -275,10 +275,10 @@ class Bigbluebutton_Admin {
 	 */
 	public function fetch_room_server_settings() {
 		$settings = array(
-			'bbb_url'          => get_option( 'bigbluebutton_url', 'https://test-install.blindsidenetworks.com/bigbluebutton/' ),
-			'bbb_salt'         => get_option( 'bigbluebutton_salt', '8cd8ef52e8e101574e400365b55e11a6' ),
-			'bbb_default_url'  => 'https://test-install.blindsidenetworks.com/bigbluebutton/',
-			'bbb_default_salt' => '8cd8ef52e8e101574e400365b55e11a6',
+			'bbb_url'          => get_option( 'bigbluebutton_url', 'https://test.bymond.live/bigbluebutton/' ),
+			'bbb_salt'         => get_option( 'bigbluebutton_salt', 'jcBmHVuxJcd1LFvMQrI179uiDqpXrnNGKbNjYl0uCM' ),
+			'bbb_default_url'  => 'https://test.bymond.live/bigbluebutton/',
+			'bbb_default_salt' => 'jcBmHVuxJcd1LFvMQrI179uiDqpXrnNGKbNjYl0uCM',
 		);
 
 		return apply_filters( 'bbb_room_server_settings_display', $settings );

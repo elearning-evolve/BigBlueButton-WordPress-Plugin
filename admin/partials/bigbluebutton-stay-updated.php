@@ -12,7 +12,7 @@
 	#mc-embedded-subscribe-form .mc_fieldset{border:none;min-height: 0px;padding-bottom:0px;}
 </style>
 <div id="mc_embed_signup">
-<form action="https://elearningevolve.us3.list-manage.com/subscribe/post?u=0b76eeb4e810cec265e082dca&amp;id=5f1f69bf5e" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+<form action="https://elearningevolve.us3.list-manage.com/subscribe/post?u=0b76eeb4e810cec265e082dca&amp;id=5f1f69bf5e" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" rel="noopener" novalidate>
 <div id="mc_embed_signup_scroll">
 <h2>Never miss an important update for this plugin</h2>
 <div class="mc-field-group"><label for="mce-EMAIL">Email Address <span class="asterisk">*</span>
@@ -29,12 +29,12 @@
 	<li><input type="checkbox" value="512" name="group[26789][512]" id="mce-group[26789]-26789-6"><label for="mce-group[26789]-26789-6">Video Conferencing with BBB Pro</label></li>
 </ul>
 </div>
-You can unsubscribe at any time by clicking the link in the footer of our emails. For information about our privacy practices, please visit our <a href="https://elearningevolve.com/" target="_blank">website</a>.
+You can unsubscribe at any time by clicking the link in the footer of our emails. For information about our privacy practices, please visit our <a href="https://elearningevolve.com/" target="_blank" rel="noopener">website</a>.
 
 </div>
 <div class="content__gdprLegal">
 
-We use Mailchimp as our marketing platform. By clicking below to subscribe, you acknowledge that your information will be transferred to Mailchimp for processing. <a href="https://mailchimp.com/legal/" target="_blank" rel="noopener noreferrer">Learn more about Mailchimp\'s privacy practices here.</a>
+We use Mailchimp as our marketing platform. By clicking below to subscribe, you acknowledge that your information will be transferred to Mailchimp for processing. <a href="https://mailchimp.com/legal/" target="_blank" rel="noopener" rel="noopener noreferrer">Learn more about Mailchimp\'s privacy practices here.</a>
 
 </div>
 </div>

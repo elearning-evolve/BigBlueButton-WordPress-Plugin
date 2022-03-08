@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2022-01-11 03:38+0000\n"
+"POT-Creation-Date: 2022-02-28 07:19+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -23,19 +23,17 @@ msgid ""
 "%2$s."
 msgstr ""
 
-#: admin/partials/bigbluebutton-settings-display.php:23
+#: admin/partials/bigbluebutton-settings-display.php:25
 #, php-format
-msgid "%1$s You can host and %2$s BBB on your own server."
+msgid "%1$s You can choose one of our recommended managed %2$s."
 msgstr ""
 
 #: admin/partials/bigbluebutton-settings-display.php:24
 #, php-format
-msgid ""
-"%1$s You can purchase a BigBlueButton cloud hosting service. Please %2$s for "
-"more details."
+msgid "%1$s You can host and %2$s BBB on your own server."
 msgstr ""
 
-#: admin/partials/bigbluebutton-settings-display.php:22
+#: admin/partials/bigbluebutton-settings-display.php:23
 #, php-format
 msgid ""
 "%1$s You can use the default test install server hosted by Blindside "
@@ -67,14 +65,6 @@ msgstr ""
 msgid "BBB Rooms"
 msgstr ""
 
-#. Description of the plugin
-msgid ""
-"BigBlueButton is an open source video conferencing system. This plugin "
-"integrates it into WordPress allowing teachers to manage their virtual "
-"classrooms. For setting up your own BigBlueButton server or for using an "
-"external hosting provider reach us at https://elearningevolve.com/contact/."
-msgstr ""
-
 #: admin/class-bigbluebutton-admin.php:369
 msgid ""
 "BigBlueButton works best with the heartbeat API enabled. Please enable it."
@@ -88,12 +78,16 @@ msgstr ""
 msgid "Copy Shortcode"
 msgstr ""
 
-#: admin/partials/bigbluebutton-settings-display.php:44
+#: admin/partials/bigbluebutton-settings-display.php:45
 msgid "Default server settings 1. Default server settings 2."
 msgstr ""
 
 #: public/class-bigbluebutton-public-widget.php:35
 msgid "Displays a BigBlueButton login form."
+msgstr ""
+
+#: public/helpers/class-bigbluebutton-display-helper.php:111
+msgid "Download"
 msgstr ""
 
 #: admin/class-bigbluebutton-register-custom-types.php:38
@@ -138,15 +132,9 @@ msgstr ""
 msgid "Insert into room"
 msgstr ""
 
-#: includes/class-bigbluebutton-api.php:104
-msgid ""
-"It is currently not possible to create rooms on the server. Please contact "
-"support for help."
-msgstr ""
-
 # Room description
 #: public/partials/bigbluebutton-join-display.php:49
-msgid "Join"
+msgid "Join Here"
 msgstr ""
 
 #: public/partials/bigbluebutton-recordings-display.php:24
@@ -244,15 +232,15 @@ msgstr ""
 msgid "Rooms Settings"
 msgstr ""
 
-#: admin/partials/bigbluebutton-settings-display.php:56
+#: admin/partials/bigbluebutton-settings-display.php:57
 msgid "Save server settings bad server settings error message."
 msgstr ""
 
-#: admin/partials/bigbluebutton-settings-display.php:52
+#: admin/partials/bigbluebutton-settings-display.php:53
 msgid "Save server settings bad url error message."
 msgstr ""
 
-#: admin/partials/bigbluebutton-settings-display.php:48
+#: admin/partials/bigbluebutton-settings-display.php:49
 msgid "Save server settings success message."
 msgstr ""
 
@@ -305,13 +293,21 @@ msgstr ""
 msgid "The token: %s is not associated with an existing room."
 msgstr ""
 
-#: admin/partials/bigbluebutton-settings-display.php:20
+#: admin/partials/bigbluebutton-settings-display.php:21
 msgid ""
-"There are 3 methods to get the BigBlueButton server details needed below."
+"There are 3 methods to get the BBB server EndPoint URL and Salt required "
+"below:"
 msgstr ""
 
 #: public/helpers/class-bigbluebutton-tokens-helper.php:108
 msgid "There are no rooms in the selection."
+msgstr ""
+
+#. Description of the plugin
+msgid ""
+"This plugin integrates it into WordPress allowing teachers to manage their "
+"virtual classrooms. BigBlueButton is an open source video conferencing "
+"system."
 msgstr ""
 
 #: public/partials/bigbluebutton-recordings-display.php:3
@@ -344,6 +340,10 @@ msgstr ""
 
 #. Name of the plugin
 msgid "Video Conferencing with BBB"
+msgstr ""
+
+#: public/helpers/class-bigbluebutton-display-helper.php:110
+msgid "View"
 msgstr ""
 
 #: admin/class-bigbluebutton-register-custom-types.php:40
