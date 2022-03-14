@@ -5,9 +5,9 @@ Contributors: blindsidenetworks, jfederico, yfngdu, elearningevolve, adeelraza_7
 Donate link: https://elearningevolve.com/products/donate/  
 Tags: bigbluebutton, videoconferencing, virtual classroom, web conferencing, online teaching, learning management system. lms  
 Requires at least: 5.1  
-Tested up to: 5.9.1  
+Tested up to: 5.9.2  
 Requires PHP: 7.2  
-Stable tag: 1.1.0  
+Stable tag: 1.1.1  
 License: GPLv2 or later  
 License URI: http://www.gnu.org/licenses/gpl-2.0.html  
 
@@ -93,15 +93,15 @@ For anonymous users, the Name will be always required, but again the Password re
 
 You should install and activate the **"Members" plugin by Justin Tadlock** and in the Dashboard under the **"Users" > "Roles",** update the permissions.
 
-To allow another user to create and edit rooms, assign them a role that has the permissions, **activate_plugins and edit_bbb_rooms, publish_bbb_rooms, delete_bbb_rooms, delete_published_bbb_rooms, and edit_published_bbb_rooms.** The permission structure is similar for posts and pages.
+To allow another user to create and edit rooms, assign them a role that has the permissions, **publish_bbb_rooms, edit_bbb_rooms, edit_posts, delete_bbb_rooms, delete_published_bbb_rooms, and edit_published_bbb_rooms.** The permission structure is similar for posts and pages.
 
-To allow another user to create and edit room categories, assign them a role that has the permissions, **activate_plugins, and manage_categories.** This does not give them permission to create rooms. They can only manage room categories.
+To allow another user to create and edit room categories, assign them a role that has the permissions, **manage_categories.** This does not give them permission to create rooms. They can only manage room categories.
 
 To allow another user to join as moderator, viewer, or with a code, assign them to a role with one of the corresponding permissions, **join_as_moderator_bbb_room, join_as_viewer_bbb_room, or join_with_password_bbb_room.** By default, the owner of the room will always join their rooms as a moderator. The default does not apply to others' rooms.
 
 To allow another user to manage recordings, assign them to a role that has the permission, **manage_bbb_room_recordings.**
 
-To allow another user to use shortcodes or the widget, assign them to a role that has the permission, **edit_bbb_rooms.**
+To allow another user to use shortcodes or the widget, assign them to a role that has the permission, **edit_bbb_rooms, edit_posts.**
 
 If there are no roles with the corresponding permissions, please create a custom role using the **"Members" plugin** and assign the permission to that role.
 
@@ -139,6 +139,10 @@ If a user has the capability to manage recordings, they will see a pencil icon n
 8. BBB Rooms can also be organized using Categories.
 
 ## Changelog ##
+### 1.1.1 ###
+* Updated: Removed the need to assign activate_plugins user permission for admin BBB Rooms menu.
+* Added: Use capability "publish_bbb_rooms" for admin BBB Rooms menu access by any user role.
+
 ### 1.1.0 ###
 * Updated: Replaced the older test server credentials of Blindside Networks by [Bigbluebutton.host](https://bigbluebutton.host/) test server in plugin settings.
 * Fixed: Blindside Networks test server not working anymore, not able to join rooms.

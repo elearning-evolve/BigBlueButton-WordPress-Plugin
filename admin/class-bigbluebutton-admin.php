@@ -111,7 +111,7 @@ class Bigbluebutton_Admin {
 		add_menu_page(
 			__( 'BBB Rooms', 'bigbluebutton' ),
 			__( 'BBB Rooms', 'bigbluebutton' ),
-			'activate_plugins',
+			'publish_bbb_rooms',
 			'bbb_room',
 			'',
 			'dashicons-video-alt2',
@@ -123,7 +123,7 @@ class Bigbluebutton_Admin {
 				'bbb_room',
 				__( 'Rooms', 'bigbluebutton' ),
 				__( 'Categories' ),
-				'activate_plugins',
+				'publish_bbb_rooms',
 				'edit-tags.php?taxonomy=bbb-room-category',
 				''
 			);
@@ -133,7 +133,7 @@ class Bigbluebutton_Admin {
 			'bbb_room',
 			__( 'Rooms Settings', 'bigbluebutton' ),
 			__( 'Settings' ),
-			'activate_plugins',
+			'publish_bbb_rooms',
 			'bbb-room-server-settings',
 			array( $this, 'display_room_server_settings' )
 		);
@@ -142,7 +142,7 @@ class Bigbluebutton_Admin {
 			'bbb_room',
 			__( 'Rooms', 'bigbluebutton' ),
 			__( 'Stay Updated', 'bigbluebutton' ),
-			'activate_plugins',
+			'publish_bbb_rooms',
 			'bbb-room-subscribe-updates',
 			array( $this, 'display_room_subscribe_updates' )
 		);
