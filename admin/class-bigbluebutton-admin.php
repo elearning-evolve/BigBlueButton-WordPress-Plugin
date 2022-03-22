@@ -121,7 +121,7 @@ class Bigbluebutton_Admin {
 		if ( current_user_can( 'manage_categories' ) ) {
 			add_submenu_page(
 				'bbb_room',
-				__( 'Rooms', 'bigbluebutton' ),
+				__( 'Room Categories', 'bigbluebutton' ),
 				__( 'Categories' ),
 				'publish_bbb_rooms',
 				'edit-tags.php?taxonomy=bbb-room-category',
@@ -140,13 +140,23 @@ class Bigbluebutton_Admin {
 
 		add_submenu_page(
 			'bbb_room',
-			__( 'Rooms', 'bigbluebutton' ),
+			__( 'Stay Updated', 'bigbluebutton' ),
 			__( 'Stay Updated', 'bigbluebutton' ),
 			'publish_bbb_rooms',
 			'bbb-room-subscribe-updates',
 			array( $this, 'display_room_subscribe_updates' )
 		);
 
+		if ( ! defined( 'BBB_PRO_VERSION' ) ) {
+			add_submenu_page(
+				'bbb_room',
+				__( 'Get Pro Version', 'bigbluebutton' ),
+				__( 'Get Pro Version', 'bigbluebutton' ),
+				'publish_bbb_rooms',
+				'bbb-room-server-settings',
+				array( $this, 'display_room_server_settings' )
+			);
+		}
 	}
 
 	/**
@@ -264,6 +274,15 @@ class Bigbluebutton_Admin {
 	 */
 	public function display_room_subscribe_updates() {
 		require_once 'partials/bigbluebutton-stay-updated.php';
+	}
+
+	/**
+	 * Render the pro version page for plugin.
+	 *
+	 * @since   3.0.0
+	 */
+	public function display_pro_version_page() {
+		require_once 'partials/bigbluebutton-pro-version.php';
 	}
 
 	/**

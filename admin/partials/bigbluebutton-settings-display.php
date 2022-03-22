@@ -42,7 +42,27 @@
 						</div>
 						<br />
 						<?php if ( $bbb_settings['bbb_url'] == $bbb_settings['bbb_default_url'] ) { ?>
-						<strong><label><?php echo apply_filters( 'bbb_room_default_server_notice', esc_html__( 'Default server settings 1. Default server settings 2.', 'bigbluebutton' ) ); ?></label></strong>
+						<label>
+							<?php
+							echo apply_filters(
+								'bbb_room_default_server_notice',
+								wp_kses(
+									__( 'Default server settings 1. Default server settings 2.', 'bigbluebutton' ),
+									array(
+										'a' => array(
+											'href'   => array(),
+											'title'  => array(),
+											'target' => array(),
+											'rel'    => array(),
+										),
+										'strong' => array(
+											'class' => array(),
+										),
+									)
+								)
+							);
+							?>
+						</label>
 						<?php } ?>
 						<?php if ( $change_success == 1 ) { ?>
 							<div class="updated">
@@ -90,6 +110,11 @@
 		<div class="zvc-information-sec">
 			<h3>Our Plugins</h3>
 			<ol>
+				<?php if ( ! defined( 'BBB_PRO_VERSION' ) ) : ?>
+				<li>
+					<p><strong><a target="_blank" rel="noopener" href="https://elearningevolve.com/products/video-conferencing-with-bbb-pro/">Video Conferencing with BigBlueButton (BBB) Pro</a></strong> is a premium plugin that provides enhanced features on top of our free plugin.</p>
+				</li>
+				<?php endif; ?>
 				<li>
 					<p>Create & join Zoom meetings directly from your WordPress site with our powerful <a target="_blank" rel="noopener" href="https://elearningevolve.com/products/zoom-wordpress-plugin">Zoom WordPress Plugin</a></p>
 				</li>

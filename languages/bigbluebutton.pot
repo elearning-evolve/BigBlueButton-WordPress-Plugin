@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2022-02-28 07:19+0000\n"
+"POT-Creation-Date: 2022-03-22 09:06+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -35,9 +35,7 @@ msgstr ""
 
 #: admin/partials/bigbluebutton-settings-display.php:23
 #, php-format
-msgid ""
-"%1$s You can use the default test install server hosted by Blindside "
-"Networks."
+msgid "%1$s You can use the default test install server hosted by %2$s."
 msgstr ""
 
 # Public strings
@@ -65,7 +63,7 @@ msgstr ""
 msgid "BBB Rooms"
 msgstr ""
 
-#: admin/class-bigbluebutton-admin.php:369
+#: admin/class-bigbluebutton-admin.php:388
 msgid ""
 "BigBlueButton works best with the heartbeat API enabled. Please enable it."
 msgstr ""
@@ -74,7 +72,7 @@ msgstr ""
 msgid "Collapse recordings"
 msgstr ""
 
-#: admin/class-bigbluebutton-admin.php:230
+#: admin/class-bigbluebutton-admin.php:240
 msgid "Copy Shortcode"
 msgstr ""
 
@@ -120,6 +118,11 @@ msgstr ""
 msgid "Filter rooms list"
 msgstr ""
 
+#: admin/class-bigbluebutton-admin.php:153
+#: admin/class-bigbluebutton-admin.php:154
+msgid "Get Pro Version"
+msgstr ""
+
 #. Author URI of the plugin
 msgid "https://elearningevolve.com/"
 msgstr ""
@@ -148,7 +151,7 @@ msgstr ""
 
 #: admin/class-bigbluebutton-register-custom-types.php:102
 #: admin/class-bigbluebutton-register-custom-types.php:135
-#: admin/class-bigbluebutton-admin.php:185
+#: admin/class-bigbluebutton-admin.php:195
 msgid "Moderator Access Code"
 msgstr ""
 
@@ -190,6 +193,10 @@ msgstr ""
 msgid "Room Attributes"
 msgstr ""
 
+#: admin/class-bigbluebutton-admin.php:124
+msgid "Room Categories"
+msgstr ""
+
 #: admin/class-bigbluebutton-register-custom-types.php:53
 msgid "Room published"
 msgstr ""
@@ -212,12 +219,6 @@ msgstr ""
 
 #: admin/class-bigbluebutton-register-custom-types.php:57
 msgid "Room updated"
-msgstr ""
-
-# Admin server settings
-#: admin/class-bigbluebutton-admin.php:124
-#: admin/class-bigbluebutton-admin.php:143
-msgid "Rooms"
 msgstr ""
 
 #: admin/class-bigbluebutton-register-custom-types.php:52
@@ -256,10 +257,11 @@ msgstr ""
 msgid "Shared Secret/Salt"
 msgstr ""
 
-#: admin/class-bigbluebutton-admin.php:184
+#: admin/class-bigbluebutton-admin.php:194
 msgid "Shortcode"
 msgstr ""
 
+#: admin/class-bigbluebutton-admin.php:143
 #: admin/class-bigbluebutton-admin.php:144
 msgid "Stay Updated"
 msgstr ""
@@ -321,7 +323,7 @@ msgid ""
 "widget."
 msgstr ""
 
-#: admin/class-bigbluebutton-admin.php:183
+#: admin/class-bigbluebutton-admin.php:193
 msgid "Token"
 msgstr ""
 
@@ -346,6 +348,10 @@ msgstr ""
 msgid "View"
 msgstr ""
 
+#: public/partials/bigbluebutton-recordings-display.php:66
+msgid "View Recording"
+msgstr ""
+
 #: admin/class-bigbluebutton-register-custom-types.php:40
 msgid "View Room"
 msgstr ""
@@ -356,7 +362,7 @@ msgstr ""
 
 #: admin/class-bigbluebutton-register-custom-types.php:103
 #: admin/class-bigbluebutton-register-custom-types.php:151
-#: admin/class-bigbluebutton-admin.php:186
+#: admin/class-bigbluebutton-admin.php:196
 msgid "Viewer Access Code"
 msgstr ""
 
