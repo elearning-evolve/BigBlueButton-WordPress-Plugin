@@ -192,6 +192,7 @@ class Bigbluebutton_Admin {
 			'permalink'      => __( 'Permalink' ),
 			'token'          => __( 'Token', 'bigbluebutton' ),
 			'shortcode'      => __( 'Shortcode', 'bigbluebutton' ),
+			'start-time'     => __( 'Start Time', 'bigbluebutton' ),
 			'moderator-code' => __( 'Moderator Access Code', 'bigbluebutton' ),
 			'viewer-code'    => __( 'Viewer Access Code', 'bigbluebutton' ),
 		);
@@ -240,6 +241,22 @@ class Bigbluebutton_Admin {
 						<span class="tooltiptext shortcode-tooltip">' . __( 'Copy Shortcode', 'bigbluebutton' ) . '</span>
 						<span class="dashicons dashicons-clipboard"></span>
 					</div>';
+				break;
+			case 'start-time':
+				if ( ! defined( 'BBB_PRO_VERSION' ) ) {
+					echo '<a href="' . VIDEO_CONF_WITH_BBB_PRO . '" target="_blank" rel="noopener">Pro version feature</a>';
+				} else {
+					$is_start_time = get_post_meta( $post_id, 'bbb-start-time', true );
+					if ( $is_start_time ) {
+						$is_start_time = strtotime( $is_start_time );
+					}
+
+					if ( $is_start_time ) {
+						echo date_i18n( 'F j, Y, g:i a', esc_attr( $is_start_time ) );
+					} else {
+						_e( 'N/A', 'bigbluebuttonpro' );
+					}
+				}
 				break;
 			case 'moderator-code':
 				echo esc_attr( get_post_meta( $post_id, 'bbb-room-moderator-code', true ) );
@@ -388,6 +405,29 @@ class Bigbluebutton_Admin {
 			$bbb_admin_warning_message = __( 'BigBlueButton works best with the heartbeat API enabled. Please enable it.', 'bigbluebutton' );
 			$bbb_admin_notice_nonce    = wp_create_nonce( $bbb_warning_type );
 			require 'partials/bigbluebutton-warning-admin-notice-display.php';
+		}
+	}
+
+	/**
+	 * Generate review plugin notice.
+	 *
+	 * @since   3.0.0
+	 */
+	public function notice_review_plugin() {
+		if ( function_exists( 'get_current_screen' ) ) {
+			// show notice only on admin plugin pages
+			$current_screen = get_current_screen();
+			$allowed        = array( 'edit-bbb-room', 'bbb-room', 'bbb-rooms_page_bbb-room-server-settings', 'edit-bbb-room-category', 'bbb-rooms_page_bbb-room-subscribe-updates' );
+			if ( isset( $current_screen->id ) && ! in_array( $current_screen->id, $allowed ) ) {
+				return;
+			}
+		}
+
+		$bbb_warning_type = 'bbb-review-plugin';
+		if ( ! get_option( 'dismissed-' . $bbb_warning_type, false ) ) {
+			$bbb_admin_review_message = "<strong>Video Conferencing with BBB:</strong> It's critical for us to know that the plugin is working out for you. Please spare a moment to let us know.";
+			$bbb_admin_notice_nonce   = wp_create_nonce( $bbb_warning_type );
+			require 'partials/bigbluebutton-admin-notice-review.php';
 		}
 	}
 

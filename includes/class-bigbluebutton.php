@@ -242,6 +242,8 @@ class VideoConferencingWithBBB {
 		// Suggest not disabling heartbeat.
 		$this->loader->add_action( 'admin_notices', $plugin_admin, 'check_for_heartbeat_script' );
 
+		$this->loader->add_action( 'admin_notices', $plugin_admin, 'notice_review_plugin', 999 );
+
 		// Dismiss admin dashboard notices.
 		$this->loader->add_action( 'wp_ajax_dismissed_notice_handler', $plugin_admin_api, 'dismiss_admin_notices' );
 

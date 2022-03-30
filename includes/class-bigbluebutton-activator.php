@@ -30,7 +30,20 @@ class Bigbluebutton_Activator {
 	 * @since    3.0.0
 	 */
 	public static function activate() {
-		self::set_default_roles();
+		if ( ! current_user_can( 'activate_plugins' ) ) {
+			return;
+		}
+
+		if ( function_exists( 'is_multisite' ) && is_multisite() ) {
+			$blogs = wp_get_sites();
+			foreach ( $blogs as $blog ) {
+				switch_to_blog( $blog['blog_id'] );
+				self::set_default_roles();
+				restore_current_blog();
+			}
+		} else {
+			self::set_default_roles();
+		}
 	}
 
 	/**
@@ -86,7 +99,7 @@ class Bigbluebutton_Activator {
 		$set_join_cap = self::join_permissions_set( $role );
 		$role->add_cap( 'read_bbb_room' );
 
-		if ( $role->has_cap( 'activate_plugins' ) ) {
+		if ( $role->has_cap( 'activate_plugins' ) || current_user_can( 'setup_network' ) ) {
 			self::set_admin_capability( $role );
 		}
 

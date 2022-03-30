@@ -54,7 +54,18 @@ class Bigbluebutton_Display_Helper {
 	 */
 	public function get_join_form_as_string( $room_id, $meta_nonce, $access_as_moderator, $access_as_viewer, $access_using_code ) {
 		global $wp;
-		$current_url         = home_url( add_query_arg( array(), $wp->request ) );
+		$current_url = home_url( add_query_arg( array(), $wp->request ) );
+		$start_time  = get_post_meta( $room_id, 'bbb-start-time', true );
+		if ( $start_time ) {
+			$dt     = new DateTime( $start_time, new DateTimeZone( wp_timezone_string() ) );
+			$dt_now = new DateTime( 'now', new DateTimeZone( wp_timezone_string() ) );
+
+			if ( $dt_now >= $dt ) {
+				// Meeting should start now
+				$start_time = false;
+			}
+		}
+
 		$heartbeat_available = wp_script_is( 'heartbeat', 'registered' );
 		ob_start();
 		include $this->file . 'partials/bigbluebutton-join-display.php';
@@ -103,12 +114,12 @@ class Bigbluebutton_Display_Helper {
 		}
 		$sort_fields = $this->set_order_by_field();
 		ob_start();
-		$meta_nonce                   = wp_create_nonce( 'bbb_manage_recordings_nonce' );
-		$date_format                  = ( get_option( 'date_format' ) ? get_option( 'date_format' ) : 'Y-m-d' );
-		$default_bbb_recording_format = 'presentation';
-		$bbb_recording_display_text   = new stdClass();
-		$bbb_recording_display_text->presentation   = __( 'View', 'bigbluebutton' );
-		$bbb_recording_display_text->presentation_video   = __( 'Download', 'bigbluebutton' );
+		$meta_nonce                                     = wp_create_nonce( 'bbb_manage_recordings_nonce' );
+		$date_format                                    = ( get_option( 'date_format' ) ? get_option( 'date_format' ) : 'Y-m-d' );
+		$default_bbb_recording_format                   = 'presentation';
+		$bbb_recording_display_text                     = new stdClass();
+		$bbb_recording_display_text->presentation       = __( 'View', 'bigbluebutton' );
+		$bbb_recording_display_text->presentation_video = __( 'Download', 'bigbluebutton' );
 
 		include $this->file . 'partials/bigbluebutton-recordings-display.php';
 		$html_recordings = ob_get_contents();
