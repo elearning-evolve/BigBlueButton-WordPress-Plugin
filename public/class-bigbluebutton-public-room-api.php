@@ -69,6 +69,7 @@ class Bigbluebutton_Public_Room_Api {
 			$access_as_moderator = BigBlueButton_Permissions_Helper::user_has_bbb_cap( 'join_as_moderator_bbb_room' );
 			$access_as_viewer    = BigBlueButton_Permissions_Helper::user_has_bbb_cap( 'join_as_viewer_bbb_room' );
 			$return_url          = esc_url_raw( $_POST['REQUEST_URI'] );
+			$max_users           = intval( get_option( 'bbb_pro_max_participants' ) );
 
 			if ( $access_as_moderator || get_post( $room_id )->post_author == $user->ID ) {
 				$entry_code = $moderator_code;
@@ -83,11 +84,28 @@ class Bigbluebutton_Public_Room_Api {
 						'username'       => $username,
 					);
 					wp_redirect( add_query_arg( $query, $return_url ) );
-					return;
+					exit;
 				}
 			} else {
 				wp_die( esc_html__( 'You do not have permission to enter the room. Please request permission.', 'bigbluebutton' ) );
 			}
+
+			if ( $max_users ) {
+				$m_info = Bigbluebutton_Api::get_meeting_info( $room_id );
+				if ( $m_info && isset( $m_info->participantCount ) ) {
+					$max_users += 1; // Keep atleast one partc space incase of disconnection issues
+					if ( $m_info->participantCount >= $max_users ) {
+						$query = array(
+							'max_user_error' => true,
+							'room_id'        => $room_id,
+							'username'       => $username,
+						);
+						wp_redirect( add_query_arg( $query, $return_url ) );
+						exit;
+					}
+				}
+			}
+
 			$this->join_meeting( $return_url, $room_id, $username, $entry_code, $viewer_code, $wait_for_mod );
 		}
 	}

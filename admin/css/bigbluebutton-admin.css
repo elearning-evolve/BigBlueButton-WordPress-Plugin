@@ -233,3 +233,7 @@
 .bbb-hosting-notice {
     color: #bd2e2e;
 }
+
+.post-type-bbb-room .edit-post-layout__footer {
+    display: none; /* Hide edit post footer breadcrum */
+}

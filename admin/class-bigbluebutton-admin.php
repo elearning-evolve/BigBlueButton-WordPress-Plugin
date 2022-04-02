@@ -425,7 +425,7 @@ class Bigbluebutton_Admin {
 
 		$bbb_warning_type = 'bbb-review-plugin';
 		if ( ! get_option( 'dismissed-' . $bbb_warning_type, false ) ) {
-			$bbb_admin_review_message = "<strong>Video Conferencing with BBB:</strong> It's critical for us to know that the plugin is working out for you. Please spare a moment to let us know.";
+			$bbb_admin_review_message = "<strong>Video Conferencing with BBB:</strong> It's critical for us to know that the plugin is working fine. Please play your part to keep the plugin up and running smoothly.";
 			$bbb_admin_notice_nonce   = wp_create_nonce( $bbb_warning_type );
 			require 'partials/bigbluebutton-admin-notice-review.php';
 		}

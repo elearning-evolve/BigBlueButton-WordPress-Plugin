@@ -160,6 +160,41 @@ class Bigbluebutton_Api {
 	}
 
 	/**
+	 * Get current meeting info.
+	 *
+	 * @since   3.0.0
+	 *
+	 * @param   Integer $room_id            Custom post id of a room.
+	 * @return  Object room_parmas          Current meeting info.
+	 */
+	public static function get_meeting_info( $room_id ) {
+
+		$rid = intval( $room_id );
+
+		if ( get_post( $rid ) === false || 'bbb-room' != get_post_type( $rid ) ) {
+			return null;
+		}
+
+		$meeting_id = get_post_meta( $rid, 'bbb-room-meeting-id', true );
+		$arr_params = array(
+			'meetingID' => rawurlencode( $meeting_id ),
+		);
+
+		$url           = self::build_url( 'getMeetingInfo', $arr_params );
+		$full_response = self::get_response( $url );
+
+		if ( is_wp_error( $full_response ) ) {
+			return null;
+		}
+
+		$response = self::response_to_xml( $full_response );
+
+		if ( property_exists( $response, 'returncode' ) && 'SUCCESS' == $response->returncode ) {
+			return $response;
+		}
+	}
+
+	/**
 	 * Get all recordings for selected room.
 	 *
 	 * @since   3.0.0
