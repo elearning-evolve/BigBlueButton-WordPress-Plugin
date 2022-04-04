@@ -34,10 +34,14 @@ class Bigbluebutton_Activator {
 			return;
 		}
 
+		if ( ! get_option( 'ee_bb_flush_rewrite_rules_flag' ) ) {
+			add_option( 'ee_bb_flush_rewrite_rules_flag', true );
+		}
+
 		if ( function_exists( 'is_multisite' ) && is_multisite() ) {
-			$blogs = wp_get_sites();
+			$blogs = get_sites();
 			foreach ( $blogs as $blog ) {
-				switch_to_blog( $blog['blog_id'] );
+				switch_to_blog( $blog->blog_id );
 				self::set_default_roles();
 				restore_current_blog();
 			}

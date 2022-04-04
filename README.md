@@ -7,7 +7,7 @@ Tags: bigbluebutton, videoconferencing, virtual classroom, web conferencing, onl
 Requires at least: 5.1  
 Tested up to: 5.9.2  
 Requires PHP: 7.2  
-Stable tag: 1.1.4  
+Stable tag: 1.1.5  
 License: GPLv2 or later  
 License URI: http://www.gnu.org/licenses/gpl-2.0.html  
 
@@ -22,6 +22,13 @@ This plugin is a fork of the [BigBlueButton plugin](https://wordpress.org/plugin
 BBB is an open-source video conferencing tool that is designed and **"Built For Teachers"**. It has all the core features you would expect in a web conferencing system. Additionally, it offers features that can empower teachers to engage their students in the virtual classroom by enabling active collaboration.
 
 [See All BBB Features](https://support.blindsidenetworks.com/hc/en-us/articles/360052738972-What-are-the-features-in-BigBlueButton-)
+
+### BBB WordPress Plugin Features ###
+The BBB WordPress plugin enables the user to create BBB rooms right from the WordPress dashboard. Once the room is created it can be added to any WordPress page through a simple shortcode. There is also a possibility to enter multiple rooms in the shortcode to let the user choose the room that they want to join.
+
+The student can simply click Join from the page where the shortcode is added and enter the BBB room where the teacher can initiate a virtual classroom session.
+
+After the session is over the plugin can also display the recording of the session on the same page so that the students can take the keynotes from the session later on.
 
 **There is also a Pro version available with this plugin that offers more features, [learn more](https://elearningevolve.com/products/video-conferencing-with-bigbluebutton-pro/)**.
 
@@ -139,6 +146,10 @@ If a user has the capability to manage recordings, they will see a pencil icon n
 8. BBB Rooms can also be organized using Categories.
 
 ## Changelog ##
+### 1.1.5 ###
+* Fixed: The page can't be found error when viewing a BBB room
+[Action needed] Please deactivate and activate the plugin to apply this fix
+
 ### 1.1.4 ###
 * Added: compatibility for the max room participant limit feature added in Pro plugin
 
@@ -147,7 +158,7 @@ If a user has the capability to manage recordings, they will see a pencil icon n
 * Fixed: Super admin can not login WP multisite after activating the plugin
 
 ### 1.1.2 ###
-* Added: Our [Pro version](https://elearningevolve.com/products/video-conferencing-with-bbb-pro/) release notice on the plugin settings page
+* Added: Our [Pro version](https://elearningevolve.com/products/bigbluebutton-wordpress-pro/) release notice on the plugin settings page
 
 ### 1.1.1 ###
 * Updated: Removed the need to assign activate_plugins user permission for admin BBB Rooms menu.

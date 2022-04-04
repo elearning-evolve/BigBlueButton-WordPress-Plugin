@@ -94,6 +94,18 @@ class Bigbluebutton_Register_Custom_Types {
 	}
 
 	/**
+	 * Rewrite permalinks after post type is registered
+	 * Credits: https://andrezrv.com/2014/08/12/efficiently-flush-rewrite-rules-plugin-activation/
+	 * @since   3.0.0
+	 */
+	public function flush_rewrite_rules_maybe() {
+		if ( get_option( 'ee_bb_flush_rewrite_rules_flag' ) ) {
+			flush_rewrite_rules( false );
+			delete_option( 'ee_bb_flush_rewrite_rules_flag' );
+		}
+	}
+
+	/**
 	 * Create moderator and Viewer Access Code metaboxes on room creation and edit.
 	 *
 	 * @since   3.0.0

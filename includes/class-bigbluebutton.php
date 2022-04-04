@@ -253,6 +253,7 @@ class VideoConferencingWithBBB {
 		// Register bbb-rooms and custom fields.
 		$this->loader->add_action( 'init', $plugin_admin_register_custom_types, 'bbb_room_as_post_type' );
 		$this->loader->add_action( 'init', $plugin_admin_register_custom_types, 'bbb_room_category_as_taxonomy_type' );
+		$this->loader->add_action( 'init', $plugin_admin_register_custom_types, 'flush_rewrite_rules_maybe', 20 );
 
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );

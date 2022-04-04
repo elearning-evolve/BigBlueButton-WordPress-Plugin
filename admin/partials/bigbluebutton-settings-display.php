@@ -112,7 +112,7 @@
 			<ol>
 				<?php if ( ! defined( 'BBB_PRO_VERSION' ) ) : ?>
 				<li>
-					<p><strong><a target="_blank" rel="noopener" href="https://elearningevolve.com/products/video-conferencing-with-bbb-pro/">Video Conferencing with BigBlueButton (BBB) Pro</a></strong> is a premium plugin that provides enhanced features on top of our free plugin.</p>
+					<p><strong><a target="_blank" rel="noopener" href="https://elearningevolve.com/products/bigbluebutton-wordpress-pro/">Video Conferencing with BigBlueButton (BBB) Pro</a></strong> is a premium plugin that provides enhanced features on top of our free plugin.</p>
 				</li>
 				<?php endif; ?>
 				<li>
