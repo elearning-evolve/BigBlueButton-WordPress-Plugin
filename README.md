@@ -7,7 +7,7 @@ Tags: bigbluebutton, videoconferencing, virtual classroom, web conferencing, onl
 Requires at least: 5.1  
 Tested up to: 5.9.2  
 Requires PHP: 7.2  
-Stable tag: 1.1.5  
+Stable tag: 1.1.6  
 License: GPLv2 or later  
 License URI: http://www.gnu.org/licenses/gpl-2.0.html  
 
@@ -146,6 +146,9 @@ If a user has the capability to manage recordings, they will see a pencil icon n
 8. BBB Rooms can also be organized using Categories.
 
 ## Changelog ##
+### 1.1.6 ###
+* Fixed: You did not pass the checksum security check error on room join with BBB On Demand Server
+
 ### 1.1.5 ###
 * Fixed: The page can't be found error when viewing a BBB room
 [Action needed] Please deactivate and activate the plugin to apply this fix

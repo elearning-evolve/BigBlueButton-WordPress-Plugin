@@ -375,6 +375,9 @@ class Bigbluebutton_Admin {
 
 				$bbb_url .= ( substr( $bbb_url, -1 ) == '/' ? '' : '/' );
 
+				// Remove duplicate /api/ in the end if exists
+				$bbb_url = str_replace( '/bigbluebutton/api', '/bigbluebutton', $bbb_url );
+
 				if ( ! Bigbluebutton_Api::test_bigbluebutton_server( $bbb_url, $bbb_salt ) ) {
 					return 3;
 				}
