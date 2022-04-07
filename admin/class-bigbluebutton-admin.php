@@ -147,7 +147,7 @@ class Bigbluebutton_Admin {
 			array( $this, 'display_room_subscribe_updates' )
 		);
 
-		if ( ! defined( 'BBB_PRO_VERSION' ) ) {
+		if ( ! Bigbluebutton_Loader::is_bbb_pro_active() ) {
 			add_submenu_page(
 				'bbb_room',
 				__( 'Get Pro Version', 'bigbluebutton' ),
@@ -243,7 +243,7 @@ class Bigbluebutton_Admin {
 					</div>';
 				break;
 			case 'start-time':
-				if ( ! defined( 'BBB_PRO_VERSION' ) ) {
+				if ( ! Bigbluebutton_Loader::is_bbb_pro_active() ) {
 					echo '<a href="' . VIDEO_CONF_WITH_BBB_PRO . '" target="_blank" rel="noopener">Pro version feature</a>';
 				} else {
 					$is_start_time = get_post_meta( $post_id, 'bbb-start-time', true );

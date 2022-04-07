@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: 2019-09-13 10:54-0400\n"
-"PO-Revision-Date: 2022-03-22 09:24+0000\n"
+"PO-Revision-Date: 2022-04-07 01:42+0000\n"
 "Language-Team: English (Canada)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "X-Loco-Version: 2.5.5; wp-5.9.2"
 
-#: video-conferencing-with-bbb.php:84
+#: video-conferencing-with-bbb.php:98
 #, php-format
 msgid ""
 "%1$s is not compatible with %2$s. Please deactivate %1$s before activating "
@@ -40,7 +40,7 @@ msgid "%1$s You can use the default test install server hosted by %2$s."
 msgstr ""
 
 # Public strings
-#: public/partials/bigbluebutton-join-display.php:22
+#: public/partials/bigbluebutton-join-display.php:25
 msgid "Access Code"
 msgstr "Access Code"
 
@@ -64,7 +64,7 @@ msgstr "All Rooms"
 msgid "BBB Rooms"
 msgstr ""
 
-#: admin/class-bigbluebutton-admin.php:388
+#: admin/class-bigbluebutton-admin.php:408
 msgid ""
 "BigBlueButton works best with the heartbeat API enabled. Please enable it."
 msgstr ""
@@ -74,11 +74,11 @@ msgstr ""
 msgid "Collapse recordings"
 msgstr "Collapse recordings"
 
-#: admin/class-bigbluebutton-admin.php:240
+#: admin/class-bigbluebutton-admin.php:241
 msgid "Copy Shortcode"
 msgstr ""
 
-#: admin/partials/bigbluebutton-settings-display.php:45
+#: admin/partials/bigbluebutton-settings-display.php:50
 msgid "Default server settings 1. Default server settings 2."
 msgstr ""
 
@@ -86,7 +86,7 @@ msgstr ""
 msgid "Displays a BigBlueButton login form."
 msgstr "Displays a BigBlueButton login form."
 
-#: public/helpers/class-bigbluebutton-display-helper.php:111
+#: public/helpers/class-bigbluebutton-display-helper.php:131
 msgid "Download"
 msgstr ""
 
@@ -137,10 +137,9 @@ msgstr ""
 msgid "Insert into room"
 msgstr "Insert into room"
 
-# Room description
-#: public/partials/bigbluebutton-join-display.php:49
-msgid "Join Here"
-msgstr "Join Here"
+#: public/helpers/class-bigbluebutton-display-helper.php:73
+msgid "Join"
+msgstr ""
 
 #: public/partials/bigbluebutton-recordings-display.php:24
 msgid "Manage"
@@ -151,9 +150,9 @@ msgstr "Manage"
 msgid "Meeting"
 msgstr "Meeting"
 
-#: admin/class-bigbluebutton-register-custom-types.php:102
-#: admin/class-bigbluebutton-register-custom-types.php:135
-#: admin/class-bigbluebutton-admin.php:195
+#: admin/class-bigbluebutton-register-custom-types.php:114
+#: admin/class-bigbluebutton-register-custom-types.php:147
+#: admin/class-bigbluebutton-admin.php:196
 msgid "Moderator Access Code"
 msgstr "Moderator Access Code"
 
@@ -178,7 +177,7 @@ msgstr "Not all rooms were able to be imported to the new version."
 msgid "Protected"
 msgstr "Protected"
 
-#: admin/class-bigbluebutton-register-custom-types.php:113
+#: admin/class-bigbluebutton-register-custom-types.php:125
 #: admin/partials/bigbluebutton-recordable-metabox-display.php:1
 msgid "Recordable"
 msgstr "Recordable"
@@ -235,17 +234,17 @@ msgstr "Rooms list navigation"
 msgid "Rooms Settings"
 msgstr ""
 
-#: admin/partials/bigbluebutton-settings-display.php:57
+#: admin/partials/bigbluebutton-settings-display.php:77
 msgid "Save server settings bad server settings error message."
 msgstr ""
 "Error: The server cannot be reached. Are you sure the server is running and "
 "your settings are correct?"
 
-#: admin/partials/bigbluebutton-settings-display.php:53
+#: admin/partials/bigbluebutton-settings-display.php:73
 msgid "Save server settings bad url error message."
 msgstr "Error: the URL you have entered must end with '/bigbluebutton/'."
 
-#: admin/partials/bigbluebutton-settings-display.php:49
+#: admin/partials/bigbluebutton-settings-display.php:69
 msgid "Save server settings success message."
 msgstr "Success! Your room server settings have been saved."
 
@@ -265,16 +264,26 @@ msgstr "Shared Secret/Salt"
 msgid "Shortcode"
 msgstr ""
 
+#: admin/class-bigbluebutton-admin.php:195
+msgid "Start Time"
+msgstr ""
+
 #: admin/class-bigbluebutton-admin.php:143
 #: admin/class-bigbluebutton-admin.php:144
 msgid "Stay Updated"
 msgstr ""
 
-#: public/partials/bigbluebutton-join-display.php:27
+#: public/partials/bigbluebutton-join-display.php:35
 msgid "The access code you have entered is incorrect. Please try again."
 msgstr "The access code you have entered is incorrect. Please try again."
 
-#: public/partials/bigbluebutton-join-display.php:44
+#: public/partials/bigbluebutton-join-display.php:30
+msgid ""
+"The limit for the max no.of users allowed to join the room has been reached. "
+"Please try again in a while."
+msgstr ""
+
+#: public/partials/bigbluebutton-join-display.php:52
 msgid ""
 "The meeting has not started yet. Please wait for a moderator to start the "
 "meeting before joining."
@@ -282,7 +291,7 @@ msgstr ""
 "The meeting has not started yet. Please wait for a moderator to start the "
 "meeting before joining."
 
-#: public/partials/bigbluebutton-join-display.php:42
+#: public/partials/bigbluebutton-join-display.php:50
 msgid ""
 "The meeting has not started yet. You will be automatically redirected to the "
 "meeting when it starts."
@@ -354,7 +363,7 @@ msgstr "Uploaded to this room"
 msgid "Video Conferencing with BBB"
 msgstr ""
 
-#: public/helpers/class-bigbluebutton-display-helper.php:110
+#: public/helpers/class-bigbluebutton-display-helper.php:130
 #, fuzzy
 #| msgid "Video"
 msgid "View"
@@ -372,18 +381,18 @@ msgstr "View Room"
 msgid "View Rooms"
 msgstr "View Rooms"
 
-#: admin/class-bigbluebutton-register-custom-types.php:103
-#: admin/class-bigbluebutton-register-custom-types.php:151
-#: admin/class-bigbluebutton-admin.php:196
+#: admin/class-bigbluebutton-register-custom-types.php:115
+#: admin/class-bigbluebutton-register-custom-types.php:163
+#: admin/class-bigbluebutton-admin.php:197
 msgid "Viewer Access Code"
 msgstr "Viewer Access Code"
 
-#: admin/class-bigbluebutton-register-custom-types.php:123
+#: admin/class-bigbluebutton-register-custom-types.php:135
 #: admin/partials/bigbluebutton-wait-for-mod-metabox-display.php:1
 msgid "Wait for Moderator"
 msgstr "Wait for Moderator"
 
-#: public/class-bigbluebutton-public-room-api.php:89
+#: public/class-bigbluebutton-public-room-api.php:91
 msgid ""
 "You do not have permission to enter the room. Please request permission."
 msgstr ""

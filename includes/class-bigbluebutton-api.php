@@ -47,6 +47,7 @@ class Bigbluebutton_Api {
 			'bbb_create_room_params',
 			array(
 				'name'        => esc_attr( $name ),
+				'rid'         => esc_attr( $rid ),
 				'meetingID'   => rawurlencode( $meeting_id ),
 				'attendeePW'  => rawurlencode( $viewer_code ),
 				'moderatorPW' => rawurlencode( $moderator_code ),
@@ -57,13 +58,19 @@ class Bigbluebutton_Api {
 
 		$url = self::build_url( 'create', $arr_params );
 
-		$full_response = self::get_response( $url );
+		if ( Bigbluebutton_Loader::is_bbb_pro_active() ) {
+			$full_response = Bigbluebuttonpro_Helper::get_response( $url, 'get', $arr_params );
+		}
+
+		if ( ! $full_response ) {
+			$full_response = self::get_response( $url );
+		}
 
 		if ( is_wp_error( $full_response ) ) {
 			return 404;
 		}
 
-		$response = self::response_to_xml( $full_response );
+			$response = self::response_to_xml( $full_response );
 
 		if ( property_exists( $response, 'returncode' ) && 'SUCCESS' == $response->returncode ) {
 			return 200;
@@ -405,12 +412,8 @@ class Bigbluebutton_Api {
 	 * @return  Array|WP_Error  $response   Server response in array format.
 	 */
 	private static function get_response( $url ) {
-		$result = wp_remote_get(
-			esc_url_raw( $url ),
-			array(
-				'timeout' => 60,
-			)
-		);
+
+		$result = wp_remote_get( esc_url_raw( $url ), array( 'timeout' => 90 ) );
 
 		return $result;
 	}

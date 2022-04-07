@@ -126,4 +126,11 @@ class Bigbluebutton_Loader {
 
 	}
 
+	public static function is_bbb_pro_active() {
+		if ( defined( 'BBB_PRO_VERSION' ) ) {
+			return true;
+		}
+
+		return false;
+	}
 }

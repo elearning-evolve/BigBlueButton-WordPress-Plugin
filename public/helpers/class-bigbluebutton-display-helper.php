@@ -53,9 +53,10 @@ class Bigbluebutton_Display_Helper {
 	 * @return  String      $form                   Join meeting form stored in a variable.
 	 */
 	public function get_join_form_as_string( $room_id, $meta_nonce, $access_as_moderator, $access_as_viewer, $access_using_code ) {
-		global $wp;
+		global $wp, $post;
 		$current_url = home_url( add_query_arg( array(), $wp->request ) );
 		$start_time  = get_post_meta( $room_id, 'bbb-start-time', true );
+		$post_id = ( isset( $post->ID ) ? $post->ID : 0 );
 		if ( $start_time ) {
 			$dt     = new DateTime( $start_time, new DateTimeZone( wp_timezone_string() ) );
 			$dt_now = new DateTime( 'now', new DateTimeZone( wp_timezone_string() ) );
@@ -67,6 +68,14 @@ class Bigbluebutton_Display_Helper {
 		}
 
 		$heartbeat_available = wp_script_is( 'heartbeat', 'registered' );
+		if ( ! Bigbluebutton_Loader::is_bbb_pro_active() ) {
+			$form_target = '_blank';
+			$join_btn    = __( 'Join', 'bigbluebutton' );
+		} else {
+			$form_target = '';
+			$join_btn    = __( 'Join Here', 'bigbluebuttonpro' );
+		}
+
 		ob_start();
 		include $this->file . 'partials/bigbluebutton-join-display.php';
 		$form = ob_get_contents();

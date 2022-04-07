@@ -40,11 +40,16 @@ class Bigbluebutton_Public_Shortcode {
 	 *
 	 * @return  String $content    Content of the shortcode with rooms and recordings.
 	 */
-	public function display_bigbluebutton_shortcode( $atts = [], $content = null ) {
-		global $pagenow;
+	public function display_bigbluebutton_shortcode( $atts = array(), $content = null ) {
+		global $pagenow, $post;
 		$type           = 'room';
+		$post_id = ( isset( $post->ID ) ? $post->ID : 0 );
 		$author         = (int) get_the_author_meta( 'ID' );
 		$display_helper = new Bigbluebutton_Display_Helper( plugin_dir_path( __FILE__ ) );
+
+		if ( $post_id && isset( $atts['room_limit'] ) && $atts['room_limit'] ) {
+			update_post_meta( $post_id, 'bbb_pro_room_limit', sanitize_text_field( $atts['room_limit'] ) );
+		}
 
 		if ( ! Bigbluebutton_Tokens_Helper::can_display_room_on_page() ) {
 			return $content;
@@ -74,7 +79,7 @@ class Bigbluebutton_Public_Shortcode {
 	 *
 	 * @return  String $content    Content of the shortcode with recordings.
 	 */
-	public function display_bigbluebutton_old_recordings_shortcode( $atts = [], $content = null ) {
+	public function display_bigbluebutton_old_recordings_shortcode( $atts = array(), $content = null ) {
 		$atts['type'] = 'recording';
 		return $this->display_bigbluebutton_shortcode( $atts, $content );
 	}

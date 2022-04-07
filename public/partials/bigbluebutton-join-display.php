@@ -5,11 +5,12 @@
 <?php elseif ( isset( $_REQUEST['rec_url'] ) ) : ?>
 	<?php do_action( 'bbb_recording_display' ); ?>
 <?php else : ?>
-<form id="joinroom" <?php echo ( ! defined( 'BBB_PRO_VERSION' ) ? 'target="_blank"' : '' ); ?> method="post" action="<?php echo admin_url( 'admin-post.php' ); ?>" class="bbb-form validate">
+<form id="joinroom" target="<?php echo esc_attr( $form_target ); ?>" method="post" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>" class="bbb-form validate">
 	<input type="hidden" name="action" value="join_room">
 	<input id="bbb_join_room_id" type="hidden" name="room_id" value="<?php echo esc_attr( $room_id ); ?>">
-	<input type="hidden" id="bbb_join_room_meta_nonce" name="bbb_join_room_meta_nonce" value="<?php echo $meta_nonce; ?>">
-	<input type="hidden" name="REQUEST_URI" value="<?php echo $current_url; ?>">
+	<input type="hidden" id="bbb_join_room_meta_nonce" name="bbb_join_room_meta_nonce" value="<?php echo esc_attr( $meta_nonce ); ?>">
+	<input type="hidden" name="REQUEST_URI" value="<?php echo esc_url( $current_url ); ?>">
+	<input type="hidden" name="post_id" value="<?php echo esc_attr( $post_id ); ?>">
 	<?php if ( ! is_user_logged_in() ) { ?>
 		<div id="bbb_join_with_username" class="bbb-join-form-block">
 			<label id="bbb_meeting_name_label" class="bbb-join-room-label"><?php esc_html_e( 'Name' ); ?>: </label>
@@ -53,7 +54,7 @@
 			</label>
 		</div>
 	<?php } ?>
-	<input class="bbb-button" type="submit" class="button button-primary" value="<?php esc_html_e( 'Join', 'bigbluebutton' ); ?><?php echo ( defined( 'BBB_PRO_VERSION' ) ? ' ' . esc_html( 'Here', 'bigbluebuttonpro' ) : '' ); ?>">
+	<input class="bbb-button" type="submit" class="button button-primary" value="<?php echo esc_attr( $join_btn ); ?>">
 	<?php do_action( 'bbb_join_form_buttons' ); ?>
 </form>
 <?php endif; ?>

@@ -11,7 +11,7 @@
 }
 
 .bbb-error {
-    color: #f00;
+    color: #9e2c2c;
 }
 
 .bbb-table-container,
@@ -176,12 +176,12 @@
     border-bottom: groove;
 }
 
-.bbb-join-room-label {
+#joinroom .bbb-join-room-label, .bbb-join-room-label {
     display: inline-block;
     width: 140px;
 }
 
-.bbb-join-room-input {
+#joinroom .bbb-join-room-input, .bbb-join-room-input {
     width: 310px;
 }
 

@@ -49,7 +49,7 @@
 								wp_kses(
 									__( 'Default server settings 1. Default server settings 2.', 'bigbluebutton' ),
 									array(
-										'a' => array(
+										'a'      => array(
 											'href'   => array(),
 											'title'  => array(),
 											'target' => array(),
@@ -85,6 +85,44 @@
 				<input class="button button-primary bbb-settings-submit" type="submit" value="<?php esc_html_e( 'Save Changes' ); ?>"/>
 			</form>
 		</div>
+		<section id="shortcodes" class="bbb-pro-shortcode-usage">
+			<h3>Shortcode Usage Guide</h3>
+			<p>Below are the <a rel="noopnerer"  target="_blank" href="https://www.wpbeginner.com/wp-tutorials/how-to-add-a-shortcode-in-wordpress/">shortcodes</a> offered by the plugin that you can use anywhere on your site.</p>
+				<ol>
+					<li>
+						<p>Display a list of BBB rooms for the user to choose from</p>
+						<?php if ( Bigbluebutton_Loader::is_bbb_pro_active() ) : ?>
+							<code>[bigbluebutton token='zxxxx, zyyyy, ...' room_limit='x']</code>
+						<?php else : ?>
+							<code>[bigbluebutton token='zxxxx, zyyyy, ...']</code>
+						<?php endif; ?>
+						<div class="desc">
+							<ul>
+								<li><strong>tokens</strong> : The BBB Room tokens, see BBB Rooms -> All Rooms -> Token</li>
+								<?php if ( Bigbluebutton_Loader::is_bbb_pro_active() ) : ?>
+									<li><strong>room_limit (overrides global setting)</strong> : Set the max no.of users allowed to join the room at the same time</li>
+								<?php endif; ?>
+							</ul>
+						</div>
+					</li>
+					<li>
+						<p>Display a specific BBB room window anywhere on the site</p>
+						<?php if ( Bigbluebutton_Loader::is_bbb_pro_active() ) : ?>
+							<code>[bigbluebutton token='zxxxx' room_limit='x']</code>
+						<?php else : ?>
+							<code>[bigbluebutton token='zxxxx']</code>
+						<?php endif; ?>
+						<div class="desc">
+							<ul>
+								<li><strong>token</strong> : The BBB Room token, see BBB Rooms -> All Rooms -> Token</li>
+								<?php if ( Bigbluebutton_Loader::is_bbb_pro_active() ) : ?>
+									<li><strong>room_limit (overrides global setting)</strong> : Set the max no.of users allowed to join the room at the same time</li>
+								<?php endif; ?>
+							</ul>
+						</div>
+					</li>
+				</ol>
+		</section>
 	</div>
 	<div class="zvc-position-floater-right">
 		<div class="zvc-information-sec">
@@ -110,7 +148,7 @@
 		<div class="zvc-information-sec">
 			<h3>Our Plugins</h3>
 			<ol>
-				<?php if ( ! defined( 'BBB_PRO_VERSION' ) ) : ?>
+				<?php if ( ! Bigbluebutton_Loader::is_bbb_pro_active() ) : ?>
 				<li>
 					<p><strong><a target="_blank" rel="noopener" href="https://elearningevolve.com/products/bigbluebutton-wordpress-pro/">Video Conferencing with BigBlueButton (BBB) Pro</a></strong> is a premium plugin that provides enhanced features on top of our free plugin.</p>
 				</li>

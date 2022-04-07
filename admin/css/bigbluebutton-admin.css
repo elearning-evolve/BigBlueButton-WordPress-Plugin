@@ -237,3 +237,12 @@
 .post-type-bbb-room .edit-post-layout__footer {
     display: none; /* Hide edit post footer breadcrum */
 }
+
+.bbb-pro-shortcode-usage code {
+    padding: 10px;
+    line-height: 3;
+}
+
+.bbb-pro-shortcode-usage .desc {
+    margin-top: 26px;
+}

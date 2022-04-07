@@ -5,9 +5,9 @@ Contributors: blindsidenetworks, jfederico, yfngdu, elearningevolve, adeelraza_7
 Donate link: https://elearningevolve.com/products/donate/  
 Tags: bigbluebutton, videoconferencing, virtual classroom, web conferencing, online teaching, learning management system. lms  
 Requires at least: 5.1  
-Tested up to: 5.9.2  
+Tested up to: 5.9.3  
 Requires PHP: 7.2  
-Stable tag: 1.1.6  
+Stable tag: 1.2.0  
 License: GPLv2 or later  
 License URI: http://www.gnu.org/licenses/gpl-2.0.html  
 
@@ -146,6 +146,11 @@ If a user has the capability to manage recordings, they will see a pencil icon n
 8. BBB Rooms can also be organized using Categories.
 
 ## Changelog ##
+### 1.2.0 ###
+* Added: Compatibility for per shortcode max participant room limit in Pro plugin
+* Added: Compatibility for pre upload presentation (global and per room basis) in Pro plugin
+* Added: Shortcode usage guide on the plugin settings page
+
 ### 1.1.6 ###
 * Fixed: You did not pass the checksum security check error on room join with BBB On Demand Server
 
