@@ -30,8 +30,20 @@ The student can simply click Join from the page where the shortcode is added and
 
 After the session is over the plugin can also display the recording of the session on the same page so that the students can take the keynotes from the session later on.
 
-**There is also a Pro version available with this plugin that offers more features, [learn more](https://elearningevolve.com/products/video-conferencing-with-bigbluebutton-pro/)**.
+### Pro Version Features ###
+There is also a [Pro version]((https://elearningevolve.com/products/video-conferencing-with-bigbluebutton-pro/)) available with this plugin that offers the below features:
+* Embed BigBlueButton Room on WordPress
+* Set a Countdown/Schedule for Room
+* Fully White-label Virtual Classroom
+* Limit the max allowed participants for a room e.g (5, 10, .. etc) both on a per room and per page basis. This can allow you to conduct a 1:1 or group session
+* Upload your brand logo that is visible in the BBB room
+* Customize the room background-color as per your brand color
+* Change welcome message that is displayed in the Public Chat section of the room
+* Customize thank you message when the user leaves the meeting
+* Pre-upload your presentation (ability to upload both globally and per room basis)
 
+**[Get Pro Version](https://elearningevolve.com/products/video-conferencing-with-bigbluebutton-pro/)**
+### BigBlueButton Server ###
 To get up and running in no time with a managed BigBlueButton hosting provider please refer to our [Recommended BBB hosting providers](https://elearningevolve.com/blog/bigbluebutton-hosting).
 
 For further queries feel free to [contact us](https://elearningevolve.com/contact/).
