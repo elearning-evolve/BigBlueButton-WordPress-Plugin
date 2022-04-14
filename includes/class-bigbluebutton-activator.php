@@ -103,7 +103,7 @@ class Bigbluebutton_Activator {
 		$set_join_cap = self::join_permissions_set( $role );
 		$role->add_cap( 'read_bbb_room' );
 
-		if ( $role->has_cap( 'activate_plugins' ) || current_user_can( 'setup_network' ) ) {
+		if ( $role->has_cap( 'activate_plugins' ) ) {
 			self::set_admin_capability( $role );
 		}
 
@@ -117,7 +117,7 @@ class Bigbluebutton_Activator {
 		if ( 'author' == $name ) {
 			self::set_edit_room_capability( $role );
 		}
-		if ( 'author' == $name || 'editor' == $name || 'contributer' == $name || 'subscriber' == $name ) {
+		if ( 'author' == $name || 'editor' == $name || 'contributor' == $name || 'subscriber' == $name ) {
 			if ( ! $set_join_cap ) {
 				$role->add_cap( 'join_as_viewer_bbb_room' );
 			}

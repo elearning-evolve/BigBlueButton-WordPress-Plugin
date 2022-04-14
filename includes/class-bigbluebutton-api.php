@@ -62,7 +62,7 @@ class Bigbluebutton_Api {
 			$full_response = Bigbluebuttonpro_Helper::get_response( $url, 'get', $arr_params );
 		}
 
-		if ( ! $full_response ) {
+		if ( ! isset( $full_response ) || ! $full_response ) {
 			$full_response = self::get_response( $url );
 		}
 

@@ -7,7 +7,7 @@ Tags: bigbluebutton, videoconferencing, virtual classroom, web conferencing, onl
 Requires at least: 5.1  
 Tested up to: 5.9.3  
 Requires PHP: 7.2  
-Stable tag: 1.2.0  
+Stable tag: 1.2.1  
 License: GPLv2 or later  
 License URI: http://www.gnu.org/licenses/gpl-2.0.html  
 
@@ -58,16 +58,17 @@ Here's an overview of the installation.
 ## Frequently Asked Questions ##
 
 **How do I create meetings?**
-After activating the BigBlueButton plugin, click on "BBB Rooms" and "Add New" and give the meeting a title and fill out the room details.
+After activating the plugin, click on "BBB Rooms" and "Add New" and give the meeting a title and fill out the room details.
 
-**How can users join the meetings?**
+**How to display room join form?**
 
-Users join meetings using a join room form. This form can be shown on a site as a sidebar element or as a page/post.
-
-For setting up in the sidebar, add the BBB Rooms widget, as you do with any other widget, dragging the box to the position you want it to be in.
-
-By default, each room will be on its own page, with the permalink listed in the BBB Rooms page on the admin panel. BBB Rooms can also be inserted into any post/page using the **[bigbluebutton] shortcode** with specified tokens, token1, token2 in the shortcode in the format,
+* By default, each room will be on its own page, with the permalink listed under BBB Rooms -> All Rooms. BBB Rooms can also be inserted into any post/page using the **[bigbluebutton] shortcode** with specified tokens, token1, token2 in the shortcode in the format,
 `[bigbluebutton token="token1,token2"]`
+* Users join meetings using a join room form. This form can be shown on a site as a sidebar element or as a page/post.
+* For setting up in the sidebar, add the BBB Rooms widget, as you do with any other widget, dragging the box to the position you want it to be in.
+
+**How to join the BBB room?**
+Once you display the room join form on your preferred page or section on your site. Simply, share the website link of your page with your participants and they can join the BBB room directly from there.
 
 **How can users view recordings?**
 
@@ -80,59 +81,46 @@ To place recordings on a separate post/page, use the shortcode `[bigbluebutton t
 
 Insert the token of your BBB Room that you would like the users to select from in the shortcode with this format, `[bigbluebutton token="token1,token2"]`
 
-**I've migrated my rooms. Now it says they're missing when I try to access them!**
-Please try going to settings, and save permalinks. There is no need to change your permalink structure.
+**Which users are required to enter the Name and Access Code on room join form?**
+* *For non-logged in users:* The Name & Access Code will be always required.
+* *For logged-in users:* The login username will be taken as their Name. The Access Code field does not displays for these user roles **administrator, author, editor, contributor, subscriber**. Any other user role will be required to enter the Access Code.
+* *For logged-in users:* To remove the Access Code requirement for a user role, you can customize the particular user role by adding the capability, **join_as_viewer_bbb_room**.
 
-**I'm an admin and when I tried to enter a room, I couldn't enter as a moderator.**
-Please try deactivating the plugin, and reactivating it again.
+**How can I change the capability/permissions of a user role?**
 
-**Why sometimes the Name and Password are required, some others only the Name and others only the Password?**
+You can install the [**"User Role Editor plugin"**](https://wordpress.org/plugins/user-role-editor/) and update the capabilities/permissions from **"Users" > "User Role Editor"**.
+![bbb-room-user-roles-editor](https://elearningevolve.com/wp-content/uploads/2022/04/bbb-room-user-roles-editor.jpeg "BBB User Role Editor")
 
-The plugin gathers the much information it can from WordPress, but what will be taken depends on the configuration.
+**How to allow a user role to create BBB Rooms from the Dashbaord?**
 
-For registered users, their registered name or username will be taken as their Name.
+To allow a user role to create and edit rooms, assign them a role or add the capability, **publish_bbb_rooms, edit_bbb_rooms, edit_posts, delete_bbb_rooms, delete_published_bbb_rooms, and edit_published_bbb_rooms.**
 
-For registered users whose role has been set for requiring always a password, only the Password will be required.
+**How to assign a WordPress user role as the moderator for the BBB room?**
 
-For anonymous users, the Name will be always required, but again the Password requirement will depend on the configuration. If Moderator/Attendee capability has been set for them no Password box will be shown in their join room form.
+* By default, the user who has created a BBB room and will always join their room as a moderator, this does not apply to others'rooms.
+* The WordPress site administrators have the moderator access for all BBB Rooms.
+* Additionally, you can customize your site user roles to add the capability,  **join_as_moderator_bbb_room** for your preferred role to grant them the moderator access for all BBB Rooms like the administrator.
 
-**How can I change the permissions of the users?**
+**How to Restrict number of users or max participants for all rooms or per room?**
+This feature is available in our [Pro plugin](https://elearningevolve.com/products/bigbluebutton-wordpress-pro/). You can limit the max participants for all the rooms from *BBB Rooms -> Settings -> Room Config*
+![bbb-room-limit-participant-global](https://elearningevolve.com/wp-content/uploads/2022/04/bbb-room-limit-participant-global.jpeg "Max Participant Global")
 
-You should install and activate the **"User Role Editor" plugin by Vladimir Garagulya** and in the Dashboard under the **"Users" > "User Role Editor",** update the permissions.
+You can also override the global settings or set a different limit for each page by setting the max participants param with each shortcode that is added to a page.
+![bbb-room-limit-participant-shortcode](https://elearningevolve.com/wp-content/uploads/2022/04/bbb-room-limit-participant-shortcode.jpeg "Max Participant Per Page")
 
-To allow another user to create and edit rooms, assign them a role that has the permissions, **publish_bbb_rooms, edit_bbb_rooms, edit_posts, delete_bbb_rooms, delete_published_bbb_rooms, and edit_published_bbb_rooms.** The permission structure is similar for posts and pages.
+**Where do administrator of the room login to their page/ room to schedule and manage meetings**
+They need to login to their WordPress dashboard https://mywpsite.com/wp-admin
+from the dashbaord they can manage the room from BBB Rooms menu.
 
-To allow another user to create and edit room categories, assign them a role that has the permissions, **manage_categories.** This does not give them permission to create rooms. They can only manage room categories.
-
-To allow another user to join as moderator, viewer, or with a code, assign them to a role with one of the corresponding permissions, **join_as_moderator_bbb_room, join_as_viewer_bbb_room, or join_with_password_bbb_room.** By default, the owner of the room will always join their rooms as a moderator. The default does not apply to others' rooms.
-
-To allow another user to manage recordings, assign them to a role that has the permission, **manage_bbb_room_recordings.**
-
-To allow another user to use shortcodes or the widget, assign them to a role that has the permission, **edit_bbb_rooms, edit_posts.**
-
-If there are no roles with the corresponding permissions, please create a custom role using the **"Members" plugin** and assign the permission to that role.
-
-**Is there any way users can go directly into a meeting?**
-
-To provide direct access to the meeting rooms by adding the meeting token ID to the shortcode: `[bigbluebutton token="aa2817f3a1e1"]`
-
-The joining form is the same, so with the right permission configuration users would be able to join meetings with one click.
-
-**Why is it giving an error about creating a meeting room?**
-
-Make sure you are using BigBlueButton 0.8 or higher. Ensure the server settings are configured correctly.
-
-**How can I improve security?**
-
-You should enable the curl extension in php.ini.
-
-**I tried to preview my room, and nothing showed up!**
-
-BBB Rooms may not be viewed until they are published. Please try again after publication.
+**How to schedule a BBB room meeting**
+This feature is available in our [Pro plugin](https://elearningevolve.com/products/bigbluebutton-wordpress-pro/) where the Room admin can set a date/time of room meeting to start for each of the rooms.
+![bbb-room-countdown-setting](https://elearningevolve.com/wp-content/uploads/2022/04/bbb-room-countdown-setting.jpeg "BBB Room Countdown")
 
 **I want to edit my recordings. How do I do that?**
 
 If a user has the capability to manage recordings, they will see a pencil icon next to the recording name and description. Click on the icon to start editing, and press enter to submit. A user can cancel editing by pressing the ESC key.
+
+To allow a user role to manage recordings add the capability, **manage_bbb_room_recordings**.
 
 ## Screenshots ##
 
@@ -146,9 +134,18 @@ If a user has the capability to manage recordings, they will see a pencil icon n
 8. BBB Rooms can also be organized using Categories.
 
 ## Changelog ##
+### 1.2.1 ###
+* Added: updated FAQ section and added new answers
+* Updated: Removed restriction for preview of unpublished rooms
+* Fixed: BBB Room create/edit permissions granted to non-admin user roles
+* Fixed: Permissions are not assigned on plugin activate
+[Action needed] Please deactivate and activate the plugin to apply the above fixes
+
+
 ### 1.2.0 ###
 * Added: Compatibility for per shortcode max participant room limit in Pro plugin
 * Added: Compatibility for pre upload presentation (global and per room basis) in Pro plugin
+* Added: Compatibility for the ability to customize background color for the room in Pro plugin
 * Added: Shortcode usage guide on the plugin settings page
 
 ### 1.1.6 ###
