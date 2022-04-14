@@ -74,8 +74,11 @@ After activating the plugin, click on "BBB Rooms" and "Add New" and give the mee
 
 **How to display room join form?**
 
-* By default, each room will be on its own page, with the permalink listed under BBB Rooms -> All Rooms. BBB Rooms can also be inserted into any post/page using the **[bigbluebutton] shortcode** with specified tokens, token1, token2 in the shortcode in the format,
-`[bigbluebutton token="token1,token2"]`
+* By default, each room will be on its own page, with the permalink listed under BBB Rooms -> All Rooms. 
+* A single BBB Room can also be inserted into any post/page using the **[bigbluebutton] shortcode** with a specified token in the shortcode in the format,
+`[bigbluebutton token=z2xxx]`
+* There is also an option to insert multiple Rooms to any post/page where the user can select a specific room to join. To acheive this insert multiple tokens in the shortcode in the format,
+`[bigbluebutton token=z2xxx,z2yyy]`
 * Users join meetings using a join room form. This form can be shown on a site as a sidebar element or as a page/post.
 * For setting up in the sidebar, add the BBB Rooms widget, as you do with any other widget, dragging the box to the position you want it to be in.
 
@@ -84,14 +87,16 @@ Once you display the room join form on your preferred page or section on your si
 
 **How can users view recordings?**
 
-By default, each room will have its own page, which will display the room description, join button, and recordings.
+By default, the recordings display under each room created under BBB Rooms -> All Rooms.
 
-To place recordings on a separate post/page, use the shortcode `[bigbluebutton type="recording"]`, with the room tokens of the desired recordings. For example, the recordings for the tokens, token1, token2 can be displayed using,
-`[bigbluebutton type="recording" token="token1, token2"]`
+* To place recordings on a separate post/page, use the shortcode `[bigbluebutton type=recording]`, with the room token of the desired recording e.g:
+`[bigbluebutton type=recording token=z2xxx]`
+* To place multiple recordings on a separate post/page, use the shortcode `[bigbluebutton type=recording]`, with the room tokens of the desired recording e.g:
+`[bigbluebutton type=recording token=z2xxx,z2yyy]`
 
 **How to let users select a specific BBB room to join from frontend**
 
-Insert the token of your BBB Room that you would like the users to select from in the shortcode with this format, `[bigbluebutton token="token1,token2"]`
+Insert the token of your BBB Room that you would like the users to select from in the shortcode with this format, `[bigbluebutton token=z2xxx,z2yyy]`
 
 **Which users are required to enter the Name and Access Code on room join form?**
 * *For non-logged in users:* The Name & Access Code will be always required.
@@ -152,7 +157,6 @@ To allow a user role to manage recordings add the capability, **manage_bbb_room_
 * Fixed: BBB Room create/edit permissions granted to non-admin user roles
 * Fixed: Permissions are not assigned on plugin activate
 [Action needed] Please deactivate and activate the plugin to apply the above fixes
-
 
 ### 1.2.0 ###
 * Added: Compatibility for per shortcode max participant room limit in Pro plugin
