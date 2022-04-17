@@ -63,6 +63,7 @@ class Bigbluebutton_Register_Custom_Types {
 				'rewrite'         => array( 'slug' => 'bbb-room' ),
 				'show_in_menu'    => 'bbb_room',
 				'map_meta_cap'    => true,
+				'query_var'       => true,
 				// Enables block editing in the rooms editor.
 				'show_in_rest'    => true,
 				'supports'        => array( 'title', 'editor', 'author', 'thumbnail', 'permalink' ),
@@ -103,6 +104,36 @@ class Bigbluebutton_Register_Custom_Types {
 			flush_rewrite_rules( false );
 			delete_option( 'ee_bb_flush_rewrite_rules_flag' );
 		}
+	}
+
+	/**
+	 * Generate the default BBB Room
+	 * @since   3.0.0
+	 */
+	public function default_bbb_room() {
+		if ( get_option( 'ee_bb_default_bbb_room' ) ) {
+			return;
+		}
+
+		$home_room = array(
+			'post_title'  => __( 'Home Room', 'bigbluebutton' ),
+			'post_status' => 'publish',
+			'post_type'   => 'bbb-room',
+			'menu_order'  => -1,
+		);
+
+		$room_id = wp_insert_post( $home_room );
+
+		// Add room codes to postmeta data.
+		update_post_meta( $room_id, 'bbb-room-moderator-code', Bigbluebutton_Admin_Helper::generate_random_code( 6 ) );
+		update_post_meta( $room_id, 'bbb-room-viewer-code', Bigbluebutton_Admin_Helper::generate_random_code( 6 ) );
+		update_post_meta( $room_id, 'bbb-room-meeting-id', sha1( home_url() . Bigbluebutton_Admin_Helper::generate_random_code( 12 ) ) );
+
+		// Update room recordable value.
+		update_post_meta( $room_id, 'bbb-room-recordable', 'true' );
+		//update_post_meta( $room_id, 'bbb-room-wait-for-moderator', ( $wait_for_mod ? 'true' : 'false' ) );
+
+		update_option( 'ee_bb_default_bbb_room', intval( $room_id ) );
 	}
 
 	/**

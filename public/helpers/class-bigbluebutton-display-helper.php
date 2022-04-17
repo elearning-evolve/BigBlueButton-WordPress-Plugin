@@ -56,7 +56,7 @@ class Bigbluebutton_Display_Helper {
 		global $wp, $post;
 		$current_url = home_url( add_query_arg( array(), $wp->request ) );
 		$start_time  = get_post_meta( $room_id, 'bbb-start-time', true );
-		$post_id = ( isset( $post->ID ) ? $post->ID : 0 );
+		$post_id     = ( isset( $post->ID ) ? $post->ID : 0 );
 		if ( $start_time ) {
 			$dt     = new DateTime( $start_time, new DateTimeZone( wp_timezone_string() ) );
 			$dt_now = new DateTime( 'now', new DateTimeZone( wp_timezone_string() ) );
@@ -73,7 +73,11 @@ class Bigbluebutton_Display_Helper {
 			$join_btn    = __( 'Join', 'bigbluebutton' );
 		} else {
 			$form_target = '';
-			$join_btn    = __( 'Join Here', 'bigbluebuttonpro' );
+			$join_btn    = __( 'Join Here', 'bigbluebutton' );
+		}
+
+		if ( $access_as_moderator ) {
+			$join_btn = str_replace( 'Join', __( 'Start', 'bigbluebutton' ), $join_btn );
 		}
 
 		ob_start();

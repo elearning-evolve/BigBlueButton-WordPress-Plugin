@@ -70,7 +70,7 @@ class Bigbluebutton_Api {
 			return 404;
 		}
 
-			$response = self::response_to_xml( $full_response );
+		$response = self::response_to_xml( $full_response );
 
 		if ( property_exists( $response, 'returncode' ) && 'SUCCESS' == $response->returncode ) {
 			return 200;

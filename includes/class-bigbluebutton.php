@@ -254,6 +254,7 @@ class VideoConferencingWithBBB {
 		$this->loader->add_action( 'init', $plugin_admin_register_custom_types, 'bbb_room_as_post_type' );
 		$this->loader->add_action( 'init', $plugin_admin_register_custom_types, 'bbb_room_category_as_taxonomy_type' );
 		$this->loader->add_action( 'init', $plugin_admin_register_custom_types, 'flush_rewrite_rules_maybe', 20 );
+		$this->loader->add_action( 'init', $plugin_admin_register_custom_types, 'default_bbb_room', 30 );
 
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
@@ -275,6 +276,18 @@ class VideoConferencingWithBBB {
 		$this->loader->add_action( 'manage_posts_custom_column', $plugin_admin, 'bbb_room_custom_columns', 10, 2 );
 		$this->loader->add_filter( 'manage_bbb-room_posts_columns', $plugin_admin, 'add_custom_room_column_to_list' );
 
+		// Show taxonomy filter in rooms table
+		$this->loader->add_action( 'restrict_manage_posts', $plugin_admin, 'bbb_filter_post_type_by_taxonomy' );
+		$this->loader->add_filter( 'parse_query', $plugin_admin, 'bbb_convert_id_to_term_in_query' );
+
+		// Order posts by menu order
+		$this->loader->add_action( 'pre_get_posts', $plugin_admin, 'bbb_order_rooms' );
+
+		// Start meeting from admin
+		$this->loader->add_action( 'init', $plugin_admin, 'bbb_start_meeting_admin' );
+
+		// Add contextual help tab
+		$this->loader->add_action( 'current_screen', $plugin_admin, 'add_help_tab' );
 	}
 
 	/**

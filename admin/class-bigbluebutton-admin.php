@@ -189,12 +189,13 @@ class Bigbluebutton_Admin {
 	public function add_custom_room_column_to_list( $columns ) {
 		$custom_columns = array(
 			'category'       => __( 'Category' ),
-			'permalink'      => __( 'Permalink' ),
+			'permalink'      => __( 'Invite Participants' ),
 			'token'          => __( 'Token', 'bigbluebutton' ),
 			'shortcode'      => __( 'Shortcode', 'bigbluebutton' ),
 			'start-time'     => __( 'Start Time', 'bigbluebutton' ),
 			'moderator-code' => __( 'Moderator Access Code', 'bigbluebutton' ),
 			'viewer-code'    => __( 'Viewer Access Code', 'bigbluebutton' ),
+			'start-meeting'  => __( 'Start Meeting', 'bigbluebutton' ),
 		);
 
 		$columns = array_merge( $columns, $custom_columns );
@@ -220,7 +221,14 @@ class Bigbluebutton_Admin {
 				break;
 			case 'permalink':
 				$permalink = ( get_permalink( $post_id ) ? get_permalink( $post_id ) : '' );
-				echo '<a href="' . esc_url( $permalink ) . '" target="_blank" rel="noopener">' . esc_url( $permalink ) . '</a>';
+				echo '<div class="tooltip" onclick="copyToClipboard(this)" onmouseout="copyClipboardExit(this)"
+						data-value="' . esc_url( $permalink ) . '">
+						<span class="tooltiptext invite-tooltip">' . __( 'Copy Invite URL', 'bigbluebutton' ) . '</span>
+					<span class="bbb-button button">
+						<span class="bbb-dashicon dashicons dashicons-admin-page"></span>'
+						. __( 'Copy', 'bigbluebutton' ) .
+					'</span>
+				</div>';
 				break;
 			case 'token':
 				if ( metadata_exists( 'post', $post_id, 'bbb-room-token' ) ) {
@@ -239,7 +247,8 @@ class Bigbluebutton_Admin {
 				echo '<div class="tooltip" onclick="copyToClipboard(this)" onmouseout="copyClipboardExit(this)"
 						data-value="[bigbluebutton token=' . esc_attr( $token ) . ']">
 						<span class="tooltiptext shortcode-tooltip">' . __( 'Copy Shortcode', 'bigbluebutton' ) . '</span>
-						<span class="dashicons dashicons-clipboard"></span>
+						<input type="text" disabled value="[bigbluebutton token= ' . esc_attr( $token ) . ']"/>
+						<span class="bbb-dashicon dashicons dashicons-admin-page"></span>
 					</div>';
 				break;
 			case 'start-time':
@@ -254,7 +263,7 @@ class Bigbluebutton_Admin {
 					if ( $is_start_time ) {
 						echo date_i18n( 'F j, Y, g:i a', esc_attr( $is_start_time ) );
 					} else {
-						_e( 'N/A', 'bigbluebuttonpro' );
+						_e( 'N/A', 'bigbluebutton' );
 					}
 				}
 				break;
@@ -263,6 +272,15 @@ class Bigbluebutton_Admin {
 				break;
 			case 'viewer-code':
 				echo esc_attr( get_post_meta( $post_id, 'bbb-room-viewer-code', true ) );
+				break;
+			case 'start-meeting':
+				$entry_code = strval( get_post_meta( $post_id, 'bbb-room-moderator-code', true ) );
+				?>
+				<a href="<?php echo esc_url( wp_nonce_url( admin_url( 'edit.php?post_type=bbb-room&start_bbb_meeting_admin=1&room_id=' . $post_id . '&code=' . $entry_code ), 'start_meeting' ) ); ?>"
+					rel="noopener" target="_blank" class="bbb-button button button-primary">
+					<?php echo esc_html( __( 'Start', 'bigbluebutton' ) ); ?>	
+				</a>
+				<?php
 				break;
 		}
 	}
@@ -453,5 +471,127 @@ class Bigbluebutton_Admin {
 			$query->set( 'author', get_current_user_id() );
 		}
 		return $query;
+	}
+
+	/**
+	 * Display a custom taxonomy dropdown in admin
+	 * @author Mike Hemberger
+	 * @link http://thestizmedia.com/custom-post-type-filter-admin-custom-taxonomy/
+	 */
+	public function bbb_filter_post_type_by_taxonomy() {
+		global $typenow;
+		$post_type = 'bbb-room'; // change to your post type
+		$taxonomy  = 'bbb-room-category'; // change to your taxonomy
+		if ( $typenow == $post_type ) {
+			$selected      = isset( $_GET[ $taxonomy ] ) ? $_GET[ $taxonomy ] : '';
+			$info_taxonomy = get_taxonomy( $taxonomy );
+			wp_dropdown_categories(
+				array(
+					'show_option_all' => sprintf( __( 'Show all %s', 'bigbluebutton' ), $info_taxonomy->label ),
+					'taxonomy'        => $taxonomy,
+					'name'            => $taxonomy,
+					'orderby'         => 'name',
+					'selected'        => $selected,
+					'show_count'      => true,
+					'hide_empty'      => true,
+				)
+			);
+		};
+	}
+
+	/**
+	 * Filter posts by taxonomy in admin
+	 * @author  Mike Hemberger
+	 * @link http://thestizmedia.com/custom-post-type-filter-admin-custom-taxonomy/
+	 */
+	public function bbb_convert_id_to_term_in_query( $query ) {
+		global $pagenow;
+		$post_type = 'bbb-room'; // change to your post type
+		$taxonomy  = 'bbb-room-category'; // change to your taxonomy
+		$q_vars    = &$query->query_vars;
+		if ( $pagenow == 'edit.php' && isset( $q_vars['post_type'] ) && $q_vars['post_type'] == $post_type && isset( $q_vars[ $taxonomy ] ) && is_numeric( $q_vars[ $taxonomy ] ) && $q_vars[ $taxonomy ] != 0 ) {
+			$term                = get_term_by( 'id', $q_vars[ $taxonomy ], $taxonomy );
+			$q_vars[ $taxonomy ] = $term->slug;
+		}
+
+		return $query;
+	}
+
+	/**
+	 * Order posts by menu_order in admin
+	 */
+	public function bbb_order_rooms( $query ) {
+		if ( ! is_admin() ) {
+			return;
+		}
+
+		$screen = get_current_screen();
+		if ( 'edit' == $screen->base && 'bbb-room' == $screen->post_type && ! isset( $_GET['orderby'] ) ) {
+			$query->set( 'orderby', 'menu_order' );
+			$query->set( 'order', 'ASC' );
+		}
+	}
+
+	/**
+	 * Start meeting from admin
+	 */
+	public function bbb_start_meeting_admin() {
+		if ( ! isset( $_GET['start_bbb_meeting_admin'] ) || ! isset( $_GET['_wpnonce'] ) || ! isset( $_GET['code'] ) ) {
+			return;
+		}
+
+		if ( ! wp_verify_nonce( $_GET['_wpnonce'], 'start_meeting' ) ) {
+			die( __( 'Security check' ) );
+		}
+
+		$access_code = $_GET['code'];
+		$room_id     = $_GET['room_id'];
+		$user        = wp_get_current_user();
+		if ( $user && $user->display_name ) {
+			$username = $user->display_name;
+		}
+
+		$join_url = Bigbluebutton_Api::get_join_meeting_url( $room_id, $username, $access_code );
+		wp_redirect( $join_url );
+		exit;
+	}
+
+	/**
+	 * Add contextual help
+	 */
+	public function add_help_tab( $screen ) {
+		if ( defined( 'DOING_AJAX' ) && DOING_AJAX ) {
+			return;
+		}
+
+		if ( ! isset( $screen->id ) || 'edit-bbb-room' != $screen->id ) {
+			return;
+		}
+
+		ob_start();
+		include 'partials/bigbluebutton-admin-help-tab-shortcode.php';
+		$shortcode_content = ob_get_contents();
+		ob_end_clean();
+
+		ob_start();
+		include 'partials/bigbluebutton-admin-help-tab-invite.php';
+		$invite_content = ob_get_contents();
+		ob_end_clean();
+
+		$screen->add_help_tab(
+			array(
+				'id'      => 'edit-bbb-room-shortcode',
+				'title'   => __( 'Add Shortcode to Page', 'bigbluebutton' ),
+				'content' => $shortcode_content,
+			)
+		);
+
+		$screen->add_help_tab(
+			array(
+				'id'      => 'edit-bbb-room-participants',
+				'title'   => __( 'Invite Participants', 'bigbluebutton' ),
+				'content' => $invite_content,
+			)
+		);
 	}
 }

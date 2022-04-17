@@ -3,11 +3,11 @@
 
 Contributors: blindsidenetworks, jfederico, yfngdu, elearningevolve, adeelraza_786@hotmail.com  
 Donate link: https://elearningevolve.com/products/donate/  
-Tags: bigbluebutton, videoconferencing, virtual classroom, web conferencing, online teaching, learning management system. lms  
+Tags: BigBlueButton, BigBlueButtom, BBB, bbb, bigbluebutton, videoconferencing, virtual classroom, web conferencing, online teaching, learning management system, LMS, online session, live training
 Requires at least: 5.1  
 Tested up to: 5.9.3  
 Requires PHP: 7.2  
-Stable tag: 1.2.1  
+Stable tag: 1.3.0  
 License: GPLv2 or later  
 License URI: http://www.gnu.org/licenses/gpl-2.0.html  
 
@@ -43,6 +43,14 @@ There is also a [Pro version]((https://elearningevolve.com/products/video-confer
 * Pre-upload your presentation (ability to upload both globally and per room basis)
 
 **[Get Pro Version](https://elearningevolve.com/products/video-conferencing-with-bigbluebutton-pro/)**
+### Video Guide ###
+[![Video Guide](https://elearningevolve.com/wp-content/uploads/2022/04/bbb-room-youtube.jpeg)](https://youtu.be/laClYKDxLcw)
+https://youtu.be/laClYKDxLcw
+
+### How-Tos ###
+* [How to join BigBlueButton Room from WordPress](https://elearningevolve.com/blog/how-to-join-bigbluebutton-room-from-wordpress/)
+* [How to limit number of users for BigBlueButton Room on WordPress](https://elearningevolve.com/blog/how-to-limit-number-of-users-for-bigbluebutton-room-on-wordpress/)
+
 ### BigBlueButton Server ###
 To get up and running in no time with a managed BigBlueButton hosting provider please refer to our [Recommended BBB hosting providers](https://elearningevolve.com/blog/bigbluebutton-hosting).
 
@@ -151,6 +159,13 @@ To allow a user role to manage recordings add the capability, **manage_bbb_room_
 8. BBB Rooms can also be organized using Categories.
 
 ## Changelog ##
+### 1.3.0 ###
+* Added: Automatically create a default Home Room under BBB Rooms -> All Rooms admin page
+* Added: Ability to start meeting from BBB Rooms -> All Rooms
+* Added: Ability to filter rooms by category from BBB Rooms -> All Rooms\
+* Added: Help text on BBB Rooms -> All Rooms page
+* Updated: Admin view of All Rooms page
+
 ### 1.2.1 ###
 * Added: updated FAQ section and added new answers
 * Updated: Removed restriction for preview of unpublished rooms

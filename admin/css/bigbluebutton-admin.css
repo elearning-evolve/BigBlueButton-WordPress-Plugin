@@ -246,3 +246,17 @@
 .bbb-pro-shortcode-usage .desc {
     margin-top: 26px;
 }
+
+.bbb-dashicon {
+    margin: 3px;
+    cursor: pointer;
+}
+
+.wp-list-table .start-meeting a {
+    padding: 3px 20px 3px 20px; 
+}
+
+/* Credits: https: //stackoverflow.com/questions/3559935/wordpress-is-there-a-way-to-adjust-the-column-width-for-the-post-table */
+.post-type-bbb-room table.fixed {
+    table-layout: auto;
+}

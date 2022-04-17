@@ -30,7 +30,6 @@ const { __, _x, _n, _nx } = wp.i18n;
 	 */
 
 	$( window ).load( function() {
-        
         $("#toplevel_page_bbb_room ul li:nth-child(6) a").on( 'click', function(){
             window.open('https://elearningevolve.com/products/bigbluebutton-wordpress-pro/', '_blank').focus();
         })
@@ -64,8 +63,37 @@ function copyToClipboard(elem) {
     navigator.clipboard.writeText(elem.getAttribute('data-value'));
 
     var tooltip = jQuery(elem).find('.shortcode-tooltip').html( __('Copied:', 'bigbluebutton') );
+    var tooltip = jQuery(elem).find('.invite-tooltip').html( __('Copied:', 'bigbluebutton') );
+    
+    /* Open Help screen when adding shortcode to page */
+    if( jQuery(elem).find('.shortcode-tooltip').length != 0 ) {
+        if( jQuery(document).find('#contextual-help-link').length != 0 ) {
+           jQuery('#screen-meta').show();
+           jQuery('#contextual-help-wrap').show();
+           jQuery('#tab-link-edit-bbb-room-participants').removeClass('active');
+           jQuery('#tab-link-edit-bbb-room-shortcode').addClass('active');
+           
+           jQuery('#tab-panel-edit-bbb-room-participants').hide();
+           jQuery('#tab-panel-edit-bbb-room-shortcode').show();
+           
+        }
+    }
+    
+    if( jQuery(elem).find('.invite-tooltip').length != 0 ) {
+        if( jQuery(document).find('#contextual-help-link').length != 0 ) {
+            jQuery('#screen-meta').show();
+            jQuery('#contextual-help-wrap').show();
+            jQuery('#tab-link-edit-bbb-room-shortcode').removeClass('active');
+            jQuery('#tab-link-edit-bbb-room-participants').addClass('active');
+            
+            jQuery('#tab-panel-edit-bbb-room-shortcode').hide();
+            jQuery('#tab-panel-edit-bbb-room-participants').show();
+        }
+    }
+    
 }
 
 function copyClipboardExit(elem) {
     var tooltip = jQuery(elem).find('.shortcode-tooltip').html( __('Copy Shortcode', 'bigbluebutton') );
+    var tooltip = jQuery(elem).find('.invite-tooltip').html( __('Copy Invite URL', 'bigbluebutton') );
 }

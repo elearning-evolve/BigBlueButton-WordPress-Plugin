@@ -202,6 +202,7 @@ class Bigbluebutton_Public_Room_Api {
 		if ( $entry_code == $viewer_code && 'true' == $wait_for_mod ) {
 			if ( Bigbluebutton_Api::is_meeting_running( $room_id ) ) {
 				wp_redirect( $join_url );
+				exit;
 			} else {
 				$query = array(
 					'bigbluebutton_wait_for_mod' => true,
@@ -217,9 +218,11 @@ class Bigbluebutton_Public_Room_Api {
 					$query['temp_entry_pass'] = wp_create_nonce( 'bigbluebutton_entry_code_' . $entry_code );
 				}
 				wp_redirect( add_query_arg( $query, $return_url ) );
+				exit;
 			}
 		} else {
 			wp_redirect( $join_url );
+			exit;
 		}
 	}
 

@@ -28,7 +28,7 @@ class Bigbluebutton_Admin_Helper {
 	 * @param   Integer $length         Length of random string.
 	 * @return  String  $default_code   The resulting random string.
 	 */
-	public static function generate_random_code( $length = 10 ) {
+	public static function generate_random_code( $length = 6 ) {
 		$default_code = bin2hex( random_bytes( $length / 2 ) );
 		return $default_code;
 	}

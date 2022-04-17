@@ -35,7 +35,6 @@
 				<label><?php esc_html_e( 'The access code you have entered is incorrect. Please try again.', 'bigbluebutton' ); ?></label>
 			</div>
 		<?php } ?>
-	<br>	
 	<?php if ( isset( $_REQUEST['bigbluebutton_wait_for_mod'] ) && $_REQUEST['room_id'] == $room_id ) { ?>
 		<div class="bbb-join-form-block">
 			<label id="bbb-wait-for-mod-msg"
@@ -54,7 +53,7 @@
 			</label>
 		</div>
 	<?php } ?>
-	<input class="bbb-button" type="submit" class="button button-primary" value="<?php echo esc_attr( $join_btn ); ?>">
-	<?php do_action( 'bbb_join_form_buttons' ); ?>
+	<input class="bbb-button button button-primary" type="submit" value="<?php echo esc_attr( $join_btn ); ?>">
+	<?php do_action( 'bbb_join_form_buttons', $access_as_moderator ); ?>
 </form>
 <?php endif; ?>
