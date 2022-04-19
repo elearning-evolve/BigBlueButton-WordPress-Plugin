@@ -435,6 +435,10 @@ class Bigbluebutton_Admin {
 	 * @since   3.0.0
 	 */
 	public function notice_review_plugin() {
+		if ( ! function_exists( 'get_current_screen' ) ) {
+			include ABSPATH . '/wp-admin/includes/screen.php';
+		}
+
 		if ( function_exists( 'get_current_screen' ) ) {
 			// show notice only on admin plugin pages
 			$current_screen = get_current_screen();
@@ -525,10 +529,21 @@ class Bigbluebutton_Admin {
 			return;
 		}
 
-		$screen = get_current_screen();
-		if ( 'edit' == $screen->base && 'bbb-room' == $screen->post_type && ! isset( $_GET['orderby'] ) ) {
-			$query->set( 'orderby', 'menu_order' );
-			$query->set( 'order', 'ASC' );
+		$post_type = $query->get( 'post_type' );
+		if ( 'bbb-room' != $post_type ) {
+			return;
+		}
+
+		if ( ! function_exists( 'get_current_screen' ) ) {
+			include ABSPATH . '/wp-admin/includes/screen.php';
+		}
+
+		if ( function_exists( 'get_current_screen' ) ) {
+			$screen = get_current_screen();
+			if ( $screen && 'edit' == $screen->base && 'bbb-room' == $screen->post_type && ! isset( $_GET['orderby'] ) ) {
+				$query->set( 'orderby', 'menu_order' );
+				$query->set( 'order', 'ASC' );
+			}
 		}
 	}
 

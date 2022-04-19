@@ -63,7 +63,7 @@ class Bigbluebutton_Register_Custom_Types {
 				'rewrite'         => array( 'slug' => 'bbb-room' ),
 				'show_in_menu'    => 'bbb_room',
 				'map_meta_cap'    => true,
-				'query_var'       => true,
+				//'query_var'       => true,
 				// Enables block editing in the rooms editor.
 				'show_in_rest'    => true,
 				'supports'        => array( 'title', 'editor', 'author', 'thumbnail', 'permalink' ),
