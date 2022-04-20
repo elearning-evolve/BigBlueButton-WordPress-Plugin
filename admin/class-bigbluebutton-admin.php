@@ -133,7 +133,7 @@ class Bigbluebutton_Admin {
 			'bbb_room',
 			__( 'Rooms Settings', 'bigbluebutton' ),
 			__( 'Settings' ),
-			'edit_bbb_rooms',
+			'manage_options',
 			'bbb-room-server-settings',
 			array( $this, 'display_room_server_settings' )
 		);
@@ -142,7 +142,7 @@ class Bigbluebutton_Admin {
 			'bbb_room',
 			__( 'Stay Updated', 'bigbluebutton' ),
 			__( 'Stay Updated', 'bigbluebutton' ),
-			'edit_bbb_rooms',
+			'manage_options',
 			'bbb-room-subscribe-updates',
 			array( $this, 'display_room_subscribe_updates' )
 		);
@@ -152,7 +152,7 @@ class Bigbluebutton_Admin {
 				'bbb_room',
 				__( 'Get Pro Version', 'bigbluebutton' ),
 				__( 'Get Pro Version', 'bigbluebutton' ),
-				'edit_bbb_rooms',
+				'manage_options',
 				'bbb-room-server-settings',
 				array( $this, 'display_room_server_settings' )
 			);
@@ -223,7 +223,7 @@ class Bigbluebutton_Admin {
 				$permalink = ( get_permalink( $post_id ) ? get_permalink( $post_id ) : '' );
 				echo '<div class="tooltip" onclick="copyToClipboard(this)" onmouseout="copyClipboardExit(this)"
 						data-value="' . esc_url( $permalink ) . '">
-						<span class="tooltiptext invite-tooltip">' . __( 'Copy Invite URL', 'bigbluebutton' ) . '</span>
+						<span class="tooltiptext invite-tooltip">' . esc_html_e( 'Copy Invite URL', 'bigbluebutton' ) . '</span>
 					<span class="bbb-button button">
 						<span class="bbb-dashicon dashicons dashicons-admin-page"></span>'
 						. __( 'Copy', 'bigbluebutton' ) .
@@ -246,7 +246,7 @@ class Bigbluebutton_Admin {
 				}
 				echo '<div class="tooltip" onclick="copyToClipboard(this)" onmouseout="copyClipboardExit(this)"
 						data-value="[bigbluebutton token=' . esc_attr( $token ) . ']">
-						<span class="tooltiptext shortcode-tooltip">' . __( 'Copy Shortcode', 'bigbluebutton' ) . '</span>
+						<span class="tooltiptext shortcode-tooltip">' . esc_html_e( 'Copy Shortcode', 'bigbluebutton' ) . '</span>
 						<input type="text" disabled value="[bigbluebutton token= ' . esc_attr( $token ) . ']"/>
 						<span class="bbb-dashicon dashicons dashicons-admin-page"></span>
 					</div>';

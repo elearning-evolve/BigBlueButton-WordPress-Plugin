@@ -169,13 +169,13 @@ class Bigbluebutton_Public {
 		}
 
 		$token    = 'z' . $room_id;
-		$content .= '[bigbluebutton token="' . $token . '"]';
+		$content .= '[bigbluebutton token="' . esc_attr( $token ) . '"]';
 
 		// Add recordings list to post content if the room is recordable.
 		$room_can_record = get_post_meta( $room_id, 'bbb-room-recordable', true );
 
 		if ( 'true' == $room_can_record ) {
-			$content .= '[bigbluebutton type="recording" token="' . $token . '"]';
+			$content .= '[bigbluebutton type="recording" token="' . esc_attr( $token ) . '"]';
 		}
 
 		return $content;

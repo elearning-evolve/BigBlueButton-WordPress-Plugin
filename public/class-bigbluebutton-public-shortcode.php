@@ -43,9 +43,15 @@ class Bigbluebutton_Public_Shortcode {
 	public function display_bigbluebutton_shortcode( $atts = array(), $content = null ) {
 		global $pagenow, $post;
 		$type           = 'room';
-		$post_id = ( isset( $post->ID ) ? $post->ID : 0 );
+		$post_id        = ( isset( $post->ID ) ? $post->ID : 0 );
 		$author         = (int) get_the_author_meta( 'ID' );
 		$display_helper = new Bigbluebutton_Display_Helper( plugin_dir_path( __FILE__ ) );
+		delete_post_meta( $post_id, 'bbb_pro_room_limit' );
+
+		$room_limit_cpt = intval( get_post_meta( $post_id, 'bbb-room-limit', true ) );
+		if ( $room_limit_cpt ) {
+			update_post_meta( $post_id, 'bbb_pro_room_limit', sanitize_text_field( $room_limit_cpt ) );
+		}
 
 		if ( $post_id && isset( $atts['room_limit'] ) && $atts['room_limit'] ) {
 			update_post_meta( $post_id, 'bbb_pro_room_limit', sanitize_text_field( $atts['room_limit'] ) );

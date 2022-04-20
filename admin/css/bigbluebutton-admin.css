@@ -260,3 +260,11 @@
 .post-type-bbb-room table.fixed {
     table-layout: auto;
 }
+
+.spacer {
+    margin: 10px 0 10px 0;
+}
+
+.bbb-rooms_page_bbb-room-server-settings ul {
+    list-style: inside;
+}

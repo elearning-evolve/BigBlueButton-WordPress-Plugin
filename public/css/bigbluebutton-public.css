@@ -6,7 +6,7 @@
 .bbb-room-selection {
     display: inline-block;
     min-width: 10em;
-    margin-bottom: 2em;
+    margin-bottom: 1em;
     background: #fff;
 }
 
@@ -189,6 +189,10 @@
     margin-bottom: 1em;
 }
 
-.bbb-form {
+.bbb-form, .bbb-room-selection-block {
     text-align: center;
+}
+
+#joinroom .bbb-btn-join {
+    margin-left: 140px;
 }

@@ -81,7 +81,7 @@ class Bigbluebutton_Display_Helper {
 		}
 
 		ob_start();
-		include $this->file . 'partials/bigbluebutton-join-display.php';
+		include VIDEO_CONF_WITH_BBB_PUBLIC_PATH . 'partials/bigbluebutton-join-display.php';
 		$form = ob_get_contents();
 		ob_end_clean();
 		return $form;
@@ -197,7 +197,7 @@ class Bigbluebutton_Display_Helper {
 	 */
 	public function get_room_list_dropdown_as_string( $rooms, $selected_room, $html_form ) {
 		ob_start();
-		include $this->file . 'partials/bigbluebutton-room-dropdown-display.php';
+		include VIDEO_CONF_WITH_BBB_PUBLIC_PATH . 'partials/bigbluebutton-room-dropdown-display.php';
 		$dropdown = ob_get_contents();
 		ob_end_clean();
 		return $dropdown;

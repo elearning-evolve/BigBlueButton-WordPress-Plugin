@@ -58,7 +58,7 @@ class Bigbluebutton_Api {
 
 		$url = self::build_url( 'create', $arr_params );
 
-		if ( Bigbluebutton_Loader::is_bbb_pro_active() ) {
+		if ( Bigbluebutton_Loader::is_bbb_pro_active() && class_exists( 'Bigbluebuttonpro_Helper' ) ) {
 			$full_response = Bigbluebuttonpro_Helper::get_response( $url, 'get', $arr_params );
 		}
 
@@ -121,6 +121,7 @@ class Bigbluebutton_Api {
 				'meetingID' => rawurlencode( $meeting_id ),
 				'fullName'  => $uname,
 				'password'  => rawurlencode( $pword ),
+				'roomId' => $rid
 			)
 		);
 

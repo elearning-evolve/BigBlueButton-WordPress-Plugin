@@ -90,34 +90,89 @@
 			<p>Below are the <a rel="noopnerer"  target="_blank" href="https://www.wpbeginner.com/wp-tutorials/how-to-add-a-shortcode-in-wordpress/">shortcodes</a> offered by the plugin that you can use anywhere on your site.</p>
 				<ol>
 					<li>
-						<p>Display a list of BBB rooms for the user to choose from</p>
-						<?php if ( Bigbluebutton_Loader::is_bbb_pro_active() ) : ?>
-							<code>[bigbluebutton token='zxxxx, zyyyy, ...' room_limit='x']</code>
-						<?php else : ?>
-							<code>[bigbluebutton token='zxxxx, zyyyy, ...']</code>
-						<?php endif; ?>
+						<p>Display all the available BBB rooms with the join form</p>
+						<div class="tooltip" onclick="copyToClipboard(this)" onmouseout="copyClipboardExit(this)"
+							data-value="[bigbluebutton_all_rooms]">
+							<span class="tooltiptext shortcode-tooltip"><?php echo esc_html_e( 'Copy Shortcode', 'bigbluebutton' ); ?></span>
+							<input size="30" type="text" disabled value="[bigbluebutton_all_rooms]"/>
+							<span class="bbb-dashicon dashicons dashicons-admin-page"></span> <strong><?php echo esc_html_e( 'Pro Version Note', 'bigbluebutton' ); ?></strong>
+						</div>
 						<div class="desc">
 							<ul>
-								<li><strong>tokens</strong> : The BBB Room tokens, see BBB Rooms -> All Rooms -> Token</li>
-								<?php if ( Bigbluebutton_Loader::is_bbb_pro_active() ) : ?>
-									<li><strong>room_limit (overrides global setting)</strong> : Set the max no.of users allowed to join the room at the same time</li>
-								<?php endif; ?>
+								<li>This shortcode will show all the rooms created under BBB Rooms -> All Rooms to the user</li>
+							</ul>
+						</div>
+					</li>
+					
+					<li>
+						<p>Display a list of BBB rooms with join form</p>
+						<div class="tooltip" onclick="copyToClipboard(this)" onmouseout="copyClipboardExit(this)"
+							data-value="[bigbluebutton token='z2xxx, z2yyy, ...' room_limit='50']">
+							<span class="tooltiptext shortcode-tooltip"><?php echo esc_html_e( 'Copy Shortcode', 'bigbluebutton' ); ?></span>
+							<input size="40" type="text" disabled value="[bigbluebutton token='z2xxx, z2yyy, ...' room_limit='50']"/>
+							<span class="bbb-dashicon dashicons dashicons-admin-page"></span> <strong><?php echo esc_html_e( 'Pro Version Note', 'bigbluebutton' ); ?></strong>
+						</div>
+						<div class="spacer"></div>
+						<div class="tooltip" onclick="copyToClipboard(this)" onmouseout="copyClipboardExit(this)"
+							data-value="[bigbluebutton token='z2xxx, z2yyy, ...']">
+							<span class="tooltiptext shortcode-tooltip"><?php echo esc_html_e( 'Copy Shortcode', 'bigbluebutton' ); ?></span>
+							<input size="30" type="text" disabled value="[bigbluebutton token='z2xxx, z2yyy, ...']"/>
+							<span class="bbb-dashicon dashicons dashicons-admin-page"></span>
+						</div>
+						<div class="desc">
+							<ul>
+								<li><strong>token</strong> : The BBB Room tokens, see BBB Rooms -> All Rooms -> Token</li>								
+								<li><strong>room_limit (overrides Settings -> Room Config  & Room level limit)</strong> : Set the max no.of users allowed to join the room at the same time</li>
 							</ul>
 						</div>
 					</li>
 					<li>
-						<p>Display a specific BBB room window anywhere on the site</p>
-						<?php if ( Bigbluebutton_Loader::is_bbb_pro_active() ) : ?>
-							<code>[bigbluebutton token='zxxxx' room_limit='x']</code>
-						<?php else : ?>
-							<code>[bigbluebutton token='zxxxx']</code>
-						<?php endif; ?>
+						<p>Add this shortcode to your page to show a single BBB room join form</p>
+							<div class="tooltip" onclick="copyToClipboard(this)" onmouseout="copyClipboardExit(this)"
+								data-value="[bigbluebutton token='z2xxx' room_limit='50']">
+								<span class="tooltiptext shortcode-tooltip"><?php echo esc_html_e( 'Copy Shortcode', 'bigbluebutton' ); ?></span>
+								<input size="30" type="text" disabled value="[bigbluebutton token='z2xxx' room_limit='50']"/>
+								<span class="bbb-dashicon dashicons dashicons-admin-page"></span> <strong><?php echo esc_html_e( 'Pro Version Note', 'bigbluebutton' ); ?></strong>
+							</div>
+							<div class="spacer"></div>
+							<div class="tooltip" onclick="copyToClipboard(this)" onmouseout="copyClipboardExit(this)"
+								data-value="[bigbluebutton token='z2xxx']">
+								<span class="tooltiptext shortcode-tooltip"><?php echo esc_html_e( 'Copy Shortcode', 'bigbluebutton' ); ?></span>
+								<input size="30" type="text" disabled value="[bigbluebutton token='z2xxx']"/>
+								<span class="bbb-dashicon dashicons dashicons-admin-page"></span>
+							</div>
 						<div class="desc">
 							<ul>
 								<li><strong>token</strong> : The BBB Room token, see BBB Rooms -> All Rooms -> Token</li>
-								<?php if ( Bigbluebutton_Loader::is_bbb_pro_active() ) : ?>
-									<li><strong>room_limit (overrides global setting)</strong> : Set the max no.of users allowed to join the room at the same time</li>
-								<?php endif; ?>
+								<li><strong>room_limit (overrides Settings -> Room Config  & Room level limit)</strong> : Set the max no.of users allowed to join the room at the same time</li>
+							</ul>
+						</div>
+					</li>
+					<li>
+						<p>Display a list of BBB room recordings from multiple rooms</p>
+							<div class="tooltip" onclick="copyToClipboard(this)" onmouseout="copyClipboardExit(this)"
+								data-value="[bigbluebutton_recordings token='z2xxx, z2yyy, ...']">
+								<span class="tooltiptext shortcode-tooltip"><?php echo esc_html_e( 'Copy Shortcode', 'bigbluebutton' ); ?></span>
+								<input size="40" type="text" disabled value="[bigbluebutton_recordings token='z2xxx, z2yyy, ...']"/>
+								<span class="bbb-dashicon dashicons dashicons-admin-page"></span>
+							</div>
+						<div class="desc">
+							<ul>
+								<li><strong>token</strong> : The BBB Room tokens, see BBB Rooms -> All Rooms -> Token</li>
+							</ul>
+						</div>
+					</li>
+					<li>
+						<p>Display BBB room recordings from a single room</p>
+							<div class="tooltip" onclick="copyToClipboard(this)" onmouseout="copyClipboardExit(this)"
+								data-value="[bigbluebutton_recordings token='z2xxx']">
+								<span class="tooltiptext shortcode-tooltip"><?php echo esc_html_e( 'Copy Shortcode', 'bigbluebutton' ); ?></span>
+								<input size="30" type="text" disabled value="[bigbluebutton_recordings token='z2xxx']"/>
+								<span class="bbb-dashicon dashicons dashicons-admin-page"></span>
+							</div>
+						<div class="desc">
+							<ul>
+								<li><strong>token</strong> : The BBB Room token, see BBB Rooms -> All Rooms -> Token</li>
 							</ul>
 						</div>
 					</li>
@@ -136,30 +191,44 @@
 				<li><a target="_blank" rel="noopener" href="https://elearningevolve.com/blog/bigbluebutton-hosting/">Recommended BigBlueButton Hosting</a></li>
 			</ol>
 		</div>
-		<!-- <div class="zvc-information-sec">
+		<div class="zvc-information-sec">
 			<h3 id="tutorials">Tutorials</h3>
 			<ol>
-				<li>Generate Zoom Meeting from <a target="_blank" rel="noopener" href="https://elearningevolve.com/blog/generate-zoom-meeting-shortcode/">WP Editor</a></li>
-				<li>Setup <a target="_blank" rel="noopener" href="https://elearningevolve.com/blog/zoom-webinar-on-wordpress/">Zoom Webinar</a></li>
-				<li>Setup <a target="_blank" rel="noopener" href="https://elearningevolve.com/blog/multiple-hosts-with-zoom/">Multiple Meeting Hosts</a></li>
-				<li>Setup <a target="_blank" rel="noopener" href="https://elearningevolve.com/blog/zoom-cloud-recordings-in-wordpress/">Meeting Cloud Recordings</a></li>
+				<li><a target="_blank" rel="noopener" href="https://elearningevolve.com/blog/how-to-join-bigbluebutton-room-from-wordpress/">How to join BigBlueButton Room from WordPress</a></li>
+				<li><a target="_blank" rel="noopener" href="https://elearningevolve.com/blog/how-to-limit-number-of-users-for-bigbluebutton-room-on-wordpress/">How to limit number of users for BigBlueButton Room on WordPress
+					</a>
+				</li>
 			</ol>
-		</div> -->
+		</div>
+		<div class="zvc-information-sec">
+			<h3 id="pro-version"><a target="_blank" rel="noopener" href="https://elearningevolve.com/products/bigbluebutton-wordpress-pro/">Pro Version Features</a></h3>
+			<ul>
+				<li>Embed BigBlueButton Room on WordPress</li>
+				<li>Set a Countdown/Schedule for Room</li>
+				<li>Fully White-label Virtual Classroom</li>
+				<li>Limit the max allowed participants for a room e.g (5, 10, .. etc) both on a per room and per page basis. This can allow you to conduct a 1:1 or group session</li>
+				<li>Upload your brand logo that is visible in the BBB room</li>
+				<li>Customize the room background-color as per your brand color</li>
+				<li>Change welcome message that is displayed in the Public Chat section of the room</li>
+				<li>Customize thank you message when the user leaves the meeting</li>
+				<li>Pre-upload your presentation (ability to upload both globally and per room basis)</li>
+			</ul>
+		</div>
 		<div class="zvc-information-sec">
 			<h3>Our Plugins</h3>
-			<ol>
 				<?php if ( ! Bigbluebutton_Loader::is_bbb_pro_active() ) : ?>
-				<li>
-					<p><strong><a target="_blank" rel="noopener" href="https://elearningevolve.com/products/bigbluebutton-wordpress-pro/">Video Conferencing with BigBlueButton (BBB) Pro</a></strong> is a premium plugin that provides enhanced features on top of our free plugin.</p>
-				</li>
+					<img width="100%" height="180" src="<?php echo VIDEO_CONF_WITH_BBB_IMG_URL . '/video-conferencing-with-BBB.png'; ?>" title="BigBlueButton WordPress Pro" alt="BigBlueButton WordPress Pro"/>
+					<p>
+						Pro version of this plugin that enables you to create fully white-label virtual classrooms & enhanced customization options for BBB Rooms.
+					</p>
+					<a rel="noopnerer"  target="_blank" href="https://elearningevolve.com/products/video-conferencing-with-bbb-pro/"><button class="button button-primary">View More</button></a>
+					<hr />
 				<?php endif; ?>
-				<li>
-					<p>Create & join Zoom meetings directly from your WordPress site with our powerful <a target="_blank" rel="noopener" href="https://elearningevolve.com/products/zoom-wordpress-plugin">Zoom WordPress Plugin</a></p>
-				</li>
-				<li>
-					<p>Enable students to become active contributors for your LearnDash courses with our <a target="_blank" rel="noopener" href="https://elearningevolve.com/products/learndash-student-voice/">LearnDash Student Voice</a></p>
-				</li>
-			</ol>
+				<img width="100%" height="180" src="<?php echo VIDEO_CONF_WITH_BBB_IMG_URL . '/zoom-wordpress-plugin.png'; ?>" title="Zoom WordPress Plugin" alt="Zoom WordPress Plugin"/>
+				<p>
+					Create & join Zoom meetings directly from your WordPress site with our powerful <a target="_blank" rel="noopener" href="https://elearningevolve.com/products/zoom-wordpress-plugin">Zoom WordPress Plugin</a>
+				</p>
+				<a rel="noopnerer"  target="_blank" href="https://elearningevolve.com/products/zoom-wordpress-plugin"><button class="button button-primary">View More</button></a>
 		</div>
 	</div>
 </div>

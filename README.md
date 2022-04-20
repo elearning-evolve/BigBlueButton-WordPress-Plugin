@@ -7,7 +7,7 @@ Tags: BigBlueButton, BigBlueButtom, BBB, bbb, bigbluebutton, videoconferencing, 
 Requires at least: 5.1  
 Tested up to: 5.9.3  
 Requires PHP: 7.2  
-Stable tag: 1.3.1  
+Stable tag: 1.4.0  
 License: GPLv2 or later  
 License URI: http://www.gnu.org/licenses/gpl-2.0.html  
 
@@ -31,7 +31,7 @@ The student can simply click Join from the page where the shortcode is added and
 After the session is over the plugin can also display the recording of the session on the same page so that the students can take the keynotes from the session later on.
 
 ### Pro Version Features ###
-There is also a [Pro version]((https://elearningevolve.com/products/video-conferencing-with-bigbluebutton-pro/)) available with this plugin that offers the below features:
+There is also a Pro version available with this plugin that offers the below features:
 * Embed BigBlueButton Room on WordPress
 * Set a Countdown/Schedule for Room
 * Fully White-label Virtual Classroom
@@ -159,6 +159,14 @@ To allow a user role to manage recordings add the capability, **manage_bbb_room_
 8. BBB Rooms can also be organized using Categories.
 
 ## Changelog ##
+### 1.4.0 ###
+* Added: Tutorials section on plugin settings page
+* Added: Shortcode guide section on settings page for all available plugin shortcodes
+* Updated: Restrict settings page access only to Admin level users
+* Updated: BBB multiple room select shortcode layout to align with the join form
+* Updated: Compatibility for Room level limit feature addition in Pro plugin
+* Fixed: Access code error message does not display when codes updated while meeting is running
+
 ### 1.3.1 ###
 * Fixed: Error Call to undefined function get_current_screen()
 

@@ -1,6 +1,6 @@
 <?php if ( isset( $start_time ) && $start_time ) : ?>
 	<?php do_action( 'bbb_countdown_display', $room_id, $start_time ); ?>
-<?php elseif ( isset( $_REQUEST['join'] ) ) : ?>
+<?php elseif ( isset( $_REQUEST['bbb_room_join'] ) ) : ?>
 	<?php do_action( 'bbb_on_room_join' ); ?>
 <?php elseif ( isset( $_REQUEST['rec_url'] ) ) : ?>
 	<?php do_action( 'bbb_recording_display' ); ?>
@@ -13,7 +13,7 @@
 	<input type="hidden" name="post_id" value="<?php echo esc_attr( $post_id ); ?>">
 	<?php if ( ! is_user_logged_in() ) { ?>
 		<div id="bbb_join_with_username" class="bbb-join-form-block">
-			<label id="bbb_meeting_name_label" class="bbb-join-room-label"><?php esc_html_e( 'Name' ); ?>: </label>
+			<label id="bbb_meeting_name_label" class="bbb-join-room-label"><?php esc_html_e( 'Name' ); ?></label>
 			<input type="text" name="bbb_meeting_username" aria-labelledby="bbb_meeting_name_label" class="bbb-join-room-input">
 		</div>
 	<?php } ?>
@@ -22,12 +22,12 @@
 	<?php } else { ?>
 		<div id="bbb_join_with_password" class="bbb-join-form-block" style="display:none;">
 	<?php } ?>
-			<label id="bbb_meeting_access_code_label" class="bbb-join-room-label"><?php esc_html_e( 'Access Code', 'bigbluebutton' ); ?>: </label>
+			<label id="bbb_meeting_access_code_label" class="bbb-join-room-label"><?php esc_html_e( 'Access Code', 'bigbluebutton' ); ?></label>
 			<input type="text" name="bbb_meeting_access_code" aria-labelledby="bbb_meeting_access_code_label" class="bbb-join-room-input">
 		</div>
 		<?php if ( isset( $_REQUEST['max_user_error'] ) && $_REQUEST['room_id'] == $room_id ) { ?>
 			<div class="bbb-error">
-				<label><?php esc_html_e( 'The limit for the max no.of users allowed to join the room has been reached. Please try again in a while.', 'bigbluebutton' ); ?></label>
+				<label><?php esc_html_e( 'The participants limit for this meeting has been reached. Please try again in a while.', 'bigbluebutton' ); ?></label>
 			</div>
 		<?php } ?>
 		<?php if ( isset( $_REQUEST['password_error'] ) && $_REQUEST['room_id'] == $room_id ) { ?>
@@ -53,7 +53,7 @@
 			</label>
 		</div>
 	<?php } ?>
-	<input class="bbb-button button button-primary" type="submit" value="<?php echo esc_attr( $join_btn ); ?>">
+	<input class="bbb-button bbb-btn-join button button-primary" type="submit" value="<?php echo esc_attr( $join_btn ); ?>">
 	<?php do_action( 'bbb_join_form_buttons', $access_as_moderator ); ?>
 </form>
 <?php endif; ?>
