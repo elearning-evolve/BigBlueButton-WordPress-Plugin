@@ -118,6 +118,15 @@ class Bigbluebutton_Admin {
 			6
 		);
 
+		add_submenu_page(
+			'bbb_room',
+			__( 'Add New', 'bigbluebutton' ),
+			__( 'Add New' ),
+			'edit_bbb_rooms',
+			'post-new.php?post_type=bbb-room',
+			''
+		);
+
 		if ( current_user_can( 'manage_categories' ) ) {
 			add_submenu_page(
 				'bbb_room',
@@ -223,7 +232,7 @@ class Bigbluebutton_Admin {
 				$permalink = ( get_permalink( $post_id ) ? get_permalink( $post_id ) : '' );
 				echo '<div class="tooltip" onclick="copyToClipboard(this)" onmouseout="copyClipboardExit(this)"
 						data-value="' . esc_url( $permalink ) . '">
-						<span class="tooltiptext invite-tooltip">' . esc_html_e( 'Copy Invite URL', 'bigbluebutton' ) . '</span>
+						<span class="tooltiptext invite-tooltip">' . esc_html( 'Copy Invite URL', 'bigbluebutton' ) . '</span>
 					<span class="bbb-button button">
 						<span class="bbb-dashicon dashicons dashicons-admin-page"></span>'
 						. __( 'Copy', 'bigbluebutton' ) .
@@ -246,7 +255,7 @@ class Bigbluebutton_Admin {
 				}
 				echo '<div class="tooltip" onclick="copyToClipboard(this)" onmouseout="copyClipboardExit(this)"
 						data-value="[bigbluebutton token=' . esc_attr( $token ) . ']">
-						<span class="tooltiptext shortcode-tooltip">' . esc_html_e( 'Copy Shortcode', 'bigbluebutton' ) . '</span>
+						<span class="tooltiptext shortcode-tooltip">' . esc_html( 'Copy Shortcode', 'bigbluebutton' ) . '</span>
 						<input type="text" disabled value="[bigbluebutton token= ' . esc_attr( $token ) . ']"/>
 						<span class="bbb-dashicon dashicons dashicons-admin-page"></span>
 					</div>';

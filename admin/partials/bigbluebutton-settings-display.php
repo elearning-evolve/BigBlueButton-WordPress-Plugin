@@ -10,7 +10,7 @@
 					?>
 				 nav-tab-active 
 				<?php endif; ?>"><?php esc_html_e( 'Setup', 'bigbluebutton' ); ?></a>
-				<?php do_action( 'bbb_settings_tab_nav' ); ?>
+				<?php do_action( 'bbb_settings_tab_nav', $tab ); ?>
 			</nav>		
 			<form id="bbb-general-settings-form" method="POST" action="" enctype="multipart/form-data">
 				<input type="hidden" name="action" value="bbb_general_settings">
@@ -194,6 +194,7 @@
 		<div class="zvc-information-sec">
 			<h3 id="tutorials">Tutorials</h3>
 			<ol>
+				<li><a target="_blank" rel="noopener" href="https://elearningevolve.com/blog/how-to-allow-instructors-to-manage-bbb-rooms-on-wp/">How to allow instructors or users to manage BigblueButton Rooms on WordPress</a></li>
 				<li><a target="_blank" rel="noopener" href="https://elearningevolve.com/blog/how-to-join-bigbluebutton-room-from-wordpress/">How to join BigBlueButton Room from WordPress</a></li>
 				<li><a target="_blank" rel="noopener" href="https://elearningevolve.com/blog/how-to-limit-number-of-users-for-bigbluebutton-room-on-wordpress/">How to limit number of users for BigBlueButton Room on WordPress
 					</a>

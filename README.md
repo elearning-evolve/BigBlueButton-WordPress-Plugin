@@ -7,7 +7,7 @@ Tags: BigBlueButton, BigBlueButtom, BBB, bbb, bigbluebutton, videoconferencing, 
 Requires at least: 5.1  
 Tested up to: 5.9.3  
 Requires PHP: 7.2  
-Stable tag: 1.4.0  
+Stable tag: 1.4.1  
 License: GPLv2 or later  
 License URI: http://www.gnu.org/licenses/gpl-2.0.html  
 
@@ -114,11 +114,11 @@ Insert the token of your BBB Room that you would like the users to select from i
 **How can I change the capability/permissions of a user role?**
 
 You can install the [**"User Role Editor plugin"**](https://wordpress.org/plugins/user-role-editor/) and update the capabilities/permissions from **"Users" > "User Role Editor"**.
-![bbb-room-user-roles-editor](https://elearningevolve.com/wp-content/uploads/2022/04/bbb-room-user-roles-editor.jpeg "BBB User Role Editor")
+[See User Role Plugin Usage Screenshot](https://elearningevolve.com/wp-content/uploads/2022/04/bbb-room-user-roles-editor.jpeg)
 
 **How to allow a user role to create BBB Rooms from the Dashbaord?**
 
-To allow a user role to create and edit rooms, assign them a role or add the capability, **publish_bbb_rooms, edit_bbb_rooms, edit_posts, delete_bbb_rooms, delete_published_bbb_rooms, and edit_published_bbb_rooms.**
+See our detailed [step by step guide](https://elearningevolve.com/blog/how-to-allow-instructors-to-manage-bbb-rooms-on-wp/) to learn this.
 
 **How to assign a WordPress user role as the moderator for the BBB room?**
 
@@ -128,10 +128,10 @@ To allow a user role to create and edit rooms, assign them a role or add the cap
 
 **How to Restrict number of users or max participants for all rooms or per room?**
 This feature is available in our [Pro plugin](https://elearningevolve.com/products/bigbluebutton-wordpress-pro/). You can limit the max participants for all the rooms from *BBB Rooms -> Settings -> Room Config*
-![bbb-room-limit-participant-global](https://elearningevolve.com/wp-content/uploads/2022/04/bbb-room-limit-participant-global.jpeg "Max Participant Global")
+[See Global Participant Limit Screenshot](https://elearningevolve.com/wp-content/uploads/2022/04/bbb-room-limit-participant-global.jpeg)
 
 You can also override the global settings or set a different limit for each page by setting the max participants param with each shortcode that is added to a page.
-![bbb-room-limit-participant-shortcode](https://elearningevolve.com/wp-content/uploads/2022/04/bbb-room-limit-participant-shortcode.jpeg "Max Participant Per Page")
+[See Shortcode Level Limit Screenshot](https://elearningevolve.com/wp-content/uploads/2022/04/bbb-room-limit-participant-shortcode.jpeg)
 
 **Where do administrator of the room login to their page/ room to schedule and manage meetings**
 They need to login to their WordPress dashboard https://mywpsite.com/wp-admin
@@ -139,7 +139,7 @@ from the dashbaord they can manage the room from BBB Rooms menu.
 
 **How to schedule a BBB room meeting**
 This feature is available in our [Pro plugin](https://elearningevolve.com/products/bigbluebutton-wordpress-pro/) where the Room admin can set a date/time of room meeting to start for each of the rooms.
-![bbb-room-countdown-setting](https://elearningevolve.com/wp-content/uploads/2022/04/bbb-room-countdown-setting.jpeg "BBB Room Countdown")
+[See BBB Room Countdown Screenshot](https://elearningevolve.com/wp-content/uploads/2022/04/bbb-room-countdown-setting.jpeg)
 
 **I want to edit my recordings. How do I do that?**
 
@@ -159,6 +159,11 @@ To allow a user role to manage recordings add the capability, **manage_bbb_room_
 8. BBB Rooms can also be organized using Categories.
 
 ## Changelog ##
+### 1.4.1 ###
+* Updated: Remove custom fields from BBB Rooms -> Add New
+* Added: New capability can_limit_user_in_bbb_rooms the room limit option will show only to admins and users with this new capability
+* Added: New tutorial [How to allow instructors or users to manage BigblueButton Rooms on WordPress](https://elearningevolve.com/blog/how-to-allow-instructors-to-manage-bbb-rooms-on-wp/) in plugin settings page
+
 ### 1.4.0 ###
 * Added: Tutorials section on plugin settings page
 * Added: Shortcode guide section on settings page for all available plugin shortcodes

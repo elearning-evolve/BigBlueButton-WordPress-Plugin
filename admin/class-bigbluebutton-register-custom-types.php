@@ -146,6 +146,10 @@ class Bigbluebutton_Register_Custom_Types {
 	 * @since   3.0.0
 	 */
 	public function register_room_code_metaboxes() {
+		/**
+		 * Remove Custom Fields meta box
+		 */
+		remove_meta_box( 'postcustom', 'bbb-room', 'normal' );
 		add_meta_box( 'bbb-moderator-code', __( 'Moderator Access Code', 'bigbluebutton' ), array( $this, 'display_moderator_code_metabox' ), 'bbb-room' );
 		add_meta_box( 'bbb-viewer-code', __( 'Viewer Access Code', 'bigbluebutton' ), array( $this, 'display_viewer_code_metabox' ), 'bbb-room' );
 	}
@@ -180,10 +184,10 @@ class Bigbluebutton_Register_Custom_Types {
 	public function display_moderator_code_metabox( $object ) {
 		$entry_code       = Bigbluebutton_Admin_Helper::generate_random_code();
 		$entry_code_label = __( 'Moderator Access Code', 'bigbluebutton' );
-		$entry_code_msg = __( 'Access Code Note', 'bigbluebutton' );
-		
-		$entry_code_name  = 'bbb-moderator-code';
-		$existing_value   = get_post_meta( $object->ID, 'bbb-room-moderator-code', true );
+		$entry_code_msg   = __( 'Access Code Note', 'bigbluebutton' );
+
+		$entry_code_name = 'bbb-moderator-code';
+		$existing_value  = get_post_meta( $object->ID, 'bbb-room-moderator-code', true );
 		wp_nonce_field( 'bbb-room-moderator-code-nonce', 'bbb-room-moderator-code-nonce' );
 		require 'partials/bigbluebutton-room-code-metabox-display.php';
 	}
@@ -198,7 +202,7 @@ class Bigbluebutton_Register_Custom_Types {
 	public function display_viewer_code_metabox( $object ) {
 		$entry_code       = Bigbluebutton_Admin_Helper::generate_random_code();
 		$entry_code_label = __( 'Viewer Access Code', 'bigbluebutton' );
-		$entry_code_msg = __( 'Access Code Note', 'bigbluebutton' );
+		$entry_code_msg   = __( 'Access Code Note', 'bigbluebutton' );
 		$entry_code_name  = 'bbb-viewer-code';
 		$existing_value   = get_post_meta( $object->ID, 'bbb-room-viewer-code', true );
 		wp_nonce_field( 'bbb-room-viewer-code-nonce', 'bbb-room-viewer-code-nonce' );

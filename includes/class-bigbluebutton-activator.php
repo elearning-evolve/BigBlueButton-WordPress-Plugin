@@ -141,6 +141,7 @@ class Bigbluebutton_Activator {
 		$role->add_cap( 'delete_others_bbb_rooms' );
 		$role->add_cap( 'create_recordable_bbb_room' );
 		$role->add_cap( 'manage_bbb_room_recordings' );
+		$role->add_cap( 'can_limit_user_in_bbb_rooms' );
 		$role->add_cap( 'view_extended_bbb_room_recording_formats' );
 	}
 
