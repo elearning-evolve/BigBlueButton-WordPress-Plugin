@@ -26,48 +26,56 @@ class Bigbluebutton_Register_Custom_Types {
 	 * @since   3.0.0
 	 */
 	public function bbb_room_as_post_type() {
+		$params = array(
+			'public'          => true,
+			'show_ui'         => true,
+			'labels'          => array(
+				'name'                     => __( 'BBB Rooms', 'bigbluebutton' ),
+				'add_new'                  => __( 'Add New', 'bigbluebutton' ),
+				'add_new_item'             => __( 'Add New Room', 'bigbluebutton' ),
+				'edit_item'                => __( 'Edit Room', 'bigbluebutton' ),
+				'new_item'                 => __( 'New Room', 'bigbluebutton' ),
+				'view_item'                => __( 'View Room', 'bigbluebutton' ),
+				'view_items'               => __( 'View Rooms', 'bigbluebutton' ),
+				'search_items'             => __( 'Search Rooms', 'bigbluebutton' ),
+				'not_found'                => __( 'No rooms found', 'bigbluebutton' ),
+				'not_found_in_trash'       => __( 'No rooms found in trash', 'bigbluebutton' ),
+				'all_items'                => __( 'All Rooms', 'bigbluebutton' ),
+				'archives'                 => __( 'Room Archives', 'bigbluebutton' ),
+				'attributes'               => __( 'Room Attributes', 'bigbluebutton' ),
+				'insert_into_item'         => __( 'Insert into room', 'bigbluebutton' ),
+				'uploaded_to_this_item'    => __( 'Uploaded to this room', 'bigbluebutton' ),
+				'filter_items_list'        => __( 'Filter rooms list', 'bigbluebutton' ),
+				'items_list_navigation'    => __( 'Rooms list navigation', 'bigbluebutton' ),
+				'items_list'               => __( 'Rooms list', 'bigbluebutton' ),
+				'item_published'           => __( 'Room published', 'bigbluebutton' ),
+				'item_published_privately' => __( 'Room published privately', 'bigbluebutton' ),
+				'item_reverted_to_draft'   => __( 'Room reverted to draft', 'bigbluebutton' ),
+				'item_scheduled'           => __( 'Room scheduled', 'bigbluebutton' ),
+				'item_updated'             => __( 'Room updated', 'bigbluebutton' ),
+			),
+			'taxonomies'      => array( 'bbb-room-category' ),
+			'capability_type' => 'bbb_room',
+			'has_archive'     => true,
+			'supports'        => array( 'title', 'editor' ),
+			'rewrite'         => array( 'slug' => 'bbb-room' ),
+			'show_in_menu'    => 'bbb_room',
+			'map_meta_cap'    => true,
+			//'query_var'       => true,
+			// Enables block editing in the rooms editor.
+			'show_in_rest'    => true,
+			'supports'        => array( 'title', 'editor', 'author', 'thumbnail', 'permalink' ),
+		);
+
+		if ( ! current_user_can( 'add_bbb_rooms' ) ) {
+			$params['capabilities'] = array(
+				'create_posts' => 'do_not_allow',
+			);
+		}
+
 		register_post_type(
 			'bbb-room',
-			array(
-				'public'          => true,
-				'show_ui'         => true,
-				'labels'          => array(
-					'name'                     => __( 'BBB Rooms', 'bigbluebutton' ),
-					'add_new'                  => __( 'Add New', 'bigbluebutton' ),
-					'add_new_item'             => __( 'Add New Room', 'bigbluebutton' ),
-					'edit_item'                => __( 'Edit Room', 'bigbluebutton' ),
-					'new_item'                 => __( 'New Room', 'bigbluebutton' ),
-					'view_item'                => __( 'View Room', 'bigbluebutton' ),
-					'view_items'               => __( 'View Rooms', 'bigbluebutton' ),
-					'search_items'             => __( 'Search Rooms', 'bigbluebutton' ),
-					'not_found'                => __( 'No rooms found', 'bigbluebutton' ),
-					'not_found_in_trash'       => __( 'No rooms found in trash', 'bigbluebutton' ),
-					'all_items'                => __( 'All Rooms', 'bigbluebutton' ),
-					'archives'                 => __( 'Room Archives', 'bigbluebutton' ),
-					'attributes'               => __( 'Room Attributes', 'bigbluebutton' ),
-					'insert_into_item'         => __( 'Insert into room', 'bigbluebutton' ),
-					'uploaded_to_this_item'    => __( 'Uploaded to this room', 'bigbluebutton' ),
-					'filter_items_list'        => __( 'Filter rooms list', 'bigbluebutton' ),
-					'items_list_navigation'    => __( 'Rooms list navigation', 'bigbluebutton' ),
-					'items_list'               => __( 'Rooms list', 'bigbluebutton' ),
-					'item_published'           => __( 'Room published', 'bigbluebutton' ),
-					'item_published_privately' => __( 'Room published privately', 'bigbluebutton' ),
-					'item_reverted_to_draft'   => __( 'Room reverted to draft', 'bigbluebutton' ),
-					'item_scheduled'           => __( 'Room scheduled', 'bigbluebutton' ),
-					'item_updated'             => __( 'Room updated', 'bigbluebutton' ),
-				),
-				'taxonomies'      => array( 'bbb-room-category' ),
-				'capability_type' => 'bbb_room',
-				'has_archive'     => true,
-				'supports'        => array( 'title', 'editor' ),
-				'rewrite'         => array( 'slug' => 'bbb-room' ),
-				'show_in_menu'    => 'bbb_room',
-				'map_meta_cap'    => true,
-				//'query_var'       => true,
-				// Enables block editing in the rooms editor.
-				'show_in_rest'    => true,
-				'supports'        => array( 'title', 'editor', 'author', 'thumbnail', 'permalink' ),
-			)
+			$params
 		);
 	}
 
@@ -137,7 +145,7 @@ class Bigbluebutton_Register_Custom_Types {
 		update_post_meta( $room_id, 'bbb-room-recordable', 'true' );
 		//update_post_meta( $room_id, 'bbb-room-wait-for-moderator', ( $wait_for_mod ? 'true' : 'false' ) );
 
-		update_option( 'ee_bb_default_bbb_room', intval( $room_id ) );
+		update_option( 'ee_bb_default_bbb_room', intval( $room_id ), false );
 	}
 
 	/**

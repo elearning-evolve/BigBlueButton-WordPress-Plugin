@@ -76,6 +76,8 @@ if ( ! class_exists( 'Bigbluebutton_Uninstall' ) ) {
 				'create_recordable_bbb_room',
 				'manage_bbb_room_recordings',
 				'view_extended_bbb_room_recording_formats',
+				'add_bbb_rooms',
+				'can_limit_user_in_bbb_rooms',
 			);
 
 			if ( empty( $rooms ) ) {
@@ -128,6 +130,7 @@ if ( ! class_exists( 'Bigbluebutton_Uninstall' ) ) {
 			delete_option( 'bigbluebutton_salt' );
 			delete_option( 'bigbluebutton_plugin_version' );
 			delete_option( 'bigbluebutton_default_roles_set' );
+			delete_option( 'video_conf_with_bbb_version' );
 		}
 	}
 }

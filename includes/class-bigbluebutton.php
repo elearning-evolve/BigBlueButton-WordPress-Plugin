@@ -91,11 +91,11 @@ class VideoConferencingWithBBB {
 		$migrator         = new Bigbluebutton_Migration( $previous_version, $new_version );
 
 		if ( false === $previous_version && false === $oldest_version ) {
-			update_option( 'bigbluebutton_plugin_version', $new_version );
+			update_option( 'bigbluebutton_plugin_version', $new_version, false );
 		} elseif ( ( false === $previous_version && false !== $oldest_version ) || version_compare( $previous_version, $new_version, '<' ) ) {
 			$success = $migrator->migrate();
 			if ( $success ) {
-				update_option( 'bigbluebutton_plugin_version', $new_version );
+				update_option( 'bigbluebutton_plugin_version', $new_version, false );
 			}
 		}
 	}
@@ -117,6 +117,12 @@ class VideoConferencingWithBBB {
 	 * @access   private
 	 */
 	private function load_dependencies() {
+		/**
+		 * The activator class
+		 *
+		 */
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-bigbluebutton-activator.php';
+
 		/**
 		 * The class for all helper functions
 		 *
@@ -244,6 +250,10 @@ class VideoConferencingWithBBB {
 		$plugin_admin                       = new Bigbluebutton_Admin( $this->get_plugin_name(), $this->get_version() );
 		$plugin_admin_api                   = new Bigbluebutton_Admin_Api();
 		$plugin_admin_register_custom_types = new Bigbluebutton_Register_Custom_Types();
+		$activator                          = new Bigbluebutton_Activator();
+
+		// Set plugin roles
+		$this->loader->add_action( 'admin_init', $activator, 'admin_init' );
 
 		// Suggest not disabling heartbeat.
 		$this->loader->add_action( 'admin_notices', $plugin_admin, 'check_for_heartbeat_script' );

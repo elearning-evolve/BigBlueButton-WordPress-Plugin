@@ -81,7 +81,7 @@ class Bigbluebutton_Admin_Api {
 		if ( isset( $_POST['type'] ) && 'bbb-' === substr( $_POST['type'], 0, 4 ) ) {
 			$type = sanitize_text_field( $_POST['type'] );
 			if ( wp_verify_nonce( $_POST['nonce'], $type ) ) {
-				update_option( 'dismissed-' . $type, true );
+				update_option( 'dismissed-' . $type, true, false );
 			}
 		}
 	}

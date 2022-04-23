@@ -122,7 +122,7 @@ class Bigbluebutton_Admin {
 			'bbb_room',
 			__( 'Add New', 'bigbluebutton' ),
 			__( 'Add New' ),
-			'edit_bbb_rooms',
+			'add_bbb_rooms',
 			'post-new.php?post_type=bbb-room',
 			''
 		);

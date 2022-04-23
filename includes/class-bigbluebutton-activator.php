@@ -37,7 +37,9 @@ class Bigbluebutton_Activator {
 		if ( ! get_option( 'ee_bb_flush_rewrite_rules_flag' ) ) {
 			add_option( 'ee_bb_flush_rewrite_rules_flag', true );
 		}
+	}
 
+	public static function admin_init() {
 		if ( function_exists( 'is_multisite' ) && is_multisite() ) {
 			$blogs = get_sites();
 			foreach ( $blogs as $blog ) {
@@ -58,10 +60,14 @@ class Bigbluebutton_Activator {
 	 * @since   3.0.0
 	 */
 	public static function set_default_roles() {
+		$version          = get_option( 'video_conf_with_bbb_version' );
 		$are_defaults_set = get_option( 'bigbluebutton_default_roles_set' );
-		if ( true === $are_defaults_set ) {
+
+		// If permissions already set or the version updated check passed
+		if ( true == $are_defaults_set && $version && VIDEO_CONF_WITH_BBB_VERSION === $version ) {
 			return;
 		}
+
 		if ( get_role( 'anonymous' ) === null ) {
 			add_role(
 				'anonymous',
@@ -75,7 +81,8 @@ class Bigbluebutton_Activator {
 		$role_names = array_keys( $roles );
 
 		self::set_default_capabilities_for_each_role( $role_names );
-		update_option( 'bigbluebutton_default_roles_set', true );
+		update_option( 'bigbluebutton_default_roles_set', true, false );
+		update_option( 'video_conf_with_bbb_version', VIDEO_CONF_WITH_BBB_VERSION, false );
 	}
 
 	/**
@@ -137,6 +144,7 @@ class Bigbluebutton_Activator {
 	 */
 	private static function set_admin_capability( $role ) {
 		self::set_edit_room_capability( $role );
+		$role->add_cap( 'add_bbb_rooms' );
 		$role->add_cap( 'edit_others_bbb_rooms' );
 		$role->add_cap( 'delete_others_bbb_rooms' );
 		$role->add_cap( 'create_recordable_bbb_room' );

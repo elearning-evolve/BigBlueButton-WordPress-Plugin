@@ -236,7 +236,7 @@ class Bigbluebutton_Migration {
 		$this->import_from_older_versions_permissions();
 
 		// Set bigbluebutton_plugin_version value.
-		update_option( 'bigbluebutton_plugin_version', '1.4.6' );
+		update_option( 'bigbluebutton_plugin_version', '1.4.6', false );
 
 	}
 
@@ -269,16 +269,16 @@ class Bigbluebutton_Migration {
 
 			// Update settings.
 			if ( ! get_option( 'mt_bbb_url' ) ) {
-				update_option( 'bigbluebutton_url', 'https://test.bymond.live/bigbluebutton/' );
+				update_option( 'bigbluebutton_url', 'https://test.bymond.live/bigbluebutton/', false );
 			} else {
-				update_option( 'bigbluebutton_url', get_option( 'mt_bbb_url' ) );
+				update_option( 'bigbluebutton_url', get_option( 'mt_bbb_url' ), false );
 				delete_option( 'mt_bbb_url' );
 			}
 
 			if ( ! get_option( 'mt_salt' ) ) {
-				update_option( 'bigbluebutton_salt', 'jcBmHVuxJcd1LFvMQrI179uiDqpXrnNGKbNjYl0uCM' );
+				update_option( 'bigbluebutton_salt', 'jcBmHVuxJcd1LFvMQrI179uiDqpXrnNGKbNjYl0uCM', false );
 			} else {
-				update_option( 'bigbluebutton_salt', get_option( 'mt_salt' ) );
+				update_option( 'bigbluebutton_salt', get_option( 'mt_salt' ), false );
 				delete_option( 'mt_salt' );
 			}
 
@@ -324,7 +324,7 @@ class Bigbluebutton_Migration {
 						$permissions[ $key ] = $old_permissions[ $key ];
 					}
 				}
-				update_option( 'bigbluebutton_permissions', $permissions );
+				update_option( 'bigbluebutton_permissions', $permissions, false );
 			}
 		}
 	}
