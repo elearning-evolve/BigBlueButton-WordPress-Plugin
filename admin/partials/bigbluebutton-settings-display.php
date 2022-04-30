@@ -90,6 +90,34 @@
 			<p>Below are the <a rel="noopnerer"  target="_blank" href="https://www.wpbeginner.com/wp-tutorials/how-to-add-a-shortcode-in-wordpress/">shortcodes</a> offered by the plugin that you can use anywhere on your site.</p>
 				<ol>
 					<li>
+						<p>Display moderator login from on frontend</p>
+						<div class="tooltip" onclick="copyToClipboard(this)" onmouseout="copyClipboardExit(this)"
+							data-value="[bigbluebutton_moderator_login]">
+							<span class="tooltiptext shortcode-tooltip"><?php echo esc_html_e( 'Copy Shortcode', 'bigbluebutton' ); ?></span>
+							<input size="30" type="text" disabled value="[bigbluebutton_moderator_login]"/>
+							<span class="bbb-dashicon dashicons dashicons-admin-page"></span> <strong><?php echo esc_html_e( 'Pro Version Note', 'bigbluebutton' ); ?></strong>
+						</div>
+						<div class="desc">
+							<ul>
+								<li>This shortcode displays the moderator login form on frontend</li>
+							</ul>
+						</div>
+					</li>
+					<li>
+						<p>Display moderator room management area</p>
+						<div class="tooltip" onclick="copyToClipboard(this)" onmouseout="copyClipboardExit(this)"
+							data-value="[bigbluebutton_room_manage]">
+							<span class="tooltiptext shortcode-tooltip"><?php echo esc_html_e( 'Copy Shortcode', 'bigbluebutton' ); ?></span>
+							<input size="30" type="text" disabled value="[bigbluebutton_room_manage]"/>
+							<span class="bbb-dashicon dashicons dashicons-admin-page"></span> <strong><?php echo esc_html_e( 'Pro Version Note', 'bigbluebutton' ); ?></strong>
+						</div>
+						<div class="desc">
+							<ul>
+								<li>This shortcode displays the moderator room management area on frontend</li>
+							</ul>
+						</div>
+					</li>
+					<li>
 						<p>Display all the available BBB rooms with the join form</p>
 						<div class="tooltip" onclick="copyToClipboard(this)" onmouseout="copyClipboardExit(this)"
 							data-value="[bigbluebutton_all_rooms]">
@@ -201,6 +229,7 @@
 				</li>
 			</ol>
 		</div>
+		<?php if ( ! Bigbluebutton_Loader::is_bbb_pro_active() ) : ?>
 		<div class="zvc-information-sec">
 			<h3 id="pro-version"><a target="_blank" rel="noopener" href="https://elearningevolve.com/products/bigbluebutton-wordpress-pro/">Pro Version Features</a></h3>
 			<ul>
@@ -215,6 +244,7 @@
 				<li>Pre-upload your presentation (ability to upload both globally and per room basis)</li>
 			</ul>
 		</div>
+		<?php endif; ?>
 		<div class="zvc-information-sec">
 			<h3>Our Plugins</h3>
 				<?php if ( ! Bigbluebutton_Loader::is_bbb_pro_active() ) : ?>

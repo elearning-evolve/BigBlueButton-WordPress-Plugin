@@ -119,7 +119,7 @@ class Bigbluebutton_Register_Custom_Types {
 	 * @since   3.0.0
 	 */
 	public function default_bbb_room() {
-		if ( ( defined( 'DOING_AJAX' ) && DOING_AJAX ) || defined( 'WC_API_REQUEST' ) || defined( 'JSON_REQUEST' ) || defined( 'WP_CLI' ) || defined( 'DOING_CRON' ) || defined( 'REST_REQUEST' ) ) {
+		if ( ( defined( 'DOING_AJAX' ) && DOING_AJAX ) || EE_Bigbluebutton_Helper::check_if_rest_or_json() ) {
 			return;
 		}
 
@@ -137,8 +137,8 @@ class Bigbluebutton_Register_Custom_Types {
 		$room_id = wp_insert_post( $home_room );
 
 		// Add room codes to postmeta data.
-		update_post_meta( $room_id, 'bbb-room-moderator-code', Bigbluebutton_Admin_Helper::generate_random_code( 6 ) );
-		update_post_meta( $room_id, 'bbb-room-viewer-code', Bigbluebutton_Admin_Helper::generate_random_code( 6 ) );
+		update_post_meta( $room_id, 'bbb-room-moderator-code', Bigbluebutton_Admin_Helper::generate_random_code() );
+		update_post_meta( $room_id, 'bbb-room-viewer-code', Bigbluebutton_Admin_Helper::generate_random_code() );
 		update_post_meta( $room_id, 'bbb-room-meeting-id', sha1( home_url() . Bigbluebutton_Admin_Helper::generate_random_code( 12 ) ) );
 
 		// Update room recordable value.

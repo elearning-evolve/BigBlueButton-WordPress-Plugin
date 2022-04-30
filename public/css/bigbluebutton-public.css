@@ -117,8 +117,8 @@
 }
 
 #joinroom .bbb-button, .bbb-button {
-    color: #fff !important;
-    background-color: #06172a !important;
+    color: #fff;
+    background-color: #06172a;
     padding: 0.7em 1.6em;
 }
 
@@ -128,14 +128,14 @@
 .bbb-button:hover,
 .bbb-button:focus,
 .bbb-button:active {
-    border-color: #006799 !important;
-    background-color: #0a9ed4 !important;
+    border-color: #006799;
+    background-color: #0a9ed4;
 }
 
 .bbb-recording-link > a {
     color: #fff;
-    box-shadow: none !important;
-    text-decoration: none !important;
+    box-shadow: none;
+    text-decoration: none;
 }
 
 .bbb-recording-link > a:hover,
