@@ -568,8 +568,8 @@ class Bigbluebutton_Admin {
 			die( __( 'Security check' ) );
 		}
 
-		$access_code = $_GET['code'];
-		$room_id     = $_GET['room_id'];
+		$access_code = sanitize_text_field( $_GET['code'] );
+		$room_id     = sanitize_text_field( $_GET['room_id'] );
 		$user        = wp_get_current_user();
 		if ( $user && $user->display_name ) {
 			$username = $user->display_name;

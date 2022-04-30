@@ -29,7 +29,6 @@ class Bigbluebutton_Admin_Api {
 	 * @return  Integer $post_id    Post ID of the new room.
 	 */
 	public function save_room( $post_id ) {
-
 		if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
 			return $post_id;
 		}
@@ -51,7 +50,7 @@ class Bigbluebutton_Admin_Api {
 
 			// Ensure the Moderator Access Code is not the same as the Viewer Access Code.
 			if ( $moderator_code === $viewer_code ) {
-				$viewer_code = $moderator_code . Bigbluebutton_Admin_Helper::generate_random_code( 1 );
+				$viewer_code = $moderator_code . Bigbluebutton_Admin_Helper::generate_random_code( 3 );
 			}
 
 			// Add room codes to postmeta data.

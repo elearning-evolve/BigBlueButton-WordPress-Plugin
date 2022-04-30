@@ -10,6 +10,19 @@
  */
 class EE_Bigbluebutton_Helper {
 	/**
+	 * Check if rest or json request
+	 *
+	 */
+	public static function check_if_rest_or_json() {
+
+		if ( defined( 'WC_API_REQUEST' ) || defined( 'JSON_REQUEST' ) || defined( 'WP_CLI' )
+			|| defined( 'DOING_CRON' ) || defined( 'REST_REQUEST' ) ) {
+			return true;
+		}
+
+		return false;
+	}
+	/**
 	 * Get user's name for the meeting.
 	 *
 	 * @since   3.0.0

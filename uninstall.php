@@ -131,6 +131,7 @@ if ( ! class_exists( 'Bigbluebutton_Uninstall' ) ) {
 			delete_option( 'bigbluebutton_plugin_version' );
 			delete_option( 'bigbluebutton_default_roles_set' );
 			delete_option( 'video_conf_with_bbb_version' );
+			delete_option( 'ee_bb_default_bbb_room' );
 		}
 	}
 }

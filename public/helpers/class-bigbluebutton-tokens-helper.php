@@ -45,7 +45,7 @@ class Bigbluebutton_Tokens_Helper {
 				$tokens_string .= $param;
 			} else {
 				if ( 'token' == substr( $param, 0, 5 ) ) {
-					$param = substr( $param, 5 );
+					$param          = substr( $param, 5 );
 					$tokens_string .= ',' . $param;
 				}
 			}
@@ -186,6 +186,16 @@ class Bigbluebutton_Tokens_Helper {
 		if ( 'edit.php' == $pagenow || 'post.php' == $pagenow || 'post-new.php' == $pagenow ) {
 			$can_view = false;
 		}
+
+		// Elementor checks
+		if ( ( isset( $_REQUEST['action'] ) && 'elementor_ajax' == $_REQUEST['action'] ) || isset( $_GET['elementor-preview'] ) ) {
+			$can_view = false;
+		}
+
+		if ( EE_Bigbluebutton_Helper::check_if_rest_or_json() ) {
+			$can_view = false;
+		}
+
 		return $can_view;
 	}
 
