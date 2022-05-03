@@ -93,9 +93,9 @@
 						<p>Display moderator login from on frontend</p>
 						<div class="tooltip" onclick="copyToClipboard(this)" onmouseout="copyClipboardExit(this)"
 							data-value="[bigbluebutton_moderator_login]">
-							<span class="tooltiptext shortcode-tooltip"><?php echo esc_html_e( 'Copy Shortcode', 'bigbluebutton' ); ?></span>
+							<span class="tooltiptext shortcode-tooltip"><?php esc_html_e( 'Copy Shortcode', 'bigbluebutton' ); ?></span>
 							<input size="30" type="text" disabled value="[bigbluebutton_moderator_login]"/>
-							<span class="bbb-dashicon dashicons dashicons-admin-page"></span> <strong><?php echo esc_html_e( 'Pro Version Note', 'bigbluebutton' ); ?></strong>
+							<span class="bbb-dashicon dashicons dashicons-admin-page"></span> <strong><?php esc_html_e( 'Pro Version Note', 'bigbluebutton' ); ?></strong>
 						</div>
 						<div class="desc">
 							<ul>
@@ -107,9 +107,9 @@
 						<p>Display moderator room management area</p>
 						<div class="tooltip" onclick="copyToClipboard(this)" onmouseout="copyClipboardExit(this)"
 							data-value="[bigbluebutton_room_manage]">
-							<span class="tooltiptext shortcode-tooltip"><?php echo esc_html_e( 'Copy Shortcode', 'bigbluebutton' ); ?></span>
+							<span class="tooltiptext shortcode-tooltip"><?php esc_html_e( 'Copy Shortcode', 'bigbluebutton' ); ?></span>
 							<input size="30" type="text" disabled value="[bigbluebutton_room_manage]"/>
-							<span class="bbb-dashicon dashicons dashicons-admin-page"></span> <strong><?php echo esc_html_e( 'Pro Version Note', 'bigbluebutton' ); ?></strong>
+							<span class="bbb-dashicon dashicons dashicons-admin-page"></span> <strong><?php esc_html_e( 'Pro Version Note', 'bigbluebutton' ); ?></strong>
 						</div>
 						<div class="desc">
 							<ul>
@@ -121,9 +121,9 @@
 						<p>Display all the available BBB rooms with the join form</p>
 						<div class="tooltip" onclick="copyToClipboard(this)" onmouseout="copyClipboardExit(this)"
 							data-value="[bigbluebutton_all_rooms]">
-							<span class="tooltiptext shortcode-tooltip"><?php echo esc_html_e( 'Copy Shortcode', 'bigbluebutton' ); ?></span>
+							<span class="tooltiptext shortcode-tooltip"><?php esc_html_e( 'Copy Shortcode', 'bigbluebutton' ); ?></span>
 							<input size="30" type="text" disabled value="[bigbluebutton_all_rooms]"/>
-							<span class="bbb-dashicon dashicons dashicons-admin-page"></span> <strong><?php echo esc_html_e( 'Pro Version Note', 'bigbluebutton' ); ?></strong>
+							<span class="bbb-dashicon dashicons dashicons-admin-page"></span> <strong><?php esc_html_e( 'Pro Version Note', 'bigbluebutton' ); ?></strong>
 						</div>
 						<div class="desc">
 							<ul>
@@ -136,14 +136,14 @@
 						<p>Display a list of BBB rooms with join form</p>
 						<div class="tooltip" onclick="copyToClipboard(this)" onmouseout="copyClipboardExit(this)"
 							data-value="[bigbluebutton token='z2xxx, z2yyy, ...' room_limit='50']">
-							<span class="tooltiptext shortcode-tooltip"><?php echo esc_html_e( 'Copy Shortcode', 'bigbluebutton' ); ?></span>
+							<span class="tooltiptext shortcode-tooltip"><?php esc_html_e( 'Copy Shortcode', 'bigbluebutton' ); ?></span>
 							<input size="40" type="text" disabled value="[bigbluebutton token='z2xxx, z2yyy, ...' room_limit='50']"/>
-							<span class="bbb-dashicon dashicons dashicons-admin-page"></span> <strong><?php echo esc_html_e( 'Pro Version Note', 'bigbluebutton' ); ?></strong>
+							<span class="bbb-dashicon dashicons dashicons-admin-page"></span> <strong><?php esc_html_e( 'Pro Version Note', 'bigbluebutton' ); ?></strong>
 						</div>
 						<div class="spacer"></div>
 						<div class="tooltip" onclick="copyToClipboard(this)" onmouseout="copyClipboardExit(this)"
 							data-value="[bigbluebutton token='z2xxx, z2yyy, ...']">
-							<span class="tooltiptext shortcode-tooltip"><?php echo esc_html_e( 'Copy Shortcode', 'bigbluebutton' ); ?></span>
+							<span class="tooltiptext shortcode-tooltip"><?php esc_html_e( 'Copy Shortcode', 'bigbluebutton' ); ?></span>
 							<input size="30" type="text" disabled value="[bigbluebutton token='z2xxx, z2yyy, ...']"/>
 							<span class="bbb-dashicon dashicons dashicons-admin-page"></span>
 						</div>
@@ -158,14 +158,14 @@
 						<p>Add this shortcode to your page to show a single BBB room join form</p>
 							<div class="tooltip" onclick="copyToClipboard(this)" onmouseout="copyClipboardExit(this)"
 								data-value="[bigbluebutton token='z2xxx' room_limit='50']">
-								<span class="tooltiptext shortcode-tooltip"><?php echo esc_html_e( 'Copy Shortcode', 'bigbluebutton' ); ?></span>
+								<span class="tooltiptext shortcode-tooltip"><?php esc_html_e( 'Copy Shortcode', 'bigbluebutton' ); ?></span>
 								<input size="30" type="text" disabled value="[bigbluebutton token='z2xxx' room_limit='50']"/>
-								<span class="bbb-dashicon dashicons dashicons-admin-page"></span> <strong><?php echo esc_html_e( 'Pro Version Note', 'bigbluebutton' ); ?></strong>
+								<span class="bbb-dashicon dashicons dashicons-admin-page"></span> <strong><?php esc_html_e( 'Pro Version Note', 'bigbluebutton' ); ?></strong>
 							</div>
 							<div class="spacer"></div>
 							<div class="tooltip" onclick="copyToClipboard(this)" onmouseout="copyClipboardExit(this)"
 								data-value="[bigbluebutton token='z2xxx']">
-								<span class="tooltiptext shortcode-tooltip"><?php echo esc_html_e( 'Copy Shortcode', 'bigbluebutton' ); ?></span>
+								<span class="tooltiptext shortcode-tooltip"><?php esc_html_e( 'Copy Shortcode', 'bigbluebutton' ); ?></span>
 								<input size="30" type="text" disabled value="[bigbluebutton token='z2xxx']"/>
 								<span class="bbb-dashicon dashicons dashicons-admin-page"></span>
 							</div>
@@ -180,7 +180,7 @@
 						<p>Display a list of BBB room recordings from multiple rooms</p>
 							<div class="tooltip" onclick="copyToClipboard(this)" onmouseout="copyClipboardExit(this)"
 								data-value="[bigbluebutton_recordings token='z2xxx, z2yyy, ...']">
-								<span class="tooltiptext shortcode-tooltip"><?php echo esc_html_e( 'Copy Shortcode', 'bigbluebutton' ); ?></span>
+								<span class="tooltiptext shortcode-tooltip"><?php esc_html_e( 'Copy Shortcode', 'bigbluebutton' ); ?></span>
 								<input size="40" type="text" disabled value="[bigbluebutton_recordings token='z2xxx, z2yyy, ...']"/>
 								<span class="bbb-dashicon dashicons dashicons-admin-page"></span>
 							</div>
@@ -194,7 +194,7 @@
 						<p>Display BBB room recordings from a single room</p>
 							<div class="tooltip" onclick="copyToClipboard(this)" onmouseout="copyClipboardExit(this)"
 								data-value="[bigbluebutton_recordings token='z2xxx']">
-								<span class="tooltiptext shortcode-tooltip"><?php echo esc_html_e( 'Copy Shortcode', 'bigbluebutton' ); ?></span>
+								<span class="tooltiptext shortcode-tooltip"><?php esc_html_e( 'Copy Shortcode', 'bigbluebutton' ); ?></span>
 								<input size="30" type="text" disabled value="[bigbluebutton_recordings token='z2xxx']"/>
 								<span class="bbb-dashicon dashicons dashicons-admin-page"></span>
 							</div>

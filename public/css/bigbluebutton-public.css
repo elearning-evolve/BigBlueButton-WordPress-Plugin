@@ -118,8 +118,9 @@
 
 #joinroom .bbb-button, .bbb-button {
     color: #fff;
-    background-color: #06172a;
-    padding: 0.7em 1.6em;
+    background-color: #007acc;
+    padding: 0.7em 1em;
+    border: none;
 }
 
 .bbb-recording-link:hover,
@@ -129,7 +130,6 @@
 .bbb-button:focus,
 .bbb-button:active {
     border-color: #006799;
-    background-color: #0a9ed4;
 }
 
 .bbb-recording-link > a {
@@ -192,7 +192,40 @@
 .bbb-form, .bbb-room-selection-block {
     text-align: center;
 }
+.tooltip {
+    position: relative;
+    display: inline-block;
+}
 
-#joinroom .bbb-btn-join {
-    margin-left: 140px;
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 140px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px;
+    position: absolute;
+    z-index: 1;
+    bottom: 150%;
+    left: 50%;
+    margin-left: -75px;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.tooltip .tooltiptext::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #555 transparent transparent transparent;
+}
+
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
 }

@@ -1,3 +1,4 @@
+const { __, _x, _n, _nx } = wp.i18n;
 ( function( $ ) {
 	
 
@@ -261,34 +262,35 @@
 
 		// delete recording
 		$( '.bbb_trash_recording' ).click( function() {
+            if (window.confirm(__( 'Do you really want to delete this recording?', 'bigbluebutton' ) ) ) {
+                 /** global: php_vars */
+    			let recordID = $( this ).data( 'record-id' );
+    			let nonce = $( this ).data( 'meta-nonce' );
 
-			/** global: php_vars */
-			let recordID = $( this ).data( 'record-id' );
-			let nonce = $( this ).data( 'meta-nonce' );
+    			let data = {
+    				action: 'trash_bbb_recording',
+    				post_type: 'POST',
+    				meta_nonce: nonce,
+    				record_id: recordID
+    			};
 
-			let data = {
-				action: 'trash_bbb_recording',
-				post_type: 'POST',
-				meta_nonce: nonce,
-				record_id: recordID
-			};
+    			jQuery.post(
+    				php_vars.ajax_url,
+    				data,
+    				function( response ) {
+    					if ( response.success ) {
+    						$( '#bbb-recording-' + recordID ).remove();
 
-			jQuery.post(
-				php_vars.ajax_url,
-				data,
-				function( response ) {
-					if ( response.success ) {
-						$( '#bbb-recording-' + recordID ).remove();
-
-						// if there are no recordings left, remove the table
-						if ( 0 == $( '.bbb-recording-row' ).length ) {
-							$( '#bbb-recordings-table' ).remove();
-							$( '#bbb-no-recordings-msg' ).show();
-						}
-					}
-				},
-				'json'
-			);
+    						// if there are no recordings left, remove the table
+    						if ( 0 == $( '.bbb-recording-row' ).length ) {
+    							$( '#bbb-recordings-table' ).remove();
+    							$( '#bbb-no-recordings-msg' ).show();
+    						}
+    					}
+    				},
+    				'json'
+    			);
+            }
 		});
 
 		// edit recording data in the table
@@ -356,3 +358,14 @@
 		});
 	});
 }( jQuery ) );
+
+function copyToClipboard(elem) {
+    /* Copy the text inside the text field */
+    navigator.clipboard.writeText(elem.getAttribute('data-value'));
+
+    var tooltip = jQuery(elem).find('.recording-url-tooltip').html( __('Copied:', 'bigbluebutton') );    
+}
+
+function copyClipboardExit(elem) {
+    var tooltip = jQuery(elem).find('.recording-url-tooltip').html( __('Share Recording URL', 'bigbluebutton') );
+}

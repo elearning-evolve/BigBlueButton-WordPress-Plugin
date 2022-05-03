@@ -130,6 +130,7 @@ class Bigbluebutton_Recording_Helper {
 		}
 
 		$recording->trash_icon_classes = 'bbb-icon bbb_trash_recording dashicons dashicons-trash';
+		$recording->share_icon_classes = 'bbb-icon dashicons dashicons-share';
 		return $recording;
 	}
 

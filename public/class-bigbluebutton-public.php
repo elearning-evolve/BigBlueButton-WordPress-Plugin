@@ -106,9 +106,7 @@ class Bigbluebutton_Public {
 			'ajax_url'            => admin_url( 'admin-ajax.php' ),
 		);
 
-		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/bigbluebutton-public.js', array( 'jquery' ), $this->version, true );
-		wp_localize_script( $this->plugin_name, 'php_vars', $translations );
-
+		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/bigbluebutton-public.js', array( 'jquery', 'wp-i18n' ), $this->version, true );
 	}
 
 	/**
