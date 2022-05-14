@@ -72,7 +72,7 @@ class Bigbluebutton_Tokens_Helper {
 		$access_as_moderator = BigBlueButton_Permissions_Helper::user_has_bbb_cap( 'join_as_moderator_bbb_room' );
 		$access_as_viewer    = BigBlueButton_Permissions_Helper::user_has_bbb_cap( 'join_as_viewer_bbb_room' );
 		$rooms               = array();
-
+		
 		foreach ( $tokens_arr as $raw_token ) {
 			if ( sanitize_text_field( $raw_token ) == '' ) {
 				continue;

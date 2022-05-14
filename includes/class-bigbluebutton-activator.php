@@ -106,15 +106,20 @@ class Bigbluebutton_Activator {
 	 * @param  String $name    Role name to set capability for.
 	 */
 	private static function set_default_capability_for_one_role( $name ) {
+		global $wp_roles;
+		$all_roles    = array_keys( $wp_roles->roles );
 		$role         = get_role( $name );
 		$set_join_cap = self::join_permissions_set( $role );
 		$role->add_cap( 'read_bbb_room' );
+		$admin_cap = false;
 
 		if ( $role->has_cap( 'activate_plugins' ) ) {
+			$admin_cap = true;
 			self::set_admin_capability( $role );
 		}
 
 		if ( 'administrator' == $name ) {
+			$admin_cap = true;
 			self::set_admin_capability( $role );
 			if ( ! $set_join_cap ) {
 				$role->add_cap( 'join_as_moderator_bbb_room' );
@@ -124,12 +129,16 @@ class Bigbluebutton_Activator {
 		if ( 'author' == $name ) {
 			self::set_edit_room_capability( $role );
 		}
-		if ( 'author' == $name || 'editor' == $name || 'contributor' == $name || 'subscriber' == $name ) {
+
+		// Assign viewer access to all WP roles @1.5.0
+		if ( ! $admin_cap && in_array( $name, $all_roles ) && $name != 'anonymous' ) {
+			//if ( 'author' == $name || 'editor' == $name || 'contributor' == $name || 'subscriber' == $name ) {
 			if ( ! $set_join_cap ) {
 				$role->add_cap( 'join_as_viewer_bbb_room' );
 			}
 			return;
 		}
+
 		if ( ! $set_join_cap ) {
 			$role->add_cap( 'join_with_access_code_bbb_room' );
 		}
@@ -178,7 +187,7 @@ class Bigbluebutton_Activator {
 	 * @return Boolean true|false  The boolean value of whether the role already has join room permissions set.
 	 */
 	private static function join_permissions_set( $role ) {
-		if ( $role->has_cap( 'join_as_moderator_bbb_room' ) || $role->has_cap( 'join_as_viewer_bbb_room' ) || $role->has_cap( 'join_with_access_code_bbb_room' ) ) {
+		if ( $role->has_cap( 'join_as_moderator_bbb_room' ) || $role->has_cap( 'join_as_viewer_bbb_room' ) ) {
 			return true;
 		}
 		return false;

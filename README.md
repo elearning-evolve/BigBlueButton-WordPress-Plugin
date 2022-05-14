@@ -7,7 +7,7 @@ Tags: BigBlueButton, BigBlueButtom, BBB, bbb, bigbluebutton, videoconferencing, 
 Requires at least: 5.1  
 Tested up to: 5.9.3  
 Requires PHP: 7.2  
-Stable tag: 1.4.4  
+Stable tag: 1.5.0  
 License: GPLv2 or later  
 License URI: http://www.gnu.org/licenses/gpl-2.0.html  
 
@@ -159,6 +159,9 @@ To allow a user role to manage recordings add the capability, **manage_bbb_room_
 8. BBB Rooms can also be organized using Categories.
 
 ## Changelog ##
+### 1.5.0 ###
+* Updated: Allow all logged-in users to access the BBB room without the need to enter the Access Code
+
 ### 1.4.4 ###
 * Added: Share recording option for admins and moderators on bbb room page
 * Updated: Confirmation check before deleting recording

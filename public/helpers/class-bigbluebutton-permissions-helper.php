@@ -35,6 +35,9 @@ class BigBlueButton_Permissions_Helper {
 		} elseif ( get_role( 'anonymous' ) ) {
 			$user_can = get_role( 'anonymous' )->has_cap( $type );
 		}
+
+		$user_can = apply_filters( 'bbb_user_has_this_cap', $user_can, $type );
+
 		return $user_can;
 	}
 }

@@ -123,6 +123,10 @@
     border: none;
 }
 
+#joinroom .bbb-button:hover {
+    color: #fff;
+}
+
 .bbb-recording-link:hover,
 .bbb-recording-link:focus,
 .bbb-recording-link:active,
@@ -130,6 +134,7 @@
 .bbb-button:focus,
 .bbb-button:active {
     border-color: #006799;
+    color: #fff;
 }
 
 .bbb-recording-link > a {
