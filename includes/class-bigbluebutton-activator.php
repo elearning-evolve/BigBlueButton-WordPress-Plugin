@@ -83,6 +83,7 @@ class Bigbluebutton_Activator {
 		self::set_default_capabilities_for_each_role( $role_names );
 		update_option( 'bigbluebutton_default_roles_set', true, false );
 		update_option( 'video_conf_with_bbb_version', VIDEO_CONF_WITH_BBB_VERSION, false );
+		update_option( 'bbb_flush_incorrect_caps_once', 1, false );
 	}
 
 	/**
@@ -113,6 +114,11 @@ class Bigbluebutton_Activator {
 		$role->add_cap( 'read_bbb_room' );
 		$admin_cap = false;
 
+		// flush admin capabilities incorrectly set for other roles in v1.2.1
+		if ( ! get_option( 'bbb_flush_incorrect_caps_once' ) ) {
+			self::flush_incorrect_caps_once( $role );
+		}
+
 		if ( $role->has_cap( 'activate_plugins' ) ) {
 			$admin_cap = true;
 			self::set_admin_capability( $role );
@@ -121,9 +127,7 @@ class Bigbluebutton_Activator {
 		if ( 'administrator' == $name ) {
 			$admin_cap = true;
 			self::set_admin_capability( $role );
-			if ( ! $set_join_cap ) {
-				$role->add_cap( 'join_as_moderator_bbb_room' );
-			}
+			$role->add_cap( 'join_as_moderator_bbb_room' );
 			return;
 		}
 		if ( 'author' == $name ) {
@@ -133,9 +137,7 @@ class Bigbluebutton_Activator {
 		// Assign viewer access to all WP roles @1.5.0
 		if ( ! $admin_cap && in_array( $name, $all_roles ) && $name != 'anonymous' ) {
 			//if ( 'author' == $name || 'editor' == $name || 'contributor' == $name || 'subscriber' == $name ) {
-			if ( ! $set_join_cap ) {
-				$role->add_cap( 'join_as_viewer_bbb_room' );
-			}
+			$role->add_cap( 'join_as_viewer_bbb_room' );
 			return;
 		}
 
@@ -191,5 +193,30 @@ class Bigbluebutton_Activator {
 			return true;
 		}
 		return false;
+	}
+
+	/**
+	 * flush admin and editor caps set incorrectly for other user roles in v1.2.1 update
+	 *
+	 */
+	private static function flush_incorrect_caps_once( $role ) {
+		$role->remove_cap( 'add_bbb_rooms' );
+		$role->remove_cap( 'read_private_bbb_rooms' );
+		$role->remove_cap( 'edit_others_bbb_rooms' );
+		$role->remove_cap( 'edit_private_bbb_rooms' );
+		$role->remove_cap( 'delete_others_bbb_rooms' );
+		$role->remove_cap( 'delete_private_bbb_rooms' );
+		$role->remove_cap( 'create_recordable_bbb_room' );
+		$role->remove_cap( 'manage_bbb_room_recordings' );
+		$role->remove_cap( 'can_limit_user_in_bbb_rooms' );
+		$role->remove_cap( 'view_extended_bbb_room_recording_formats' );
+		$role->remove_cap( 'edit_bbb_rooms' );
+		$role->remove_cap( 'edit_published_bbb_rooms' );
+		$role->remove_cap( 'delete_bbb_rooms' );
+		$role->remove_cap( 'delete_published_bbb_rooms' );
+		$role->remove_cap( 'publish_bbb_rooms' );
+		if ( ! $role->has_cap( 'manage_categories' ) ) {
+			$role->remove_cap( 'manage_categories' );
+		}
 	}
 }

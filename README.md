@@ -7,7 +7,7 @@ Tags: BigBlueButton, BigBlueButtom, BBB, bbb, bigbluebutton, videoconferencing, 
 Requires at least: 5.1  
 Tested up to: 5.9.3  
 Requires PHP: 7.2  
-Stable tag: 1.5.0  
+Stable tag: 1.5.1  
 License: GPLv2 or later  
 License URI: http://www.gnu.org/licenses/gpl-2.0.html  
 
@@ -108,8 +108,8 @@ Insert the token of your BBB Room that you would like the users to select from i
 
 **Which users are required to enter the Name and Access Code on room join form?**
 * *For non-logged in users:* The Name & Access Code will be always required.
-* *For logged-in users:* The login username will be taken as their Name. The Access Code field does not displays for these user roles **administrator, author, editor, contributor, subscriber**. Any other user role will be required to enter the Access Code.
-* *For logged-in users:* To remove the Access Code requirement for a user role, you can customize the particular user role by adding the capability, **join_as_viewer_bbb_room**.
+* *For logged-in users:* The login username will be taken as their Name. The Access Code field does not displays for logged-in users 
+* *For logged-in users:* To apply the Access Code requirement for a user role, you can customize the particular user role by adding the capability, **join_with_access_code_bbb_room** and remove the capability **join_as_viewer_bbb_room**.
 
 **How can I change the capability/permissions of a user role?**
 
@@ -159,6 +159,9 @@ To allow a user role to manage recordings add the capability, **manage_bbb_room_
 8. BBB Rooms can also be organized using Categories.
 
 ## Changelog ##
+### 1.5.1 ###
+* Fixed: Remove admin permissions incorrectly set for other user roles in v1.2.1 update
+
 ### 1.5.0 ###
 * Updated: Allow all logged-in users to access the BBB room without the need to enter the Access Code
 
