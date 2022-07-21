@@ -64,7 +64,7 @@ class Bigbluebutton_Activator {
 		$are_defaults_set = get_option( 'bigbluebutton_default_roles_set' );
 
 		// If permissions already set or the version updated check passed
-		if ( true == $are_defaults_set && $version && VIDEO_CONF_WITH_BBB_VERSION === $version ) {
+		if ( true == $are_defaults_set && VIDEO_CONF_WITH_BBB_VERSION === $version ) {
 			return;
 		}
 

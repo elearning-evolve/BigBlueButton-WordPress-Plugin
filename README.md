@@ -5,9 +5,9 @@ Contributors: blindsidenetworks, jfederico, yfngdu, elearningevolve, adeelraza_7
 Donate link: https://elearningevolve.com/products/donate/  
 Tags: BigBlueButton, BigBlueButtom, BBB, bbb, bigbluebutton, videoconferencing, virtual classroom, web conferencing, online teaching, learning management system, LMS, online session, live training
 Requires at least: 5.1  
-Tested up to: 5.9.3  
+Tested up to: 6.0.1  
 Requires PHP: 7.2  
-Stable tag: 1.5.1  
+Stable tag: 1.5.2  
 License: GPLv2 or later  
 License URI: http://www.gnu.org/licenses/gpl-2.0.html  
 
@@ -32,6 +32,7 @@ After the session is over the plugin can also display the recording of the sessi
 
 ### Pro Version Features ###
 There is also a Pro version available with this plugin that offers the below features:
+* Moderators frontend Room management area
 * Embed BigBlueButton Room on WordPress
 * Set a Countdown/Schedule for Room
 * Fully White-label Virtual Classroom
@@ -50,11 +51,12 @@ There is also a Pro version available with this plugin that offers the below fea
 ### How-Tos ###
 * [How to join BigBlueButton Room from WordPress](https://elearningevolve.com/blog/how-to-join-bigbluebutton-room-from-wordpress/)
 * [How to limit number of users for BigBlueButton Room on WordPress](https://elearningevolve.com/blog/how-to-limit-number-of-users-for-bigbluebutton-room-on-wordpress/)
+* [How to allow instructors or users to manage BigBlueButton Rooms on WordPress](https://elearningevolve.com/blog/how-to-allow-instructors-to-manage-bbb-rooms-on-wp/)
 
 ### BigBlueButton Server ###
 To get up and running in no time with a managed BigBlueButton hosting provider please refer to our [Recommended BBB hosting providers](https://elearningevolve.com/blog/bigbluebutton-hosting).
 
-For further queries feel free to [contact us](https://elearningevolve.com/contact/).
+For further queries feel free to [contact us](https://elearningevolve.com/contact/) or directly reach out on *info@elearningevolve.com*
 
 ## Installation ##
 
@@ -159,6 +161,9 @@ To allow a user role to manage recordings add the capability, **manage_bbb_room_
 8. BBB Rooms can also be organized using Categories.
 
 ## Changelog ##
+### 1.5.2 ###
+* Updated: Compatibility with BBB Pro v2.4.0
+
 ### 1.5.1 ###
 * Fixed: Remove admin permissions incorrectly set for other user roles in v1.2.1 update
 

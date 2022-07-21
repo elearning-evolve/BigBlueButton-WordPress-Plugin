@@ -53,7 +53,9 @@
 			</label>
 		</div>
 	<?php } ?>
-	<input class="bbb-button bbb-btn-join button button-primary" type="submit" value="<?php echo esc_attr( $join_btn ); ?>">
+	<?php if ( $is_join_web ) : ?>
+		<input class="bbb-button bbb-btn-join button button-primary" type="submit" value="<?php echo esc_attr( $join_btn ); ?>"/>
+	<?php endif; ?>
 	<?php do_action( 'bbb_join_form_buttons', $access_as_moderator ); ?>
 </form>
 <?php endif; ?>

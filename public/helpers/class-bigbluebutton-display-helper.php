@@ -54,6 +54,7 @@ class Bigbluebutton_Display_Helper {
 	 */
 	public function get_join_form_as_string( $room_id, $meta_nonce, $access_as_moderator, $access_as_viewer, $access_using_code ) {
 		global $wp, $post;
+		$is_join_web = 1;
 		$current_url = home_url( add_query_arg( array(), $wp->request ) );
 		$start_time  = get_post_meta( $room_id, 'bbb-start-time', true );
 		$post_id     = ( isset( $post->ID ) ? $post->ID : 0 );
@@ -74,6 +75,7 @@ class Bigbluebutton_Display_Helper {
 		} else {
 			$form_target = '';
 			$join_btn    = __( 'Join Here', 'bigbluebutton' );
+			$is_join_web = get_option( 'bbb_pro_join_web_iframe', 1 );
 		}
 
 		if ( $access_as_moderator ) {
