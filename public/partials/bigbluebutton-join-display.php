@@ -14,7 +14,7 @@
 	<?php if ( ! is_user_logged_in() ) { ?>
 		<div id="bbb_join_with_username" class="bbb-join-form-block">
 			<label id="bbb_meeting_name_label" class="bbb-join-room-label"><?php esc_html_e( 'Name' ); ?></label>
-			<input type="text" name="bbb_meeting_username" aria-labelledby="bbb_meeting_name_label" class="bbb-join-room-input">
+			<input type="text" name="bbb_meeting_username" aria-labelledby="bbb_meeting_name_label" class="bbb-join-room-input" required />
 		</div>
 	<?php } ?>
 	<?php if ( ! $access_as_moderator && ! $access_as_viewer && $access_using_code ) { ?>

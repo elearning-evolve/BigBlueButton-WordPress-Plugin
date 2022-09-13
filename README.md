@@ -5,9 +5,9 @@ Contributors: blindsidenetworks, jfederico, yfngdu, elearningevolve, adeelraza_7
 Donate link: https://elearningevolve.com/products/donate/  
 Tags: BigBlueButton, BigBlueButtom, BBB, bbb, bigbluebutton, videoconferencing, virtual classroom, web conferencing, online teaching, learning management system, LMS, online session, live training
 Requires at least: 5.1  
-Tested up to: 6.0.1  
+Tested up to: 6.0.2  
 Requires PHP: 7.2  
-Stable tag: 1.5.2  
+Stable tag: 1.5.3  
 License: GPLv2 or later  
 License URI: http://www.gnu.org/licenses/gpl-2.0.html  
 
@@ -161,6 +161,10 @@ To allow a user role to manage recordings add the capability, **manage_bbb_room_
 8. BBB Rooms can also be organized using Categories.
 
 ## Changelog ##
+### 1.5.3 ###
+* Fixed: Wait for Moderator option not working on some BBB hosts
+* Updated: Require username input when user is not logged in to prevent join error
+
 ### 1.5.2 ###
 * Updated: Compatibility with BBB Pro v2.4.0
 

@@ -108,9 +108,17 @@ class Bigbluebutton_Api {
 		}
 
 		if ( ! self::is_meeting_running( $rid ) ) {
-			$code = self::create_meeting( $rid, $lo_url );
-			if ( 200 !== $code ) {
-				wp_die( esc_html__( $code, 'bigbluebutton' ) );
+			$wait_for_mod = get_post_meta( $room_id, 'bbb-room-wait-for-moderator', true );
+			$viewer_code  = strval( get_post_meta( $room_id, 'bbb-room-viewer-code', true ) );
+
+			// If viewer & wait for mod is enabled then dont start meeting
+			if ( $pword == $viewer_code && 'true' == $wait_for_mod ) {
+				// dont start meeting
+			} else {
+				$code = self::create_meeting( $rid, $lo_url );
+				if ( 200 !== $code ) {
+					wp_die( esc_html__( $code, 'bigbluebutton' ) );
+				}
 			}
 		}
 
@@ -121,7 +129,7 @@ class Bigbluebutton_Api {
 				'meetingID' => rawurlencode( $meeting_id ),
 				'fullName'  => $uname,
 				'password'  => rawurlencode( $pword ),
-				'roomId' => $rid
+				'roomId'    => $rid,
 			)
 		);
 
