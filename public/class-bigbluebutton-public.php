@@ -107,6 +107,7 @@ class Bigbluebutton_Public {
 		);
 
 		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/bigbluebutton-public.js', array( 'jquery', 'wp-i18n' ), $this->version, true );
+		wp_localize_script( $this->plugin_name, 'php_vars', $translations );
 	}
 
 	/**

@@ -7,7 +7,7 @@ Tags: BigBlueButton, BigBlueButtom, BBB, bbb, bigbluebutton, videoconferencing, 
 Requires at least: 5.1  
 Tested up to: 6.0.2  
 Requires PHP: 7.2  
-Stable tag: 1.5.3  
+Stable tag: 1.5.4  
 License: GPLv2 or later  
 License URI: http://www.gnu.org/licenses/gpl-2.0.html  
 
@@ -78,6 +78,8 @@ Here's an overview of the installation.
    1. You are ready to begin creating meetings and holding conferences.
 
 ## Frequently Asked Questions ##
+**401 unauthorized error when BBB room window opens within the page**
+It is required that your BBB hosting server supports the BBB room in an iFrame for our Pro plugin else the room window within a page will display a 401 unauthorized error when starting a meeting. The solution to add the iFrame support on BBB hosting server is mentioned on Github [here](https://github.com/bigbluebutton/bigbluebutton/issues/9998#issuecomment-678272306). Our list of [recommended BBB hosts](https://elearningevolve.com/blog/bigbluebutton-hosting/) already support this feature.
 
 **How do I create meetings?**
 After activating the plugin, click on "BBB Rooms" and "Add New" and give the meeting a title and fill out the room details.
@@ -87,7 +89,7 @@ After activating the plugin, click on "BBB Rooms" and "Add New" and give the mee
 * By default, each room will be on its own page, with the permalink listed under BBB Rooms -> All Rooms. 
 * A single BBB Room can also be inserted into any post/page using the **[bigbluebutton] shortcode** with a specified token in the shortcode in the format,
 `[bigbluebutton token=z2xxx]`
-* There is also an option to insert multiple Rooms to any post/page where the user can select a specific room to join. To acheive this insert multiple tokens in the shortcode in the format,
+* There is also an option to insert multiple Rooms to any post/page where the user can select a specific room to join. To achieve this insert multiple tokens in the shortcode in the format,
 `[bigbluebutton token=z2xxx,z2yyy]`
 * Users join meetings using a join room form. This form can be shown on a site as a sidebar element or as a page/post.
 * For setting up in the sidebar, add the BBB Rooms widget, as you do with any other widget, dragging the box to the position you want it to be in.
@@ -161,6 +163,9 @@ To allow a user role to manage recordings add the capability, **manage_bbb_room_
 8. BBB Rooms can also be organized using Categories.
 
 ## Changelog ##
+### 1.5.4 ###
+* Fixed: Recording delete not working from BBB room page when pro plugin not enabled
+
 ### 1.5.3 ###
 * Fixed: Wait for Moderator option not working on some BBB hosts
 * Updated: Require username input when user is not logged in to prevent join error
