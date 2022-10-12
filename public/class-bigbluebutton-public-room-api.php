@@ -57,8 +57,8 @@ class Bigbluebutton_Public_Room_Api {
 	 * @since   3.0.0
 	 */
 	public function bbb_user_join_room() {
-		if ( ! empty( $_POST['action'] ) && 'join_room' == $_POST['action'] && wp_verify_nonce( $_POST['bbb_join_room_meta_nonce'], 'bbb_join_room_meta_nonce' ) ) {
-			$room_id             = sanitize_text_field( $_POST['room_id'] );
+		if ( ! empty( $_GET['action'] ) && 'join_room' == $_GET['action'] && wp_verify_nonce( sanitize_text_field( $_GET['bbb_join_room_meta_nonce'] ), 'bbb_join_room_meta_nonce' ) ) {
+			$room_id             = sanitize_text_field( $_GET['room_id'] );
 			$user                = wp_get_current_user();
 			$entry_code          = '';
 			$username            = EE_Bigbluebutton_Helper::get_meeting_username( $user );
@@ -67,8 +67,8 @@ class Bigbluebutton_Public_Room_Api {
 			$access_using_code   = BigBlueButton_Permissions_Helper::user_has_bbb_cap( 'join_with_access_code_bbb_room' );
 			$access_as_moderator = BigBlueButton_Permissions_Helper::user_has_bbb_cap( 'join_as_moderator_bbb_room' );
 			$access_as_viewer    = BigBlueButton_Permissions_Helper::user_has_bbb_cap( 'join_as_viewer_bbb_room' );
-			$return_url          = esc_url_raw( $_POST['REQUEST_URI'] );
-			$room_limit_post     = intval( isset( $_POST['post_id'] ) ? get_post_meta( sanitize_text_field( $_POST['post_id'] ), 'bbb_pro_room_limit', true ) : 0 );
+			$return_url          = esc_url_raw( $_GET['current_page'] );
+			$room_limit_post     = intval( isset( $_GET['post_id'] ) ? get_post_meta( sanitize_text_field( $_GET['post_id'] ), 'bbb_pro_room_limit', true ) : 0 );
 			$room_limit_cpt      = intval( get_post_meta( $room_id, 'bbb-room-limit', true ) );
 			$room_limit_global   = intval( get_option( 'bbb_pro_max_participants' ) );
 
@@ -85,8 +85,8 @@ class Bigbluebutton_Public_Room_Api {
 				$entry_code = $moderator_code;
 			} elseif ( $access_as_viewer ) {
 				$entry_code = $viewer_code;
-			} elseif ( $access_using_code && isset( $_POST['bbb_meeting_access_code'] ) ) {
-				$entry_code = sanitize_text_field( $_POST['bbb_meeting_access_code'] );
+			} elseif ( $access_using_code && isset( $_GET['bbb_meeting_access_code'] ) ) {
+				$entry_code = sanitize_text_field( $_GET['bbb_meeting_access_code'] );
 				if ( $entry_code != $moderator_code && $entry_code != $viewer_code ) {
 					$query = array(
 						'password_error' => true,

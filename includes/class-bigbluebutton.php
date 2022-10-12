@@ -334,8 +334,7 @@ class VideoConferencingWithBBB {
 		$this->loader->add_filter( 'query_vars', $plugin_public, 'add_query_vars' );
 
 		// Join room API.
-		$this->loader->add_action( 'admin_post_join_room', $plugin_public_room_api, 'bbb_user_join_room' );
-		$this->loader->add_action( 'admin_post_nopriv_join_room', $plugin_public_room_api, 'bbb_user_join_room' );
+		$this->loader->add_action( 'init', $plugin_public_room_api, 'bbb_user_join_room' );
 		$this->loader->add_filter( 'heartbeat_received', $plugin_public_room_api, 'bbb_check_meeting_state', 10, 2 );
 		$this->loader->add_filter( 'heartbeat_nopriv_received', $plugin_public_room_api, 'bbb_check_meeting_state', 10, 2 );
 

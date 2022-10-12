@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2022-04-20 17:46+0000\n"
+"POT-Creation-Date: 2022-10-12 09:36+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -16,7 +16,7 @@ msgstr ""
 "X-Poedit-SearchPath-0: admin/partials\n"
 "X-Poedit-SearchPath-1: public/partials\n"
 
-#: video-conferencing-with-bbb.php:99
+#: video-conferencing-with-bbb.php:101
 #, php-format
 msgid ""
 "%1$s is not compatible with %2$s. Please deactivate %1$s before activating "
@@ -43,36 +43,37 @@ msgstr ""
 msgid "Access Code"
 msgstr ""
 
-#: admin/class-bigbluebutton-register-custom-types.php:183
-#: admin/class-bigbluebutton-register-custom-types.php:201
+#: admin/class-bigbluebutton-register-custom-types.php:195
+#: admin/class-bigbluebutton-register-custom-types.php:213
 msgid "Access Code Note"
 msgstr ""
 
 # Admin Room settings
-#: admin/class-bigbluebutton-register-custom-types.php:36
+#: admin/class-bigbluebutton-register-custom-types.php:34
+#: admin/class-bigbluebutton-admin.php:123
 msgid "Add New"
 msgstr ""
 
-#: admin/class-bigbluebutton-register-custom-types.php:37
+#: admin/class-bigbluebutton-register-custom-types.php:35
 msgid "Add New Room"
 msgstr ""
 
-#: admin/class-bigbluebutton-admin.php:599
+#: admin/class-bigbluebutton-admin.php:614
 msgid "Add Shortcode to Page"
 msgstr ""
 
-#: admin/class-bigbluebutton-register-custom-types.php:45
+#: admin/class-bigbluebutton-register-custom-types.php:43
 msgid "All Rooms"
 msgstr ""
 
-#: admin/class-bigbluebutton-register-custom-types.php:35
+#: admin/class-bigbluebutton-register-custom-types.php:33
 #: admin/class-bigbluebutton-admin.php:112
 #: admin/class-bigbluebutton-admin.php:113
 #: public/class-bigbluebutton-public-widget.php:32
 msgid "BBB Rooms"
 msgstr ""
 
-#: admin/class-bigbluebutton-admin.php:426
+#: admin/class-bigbluebutton-admin.php:441
 msgid ""
 "BigBlueButton works best with the heartbeat API enabled. Please enable it."
 msgstr ""
@@ -81,22 +82,19 @@ msgstr ""
 msgid "Collapse recordings"
 msgstr ""
 
-#: admin/class-bigbluebutton-admin.php:229
+#: admin/class-bigbluebutton-admin.php:238
 msgid "Copy"
 msgstr ""
 
-#: admin/class-bigbluebutton-admin.php:226
-msgid "Copy Invite URL"
-msgstr ""
-
-#: admin/class-bigbluebutton-admin.php:249
 #: admin/partials/bigbluebutton-settings-display.php:96
-#: admin/partials/bigbluebutton-settings-display.php:111
-#: admin/partials/bigbluebutton-settings-display.php:117
-#: admin/partials/bigbluebutton-settings-display.php:135
-#: admin/partials/bigbluebutton-settings-display.php:142
-#: admin/partials/bigbluebutton-settings-display.php:160
-#: admin/partials/bigbluebutton-settings-display.php:174
+#: admin/partials/bigbluebutton-settings-display.php:110
+#: admin/partials/bigbluebutton-settings-display.php:124
+#: admin/partials/bigbluebutton-settings-display.php:139
+#: admin/partials/bigbluebutton-settings-display.php:146
+#: admin/partials/bigbluebutton-settings-display.php:161
+#: admin/partials/bigbluebutton-settings-display.php:168
+#: admin/partials/bigbluebutton-settings-display.php:183
+#: admin/partials/bigbluebutton-settings-display.php:197
 msgid "Copy Shortcode"
 msgstr ""
 
@@ -108,11 +106,11 @@ msgstr ""
 msgid "Displays a BigBlueButton login form."
 msgstr ""
 
-#: public/helpers/class-bigbluebutton-display-helper.php:135
+#: public/helpers/class-bigbluebutton-display-helper.php:141
 msgid "Download"
 msgstr ""
 
-#: admin/class-bigbluebutton-register-custom-types.php:38
+#: admin/class-bigbluebutton-register-custom-types.php:36
 msgid "Edit Room"
 msgstr ""
 
@@ -138,12 +136,12 @@ msgstr ""
 msgid "Failed to import the room, %s."
 msgstr ""
 
-#: admin/class-bigbluebutton-register-custom-types.php:50
+#: admin/class-bigbluebutton-register-custom-types.php:48
 msgid "Filter rooms list"
 msgstr ""
 
-#: admin/class-bigbluebutton-admin.php:153
-#: admin/class-bigbluebutton-admin.php:154
+#: admin/class-bigbluebutton-admin.php:162
+#: admin/class-bigbluebutton-admin.php:163
 msgid "Get Pro Version"
 msgstr ""
 
@@ -151,7 +149,7 @@ msgstr ""
 msgid "here"
 msgstr ""
 
-#: admin/class-bigbluebutton-register-custom-types.php:123
+#: admin/class-bigbluebutton-register-custom-types.php:131
 msgid "Home Room"
 msgstr ""
 
@@ -163,19 +161,19 @@ msgstr ""
 msgid "https://github.com/elearning-evolve/wordpress-plugin_bigbluebutton"
 msgstr ""
 
-#: admin/class-bigbluebutton-register-custom-types.php:48
+#: admin/class-bigbluebutton-register-custom-types.php:46
 msgid "Insert into room"
 msgstr ""
 
-#: admin/class-bigbluebutton-admin.php:607
+#: admin/class-bigbluebutton-admin.php:622
 msgid "Invite Participants"
 msgstr ""
 
-#: public/helpers/class-bigbluebutton-display-helper.php:73
+#: public/helpers/class-bigbluebutton-display-helper.php:78
 msgid "Join"
 msgstr ""
 
-#: public/helpers/class-bigbluebutton-display-helper.php:76
+#: public/helpers/class-bigbluebutton-display-helper.php:81
 msgid "Join Here"
 msgstr ""
 
@@ -188,25 +186,25 @@ msgstr ""
 msgid "Meeting"
 msgstr ""
 
-#: admin/class-bigbluebutton-register-custom-types.php:149
-#: admin/class-bigbluebutton-register-custom-types.php:182
-#: admin/class-bigbluebutton-admin.php:196
+#: admin/class-bigbluebutton-register-custom-types.php:161
+#: admin/class-bigbluebutton-register-custom-types.php:194
+#: admin/class-bigbluebutton-admin.php:205
 msgid "Moderator Access Code"
 msgstr ""
 
-#: admin/class-bigbluebutton-admin.php:266
+#: admin/class-bigbluebutton-admin.php:275
 msgid "N/A"
 msgstr ""
 
-#: admin/class-bigbluebutton-register-custom-types.php:39
+#: admin/class-bigbluebutton-register-custom-types.php:37
 msgid "New Room"
 msgstr ""
 
-#: admin/class-bigbluebutton-register-custom-types.php:43
+#: admin/class-bigbluebutton-register-custom-types.php:41
 msgid "No rooms found"
 msgstr ""
 
-#: admin/class-bigbluebutton-register-custom-types.php:44
+#: admin/class-bigbluebutton-register-custom-types.php:42
 msgid "No rooms found in trash"
 msgstr ""
 
@@ -215,6 +213,10 @@ msgid "Not all rooms were able to be imported to the new version."
 msgstr ""
 
 #: admin/partials/bigbluebutton-settings-display.php:98
+#: admin/partials/bigbluebutton-settings-display.php:112
+#: admin/partials/bigbluebutton-settings-display.php:126
+#: admin/partials/bigbluebutton-settings-display.php:141
+#: admin/partials/bigbluebutton-settings-display.php:163
 msgid "Pro Version Note"
 msgstr ""
 
@@ -223,7 +225,7 @@ msgstr ""
 msgid "Protected"
 msgstr ""
 
-#: admin/class-bigbluebutton-register-custom-types.php:160
+#: admin/class-bigbluebutton-register-custom-types.php:172
 #: admin/partials/bigbluebutton-recordable-metabox-display.php:1
 msgid "Recordable"
 msgstr ""
@@ -232,31 +234,31 @@ msgstr ""
 msgid "Recording"
 msgstr ""
 
-#: admin/class-bigbluebutton-register-custom-types.php:46
+#: admin/class-bigbluebutton-register-custom-types.php:44
 msgid "Room Archives"
 msgstr ""
 
-#: admin/class-bigbluebutton-register-custom-types.php:47
+#: admin/class-bigbluebutton-register-custom-types.php:45
 msgid "Room Attributes"
 msgstr ""
 
-#: admin/class-bigbluebutton-admin.php:124
+#: admin/class-bigbluebutton-admin.php:133
 msgid "Room Categories"
 msgstr ""
 
-#: admin/class-bigbluebutton-register-custom-types.php:53
+#: admin/class-bigbluebutton-register-custom-types.php:51
 msgid "Room published"
 msgstr ""
 
-#: admin/class-bigbluebutton-register-custom-types.php:54
+#: admin/class-bigbluebutton-register-custom-types.php:52
 msgid "Room published privately"
 msgstr ""
 
-#: admin/class-bigbluebutton-register-custom-types.php:55
+#: admin/class-bigbluebutton-register-custom-types.php:53
 msgid "Room reverted to draft"
 msgstr ""
 
-#: admin/class-bigbluebutton-register-custom-types.php:56
+#: admin/class-bigbluebutton-register-custom-types.php:54
 msgid "Room scheduled"
 msgstr ""
 
@@ -264,19 +266,19 @@ msgstr ""
 msgid "Room Settings"
 msgstr ""
 
-#: admin/class-bigbluebutton-register-custom-types.php:57
+#: admin/class-bigbluebutton-register-custom-types.php:55
 msgid "Room updated"
 msgstr ""
 
-#: admin/class-bigbluebutton-register-custom-types.php:52
+#: admin/class-bigbluebutton-register-custom-types.php:50
 msgid "Rooms list"
 msgstr ""
 
-#: admin/class-bigbluebutton-register-custom-types.php:51
+#: admin/class-bigbluebutton-register-custom-types.php:49
 msgid "Rooms list navigation"
 msgstr ""
 
-#: admin/class-bigbluebutton-admin.php:134
+#: admin/class-bigbluebutton-admin.php:143
 msgid "Rooms Settings"
 msgstr ""
 
@@ -292,7 +294,7 @@ msgstr ""
 msgid "Save server settings success message."
 msgstr ""
 
-#: admin/class-bigbluebutton-register-custom-types.php:42
+#: admin/class-bigbluebutton-register-custom-types.php:40
 msgid "Search Rooms"
 msgstr ""
 
@@ -302,6 +304,10 @@ msgstr ""
 
 #: admin/partials/bigbluebutton-settings-display.php:12
 msgid "Setup"
+msgstr ""
+
+#: public/partials/bigbluebutton-recordings-display.php:96
+msgid "Share Recording URL"
 msgstr ""
 
 #: admin/partials/bigbluebutton-admin-help-tab-invite.php:2
@@ -314,30 +320,30 @@ msgstr ""
 msgid "Shared Secret/Salt"
 msgstr ""
 
-#: admin/class-bigbluebutton-admin.php:194
+#: admin/class-bigbluebutton-admin.php:203
 msgid "Shortcode"
 msgstr ""
 
-#: admin/class-bigbluebutton-admin.php:494
+#: admin/class-bigbluebutton-admin.php:509
 #, php-format
 msgid "Show all %s"
 msgstr ""
 
-#: admin/class-bigbluebutton-admin.php:281
-#: public/helpers/class-bigbluebutton-display-helper.php:80
+#: admin/class-bigbluebutton-admin.php:290
+#: public/helpers/class-bigbluebutton-display-helper.php:86
 msgid "Start"
 msgstr ""
 
-#: admin/class-bigbluebutton-admin.php:198
+#: admin/class-bigbluebutton-admin.php:207
 msgid "Start Meeting"
 msgstr ""
 
-#: admin/class-bigbluebutton-admin.php:195
+#: admin/class-bigbluebutton-admin.php:204
 msgid "Start Time"
 msgstr ""
 
-#: admin/class-bigbluebutton-admin.php:143
-#: admin/class-bigbluebutton-admin.php:144
+#: admin/class-bigbluebutton-admin.php:152
+#: admin/class-bigbluebutton-admin.php:153
 msgid "Stay Updated"
 msgstr ""
 
@@ -363,11 +369,11 @@ msgid ""
 "in a while."
 msgstr ""
 
-#: public/helpers/class-bigbluebutton-tokens-helper.php:287
+#: public/helpers/class-bigbluebutton-tokens-helper.php:297
 msgid "The room linked to this resource is not configured correctly."
 msgstr ""
 
-#: public/helpers/class-bigbluebutton-tokens-helper.php:250
+#: public/helpers/class-bigbluebutton-tokens-helper.php:260
 msgid "The token: %s is not associated with an existing room."
 msgstr ""
 
@@ -399,7 +405,7 @@ msgid ""
 "widget."
 msgstr ""
 
-#: admin/class-bigbluebutton-admin.php:193
+#: admin/class-bigbluebutton-admin.php:202
 msgid "Token"
 msgstr ""
 
@@ -412,7 +418,7 @@ msgstr ""
 msgid "Unprotected"
 msgstr ""
 
-#: admin/class-bigbluebutton-register-custom-types.php:49
+#: admin/class-bigbluebutton-register-custom-types.php:47
 msgid "Uploaded to this room"
 msgstr ""
 
@@ -420,29 +426,29 @@ msgstr ""
 msgid "Video Conferencing with BBB"
 msgstr ""
 
-#: public/helpers/class-bigbluebutton-display-helper.php:134
+#: public/helpers/class-bigbluebutton-display-helper.php:140
 msgid "View"
 msgstr ""
 
-#: public/partials/bigbluebutton-recordings-display.php:66
+#: public/partials/bigbluebutton-recordings-display.php:67
 msgid "View Recording"
 msgstr ""
 
-#: admin/class-bigbluebutton-register-custom-types.php:40
+#: admin/class-bigbluebutton-register-custom-types.php:38
 msgid "View Room"
 msgstr ""
 
-#: admin/class-bigbluebutton-register-custom-types.php:41
+#: admin/class-bigbluebutton-register-custom-types.php:39
 msgid "View Rooms"
 msgstr ""
 
-#: admin/class-bigbluebutton-register-custom-types.php:150
-#: admin/class-bigbluebutton-register-custom-types.php:200
-#: admin/class-bigbluebutton-admin.php:197
+#: admin/class-bigbluebutton-register-custom-types.php:162
+#: admin/class-bigbluebutton-register-custom-types.php:212
+#: admin/class-bigbluebutton-admin.php:206
 msgid "Viewer Access Code"
 msgstr ""
 
-#: admin/class-bigbluebutton-register-custom-types.php:170
+#: admin/class-bigbluebutton-register-custom-types.php:182
 #: admin/partials/bigbluebutton-wait-for-mod-metabox-display.php:1
 msgid "Wait for Moderator"
 msgstr ""

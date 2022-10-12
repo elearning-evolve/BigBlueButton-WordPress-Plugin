@@ -55,9 +55,13 @@ class Bigbluebutton_Display_Helper {
 	public function get_join_form_as_string( $room_id, $meta_nonce, $access_as_moderator, $access_as_viewer, $access_using_code ) {
 		global $wp, $post;
 		$is_join_web = 1;
-		$current_url = home_url( add_query_arg( array(), $wp->request ) );
-		$start_time  = get_post_meta( $room_id, 'bbb-start-time', true );
-		$post_id     = ( isset( $post->ID ) ? $post->ID : 0 );
+		$start_time  = get_post_meta( $room_id, 'bbb-start-time', true );		
+		$args['action'] = 'join_room';
+		$args['room_id'] = sanitize_text_field( $room_id );
+		$args['bbb_join_room_meta_nonce'] = sanitize_text_field( $meta_nonce );
+		$args['current_page'] = home_url( add_query_arg( array(), $wp->request ) );
+		$args['post_id'] = sanitize_text_field( ( isset( $post->ID ) ? $post->ID : 0 ) );
+		
 		if ( $start_time ) {
 			$dt     = new DateTime( $start_time, new DateTimeZone( wp_timezone_string() ) );
 			$dt_now = new DateTime( 'now', new DateTimeZone( wp_timezone_string() ) );

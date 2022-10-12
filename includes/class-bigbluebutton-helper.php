@@ -34,9 +34,9 @@ class EE_Bigbluebutton_Helper {
 		$username = '';
 
 		if ( $user && $user->display_name ) {
-			$username = $user->display_name;
-		} elseif ( isset( $_POST['bbb_meeting_username'] ) ) {
-			$username = sanitize_text_field( $_POST['bbb_meeting_username'] );
+			$username = sanitize_text_field( $user->display_name );
+		} elseif ( isset( $_GET['bbb_meeting_username'] ) ) {
+			$username = sanitize_text_field( $_GET['bbb_meeting_username'] );
 		}
 
 		return $username;

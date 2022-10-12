@@ -307,7 +307,13 @@ class Bigbluebutton_Admin {
 		//Get the active tab from the $_GET param
 		$default_tab = null;
 		$tab         = isset( $_GET['tab'] ) ? $_GET['tab'] : $default_tab;
-
+		
+		if ( Bigbluebutton_Loader::is_bbb_pro_active() ) {
+			$bbb_host = '<a target="_blank" rel="noopener" href="https://bigbluebutton.host">Bigbluebutton.host</a>';
+		} else {
+			$bbb_host = '<a target="_blank" rel="noopener" href="https://blindsidenetworks.com/">Blindside Networks</a>';
+		}
+		
 		require_once 'partials/bigbluebutton-settings-display.php';
 	}
 
@@ -338,10 +344,10 @@ class Bigbluebutton_Admin {
 	 */
 	public function fetch_room_server_settings() {
 		$settings = array(
-			'bbb_url'          => get_option( 'bigbluebutton_url', 'https://test.bymond.live/bigbluebutton/' ),
-			'bbb_salt'         => get_option( 'bigbluebutton_salt', 'jcBmHVuxJcd1LFvMQrI179uiDqpXrnNGKbNjYl0uCM' ),
-			'bbb_default_url'  => 'https://test.bymond.live/bigbluebutton/',
-			'bbb_default_salt' => 'jcBmHVuxJcd1LFvMQrI179uiDqpXrnNGKbNjYl0uCM',
+			'bbb_url'          => get_option( 'bigbluebutton_url', VIDEO_CONF_WITH_BBB_ENDPOINT ),
+			'bbb_salt'         => get_option( 'bigbluebutton_salt', VIDEO_CONF_WITH_BBB_SALT ),
+			'bbb_default_url'  => VIDEO_CONF_WITH_BBB_ENDPOINT,
+			'bbb_default_salt' => VIDEO_CONF_WITH_BBB_SALT,
 		);
 
 		return apply_filters( 'bbb_room_server_settings_display', $settings );

@@ -455,9 +455,14 @@ class Bigbluebutton_Api {
 	 */
 	private static function build_url( $request_type, $args ) {
 		$type = sanitize_text_field( $request_type );
-
-		$url_val  = sanitize_text_field( get_option( 'bigbluebutton_url', 'https://test.bymond.live/bigbluebutton/' ) );
-		$salt_val = sanitize_text_field( get_option( 'bigbluebutton_salt', 'jcBmHVuxJcd1LFvMQrI179uiDqpXrnNGKbNjYl0uCM' ) );
+		
+		if ( Bigbluebutton_Loader::is_bbb_pro_active() ) {
+			$url_val  = sanitize_text_field( get_option( 'bigbluebutton_url', BBB_PRO_DEFAULT_ENDPOINT ) );
+			$salt_val = sanitize_text_field( get_option( 'bigbluebutton_salt', BBB_PRO_DEFAULT_SALT ) );
+		} else {
+			$url_val  = sanitize_text_field( get_option( 'bigbluebutton_url', VIDEO_CONF_WITH_BBB_ENDPOINT ) );
+			$salt_val = sanitize_text_field( get_option( 'bigbluebutton_salt', VIDEO_CONF_WITH_BBB_SALT ) );
+		}		
 
 		$url = $url_val . 'api/' . $type . '?';
 
