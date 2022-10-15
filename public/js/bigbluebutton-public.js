@@ -369,3 +369,24 @@ function copyToClipboard(elem) {
 function copyClipboardExit(elem) {
     var tooltip = jQuery(elem).find('.recording-url-tooltip').html( __('Share Recording URL', 'bigbluebutton') );
 }
+
+function joinBBBRoomFromPage(URL, fullscreen = 0) {
+    if (document.getElementById('joinroom').reportValidity()) {
+        window.open(
+            URL +
+                '&room_id=' +
+                document.getElementById('bbb_join_room_id').value +
+                '&bbb_join_fullscreen=' +
+                fullscreen +
+                '&bbb_meeting_access_code=' +
+                document.getElementById('bbb_meeting_access_code').value +
+                '&bbb_meeting_username=' +
+                (document.getElementById('bbb_meeting_username')
+                    ? document.getElementById('bbb_meeting_username').value
+                    : ''),
+            '_system'
+        )
+    }
+
+    return false
+}

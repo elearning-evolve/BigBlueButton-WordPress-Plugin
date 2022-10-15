@@ -5,7 +5,7 @@
 <?php elseif ( isset( $_REQUEST['rec_url'] ) ) : ?>
 	<?php do_action( 'bbb_recording_display' ); ?>
 <?php else : ?>
-<form id="joinroom" target="<?php echo esc_attr( $form_target ); ?>" method="post" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>" class="bbb-form validate">
+<form id="joinroom" target="<?php echo esc_attr( $form_target ); ?>" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>" class="bbb-form validate">
 	<input type="hidden" name="action" value="<?php echo esc_attr( $args['action'] ); ?>">
 	<input id="bbb_join_room_id" type="hidden" name="room_id" value="<?php echo esc_attr( $room_id ); ?>">
 	<input type="hidden" id="bbb_join_room_meta_nonce" name="bbb_join_room_meta_nonce" value="<?php echo esc_attr( $meta_nonce ); ?>">
@@ -54,9 +54,9 @@
 		</div>
 	<?php } ?>
 	<?php if ( $is_join_web ) : ?>
-		<a rel="noopener" class="bbb-button bbb-btn-join button button-primary" href="javascript:void();"
-			onclick="if( document.getElementById('joinroom').reportValidity() ) window.open('<?php echo esc_url( get_permalink() . '?' . http_build_query($args) ) . '&bbb_meeting_access_code=' ?>' + document.getElementById('bbb_meeting_access_code').value + '&bbb_meeting_username=' + ( document.getElementById('bbb_meeting_username') ? document.getElementById('bbb_meeting_username').value : ''), '_system'); return false;">
-			<?php echo esc_attr( $join_btn ); ?>
+		<a rel="noopener" href="javascript:void(0)"
+			onclick="joinBBBRoomFromPage('<?php echo esc_url( $url ); ?>', 0)">
+			<button type="button" class="bbb-button bbb-btn-join button button-primary"><?php echo esc_attr( $join_btn ); ?></button>
 		</a>
 	<?php endif; ?>
 	<?php do_action( 'bbb_join_form_buttons', $access_as_moderator, $args ); ?>

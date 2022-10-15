@@ -7,7 +7,7 @@ Tags: BigBlueButton, BigBlueButtom, BBB, bbb, bigbluebutton, videoconferencing, 
 Requires at least: 5.1  
 Tested up to: 6.0.2  
 Requires PHP: 7.2  
-Stable tag: 1.6.0  
+Stable tag: 1.6.1  
 License: GPLv2 or later  
 License URI: http://www.gnu.org/licenses/gpl-2.0.html  
 
@@ -163,7 +163,12 @@ To allow a user role to manage recordings add the capability, **manage_bbb_room_
 8. BBB Rooms can also be organized using Categories.
 
 ## Changelog ##
+### 1.6.1 ###
+* Added: Compatibility with v2.4.3 of the [BigBlueButton Pro plugin](https://elearningevolve.com/products/bigbluebutton-wordpress-pro/)
+* Fixed: Join button UI issue on some browsers
+
 ### 1.6.0 ###
+* Added: Compatibility with v2.4.2 of the [BigBlueButton Pro plugin](https://elearningevolve.com/products/bigbluebutton-wordpress-pro/)
 * Updated: Use the testing Blindside Networks BigBlueButton server when using free plugin
 * Fixed: Ability to open BBB room in browser when Joining Fullscreen from BuddyBoss mobile App
 
