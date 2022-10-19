@@ -371,6 +371,11 @@ function copyClipboardExit(elem) {
 }
 
 function joinBBBRoomFromPage(URL, fullscreen = 0) {
+    if (fullscreen) {
+        var target = '_system';
+    } else {
+        var target = '_self';
+    }
     if (document.getElementById('joinroom').reportValidity()) {
         window.open(
             URL +
@@ -384,9 +389,9 @@ function joinBBBRoomFromPage(URL, fullscreen = 0) {
                 (document.getElementById('bbb_meeting_username')
                     ? document.getElementById('bbb_meeting_username').value
                     : ''),
-            '_system'
+            target
         )
     }
 
-    return false
+    return false;
 }

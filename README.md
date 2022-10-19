@@ -5,9 +5,9 @@ Contributors: blindsidenetworks, jfederico, yfngdu, elearningevolve, adeelraza_7
 Donate link: https://elearningevolve.com/products/donate/  
 Tags: BigBlueButton, BigBlueButtom, BBB, bbb, bigbluebutton, videoconferencing, virtual classroom, web conferencing, online teaching, learning management system, LMS, online session, live training
 Requires at least: 5.1  
-Tested up to: 6.0.2  
+Tested up to: 6.0.3  
 Requires PHP: 7.2  
-Stable tag: 1.6.1  
+Stable tag: 1.6.2  
 License: GPLv2 or later  
 License URI: http://www.gnu.org/licenses/gpl-2.0.html  
 
@@ -163,6 +163,9 @@ To allow a user role to manage recordings add the capability, **manage_bbb_room_
 8. BBB Rooms can also be organized using Categories.
 
 ## Changelog ##
+### 1.6.2 ###
+* Fixed: Start/Join Here button opening in a new tab change it to open in the same window
+
 ### 1.6.1 ###
 * Added: Compatibility with v2.4.3 of the [BigBlueButton Pro plugin](https://elearningevolve.com/products/bigbluebutton-wordpress-pro/)
 * Fixed: Join button UI issue on some browsers
