@@ -72,7 +72,7 @@ class Bigbluebutton_Tokens_Helper {
 		$access_as_moderator = BigBlueButton_Permissions_Helper::user_has_bbb_cap( 'join_as_moderator_bbb_room' );
 		$access_as_viewer    = BigBlueButton_Permissions_Helper::user_has_bbb_cap( 'join_as_viewer_bbb_room' );
 		$rooms               = array();
-		
+
 		foreach ( $tokens_arr as $raw_token ) {
 			if ( sanitize_text_field( $raw_token ) == '' ) {
 				continue;
@@ -89,6 +89,10 @@ class Bigbluebutton_Tokens_Helper {
 				'room_id'   => $room_id,
 				'room_name' => get_the_title( $room_id ),
 			);
+
+			if ( isset( $_REQUEST['room_id'] ) && ( $_REQUEST['room_id'] == $room_id || base64_decode( $_REQUEST['room_id'] ) == $room_id ) ) {
+				$selected_room_id = $room_id;
+			}
 		}
 
 		if ( count( $rooms ) > 0 ) {
@@ -96,8 +100,8 @@ class Bigbluebutton_Tokens_Helper {
 				$access_as_moderator = ( get_current_user_id() == get_post( $rooms[0]->room_id )->post_author );
 			}
 			$selected_room = $rooms[0]->room_id;
-			if ( isset( $_REQUEST['room_id'] ) ) {
-				$selected_room = $_REQUEST['room_id'];
+			if ( isset( $selected_room_id ) ) {
+				$selected_room = $selected_room_id;
 			}
 			$join_form = $display_helper->get_join_form_as_string( $selected_room, $meta_nonce, $access_as_moderator, $access_as_viewer, $access_using_code );
 			if ( count( $rooms ) > 1 ) {

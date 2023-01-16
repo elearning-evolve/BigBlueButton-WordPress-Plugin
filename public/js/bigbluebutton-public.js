@@ -109,36 +109,45 @@ const { __, _x, _n, _nx } = wp.i18n;
 		// update join room form with new room id and access code input, if necessary
 		$( '.bbb-room-selection' ).change( function() {
 			let self = this;
-			let room_id = this.value;
+			var room_id = this.value;
 			let data = {
 				action: 'view_join_form',
 				room_id: room_id,
 				post_type: 'POST'
 			};
+            
+            $(document).find('.bbb-room-selection option[selected]').removeAttr('selected')
+            $('.bbb-room-selection option[value=' + room_id + ']').attr(
+                'selected',
+                'selected'
+            )
 			jQuery.post(
 				php_vars.ajax_url,
 				data,
 				function( response ) {
 					if ( response.success ) {
-						$( self )
-							.siblings( '#joinroom' )
-							.children( '#bbb_join_room_id' )
-							.val( room_id );
-						$( self )
-							.siblings( '#joinroom' )
-							.children( '.bbb-error' )
-							.hide();
+                        $(self)
+                            .siblings('.bbb-form')
+                            .attr('id', 'joinroom'+ room_id)
+						$(self)
+                            .siblings('.bbb-form')
+                            .children('input[name="room_id"]')
+                            .val(room_id)
+						$(self)
+                            .siblings('.bbb-form')
+                            .children('.bbb-error')
+                            .hide()
 
 						if ( response['hide_access_code_input']) {
-							$( self )
-								.siblings( '#joinroom' )
-								.children( '#bbb_join_with_password' )
-								.hide();
+							$(self)
+                                .siblings('#joinroom' + room_id)
+                                .children('#bbb_join_with_password')
+                                .hide()
 						} else {
-							$( self )
-								.siblings( '#joinroom' )
-								.children( '#bbb_join_with_password' )
-								.show();
+							$(self)
+                                .siblings('#joinroom' + room_id)
+                                .children('#bbb_join_with_password')
+                                .show()
 						}
 					}
 				},
@@ -370,25 +379,29 @@ function copyClipboardExit(elem) {
     var tooltip = jQuery(elem).find('.recording-url-tooltip').html( __('Share Recording URL', 'bigbluebutton') );
 }
 
-function joinBBBRoomFromPage(URL, fullscreen = 0) {
+function joinBBBRoomFromPage(URL, fullscreen = 0, self) {
+    var req_form = jQuery(self)
+        .parents('form');
+    var username = req_form.find('input[name="bbb_meeting_username"]').val();
+    var room_id = req_form.find('input[name="room_id"]').val();
+     
     if (fullscreen) {
         var target = '_system';
     } else {
         var target = '_self';
     }
-    if (document.getElementById('joinroom').reportValidity()) {
+    
+    if (document.getElementById('joinroom' + room_id).reportValidity()) {
         window.open(
             URL +
                 '&room_id=' +
-                document.getElementById('bbb_join_room_id').value +
+                room_id +
                 '&bbb_join_fullscreen=' +
                 fullscreen +
                 '&bbb_meeting_access_code=' +
-                document.getElementById('bbb_meeting_access_code').value +
+                req_form.find('input[name="bbb_meeting_access_code"]').val() +
                 '&bbb_meeting_username=' +
-                (document.getElementById('bbb_meeting_username')
-                    ? document.getElementById('bbb_meeting_username').value
-                    : ''),
+                (username ? username : ''),
             target
         )
     }

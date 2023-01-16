@@ -186,7 +186,8 @@ class Bigbluebutton_Public_Room_Api {
 		$join_url = apply_filters(
 			'bbb_join_room_url',
 			Bigbluebutton_Api::get_join_meeting_url( $room_id, $username, $entry_code, $return_url ),
-			$return_url
+			$return_url,
+			$room_id
 		);
 
 		if ( $entry_code == $viewer_code && 'true' == $wait_for_mod ) {
