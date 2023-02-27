@@ -1,4 +1,4 @@
-# Video Conferencing with BigBlueButton (BBB) #
+# Virtual Classroom for WordPress #
 
 
 Contributors: blindsidenetworks, jfederico, yfngdu, elearningevolve, adeelraza_786@hotmail.com  
@@ -7,15 +7,15 @@ Tags: BigBlueButton, BigBlueButtom, BBB, bbb, bigbluebutton, videoconferencing, 
 Requires at least: 5.1  
 Tested up to: 6.1.1  
 Requires PHP: 7.2  
-Stable tag: 2.0.0  
+Stable tag: 2.0.1  
 License: GPLv2 or later  
 License URI: http://www.gnu.org/licenses/gpl-2.0.html  
 
-A [BigBlueButton (BBB) WordPress plugin](https://wordpress.org/plugins/video-conferencing-with-bbb) that enables you to create virtual classrooms on your WP site. BigBlueButton is an open-source video conferencing tool that is "Built For Teachers".
+This plugin allows teachers to manage their live virtual classrooms right from WordPress using BigBlueButton (BBB). It uses an open-source video conferencing tool BBB that is "Built For Teachers".
 
 ## Description ##
 
-[Video Conferencing with BBB](https://wordpress.org/plugins/video-conferencing-with-bbb) integrates [BigBlueButton](https://bigbluebutton.org/) into WordPress through which teachers can manage their virtual classrooms right from the WP dashboard.
+[Virtual Classroom for WordPress](https://wordpress.org/plugins/video-conferencing-with-bbb) integrates [BigBlueButton](https://bigbluebutton.org/) into WordPress through which teachers can manage their virtual classrooms right from the WP dashboard.
 
 This plugin is a fork of the [BigBlueButton plugin](https://wordpress.org/plugins/bigbluebutton/) initially released by Blindside Networks but no longer maintained.
 
@@ -45,8 +45,8 @@ There is also a Pro version available with this plugin that offers the below fea
 
 **[Get Pro Version](https://elearningevolve.com/products/video-conferencing-with-bigbluebutton-pro/)**
 ### Video Guide ###
-[![Video Guide](https://elearningevolve.com/wp-content/uploads/2022/04/bbb-room-youtube.jpeg)](https://youtu.be/laClYKDxLcw)
-[youtube https://www.youtube.com/watch?v=laClYKDxLcw]
+[![Video Guide](https://elearningevolve.com/wp-content/uploads/2022/04/bbb-room-youtube.jpeg)](https://youtu.be/xb5wR-VcrXs)
+[youtube https://www.youtube.com/watch?v=xb5wR-VcrXs]
 
 ### How-Tos ###
 * [How to join BigBlueButton Room from WordPress](https://elearningevolve.com/blog/how-to-join-bigbluebutton-room-from-wordpress/)
@@ -163,6 +163,9 @@ To allow a user role to manage recordings add the capability, **manage_bbb_room_
 8. BBB Rooms can also be organized using Categories.
 
 ## Changelog ##
+### 2.0.1 ###
+* Fixed: Ability to add Endpoint URL not having /bigbluebutton in the URL
+
 ### 2.0.0 ###
 * Added: Support for adding multiple BBB rooms on a single page
 * Added: Support for adding multiple BBB room join forms on a single page
