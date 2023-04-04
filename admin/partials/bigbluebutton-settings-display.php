@@ -18,19 +18,19 @@
 				 <div class="tab-content">
 					<?php if ( null === $tab ) : ?>
 						<?php do_action( 'bbb_setup_tab_content' ); ?>
-						<h4><?php esc_html_e( 'There are 3 methods to get the BBB server EndPoint URL and Salt required below:', 'bigbluebutton' ); ?></h4>
+						<!-- <h4><?php esc_html_e( 'There are 3 methods to get the BBB server EndPoint URL and Salt required below:', 'bigbluebutton' ); ?></h4>
 						<ol>
 							<li><?php echo sprintf( __( '%1$s You can use the default test install server hosted by %2$s.', 'bigbluebutton' ), '<strong>' . esc_html( 'Default (for dev/staging site only)', 'bigbluebutton' ) . ':</strong>', $bbb_host ); ?></li>
 							<li><?php echo sprintf( __( '%1$s You can host and %2$s BBB on your own server.', 'bigbluebutton' ), '<strong>' . esc_html( 'Fairly Technical', 'bigbluebutton' ) . ':</strong>', '<a target="_blank" rel="noopener" href="https://bigbluebutton.org/2018/03/28/install-bigbluebutton-in-15-minutes/">' . esc_html( 'install', 'bigbluebutton' ) . '</a>' ); ?></li>
 							<li><?php echo sprintf( __( '%1$s You can choose one of our recommended managed %2$s.', 'bigbluebutton' ), '<strong>' . esc_html( 'Recommended (for production site)', 'bigbluebutton' ) . ':</strong>', '<a target="_blank" rel="noopener" href="https://elearningevolve.com/blog/bigbluebutton-hosting">' . esc_html( 'BBB hosting providers', 'bigbluebutton' ) . '</a>' ); ?></li>
-						</ol>
+						</ol> -->
 						<div class="bbb-row">
 							<p id="bbb_endpoint_label" class="bbb-col-left bbb-important-label"><?php esc_html_e( 'EndPoint URL', 'bigbluebutton' ); ?>: </p>
 							<input class="bbb-col-right" type="text" name="bbb_url" size=50 value="<?php echo esc_url( $bbb_settings['bbb_url'] ); ?>" aria-labelledby="bbb_endpoint_label">
 						</div>
 						<div class="bbb-row">
 							<p class="bbb-col-left"></p>
-							<label aria-labelledby="bbb_endpoint_label" class="bbb-col-right"><?php esc_html_e( 'Example', 'bigbluebutton' ); ?>: <?php echo esc_url( $bbb_settings['bbb_default_url'] ); ?></label>
+							<label aria-labelledby="bbb_endpoint_label" class="bbb-col-right"><i><?php esc_html_e( 'Test Instance Endpoint', 'bigbluebutton' ); ?>: <?php echo esc_url( $bbb_settings['bbb_default_url'] ); ?></i></label>
 						</div>
 						<div class="bbb-row">
 							<p id="bbb_shared_secret_label" class="bbb-col-left bbb-important-label"><?php esc_html_e( 'Shared Secret/Salt', 'bigbluebutton' ); ?>: </p>
@@ -38,7 +38,7 @@
 						</div>
 						<div class="bbb-row">
 							<p class="bbb-col-left"></p>
-							<label class="bbb-col-right" aria-labelledby="bbb_shared_secret_label"><?php esc_html_e( 'Example', 'bigbluebutton' ); ?>: <?php echo esc_attr( $bbb_settings['bbb_default_salt'] ); ?></label>
+							<label class="bbb-col-right" aria-labelledby="bbb_shared_secret_label"><?php esc_html_e( 'Test Instance Secret', 'bigbluebutton' ); ?>: <?php echo esc_attr( $bbb_settings['bbb_default_salt'] ); ?></label>
 						</div>
 						<br />
 						<?php if ( $bbb_settings['bbb_url'] == $bbb_settings['bbb_default_url'] ) { ?>
@@ -56,6 +56,9 @@
 											'rel'    => array(),
 										),
 										'strong' => array(
+											'class' => array(),
+										),
+										'h3' => array(
 											'class' => array(),
 										),
 									)
@@ -212,16 +215,18 @@
 			<h3>Go To Links</h3>
 			<ol>
 				<li><a target="_blank" rel="noopener" href="https://wordpress.org/plugins/video-conferencing-with-bbb#faq/">FAQ: Commonly Occurring Issues</a></li>
+				<li><a target="_blank" rel="noopener" href="https://elearningevolve.com/blog/hosting-virtual-classroom-for-wordpress/">How to get Endpoint URL/Secret</a></li>
 				<li><a target="_blank" rel="noopener" href="https://wordpress.org/support/plugin/video-conferencing-with-bbb/">Support Request</a></li>
 				<li><a target="_blank" rel="noopener" href="https://wordpress.org/plugins/video-conferencing-with-bbb#reviews">Write a Review</a></li>
 				<li><a target="_blank" rel="noopener" href="https://elearningevolve.com/contact/">Contact Us</a></li>
-				<li><a href="<?php echo esc_url( admin_url( 'admin.php?page=bbb-room-subscribe-updates' ) ); ?>">Subscribe: Catch All Plugin Updates</a></li>
+				<li><a rel="noopener" href="<?php echo esc_url( admin_url( 'admin.php?page=bbb-room-subscribe-updates' ) ); ?>">Subscribe: Catch All Plugin Updates</a></li>
 				<li><a target="_blank" rel="noopener" href="https://elearningevolve.com/blog/bigbluebutton-hosting/">Recommended BigBlueButton Hosting</a></li>
 			</ol>
 		</div>
 		<div class="zvc-information-sec">
 			<h3 id="tutorials">Tutorials</h3>
 			<ol>
+				<li><a target="_blank" rel="noopener" href="https://elearningevolve.com/blog/hosting-virtual-classroom-for-wordpress/">How to set up hosting & get Endpoint URL/Secret for Virtual Classroom for WordPress</a></li>
 				<li><a target="_blank" rel="noopener" href="https://elearningevolve.com/blog/how-to-allow-instructors-to-manage-bbb-rooms-on-wp/">How to allow instructors or users to manage BigblueButton Rooms on WordPress</a></li>
 				<li><a target="_blank" rel="noopener" href="https://elearningevolve.com/blog/how-to-join-bigbluebutton-room-from-wordpress/">How to join BigBlueButton Room from WordPress</a></li>
 				<li><a target="_blank" rel="noopener" href="https://elearningevolve.com/blog/how-to-limit-number-of-users-for-bigbluebutton-room-on-wordpress/">How to limit number of users for BigBlueButton Room on WordPress

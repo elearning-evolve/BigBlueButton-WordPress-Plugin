@@ -455,14 +455,21 @@ class Bigbluebutton_Api {
 	 */
 	private static function build_url( $request_type, $args ) {
 		$type = sanitize_text_field( $request_type );
-		
+
 		if ( Bigbluebutton_Loader::is_bbb_pro_active() ) {
-			$url_val  = sanitize_text_field( get_option( 'bigbluebutton_url', BBB_PRO_DEFAULT_ENDPOINT ) );
-			$salt_val = sanitize_text_field( get_option( 'bigbluebutton_salt', BBB_PRO_DEFAULT_SALT ) );
+
+			$settings = array(
+				'bbb_url'  => '',
+				'bbb_salt' => '',
+			);
+
+			$settings = apply_filters( 'bbb_room_server_settings_display', $settings );
+			$url_val  = sanitize_text_field( $settings['bbb_url'] );
+			$salt_val = sanitize_text_field( $settings['bbb_salt'] );
 		} else {
 			$url_val  = sanitize_text_field( get_option( 'bigbluebutton_url', VIDEO_CONF_WITH_BBB_ENDPOINT ) );
 			$salt_val = sanitize_text_field( get_option( 'bigbluebutton_salt', VIDEO_CONF_WITH_BBB_SALT ) );
-		}		
+		}
 
 		$url = $url_val . 'api/' . $type . '?';
 
