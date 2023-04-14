@@ -41,8 +41,7 @@
 							<label class="bbb-col-right" aria-labelledby="bbb_shared_secret_label"><?php esc_html_e( 'Test Instance Secret', 'bigbluebutton' ); ?>: <?php echo esc_attr( $bbb_settings['bbb_default_salt'] ); ?></label>
 						</div>
 						<br />
-						<?php if ( $bbb_settings['bbb_url'] == $bbb_settings['bbb_default_url'] ) { ?>
-						<label>
+						<label id="endpoint-url-note">
 							<?php
 							echo apply_filters(
 								'bbb_room_default_server_notice',
@@ -58,7 +57,10 @@
 										'strong' => array(
 											'class' => array(),
 										),
-										'h3' => array(
+										'h4'     => array(
+											'class' => array(),
+										),
+										'p'      => array(
 											'class' => array(),
 										),
 									)
@@ -66,7 +68,7 @@
 							);
 							?>
 						</label>
-						<?php } ?>
+						
 						<?php if ( $change_success == 1 ) { ?>
 							<div class="updated">
 								<p><?php esc_html_e( 'Save server settings success message.', 'bigbluebutton' ); ?></p>
@@ -84,7 +86,6 @@
 						<?php do_action( 'bbb_settings_tab_content' ); ?>
 					<?php endif; ?>
 				 </div>
-				<br><br>
 				<input class="button button-primary bbb-settings-submit" type="submit" value="<?php esc_html_e( 'Save Changes' ); ?>"/>
 			</form>
 		</div>

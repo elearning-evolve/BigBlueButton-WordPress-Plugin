@@ -7,7 +7,7 @@ Tags: BigBlueButton, BigBlueButtom, BBB, bbb, bigbluebutton, videoconferencing, 
 Requires at least: 5.1  
 Tested up to: 6.2  
 Requires PHP: 7.2  
-Stable tag: 2.1.0  
+Stable tag: 2.1.1  
 License: GPLv2 or later  
 License URI: http://www.gnu.org/licenses/gpl-2.0.html  
 
@@ -170,6 +170,9 @@ To allow a user role to manage recordings add the capability, **manage_bbb_room_
 8. BBB Rooms can also be organized using Categories.
 
 ## Changelog ##
+### 2.1.1 ###
+* Updated: Plugin hosting notice on settings page
+
 ### 2.1.0 ###
 * Added: [Hosting guide](https://elearningevolve.com/blog/hosting-virtual-classroom-for-wordpress/) details on the plugin settings page.
 
