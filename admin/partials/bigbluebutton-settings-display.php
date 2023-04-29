@@ -87,11 +87,16 @@
 					<?php endif; ?>
 				 </div>
 				<input class="button button-primary bbb-settings-submit" type="submit" value="<?php esc_html_e( 'Save Changes' ); ?>"/>
+				<?php if ( defined( 'BBB_PRO_DEFAULT_ENDPOINT_IS_SET' ) ) : ?>
+					<a rel="noopnerer" target="_blank" href="https://elearningevolve.com/blog/hosting-virtual-classroom-for-wordpress#start-test">
+						<input class="button button-start-instance bbb-settings-submit" title="<?php esc_html_e( 'Start BBB Server' ); ?>"  type="button" value="<?php esc_html_e( 'Start Instance' ); ?>"/>
+					</a>
+				<?php endif; ?>
 			</form>
 		</div>
 		<section id="shortcodes" class="bbb-pro-shortcode-usage">
 			<h3>Shortcode Usage Guide</h3>
-			<p>Below are the <a rel="noopnerer"  target="_blank" href="https://www.wpbeginner.com/wp-tutorials/how-to-add-a-shortcode-in-wordpress/">shortcodes</a> offered by the plugin that you can use anywhere on your site.</p>
+			<p>Below are the <a rel="noopnerer" target="_blank" href="https://www.wpbeginner.com/wp-tutorials/how-to-add-a-shortcode-in-wordpress/">shortcodes</a> offered by the plugin that you can use anywhere on your site.</p>
 				<ol>
 					<li>
 						<p>Display moderator login from on frontend</p>

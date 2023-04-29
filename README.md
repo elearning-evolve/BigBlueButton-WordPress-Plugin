@@ -3,19 +3,19 @@
 
 Contributors: blindsidenetworks, jfederico, yfngdu, elearningevolve, adeelraza_786@hotmail.com  
 Donate link: https://elearningevolve.com/products/donate/  
-Tags: BigBlueButton, BigBlueButtom, BBB, bbb, bigbluebutton, videoconferencing, virtual classroom, web conferencing, online teaching, learning management system, LMS, online session, live training
+Tags: BigBlueButton, BigBlueButtom, BBB, bbb, bigbluebutton, videoconferencing, virtual classroom, web conferencing, online teaching, learning management system, LMS, online session, live training, video conferencing, video conference
 Requires at least: 5.1  
 Tested up to: 6.2  
 Requires PHP: 7.2  
-Stable tag: 2.1.1  
+Stable tag: 2.2.0  
 License: GPLv2 or later  
 License URI: http://www.gnu.org/licenses/gpl-2.0.html  
 
-This plugin allows teachers to manage their live virtual classrooms right from WordPress. It uses an open-source video conferencing tool BigBlueButton (BBB) that is "Built For Teachers".
+This plugin allows teachers to manage their live virtual classrooms & video conferencing right from WordPress. It uses an open-source video conferencing tool BigBlueButton (BBB) that is "Built For Teachers".
 
 ## Description ##
 
-[Virtual Classroom for WordPress](https://wordpress.org/plugins/video-conferencing-with-bbb) integrates [BigBlueButton](https://bigbluebutton.org/) into WordPress through which teachers can manage their virtual classrooms right from the WP dashboard.
+[Virtual Classroom for WordPress](https://wordpress.org/plugins/video-conferencing-with-bbb) integrates [BigBlueButton](https://bigbluebutton.org/) into WordPress through which teachers can manage their virtual classrooms/video conferences right from the WP dashboard.
 
 This plugin is a fork of the [BigBlueButton plugin](https://wordpress.org/plugins/bigbluebutton/) initially released by Blindside Networks but no longer maintained.
 
@@ -170,6 +170,9 @@ To allow a user role to manage recordings add the capability, **manage_bbb_room_
 8. BBB Rooms can also be organized using Categories.
 
 ## Changelog ##
+### 2.2.0 ###
+* Added: BBBHost.Cloud [test instance](https://elearningevolve.com/blog/hosting-virtual-classroom-for-wordpress/#start-test) start button on settings page
+
 ### 2.1.1 ###
 * Updated: Plugin hosting notice on settings page
 

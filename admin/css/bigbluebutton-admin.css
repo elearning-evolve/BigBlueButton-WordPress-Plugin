@@ -2,6 +2,14 @@
  * All of the CSS for your admin-specific functionality should be
  * included in this file.
  */
+#bbb-general-settings-form .button-start-instance {
+    margin-left: 8px;
+    -webkit-appearance: button;
+    color: #fff;
+    background-color: #c82333;
+    border-color: #bd2130;
+    font-weight: 600;
+}
 
 .bbb-settings-card {
     min-width: 22em;

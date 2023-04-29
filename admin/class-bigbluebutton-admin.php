@@ -307,13 +307,13 @@ class Bigbluebutton_Admin {
 		//Get the active tab from the $_GET param
 		$default_tab = null;
 		$tab         = isset( $_GET['tab'] ) ? $_GET['tab'] : $default_tab;
-		
+
 		if ( Bigbluebutton_Loader::is_bbb_pro_active() ) {
 			$bbb_host = '<a target="_blank" rel="noopener" href="https://bigbluebutton.host">Bigbluebutton.host</a>';
 		} else {
 			$bbb_host = '<a target="_blank" rel="noopener" href="https://blindsidenetworks.com/">Blindside Networks</a>';
 		}
-		
+
 		require_once 'partials/bigbluebutton-settings-display.php';
 	}
 
