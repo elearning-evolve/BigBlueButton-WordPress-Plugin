@@ -127,7 +127,7 @@ class Bigbluebutton_Loader {
 	}
 
 	public static function is_bbb_pro_active() {
-		if ( defined( 'BBB_PRO_VERSION' ) ) {
+		if ( is_plugin_active( 'video-conferencing-with-bbb-pro/video-conferencing-with-bbb-pro.php' ) ) {
 			return true;
 		}
 

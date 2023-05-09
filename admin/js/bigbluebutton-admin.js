@@ -30,15 +30,6 @@ const { __, _x, _n, _nx } = wp.i18n;
 	 */
 
 	$( window ).load( function() {
-        $("#toplevel_page_bbb_room ul li:nth-child(7) a").on( 'click', function(){
-            window
-                .open(
-                    'https://elearningevolve.com/products/wp-virtual-classroom/',
-                    '_blank'
-                )
-                .focus()
-        })
-    
 		// Make update success message in save server settings disppear after 2 seconds.
 		if ( $( '.updated' ).length ) {
 			$( '.updated' )

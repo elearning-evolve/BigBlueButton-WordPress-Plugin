@@ -67,7 +67,15 @@ class Bigbluebutton_Register_Custom_Types {
 			'supports'        => array( 'title', 'editor', 'author', 'thumbnail', 'permalink' ),
 		);
 
-		if ( ! current_user_can( 'add_bbb_rooms' ) ) {
+		$args = array(
+			'post_type'   => 'bbb-room',
+			'post_status' => 'publish',
+			'numberposts' => -1,
+		);
+
+		$rooms = get_posts( $args );
+
+		if ( ! current_user_can( 'add_bbb_rooms' ) || Bigbluebutton_Admin_Helper::check_posts() ) {
 			$params['capabilities'] = array(
 				'create_posts' => 'do_not_allow',
 			);

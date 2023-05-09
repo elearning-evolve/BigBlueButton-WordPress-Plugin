@@ -118,14 +118,16 @@ class Bigbluebutton_Admin {
 			6
 		);
 
-		add_submenu_page(
-			'bbb_room',
-			__( 'Add New', 'bigbluebutton' ),
-			__( 'Add New' ),
-			'add_bbb_rooms',
-			'post-new.php?post_type=bbb-room',
-			''
-		);
+		if ( ! Bigbluebutton_Admin_Helper::check_posts() ) {
+			add_submenu_page(
+				'bbb_room',
+				__( 'Add New', 'bigbluebutton' ),
+				__( 'Add New' ),
+				'add_bbb_rooms',
+				'post-new.php?post_type=bbb-room',
+				''
+			);
+		}
 
 		if ( current_user_can( 'manage_categories' ) ) {
 			add_submenu_page(
@@ -147,15 +149,6 @@ class Bigbluebutton_Admin {
 			array( $this, 'display_room_server_settings' )
 		);
 
-		add_submenu_page(
-			'bbb_room',
-			__( 'Stay Updated', 'bigbluebutton' ),
-			__( 'Stay Updated', 'bigbluebutton' ),
-			'manage_options',
-			'bbb-room-subscribe-updates',
-			array( $this, 'display_room_subscribe_updates' )
-		);
-
 		if ( ! Bigbluebutton_Loader::is_bbb_pro_active() ) {
 			add_submenu_page(
 				'bbb_room',
@@ -163,7 +156,7 @@ class Bigbluebutton_Admin {
 				__( 'Get Pro Version', 'bigbluebutton' ),
 				'manage_options',
 				'bbb-room-server-settings',
-				array( $this, 'display_room_server_settings' )
+				array( $this, 'redirect_to_pro_version' )
 			);
 		}
 	}
@@ -295,6 +288,26 @@ class Bigbluebutton_Admin {
 	}
 
 	/**
+	 * Redirect to Pro version of the plugin on menu click
+	 *
+	 * @since   3.0.0
+	 */
+	public function redirect_to_pro_version() {
+		wp_register_script( 'video-conf-bbb-dummy-js-header', '', );
+		wp_enqueue_script( 'video-conf-bbb-dummy-js-header' );
+		wp_add_inline_script(
+			'video-conf-bbb-dummy-js-header',
+			"window
+                .open(
+                    '" . esc_html( VIDEO_CONF_WITH_BBB_PRO ) . "',
+                    '_blank'
+                )
+                .focus();
+			"
+		);
+	}
+
+	/**
 	 * Render the server settings page for plugin.
 	 *
 	 * @since   3.0.0
@@ -303,6 +316,9 @@ class Bigbluebutton_Admin {
 		$change_success = $this->room_server_settings_change();
 		$bbb_settings   = $this->fetch_room_server_settings();
 		$meta_nonce     = wp_create_nonce( 'bbb_edit_server_settings_meta_nonce' );
+		$user           = get_userdata( get_current_user_id() );
+		$user_email     = ( isset( $user->user_email ) ? $user->user_email : '' );
+		$display_name   = ( isset( $user->display_name ) ? $user->display_name : '' );
 
 		//Get the active tab from the $_GET param
 		$default_tab = null;
@@ -315,15 +331,6 @@ class Bigbluebutton_Admin {
 		}
 
 		require_once 'partials/bigbluebutton-settings-display.php';
-	}
-
-	/**
-	 * Render the stay updated page for plugin.
-	 *
-	 * @since   3.0.0
-	 */
-	public function display_room_subscribe_updates() {
-		require_once 'partials/bigbluebutton-stay-updated.php';
 	}
 
 	/**
@@ -457,17 +464,28 @@ class Bigbluebutton_Admin {
 		if ( function_exists( 'get_current_screen' ) ) {
 			// show notice only on admin plugin pages
 			$current_screen = get_current_screen();
-			$allowed        = array( 'edit-bbb-room', 'bbb-room', 'bbb-rooms_page_bbb-room-server-settings', 'edit-bbb-room-category', 'bbb-rooms_page_bbb-room-subscribe-updates' );
+			$allowed        = array( 'edit-bbb-room', 'bbb-room', 'bbb-rooms_page_bbb-room-server-settings', 'edit-bbb-room-category' );
 			if ( isset( $current_screen->id ) && ! in_array( $current_screen->id, $allowed ) ) {
 				return;
 			}
 		}
 
 		$bbb_warning_type = 'bbb-review-plugin';
-		if ( ! get_option( 'dismissed-' . $bbb_warning_type, false ) ) {
-			$bbb_admin_review_message = "<strong>Video Conferencing with BBB:</strong> It's critical for us to know that the plugin is working fine. Please play your part to keep the plugin up and running smoothly.";
+		if ( Bigbluebutton_Admin_Helper::check_posts() ) {
+			$bbb_admin_review_message = '<strong>' . VIDEO_CONF_WITH_BBB_PLUGIN_NAME . ':</strong> You have reached the max room create limit. The free version allows to add only 2 new BBB rooms. To create unlimited rooms activate the Pro version';
 			$bbb_admin_notice_nonce   = wp_create_nonce( $bbb_warning_type );
-			require 'partials/bigbluebutton-admin-notice-review.php';
+			$type                     = 'room_create_limit';
+			$notice_type              = 'error';
+			include 'partials/bigbluebutton-admin-notice.php';
+		}
+
+		$bbb_warning_type = 'bbb-review-plugin';
+		if ( ! get_option( 'dismissed-' . $bbb_warning_type, false ) ) {
+			$bbb_admin_review_message = '<strong>' . VIDEO_CONF_WITH_BBB_PLUGIN_NAME . ":</strong> It's critical for us to know how the plugin is working out for you.";
+			$bbb_admin_notice_nonce   = wp_create_nonce( $bbb_warning_type );
+			$type                     = 'review_request';
+			$notice_type              = 'info';
+			include 'partials/bigbluebutton-admin-notice.php';
 		}
 	}
 

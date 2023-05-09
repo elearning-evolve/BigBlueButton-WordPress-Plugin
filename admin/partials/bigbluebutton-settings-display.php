@@ -218,6 +218,13 @@
 	</div>
 	<div class="zvc-position-floater-right">
 		<div class="zvc-information-sec">
+				<h3>Never miss an important update</h3>
+				<a target="_blank" rel="noopener"
+					href="<?php echo esc_url( 'https://elearningevolve.com/subscribe/?display_name=' . $display_name . '&user_email=' . $user_email ); ?>">
+					<button class="button button-primary">Subscribe</button>
+				</a>
+			</div>
+		<div class="zvc-information-sec">
 			<h3>Go To Links</h3>
 			<ol>
 				<li><a target="_blank" rel="noopener" href="https://wordpress.org/plugins/video-conferencing-with-bbb#faq/">FAQ: Commonly Occurring Issues</a></li>
@@ -225,7 +232,6 @@
 				<li><a target="_blank" rel="noopener" href="https://wordpress.org/support/plugin/video-conferencing-with-bbb/">Support Request</a></li>
 				<li><a target="_blank" rel="noopener" href="https://wordpress.org/plugins/video-conferencing-with-bbb#reviews">Write a Review</a></li>
 				<li><a target="_blank" rel="noopener" href="https://elearningevolve.com/contact/">Contact Us</a></li>
-				<li><a rel="noopener" href="<?php echo esc_url( admin_url( 'admin.php?page=bbb-room-subscribe-updates' ) ); ?>">Subscribe: Catch All Plugin Updates</a></li>
 				<li><a target="_blank" rel="noopener" href="https://elearningevolve.com/blog/bigbluebutton-hosting/">Recommended BigBlueButton Hosting</a></li>
 			</ol>
 		</div>

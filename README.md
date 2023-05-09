@@ -7,7 +7,7 @@ Tags: BigBlueButton, BigBlueButtom, BBB, bbb, bigbluebutton, videoconferencing, 
 Requires at least: 5.1  
 Tested up to: 6.2  
 Requires PHP: 7.2  
-Stable tag: 2.2.0  
+Stable tag: 2.2.1  
 License: GPLv2 or later  
 License URI: http://www.gnu.org/licenses/gpl-2.0.html  
 
@@ -33,10 +33,14 @@ The student can simply click Join from the page where the shortcode is added and
 
 After the session is over the plugin can also display the recording of the session on the same page so that the students can take the keynotes from the session later on.
 
-### Virtual Classroom for WordPress Pro Version ###
+### Free Plugin Limitations ###
+* Add New option for BBB Rooms on backend is limited to only a maximum of 2 Rooms
+* Join room on the same WP page is not available. Only join in a new full screen window is supported
+
+### Pro Version Features ###
 There is also a Pro version available with this plugin that offers the below features:
 * Moderators frontend Room management area
-* Embed BigBlueButton Room on WordPress
+* Embed BigBlueButton Room on WordPress i.e join room on the same WP page
 * Set a Countdown/Schedule for Room
 * Fully White-label Virtual Classroom
 * Limit the max allowed participants for a room e.g (5, 10, .. etc) both on a per room and per page basis. This can allow you to conduct a 1:1 or group session
@@ -81,6 +85,9 @@ Here's an overview of the installation.
    1. You are ready to begin creating meetings and holding conferences.
 
 ## Frequently Asked Questions ##
+**Cannot see Add New option for BBB Rooms**
+The free plugin allows you to Add New maximum 2 BBB Rooms. To create unlimited rooms activate the [Pro version](https://elearningevolve.com/products/wp-virtual-classroom/) on your site
+
 **404 error when joining BBB room**
 It is required that your BBB hosting server is up and running before you join a BBB room. This error is likely to show up when the
 default BBB test instance is not started from the BBB cloud. Please review this [hosting guide](https://elearningevolve.com/blog/hosting-virtual-classroom-for-wordpress/) to understand how to start the cloud instance.
@@ -170,6 +177,11 @@ To allow a user role to manage recordings add the capability, **manage_bbb_room_
 8. BBB Rooms can also be organized using Categories.
 
 ## Changelog ##
+### 2.2.1 ###
+* Updated: Improved reporting messages in the plugin
+* Added: Quick subscribe option from plugin settings page
+* Removed: Subscribe page from plugin menus
+
 ### 2.2.0 ###
 * Added: BBBHost.Cloud [test instance](https://elearningevolve.com/blog/hosting-virtual-classroom-for-wordpress/#start-test) start button on settings page
 
