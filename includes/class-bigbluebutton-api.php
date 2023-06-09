@@ -96,12 +96,13 @@ class Bigbluebutton_Api {
 	 *
 	 * @return  String  $url|null   URL to enter the meeting.
 	 */
-	public static function get_join_meeting_url( $room_id, $username, $password, $logout_url = null ) {
+	public static function get_join_meeting_url( $room_id, $username, $password, $viewer_code = null, $logout_url = null ) {
 
 		$rid    = intval( $room_id );
 		$uname  = sanitize_text_field( $username );
 		$pword  = sanitize_text_field( $password );
 		$lo_url = ( $logout_url ? esc_url( $logout_url ) : get_permalink( $rid ) );
+		$is_mod = ( $password != $viewer_code ? true : false );
 
 		if ( get_post( $rid ) === false || 'bbb-room' != get_post_type( $rid ) ) {
 			return null;
@@ -130,6 +131,7 @@ class Bigbluebutton_Api {
 				'fullName'  => $uname,
 				'password'  => rawurlencode( $pword ),
 				'roomId'    => $rid,
+				'isMod'     => $is_mod,
 			)
 		);
 

@@ -57,20 +57,20 @@ class Bigbluebutton_Public_Room_Api {
 	 * @since   3.0.0
 	 */
 	public function bbb_user_join_room() {
-		if ( ! empty( $_GET['action'] ) && 'join_room' == $_GET['action'] && wp_verify_nonce( sanitize_text_field( $_GET['bbb_join_room_meta_nonce'] ), 'bbb_join_room_meta_nonce' ) ) {
-			$room_id             = sanitize_text_field( $_GET['room_id'] );
-			$user                = wp_get_current_user();
-			$entry_code          = '';
-			$username            = EE_Bigbluebutton_Helper::get_meeting_username( $user );
-			$m_info              = Bigbluebutton_Api::get_meeting_info( $room_id );
-			$wait_for_mod        = get_post_meta( $room_id, 'bbb-room-wait-for-moderator', true );
-			$access_using_code   = BigBlueButton_Permissions_Helper::user_has_bbb_cap( 'join_with_access_code_bbb_room' );
-			$access_as_moderator = BigBlueButton_Permissions_Helper::user_has_bbb_cap( 'join_as_moderator_bbb_room' );
-			$access_as_viewer    = BigBlueButton_Permissions_Helper::user_has_bbb_cap( 'join_as_viewer_bbb_room' );
-			$return_url          = esc_url_raw( $_GET['current_page'] );
-			$room_limit_post     = intval( isset( $_GET['post_id'] ) ? get_post_meta( sanitize_text_field( $_GET['post_id'] ), 'bbb_pro_room_limit', true ) : 0 );
-			$room_limit_cpt      = intval( get_post_meta( $room_id, 'bbb-room-limit', true ) );
-			$room_limit_global   = intval( get_option( 'bbb_pro_max_participants' ) );
+		if ( isset( $_GET['room_id'] ) && ! empty( $_GET['action'] ) && 'join_room' == $_GET['action'] && wp_verify_nonce( sanitize_text_field( $_GET['bbb_join_room_meta_nonce'] ), 'bbb_join_room_meta_nonce' ) ) {
+			$room_id                  = sanitize_text_field( $_GET['room_id'] );
+			$user                     = wp_get_current_user();
+			$entry_code               = '';
+			$username                 = EE_Bigbluebutton_Helper::get_meeting_username( $user );
+			$m_info                   = Bigbluebutton_Api::get_meeting_info( $room_id );
+			$wait_for_mod             = get_post_meta( $room_id, 'bbb-room-wait-for-moderator', true );
+			$access_using_code        = BigBlueButton_Permissions_Helper::user_has_bbb_cap( 'join_with_access_code_bbb_room' );
+			$access_as_moderator      = BigBlueButton_Permissions_Helper::user_has_bbb_cap( 'join_as_moderator_bbb_room' );
+			$access_as_viewer         = BigBlueButton_Permissions_Helper::user_has_bbb_cap( 'join_as_viewer_bbb_room' );
+			$return_url               = esc_url_raw( $_GET['current_page'] );
+			$room_limit_post          = intval( isset( $_GET['post_id'] ) ? get_post_meta( sanitize_text_field( $_GET['post_id'] ), 'bbb_pro_room_limit', true ) : 0 );
+			$room_limit_cpt           = intval( get_post_meta( $room_id, 'bbb-room-limit', true ) );
+			$room_limit_global        = intval( get_option( 'bbb_pro_max_participants' ) );
 
 			// If meeting already running then get the codes directly from the meeting to avoid sync issue
 			if ( $m_info ) {
@@ -185,7 +185,7 @@ class Bigbluebutton_Public_Room_Api {
 	private function join_meeting( $return_url, $room_id, $username, $entry_code, $viewer_code, $wait_for_mod ) {
 		$join_url = apply_filters(
 			'bbb_join_room_url',
-			Bigbluebutton_Api::get_join_meeting_url( $room_id, $username, $entry_code, $return_url ),
+			Bigbluebutton_Api::get_join_meeting_url( $room_id, $username, $entry_code, $viewer_code, $return_url ),
 			$return_url,
 			$room_id
 		);

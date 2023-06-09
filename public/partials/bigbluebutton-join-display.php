@@ -56,7 +56,7 @@
 	<?php if ( $is_join_web ) : ?>
 		<a rel="noopener" href="javascript:void(0)"
 			onclick="joinBBBRoomFromPage('<?php echo esc_url( $url ); ?>', 0, this)">
-			<button type="button" class="bbb-button bbb-btn-join button button-primary"><?php echo esc_attr( $join_btn ); ?></button>
+			<button type="button" name="bbb_join_web" class="bbb-button bbb-btn-join button button-primary"><?php echo esc_attr( $join_btn ); ?></button>
 		</a>
 	<?php endif; ?>
 	<?php do_action( 'bbb_join_form_buttons', $access_as_moderator, $args ); ?>
