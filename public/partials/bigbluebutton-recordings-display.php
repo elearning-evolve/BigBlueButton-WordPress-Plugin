@@ -5,15 +5,17 @@
 		<p id="bbb-no-recordings-msg" style="display:none;"><?php esc_html_e( 'This room does not currently have any recordings.', 'bigbluebutton' ); ?></p>
 		<div id="bbb-recordings-table" class="bbb-table-container" role="table">
 			<div class="bbb-flex-table bbb-flex-table-<?php echo $columns; ?> bbb-header" role="rowgroup">
-				<div class="flex-row flex-row-<?php echo $columns; ?> first" role="columnheader"><?php esc_html_e( 'Meeting', 'bigbluebutton' ); ?></div>
+				<!-- <div class="flex-row flex-row-<?php echo $columns; ?> first" role="columnheader"><?php esc_html_e( 'Meeting', 'bigbluebutton' ); ?></div> -->
 				<a href="<?php echo esc_url( $sort_fields['name']->url ); ?>" class="flex-row flex-row-<?php echo esc_attr( $columns ); ?> <?php echo esc_html( $sort_fields['name']->header_classes ); ?>" role="columnheader">
 					<?php esc_html_e( 'Recording', 'bigbluebutton' ); ?>
 					<i class="<?php echo esc_attr( $sort_fields['name']->classes ); ?>"></i>
 				</a>
+				<?php if( $recording_description_exist ): ?>
 				<a href="<?php echo esc_url( $sort_fields['description']->url ); ?>" class="flex-row flex-row-<?php echo esc_attr( $columns ); ?> <?php echo esc_html( $sort_fields['description']->header_classes ); ?>" role="columnheader">
 					<?php esc_html_e( 'Description' ); ?>
 					<i class="<?php echo esc_attr( $sort_fields['description']->classes ); ?>"></i>
 				</a>
+				<?php endif; ?>
 				<a href="<?php echo esc_url( $sort_fields['date']->url ); ?>" class="flex-row flex-row-<?php echo esc_attr( $columns ); ?> <?php echo esc_html( $sort_fields['date']->header_classes ); ?>" role="columnheader">
 					<?php esc_html_e( 'Date' ); ?>
 					<i class="<?php echo esc_attr( $sort_fields['date']->classes ); ?>"></i>
@@ -27,7 +29,7 @@
 			</div>
 			<?php foreach ( $recordings as $recording ) { ?>
 				<div id="bbb-recording-<?php echo esc_attr( $recording->recordID ); ?>" class="bbb-flex-table bbb-flex-table-<?php echo esc_attr( $columns ); ?> bbb-recording-row" role="rowgroup">
-					<div class="flex-row flex-row-<?php echo esc_attr( $columns ); ?> first" role="cell"><?php echo esc_html( urldecode( $recording->name ) ); ?></div>
+					<!-- <div class="flex-row flex-row-<?php echo esc_attr( $columns ); ?> first" role="cell"><?php echo esc_html( urldecode( $recording->name ) ); ?></div> -->
 					<div id="bbb-recording-name-<?php echo esc_attr( $recording->recordID ); ?>" class="flex-row flex-row-<?php echo esc_attr( $columns ); ?>" role="cell">
 						<?php echo esc_html( urldecode( $recording->metadata->{'recording-name'} ) ); ?>
 						<?php if ( $manage_bbb_recordings ) { ?>
@@ -41,19 +43,21 @@
 								class="dashicons dashicons-edit bbb-icon bbb_edit_recording_data"></i>
 						<?php } ?>
 					</div>
-					<div id="bbb-recording-description-<?php echo esc_attr( $recording->recordID ); ?>" class="flex-row flex-row-<?php echo esc_attr( $columns ); ?>" role="cell">
-						<?php echo esc_html( urldecode( $recording->metadata->{'recording-description'} ) ); ?>
-						<?php if ( $manage_bbb_recordings ) { ?>
-							<i id="edit-recording-description-<?php echo esc_attr( $recording->recordID ); ?>"
-								title="<?php esc_html_e( 'Edit' ); ?>"
-								aria-label="<?php esc_html_e( 'Edit' ); ?>"
-								data-record-id="<?php echo esc_attr( $recording->recordID ); ?>"
-								data-record-value="<?php echo esc_attr( urldecode( $recording->metadata->{'recording-description'} ) ); ?>"
-								data-record-type="description"
-								data-meta-nonce="<?php echo esc_attr( $meta_nonce ); ?>"
-								class="dashicons dashicons-edit bbb-icon bbb_edit_recording_data"></i>
-						<?php } ?>
-					</div>
+					<?php if( $recording_description_exist ): ?>
+						<div id="bbb-recording-description-<?php echo esc_attr( $recording->recordID ); ?>" class="flex-row flex-row-<?php echo esc_attr( $columns ); ?>" role="cell">
+							<?php echo esc_html( urldecode( $recording->metadata->{'recording-description'} ) ); ?>
+							<?php if ( $manage_bbb_recordings ) { ?>
+								<i id="edit-recording-description-<?php echo esc_attr( $recording->recordID ); ?>"
+									title="<?php esc_html_e( 'Edit' ); ?>"
+									aria-label="<?php esc_html_e( 'Edit' ); ?>"
+									data-record-id="<?php echo esc_attr( $recording->recordID ); ?>"
+									data-record-value="<?php echo esc_attr( urldecode( $recording->metadata->{'recording-description'} ) ); ?>"
+									data-record-type="description"
+									data-meta-nonce="<?php echo esc_attr( $meta_nonce ); ?>"
+									class="dashicons dashicons-edit bbb-icon bbb_edit_recording_data"></i>
+							<?php } ?>
+						</div>
+					<?php endif; ?>
 					<div class="flex-row flex-row-<?php echo esc_attr($columns); ?>" role="cell">
 						<?php echo esc_html( date_i18n( $date_format, (int) $recording->startTime / 1000 ) ); ?>
 					</div>

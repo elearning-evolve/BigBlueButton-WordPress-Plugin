@@ -61,7 +61,7 @@
     width: calc(100% / 6);
 }
 
-@media all and (max-width: 1200px) {
+@media all and (max-width: 768px) {
     .bbb-flex-table {
         flex-flow: row wrap;
     }
@@ -81,6 +81,13 @@
 
     .bbb-header > .flex-row {
         border-bottom: solid 1px;
+    }
+}
+
+/* Media query for tablet and mobile */
+@media (max-width: 768px) {
+    #bbb-recordings-table .bbb-header {
+        display: none;
     }
 }
 

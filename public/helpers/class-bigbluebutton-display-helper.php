@@ -128,6 +128,7 @@ class Bigbluebutton_Display_Helper {
 	 */
 	private function get_recordings_as_string( $room_id, $recordings, $manage_bbb_recordings, $view_extended_recording_formats ) {
 		$columns = 5;
+		$recording_description_exist= null;
 		if ( $manage_bbb_recordings ) {
 			$columns++;
 		}
@@ -139,7 +140,13 @@ class Bigbluebutton_Display_Helper {
 		$bbb_recording_display_text                     = new stdClass();
 		$bbb_recording_display_text->presentation       = __( 'View', 'bigbluebutton' );
 		$bbb_recording_display_text->presentation_video = __( 'Download', 'bigbluebutton' );
-
+		
+		foreach ( $recordings as $recording ) {
+			if( ! empty( trim($recording->metadata->{'recording-description'} ) ) ) {
+				$recording_description_exist = 1;
+			}
+		}
+			
 		include $this->file . 'partials/bigbluebutton-recordings-display.php';
 		$html_recordings = ob_get_contents();
 		ob_end_clean();
