@@ -136,7 +136,7 @@ class Bigbluebutton_Api {
 		);
 
 		$url = self::build_url( 'join', $arr_params );
-
+		
 		return $url;
 	}
 
@@ -400,7 +400,7 @@ class Bigbluebutton_Api {
 	public static function test_bigbluebutton_server( $url, $salt ) {
 		$test_url      = $url . 'api/getMeetings?checksum=' . sha1( 'getMeetings' . $salt );
 		$full_response = self::get_response( $test_url );
-
+		
 		if ( is_wp_error( $full_response ) ) {
 			return false;
 		}
@@ -478,7 +478,7 @@ class Bigbluebutton_Api {
 		$params = http_build_query( $args );
 
 		$url .= $params . '&' . 'checksum=' . sha1( $type . $params . $salt_val );
-
+		
 		return $url;
 	}
 }

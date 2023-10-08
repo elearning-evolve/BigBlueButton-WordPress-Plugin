@@ -66,7 +66,7 @@
 							<?php foreach ( $recording->playback->format as $format ) { ?>
 								<?php
 								if ( $format->type == $default_bbb_recording_format || $view_extended_recording_formats ) {
-									$recording_url = apply_filters( 'bbb_recording_url_display', $format->url, $format->type );
+									$recording_url = trim( apply_filters( 'bbb_recording_url_display', $format->url, $format->type ) );
 									?>
 									<button class="bbb-button bbb-btn-join button button-primary" onclick="window.open('<?php echo esc_url( $recording_url ); ?>', '_blank')"><?php esc_html_e( 'View Recording', 'bigbluebutton' ); ?></button>
 								<?php } ?>
