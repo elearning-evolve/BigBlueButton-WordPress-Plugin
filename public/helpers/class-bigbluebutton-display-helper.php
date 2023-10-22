@@ -129,9 +129,6 @@ class Bigbluebutton_Display_Helper {
 	private function get_recordings_as_string( $room_id, $recordings, $manage_bbb_recordings, $view_extended_recording_formats ) {
 		$columns = 5;
 		$recording_description_exist= null;
-		if ( $manage_bbb_recordings ) {
-			$columns++;
-		}
 		$sort_fields = $this->set_order_by_field();
 		ob_start();
 		$meta_nonce                                     = wp_create_nonce( 'bbb_manage_recordings_nonce' );

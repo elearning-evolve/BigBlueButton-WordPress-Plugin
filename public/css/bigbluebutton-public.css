@@ -23,14 +23,19 @@
     display: flex;
     width: 100%;
     margin: auto 0;
-    border-left: solid 1px #d9d9d9;
     transition: 0.5s;
+    justify-content: center;
 }
 
 .flex-row {
     padding: 0.5em 0.5em;
-    border-right: solid 1px #d9d9d9;
+    border-left: solid 1px #d9d9d9;
     border-bottom: solid 1px #d9d9d9;
+    text-align: center;
+}
+
+.flex-row:last-child {
+    border-right: solid 1px #d9d9d9;
 }
 
 .bbb-flex-table:nth-child(even) .flex-row {
@@ -54,7 +59,7 @@
 }
 
 .flex-row-5 {
-    width: calc(100% / 5);
+    width: calc(100% / 4);
 }
 
 .flex-row-6 {
@@ -184,6 +189,11 @@
 
 .bbb-recordings-display {
     cursor: pointer;
+    margin-top: 10px;
+}
+
+[id^="bbb-recordings-list-"] {
+    margin-bottom: 20px;
 }
 
 .bbb-recording-display-block {
