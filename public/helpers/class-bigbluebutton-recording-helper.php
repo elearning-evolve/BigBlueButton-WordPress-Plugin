@@ -150,7 +150,8 @@ class Bigbluebutton_Recording_Helper {
 			$self      = $this;
 
 			usort(
-				$this->recordings, function( $first, $second ) use ( $direction, $field, $self ) {
+				$this->recordings,
+				function( $first, $second ) use ( $direction, $field, $self ) {
 					if ( $direction == 'asc' ) {
 						return ( strcasecmp( $self->get_recording_field( $first, $field ), $self->get_recording_field( $second, $field ) ) > 0 );
 					} else {
@@ -159,6 +160,18 @@ class Bigbluebutton_Recording_Helper {
 				}
 			);
 
+		} else {
+			// Set default sorting to DESC Order
+			$direction = sanitize_text_field( 'desc' );
+			$field     = sanitize_text_field( 'date' );
+			$self      = $this;
+
+			usort(
+				$this->recordings,
+				function( $first, $second ) use ( $direction, $field, $self ) {
+					return ( strcasecmp( $self->get_recording_field( $first, $field ), $self->get_recording_field( $second, $field ) ) < 0 );
+				}
+			);
 		}
 	}
 
