@@ -189,6 +189,19 @@ class Bigbluebutton_Admin {
 	 * @return  Array $columns    Array of existing column headers and custom column headers.
 	 */
 	public function add_custom_room_column_to_list( $columns ) {
+		if ( ! function_exists( 'get_current_screen' ) ) {
+			include ABSPATH . '/wp-admin/includes/screen.php';
+		}
+
+		if ( function_exists( 'get_current_screen' ) ) {
+			// show notice only on admin plugin pages
+			$current_screen = get_current_screen();
+			$allowed        = array( 'edit-bbb-room' );
+			if ( isset( $current_screen->id ) && ! in_array( $current_screen->id, $allowed ) ) {
+				return;
+			}
+		}
+		
 		$custom_columns = array(
 			'category'       => __( 'Category' ),
 			'permalink'      => __( 'Invite Participants' ),
@@ -214,6 +227,19 @@ class Bigbluebutton_Admin {
 	 * @param   Integer $post_id    Room ID of the current room.
 	 */
 	public function bbb_room_custom_columns( $column, $post_id ) {
+		if ( ! function_exists( 'get_current_screen' ) ) {
+			include ABSPATH . '/wp-admin/includes/screen.php';
+		}
+
+		if ( function_exists( 'get_current_screen' ) ) {
+			// show notice only on admin plugin pages
+			$current_screen = get_current_screen();
+			$allowed        = array( 'edit-bbb-room' );
+			if ( isset( $current_screen->id ) && ! in_array( $current_screen->id, $allowed ) ) {
+				return;
+			}
+		}
+		
 		switch ( $column ) {
 			case 'category':
 				$categories = wp_get_object_terms( $post_id, 'bbb-room-category', array( 'fields' => 'names' ) );

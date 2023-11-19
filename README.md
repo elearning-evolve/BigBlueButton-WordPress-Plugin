@@ -7,7 +7,7 @@ Tags: BigBlueButton, BigBlueButtom, BBB, bbb, bigbluebutton, videoconferencing, 
 Requires at least: 5.1  
 Tested up to: 6.4.1  
 Requires PHP: 7.2  
-Stable tag: 2.3.3  
+Stable tag: 2.3.4  
 License: GPLv2 or later  
 License URI: http://www.gnu.org/licenses/gpl-2.0.html  
 
@@ -177,6 +177,9 @@ To allow a user role to manage recordings add the capability, **manage_bbb_room_
 8. BBB Rooms can also be organized using Categories.
 
 ## Changelog ##
+### 2.3.4 ###
+* Fixed: BBB shortcode column displays on admin screens other than BBB room list
+
 ### 2.3.3 ###
 * Updated: Sort recordings in descending order by date in BBB room recordings list display
 
