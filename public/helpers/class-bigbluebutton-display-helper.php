@@ -61,6 +61,7 @@ class Bigbluebutton_Display_Helper {
 		$args['current_page']             = get_permalink();
 		$args['post_id']                  = sanitize_text_field( ( isset( $post->ID ) ? $post->ID : 0 ) );
 		$url                              = get_permalink() . '?' . http_build_query( $args );
+		$_REQUEST['room_id']              = ( isset( $_REQUEST['room_id'] ) ? $_REQUEST['room_id'] : 0 );
 
 		if ( $start_time ) {
 			$dt     = new DateTime( $start_time, new DateTimeZone( wp_timezone_string() ) );
@@ -127,9 +128,9 @@ class Bigbluebutton_Display_Helper {
 	 * @return  String      $html_recordings                    Recordings table stored in a variable.
 	 */
 	private function get_recordings_as_string( $room_id, $recordings, $manage_bbb_recordings, $view_extended_recording_formats ) {
-		$columns = 5;
-		$recording_description_exist= null;
-		$sort_fields = $this->set_order_by_field();
+		$columns                     = 5;
+		$recording_description_exist = null;
+		$sort_fields                 = $this->set_order_by_field();
 		ob_start();
 		$meta_nonce                                     = wp_create_nonce( 'bbb_manage_recordings_nonce' );
 		$date_format                                    = ( get_option( 'date_format' ) ? get_option( 'date_format' ) : 'Y-m-d' );
@@ -137,13 +138,13 @@ class Bigbluebutton_Display_Helper {
 		$bbb_recording_display_text                     = new stdClass();
 		$bbb_recording_display_text->presentation       = __( 'View', 'bigbluebutton' );
 		$bbb_recording_display_text->presentation_video = __( 'Download', 'bigbluebutton' );
-		
+
 		foreach ( $recordings as $recording ) {
-			if( ! empty( trim($recording->metadata->{'recording-description'} ) ) ) {
+			if ( ! empty( trim( $recording->metadata->{'recording-description'} ) ) ) {
 				$recording_description_exist = 1;
 			}
 		}
-			
+
 		include $this->file . 'partials/bigbluebutton-recordings-display.php';
 		$html_recordings = ob_get_contents();
 		ob_end_clean();
