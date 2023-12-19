@@ -90,7 +90,7 @@ class Bigbluebutton_Tokens_Helper {
 				'room_name' => get_the_title( $room_id ),
 			);
 
-			if ( isset( $_REQUEST['room_id'] ) && ( $_REQUEST['room_id'] == $room_id || base64_decode( $_REQUEST['room_id'] ) == $room_id ) ) {
+			if ( isset( $_REQUEST['room_id'] ) &&  $_REQUEST['room_id'] == $room_id ) {
 				$selected_room_id = $room_id;
 			}
 		}

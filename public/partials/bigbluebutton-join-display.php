@@ -1,6 +1,6 @@
 <?php if ( isset( $start_time ) && $start_time ) : ?>
 	<?php do_action( 'bbb_countdown_display', $room_id, $start_time ); ?>
-<?php elseif ( isset( $_REQUEST['bbb_room_join'] ) && $room_id == base64_decode( $_REQUEST['room_id'] ) ) : ?>
+<?php elseif ( isset( $_REQUEST['bbb_room_join'] ) && $room_id == $_REQUEST['room_id'] ): ?>
 	<?php do_action( 'bbb_on_room_join', $room_id ); ?>
 <?php elseif ( isset( $_REQUEST['rec_url'] ) ) : ?>
 	<?php do_action( 'bbb_recording_display' ); ?>
