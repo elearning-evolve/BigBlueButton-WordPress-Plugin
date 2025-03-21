@@ -77,7 +77,6 @@ class VideoConferencingWithBBB {
 		$this->define_admin_hooks();
 		$this->define_public_hooks();
 		$this->define_global_hooks();
-
 	}
 
 	/**
@@ -110,91 +109,91 @@ class VideoConferencingWithBBB {
 		/**
 		 * The activator class
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-bigbluebutton-activator.php';
+		require_once plugin_dir_path( __DIR__ ) . 'includes/class-bigbluebutton-activator.php';
 
 		/**
 		 * The class for all helper functions
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-bigbluebutton-helper.php';
+		require_once plugin_dir_path( __DIR__ ) . 'includes/class-bigbluebutton-helper.php';
 
 		/**
 		 * The class responsible for orchestrating the actions and filters of the
 		 * core plugin.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-bigbluebutton-loader.php';
+		require_once plugin_dir_path( __DIR__ ) . 'includes/class-bigbluebutton-loader.php';
 
 		/**
 		 * The class responsible for defining internationalization functionality
 		 * of the plugin.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-bigbluebutton-i18n.php';
+		require_once plugin_dir_path( __DIR__ ) . 'includes/class-bigbluebutton-i18n.php';
 
 		/**
 		 * The class responsible for defining actions specific to the admin area.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-bigbluebutton-admin.php';
+		require_once plugin_dir_path( __DIR__ ) . 'admin/class-bigbluebutton-admin.php';
 
 		/**
 		 * Registration of necessary components for the plugin.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-bigbluebutton-register-custom-types.php';
+		require_once plugin_dir_path( __DIR__ ) . 'admin/class-bigbluebutton-register-custom-types.php';
 
 		/**
 		 * Admin area API
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-bigbluebutton-admin-api.php';
+		require_once plugin_dir_path( __DIR__ ) . 'admin/class-bigbluebutton-admin-api.php';
 
 		/**
 		 * Admin helper.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/helpers/class-bigbluebutton-admin-helper.php';
+		require_once plugin_dir_path( __DIR__ ) . 'admin/helpers/class-bigbluebutton-admin-helper.php';
 
 		/**
 		 * The class responsible for defining all actions that occur in the public-facing
 		 * side of the site.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-bigbluebutton-public.php';
+		require_once plugin_dir_path( __DIR__ ) . 'public/class-bigbluebutton-public.php';
 
 		/**
 		 * The class responsible for migrations from previous versions of the plugin to new ones.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-bigbluebutton-migration.php';
+		require_once plugin_dir_path( __DIR__ ) . 'includes/class-bigbluebutton-migration.php';
 
 		/**
 		 * Public facing plugin API
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-bigbluebutton-public-room-api.php';
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-bigbluebutton-public-recording-api.php';
+		require_once plugin_dir_path( __DIR__ ) . 'public/class-bigbluebutton-public-room-api.php';
+		require_once plugin_dir_path( __DIR__ ) . 'public/class-bigbluebutton-public-recording-api.php';
 
 		/**
 		 * Shortcodes
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-bigbluebutton-public-shortcode.php';
+		require_once plugin_dir_path( __DIR__ ) . 'public/class-bigbluebutton-public-shortcode.php';
 
 		/**
 		 * Widget
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-bigbluebutton-public-widget.php';
+		require_once plugin_dir_path( __DIR__ ) . 'public/class-bigbluebutton-public-widget.php';
 
 		/**
 		 * Bigbluebutton API
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-bigbluebutton-api.php';
+		require_once plugin_dir_path( __DIR__ ) . 'includes/class-bigbluebutton-api.php';
 
 		/**
 		 * Bigbluebutton Recordings helper
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/helpers/class-bigbluebutton-recording-helper.php';
+		require_once plugin_dir_path( __DIR__ ) . 'public/helpers/class-bigbluebutton-recording-helper.php';
 
 		/**
 		 * Bigbluebutton public view helper
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/helpers/class-bigbluebutton-display-helper.php';
+		require_once plugin_dir_path( __DIR__ ) . 'public/helpers/class-bigbluebutton-display-helper.php';
 
 		/**
 		 * Bigbluebutton tokens helper
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/helpers/class-bigbluebutton-tokens-helper.php';
+		require_once plugin_dir_path( __DIR__ ) . 'public/helpers/class-bigbluebutton-tokens-helper.php';
 
 		if ( ! function_exists( 'is_plugin_active' ) ) {
 			include_once ABSPATH . 'wp-admin/includes/plugin.php';
@@ -203,7 +202,7 @@ class VideoConferencingWithBBB {
 		/**
 		 * Bigbluebutton permissions helper
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/helpers/class-bigbluebutton-permissions-helper.php';
+		require_once plugin_dir_path( __DIR__ ) . 'public/helpers/class-bigbluebutton-permissions-helper.php';
 
 		$this->loader = new Bigbluebutton_Loader();
 		//$this->loader->add_action( 'plugins_loaded', $this, 'check_migration' );
@@ -223,7 +222,6 @@ class VideoConferencingWithBBB {
 		$plugin_i18n = new Bigbluebutton_I18n();
 
 		$this->loader->add_action( 'init', $plugin_i18n, 'load_plugin_textdomain' );
-
 	}
 
 	/**
@@ -273,7 +271,7 @@ class VideoConferencingWithBBB {
 		$this->loader->add_action( 'add_meta_boxes', $plugin_admin_register_custom_types, 'register_room_code_metaboxes' );
 		$this->loader->add_action( 'add_meta_boxes', $plugin_admin_register_custom_types, 'register_record_room_metabox' );
 		$this->loader->add_action( 'add_meta_boxes', $plugin_admin_register_custom_types, 'register_wait_for_moderator_metabox' );
-		$this->loader->add_action( 'save_post', $plugin_admin_api, 'save_room' );
+		$this->loader->add_action( 'save_post_bbb-room', $plugin_admin_api, 'save_bbb_room', 999, 3 );
 
 		// Show custom fields in rooms table.
 		$this->loader->add_action( 'manage_posts_custom_column', $plugin_admin, 'bbb_room_custom_columns', 10, 2 );

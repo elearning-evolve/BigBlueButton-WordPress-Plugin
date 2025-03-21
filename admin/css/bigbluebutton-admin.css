@@ -128,9 +128,10 @@
     display: none;
 }
 
-.tooltip {
+.type-bbb-room .tooltip {
     position: relative;
     display: inline-block;
+    opacity: 1;
 }
 
 .tooltip .tooltiptext {

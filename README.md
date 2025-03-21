@@ -4,9 +4,9 @@ Contributors: blindsidenetworks, jfederico, yfngdu, elearningevolve, adeelraza_7
 Donate link: https://elearningevolve.com/products/donate/  
 Tags: virtual classroom, video conference, BigBlueButton, BBB, online meeting, web conferencing, online teaching, learning management system, LMS, online session, live training, video conferencing, video conference, meetings, virtual meetings
 Requires at least: 5.1  
-Tested up to: 6.7.1  
+Tested up to: 6.7.2  
 Requires PHP: 7.2  
-Stable tag: 2.4.2  
+Stable tag: 2.4.3  
 License: GPLv2 or later  
 License URI: http://www.gnu.org/licenses/gpl-2.0.html  
 
@@ -174,6 +174,10 @@ To allow a user role to manage recordings add the capability, **manage_bbb_room_
 8. BBB Rooms can also be organized using Categories.
 
 ## Changelog ##
+### 2.4.3 ###
+* Fixed: Access code not updates are not applied for the room
+* Fixed: Shortcode does not display in the admin rooms list
+
 ### 2.4.2 ###
 * Added: Character limit message for meeting access code on the meeting edit page
 

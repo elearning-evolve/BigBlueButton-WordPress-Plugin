@@ -28,7 +28,7 @@ class Bigbluebutton_Admin_Api {
 	 * @param   Integer $post_id    Post ID of the new room.
 	 * @return  Integer $post_id    Post ID of the new room.
 	 */
-	public function save_room( $post_id ) {
+	public function save_bbb_room( $post_id, $post, $update ) {
 		if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
 			return $post_id;
 		}
@@ -90,18 +90,11 @@ class Bigbluebutton_Admin_Api {
 	 *
 	 * @since 3.0.0
 	 */
-	private function can_save_room() {
+	public function can_save_room() {
 		return ( isset( $_POST['bbb-moderator-code'] ) &&
 			isset( $_POST['bbb-viewer-code'] ) &&
 			isset( $_POST['bbb-room-moderator-code-nonce'] ) &&
 			wp_verify_nonce( $_POST['bbb-room-moderator-code-nonce'], 'bbb-room-moderator-code-nonce' ) &&
-			isset( $_POST['bbb-room-viewer-code-nonce'] ) &&
-			wp_verify_nonce( $_POST['bbb-room-viewer-code-nonce'], 'bbb-room-viewer-code-nonce' ) &&
-			isset( $_POST['bbb-room-wait-for-moderator-nonce'] ) &&
-			wp_verify_nonce( $_POST['bbb-room-wait-for-moderator-nonce'], 'bbb-room-wait-for-moderator-nonce' ) &&
-			( ! current_user_can( 'create_recordable_bbb_room' ) ||
-				( isset( $_POST['bbb-room-recordable-nonce'] ) &&
-				wp_verify_nonce( $_POST['bbb-room-recordable-nonce'], 'bbb-room-recordable-nonce' ) ) )
-			);
+			current_user_can( 'create_recordable_bbb_room' ) );
 	}
 }
