@@ -1,0 +1,335 @@
+/**
+ * All of the CSS for your admin-specific functionality should be
+ * included in this file.
+ */
+.bbb-settings-btn {
+    background: #332cf2;
+    border: 0;
+    border-radius: .375rem;
+    color: #fff;
+    cursor: pointer;
+    display: inline-block;
+    font-family: Circular, Helvetica, sans-serif;
+    font-size: 0.9rem;
+    font-weight: 700;
+    letter-spacing: -.01em;
+    line-height: 1.2;
+    padding: 0.6rem 0.6rem;
+    text-align: left;
+    text-decoration: none;
+    transition: transform .2s;
+}
+
+.bbb-settings-btn:disabled {
+    color: #787878;
+    cursor: auto;
+}
+
+.bbb-settings-btn:hover {
+    transform: scale(1.05);
+}
+
+.bbb-settings-btn:active {
+    transform: scale(1.05) translateY(.125rem);
+}
+
+.bbb-settings-btn:focus {
+    outline: 0 solid transparent;
+}
+
+.bbb-settings-btn:focus:before {
+    border-width: .125rem;
+    content: "";
+    left: calc(-1*.375rem);
+    pointer-events: none;
+    position: absolute;
+    top: calc(-1*.375rem);
+    transition: border-radius;
+}
+
+.bbb-settings-btn:not(:focus-visible) {
+    outline: 0 solid transparent;
+}
+
+.bbb-settings-btn:active {
+    transform: translateY(.125rem);
+}
+
+#bbb-general-settings-form .button-start-instance {
+    margin-left: 8px;
+    -webkit-appearance: button;
+    color: #fff;
+    background-color: #c82333;
+    border-color: #bd2130;
+    font-weight: 600;
+}
+
+.bbb-settings-card {
+    min-width: 22em;
+    margin: 10px;
+    padding: 10px;
+}
+
+.bbb-settings-card h1 {
+    font-weight: 400;
+}
+
+.bbb-settings-card p {
+    font-size: 1.1em;
+}
+
+.bbb-row {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.bbb-row:nth-child(even) {
+    border-bottom-style: solid;
+    border-width: 2px;
+    border-color: #dee0e7;
+}
+
+.bbb-col-left {
+    flex: 20%;
+    max-width: 25%;
+    padding: 0 4px;
+}
+
+.bbb-col-right {
+    flex: 70%;
+    max-width: 70%;
+    padding: 0 4px;
+    margin: 10px 0 10px 0;
+}
+
+.bbb-important-label {
+    font-weight: 900;
+    color: black;
+}
+
+.bbb-width-30 {
+    min-width: 30%;
+}
+
+.bbb-width-60 {
+    min-width: 60%;
+}
+
+.bbb-inline-block {
+    display: inline-block;
+}
+
+.bbb-top-bottom-margin {
+    margin-top: 2em;
+    margin-bottom: 2em;
+}
+
+#bbb-shortcode {
+    display: none;
+}
+
+.type-bbb-room .tooltip {
+    position: relative;
+    display: inline-block;
+    opacity: 1;
+}
+
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 140px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px;
+    position: absolute;
+    z-index: 1;
+    bottom: 150%;
+    left: 50%;
+    margin-left: -75px;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.tooltip .tooltiptext::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #555 transparent transparent transparent;
+}
+
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+}
+
+.zvc_listing_table table.dataTable tbody th,
+.zvc_listing_table table.dataTable tbody td {
+    padding: 8px 0 12px 0;
+    text-align: center;
+}
+
+.zvc_listing_table .meeting-button {
+    margin: 5px 0 0 5px;
+    padding: 0 4px;
+    font-size: 0.9em;
+}
+
+.zvc-row {
+    display: flex;
+    flex-wrap: wrap;
+    place-items: flex-start;
+    margin-top: 5px;
+}
+
+.zvc-row .addon-wrap {
+    display: flex;
+    flex-wrap: wrap;
+    background: #f1f1f1;
+    border: none;
+    padding: 0;
+    width: 75%;
+    height: auto;
+}
+
+.addon-image {
+    width: 500px;
+    height: 500px;
+}
+
+.zvc-row .zvc-addons {
+    border: 1px solid #ccc;
+    background: #fff;
+    padding: 30px 30px 10px 30px;
+    margin: 10px 10px 0 10px;
+    height: fit-content;
+    flex: 1 1;
+    max-width: 40%;
+}
+
+.select2-container {
+    min-width: 100px;
+}
+
+.is_recurring_wrap {
+    display: none;
+}
+
+.zvc_listing_table {
+    margin-top: 20px;
+}
+
+.select_zvc_user_listings_wrapp {
+    margin: 20px 0px;
+}
+
+.zvc-text-left {
+    text-align: left;
+}
+
+.zvc-text-center {
+    text-align: center;
+}
+
+#zvc-cover {
+    background: url('../images/ajax-loader.gif') no-repeat scroll center center #f1f1f1;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    z-index: 1;
+    opacity: 0.5;
+}
+
+.zvc_getting_user_info_content p {
+    padding: 0px !important;
+}
+
+.zvc_daily_reports_check_form {
+    padding: 20px 0px;
+}
+
+.zvc_accounts_reports_check_form {
+    padding-bottom: 20px;
+}
+
+.zvc-position-floater-left {
+    width: 65%;
+    padding: 30px;
+    border: 1px solid #ccc;
+    background: #fff;
+    margin-right: 10px;
+}
+
+.zvc-position-floater-right {
+    width: 24%;
+    margin-top: 16px;
+}
+
+.zvc-position-floater-right .zvc-information-sec {
+    background: #fff;
+    padding: 20px;
+    border: 1px solid #ccc;
+    margin: 0 0 16px 0;
+}
+
+.zvc-position-clear {
+    clear: both;
+}
+
+.wrap .report-download-btn {
+    float: right;
+    margin-bottom: 15px;
+}
+
+.form-table .zvc-multi-select {
+    min-height: 30vh;
+}
+
+#adminmenumain #adminmenu #toplevel_page_bbb_room ul li:nth-child(6) a {
+    font-weight: bolder;
+    color: #68a6cf;
+}
+
+.bbb-hosting-notice {
+    color: #bd2e2e;
+}
+
+.post-type-bbb-room .edit-post-layout__footer {
+    display: none;
+    /* Hide edit post footer breadcrum */
+}
+
+.bbb-pro-shortcode-usage code {
+    padding: 10px;
+    line-height: 3;
+}
+
+.bbb-pro-shortcode-usage .desc {
+    margin-top: 26px;
+}
+
+.bbb-dashicon {
+    margin: 3px;
+    cursor: pointer;
+}
+
+.wp-list-table .start-meeting a {
+    padding: 3px 20px 3px 20px;
+}
+
+/* Credits: https: //stackoverflow.com/questions/3559935/wordpress-is-there-a-way-to-adjust-the-column-width-for-the-post-table */
+.post-type-bbb-room table.fixed {
+    table-layout: auto;
+}
+
+.spacer {
+    margin: 10px 0 10px 0;
+}
+
+.bbb-rooms_page_bbb-room-server-settings ul {
+    list-style: inside;
+}

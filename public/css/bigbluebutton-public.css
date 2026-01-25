@@ -1,0 +1,257 @@
+/**
+ * All of the CSS for your public-facing functionality should be
+ * included in this file.
+ */
+
+.bbb-room-selection {
+    display: inline-block;
+    min-width: 10em;
+    margin-bottom: 1em;
+    background: #fff;
+}
+
+.bbb-error {
+    color: #9e2c2c;
+}
+
+.bbb-table-container,
+.bbb-table-container > div {
+    box-sizing: border-box;
+}
+
+.bbb-flex-table {
+    display: flex;
+    width: 100%;
+    margin: auto 0;
+    transition: 0.5s;
+    justify-content: center;
+}
+
+.flex-row {
+    padding: 0.5em 0.5em;
+    border-left: solid 1px #d9d9d9;
+    border-bottom: solid 1px #d9d9d9;
+    text-align: center;
+}
+
+.flex-row:last-child {
+    border-right: solid 1px #d9d9d9;
+}
+
+.bbb-flex-table:nth-child(even) .flex-row {
+    background: #f4f2f1;
+}
+
+.bbb-flex-table:first-of-type .flex-row,
+.bbb-flex-table:first-of-type a .flex-row {
+    border-color: #1565c0;
+    color: #fff;
+    background: #1976d2;
+    text-decoration: none;
+}
+
+.bbb-flex-table-3 {
+    grid-template-columns: repeat(auto-fill, 33%);
+}
+
+.bbb-flex-table-4 {
+    grid-template-columns: repeat(auto-fill, 25%);
+}
+
+.flex-row-5 {
+    width: calc(100% / 4);
+}
+
+.flex-row-6 {
+    width: calc(100% / 6);
+}
+
+@media all and (max-width: 768px) {
+    .bbb-flex-table {
+        flex-flow: row wrap;
+    }
+
+    .flex-row {
+        width: 100%;
+    }
+
+    .flex-row:first {
+        width: 100%;
+        border-bottom: solid 1px #d9d9d9;
+    }
+
+    .bbb-flex-table > .flex-row {
+        border-bottom: solid 1px #d9d9d9;
+    }
+
+    .bbb-header > .flex-row {
+        border-bottom: solid 1px;
+    }
+}
+
+/* Media query for tablet and mobile */
+@media (max-width: 768px) {
+    #bbb-recordings-table .bbb-header {
+        display: none;
+    }
+}
+
+.bbb-recording-table-input {
+    width: 100%;
+}
+
+.bbb-icon {
+    color: #1976d2;
+    cursor: pointer;
+}
+
+.bbb-header-icon {
+    color: #fff;
+    cursor: pointer;
+}
+
+.dashicon-disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+}
+
+.bbb-inline-block {
+    display: inline-block;
+}
+
+.bbb-recording-link {
+    max-width: 8em;
+    margin: 0.2em 0.1em;
+    padding: 0.4em;
+    color: #fff;
+    background-color: #007acc;
+    cursor: pointer;
+}
+
+#joinroom .bbb-button, .bbb-button {
+    color: #fff;
+    background-color: #007acc;
+    padding: 0.7em 1em;
+    border: none;
+    -webkit-appearance: button;
+    -moz-appearance: button;
+    appearance: button;
+    text-decoration: none;
+}
+
+#joinroom .bbb-button:hover {
+    color: #fff;
+}
+
+.bbb-recording-link:hover,
+.bbb-recording-link:focus,
+.bbb-recording-link:active,
+.bbb-button:hover,
+.bbb-button:focus,
+.bbb-button:active {
+    border-color: #006799;
+    color: #fff;
+}
+
+.bbb-recording-link > a {
+    color: #fff;
+    box-shadow: none;
+    text-decoration: none;
+}
+
+.bbb-recording-link > a:hover,
+.bbb-recording-link > a:focus,
+.bbb-recording-link > a:active,
+.bbb-recording-link > a:visited {
+    color: #fff;
+}
+
+.bbb-column-header-highlight {
+    background: #52a8fd !important;
+}
+
+.bbb-hidden {
+    visibility: hidden;
+}
+
+.single-bbb-room .bbb-room .entry-content {
+    float: none !important;
+    width: auto !important;
+}
+
+.bbb-expandable-header {
+    display: inline-block;
+    margin-top: auto;
+    margin-bottom: auto;
+    font-size: 1.2em;
+    font-weight: 400;
+}
+
+.bbb-recordings-display {
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+[id^="bbb-recordings-list-"] {
+    margin-bottom: 20px;
+}
+
+.bbb-recording-display-block {
+    margin: 0.5em 0;
+    border-top: groove;
+    border-bottom: groove;
+}
+
+#joinroom .bbb-join-room-label, .bbb-join-room-label {
+    display: inline-block;
+    width: 140px;
+}
+
+#joinroom .bbb-join-room-input, .bbb-join-room-input {
+    width: 310px;
+}
+
+.bbb-join-form-block {
+    margin-bottom: 1em;
+}
+
+.bbb-form, .bbb-room-selection-block {
+    text-align: center;
+}
+.tooltip {
+    position: relative;
+    display: inline-block;
+}
+
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 140px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px;
+    position: absolute;
+    z-index: 1;
+    bottom: 150%;
+    left: 50%;
+    margin-left: -75px;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.tooltip .tooltiptext::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #555 transparent transparent transparent;
+}
+
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+}
