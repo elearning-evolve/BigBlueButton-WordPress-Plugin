@@ -39,7 +39,7 @@
 							echo apply_filters(
 								'bbb_room_default_server_notice',
 								wp_kses(
-									__( 'Default server settings 1. Default server settings 2.', 'bigbluebutton' ),
+									__( '<h4><strong class="bbb-hosting-notice">Endpoint URL & Secret:</strong> The default credentials are using a DEVELOPMENT level BigBlueButton server provided by <a rel="noopener" href="https://blindsidenetworks.com/" target="_blank">Blindside Networks</a> you MUST replace them with the credentials from a PRODUCTION-level server on your live site.' . "\n" . '<p><strong class="bbb-hosting-notice">Important:</strong>' . "\n" . 'Review the <a rel="noopener" href="https://elearningevolve.com/blog/hosting-virtual-classroom-for-wordpress" target="_blank">hosting guide</a> before joining the virtual classroom</p>' . "\n" . '</h4>', 'bigbluebutton' ),
 									array(
 										'a'      => array(
 											'href'   => array(),
@@ -64,15 +64,15 @@
 						
 						<?php if ( $change_success == 1 ) { ?>
 							<div class="updated">
-								<p><?php esc_html_e( 'Save server settings success message.', 'bigbluebutton' ); ?></p>
+								<p><?php esc_html_e( 'Success! Your room server settings have been saved.', 'bigbluebutton' ); ?></p>
 							</div>
 						<?php } elseif ( $change_success == 2 ) { ?>
 							<div class="error">
-								<p><?php esc_html_e( 'Save server settings bad url error message.', 'bigbluebutton' ); ?></p>
+								<p><?php esc_html_e( "Error: the URL you have entered must end with '/bigbluebutton/'.", 'bigbluebutton' ); ?></p>
 							</div>
 						<?php } elseif ( $change_success == 3 ) { ?>
 							<div class="error">
-								<p><?php esc_html_e( 'Save server settings bad server settings error message.', 'bigbluebutton' ); ?></p>
+								<p><?php esc_html_e( 'Error: The server cannot be reached. Are you sure the server is running and your settings are correct?', 'bigbluebutton' ); ?></p>
 							</div>
 						<?php } ?>
 					<?php else : ?>
