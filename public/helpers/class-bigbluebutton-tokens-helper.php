@@ -153,6 +153,60 @@ class Bigbluebutton_Tokens_Helper {
 	}
 
 	/**
+	 * Get rooms or recordings for a course portal lesson (FluentCommunity) as an HTML string.
+	 *
+	 * Portal lessons are fetched over REST and injected by a JS app, so the join form, its scripts and
+	 * the post author are not available there. Rooms are shown as a link to the room page, which runs
+	 * the full join flow. Recordings are shown as the regular recordings table.
+	 *
+	 * @param   Bigbluebutton_Display_Helper $display_helper     Display helper to get HTML from partials.
+	 * @param   String                       $token_string       A list of tokens as a string, separated by commas.
+	 * @param   String                       $type               Either 'room' or 'recording'.
+	 *
+	 * @return  String                       $content            HTML string for the portal lesson.
+	 */
+	public static function portal_view_from_tokens_string( $display_helper, $token_string, $type ) {
+		$room_ids = array();
+
+		foreach ( preg_split( '/\,/', $token_string ) as $raw_token ) {
+			$token = preg_replace( '/[^a-zA-Z0-9]+/', '', $raw_token );
+			if ( '' == $token ) {
+				continue;
+			}
+			$room_id = ( 'z' == substr( $token, 0, 1 ) )
+				? self::check_if_room_exists_for_new_token_format( $token, 0 )
+				: self::check_if_room_exists_for_old_token_format( $token, 0 );
+			if ( 0 == $room_id ) {
+				return '<p>' . self::$error_message . '</p>';
+			}
+			$room_ids[] = $room_id;
+		}
+
+		if ( empty( $room_ids ) ) {
+			return '<p>' . esc_html__( 'There are no rooms in the selection.', 'bigbluebutton' ) . '</p>';
+		}
+
+		if ( 'recording' == $type ) {
+			$manage_recordings               = BigBlueButton_Permissions_Helper::user_has_bbb_cap( 'manage_bbb_room_recordings' );
+			$view_extended_recording_formats = BigBlueButton_Permissions_Helper::user_has_bbb_cap( 'view_extended_bbb_room_recording_formats' );
+			$recordings                      = self::get_recordings( $room_ids );
+			return $display_helper->get_collapsable_recordings_view_as_string( $room_ids[0], $recordings, $manage_recordings, $view_extended_recording_formats );
+		}
+
+		$content = '';
+		foreach ( $room_ids as $room_id ) {
+			$link = sprintf(
+				'<p class="bbb-portal-room"><a class="bbb-button bbb-btn-join" href="%1$s" target="_blank" rel="noopener" style="display:inline-block;padding:10px 20px;border-radius:4px;background:#0073aa;color:#fff;text-decoration:none;">%2$s</a></p>',
+				esc_url( get_permalink( $room_id ) ),
+				/* translators: %s: room name */
+				esc_html( sprintf( __( 'Join %s', 'bigbluebutton' ), get_the_title( $room_id ) ) )
+			);
+			$content .= apply_filters( 'bbb_portal_room_link_html', $link, $room_id );
+		}
+		return $content;
+	}
+
+	/**
 	 * Check if the current user has any of the allowed roles.
 	 *
 	 * @param array $allowed_roles Array of allowed user role slugs.
