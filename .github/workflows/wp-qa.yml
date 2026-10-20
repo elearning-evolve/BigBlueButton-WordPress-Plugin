@@ -1,0 +1,59 @@
+# Drop this file into each repo (or let rollout-github.sh do it).
+# Everything real lives in the central repo; this just calls it.
+
+name: WP QA
+
+on:
+  pull_request:
+  push:
+    branches: [main, master]   # direct pushes to main still get checked, PR branches only run once
+  merge_group:
+  workflow_dispatch:
+
+concurrency:
+  group: wp-qa-${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+permissions:
+  contents: read
+
+jobs:
+  qa:
+    uses: elearning-evolve/ci-workflows/.github/workflows/wp-qa.yml@v1
+    with:
+      # Minimum PHP your plugin's header declares goes first. Override per repo if needed.
+      php-versions: '["7.4", "8.0", "8.1", "8.2", "8.3", "8.4"]'
+      phpcs-scope: changed      # switch to "all" once a repo is clean
+      fail-on-warnings: false
+
+  # Runs ONLY if every QA check passed. Then asks the reviewer to review.
+  # If QA fails, this never runs: the author fixes first, reviewer is not bothered.
+  request-review:
+    needs: qa
+    if: >-
+      github.event_name == 'pull_request' &&
+      !github.event.pull_request.draft &&
+      github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      pull-requests: write
+    steps:
+      - name: Request manual review
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+          PR: ${{ github.event.pull_request.number }}
+          AUTHOR: ${{ github.event.pull_request.user.login }}
+          REVIEWER: adeel-raza
+        run: |
+          if [ "$AUTHOR" = "$REVIEWER" ]; then
+            echo "Reviewer opened this PR, skipping review request."
+            exit 0
+          fi
+          if gh api -X POST "repos/$REPO/pulls/$PR/requested_reviewers" -f "reviewers[]=$REVIEWER" >/dev/null 2>&1; then
+            gh pr comment "$PR" -R "$REPO" --body "All QA checks passed. Review requested from @$REVIEWER."
+          else
+            echo "::warning::Could not request review from $REVIEWER. Is $REVIEWER a collaborator on $REPO?"
+            gh pr comment "$PR" -R "$REPO" --body "All QA checks passed. Ready for review by @$REVIEWER." || true
+          fi
