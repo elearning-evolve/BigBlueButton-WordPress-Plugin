@@ -45,15 +45,22 @@ jobs:
           REPO: ${{ github.repository }}
           PR: ${{ github.event.pull_request.number }}
           AUTHOR: ${{ github.event.pull_request.user.login }}
-          REVIEWER: adeel-raza
+          REVIEWERS: adeel-raza EVOLVE-DEV-TEAM
         run: |
-          if [ "$AUTHOR" = "$REVIEWER" ]; then
-            echo "Reviewer opened this PR, skipping review request."
-            exit 0
-          fi
-          if gh api -X POST "repos/$REPO/pulls/$PR/requested_reviewers" -f "reviewers[]=$REVIEWER" >/dev/null 2>&1; then
-            gh pr comment "$PR" -R "$REPO" --body "All QA checks passed. Review requested from @$REVIEWER."
-          else
-            echo "::warning::Could not request review from $REVIEWER. Is $REVIEWER a collaborator on $REPO?"
-            gh pr comment "$PR" -R "$REPO" --body "All QA checks passed. Ready for review by @$REVIEWER." || true
+          asked=""
+          for r in $REVIEWERS; do
+            # GitHub does not allow requesting a review from the PR author.
+            if [ "$(echo "$r" | tr A-Z a-z)" = "$(echo "$AUTHOR" | tr A-Z a-z)" ]; then
+              echo "$r opened this PR, skipping."
+              continue
+            fi
+            if gh api -X POST "repos/$REPO/pulls/$PR/requested_reviewers" -f "reviewers[]=$r" >/dev/null 2>&1; then
+              asked="$asked @$r"
+            else
+              echo "::warning::Could not request review from $r. Is $r a collaborator on $REPO?"
+              asked="$asked @$r"
+            fi
+          done
+          if [ -n "$asked" ]; then
+            gh pr comment "$PR" -R "$REPO" --body "All QA checks passed. Review requested from$asked." || true
           fi
