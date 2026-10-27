@@ -1,4 +1,27 @@
 const { __, _x, _n, _nx } = wp.i18n
+
+function bbbCopyTextToClipboard(text) {
+    text = text == null ? '' : String(text);
+    if (navigator.clipboard && window.isSecureContext) {
+        return navigator.clipboard.writeText(text);
+    }
+    return new Promise(function (resolve, reject) {
+        try {
+            var ta = document.createElement('textarea');
+            ta.value = text;
+            ta.setAttribute('readonly', '');
+            ta.style.position = 'fixed';
+            ta.style.left = '-9999px';
+            ta.style.top = '0';
+            document.body.appendChild(ta);
+            ta.select();
+            var ok = document.execCommand('copy');
+            document.body.removeChild(ta);
+            if (ok) { resolve(); } else { reject(new Error('copy failed')); }
+        } catch (e) { reject(e); }
+    });
+}
+
 ;(function ($) {
     /**
      * All of the code for your public-facing JavaScript source
@@ -46,7 +69,7 @@ const { __, _x, _n, _nx } = wp.i18n
         $('.bbb-recordings-display').click(function () {
             let room_id = $(this)[0].id.substring(23)
 
-            /** global: php_vars */
+            /** global: vcbbb_php_vars */
             if ($('#bbb-recordings-list-' + room_id).is(':visible')) {
                 $('#bbb-recordings-list-' + room_id).slideUp()
                 $(this)
@@ -55,7 +78,7 @@ const { __, _x, _n, _nx } = wp.i18n
                     .addClass('dashicons-arrow-right-alt2')
                 $(this)
                     .children('.bbb-expandable-header')
-                    .text(php_vars.expand_recordings)
+                    .text(vcbbb_php_vars.expand_recordings)
             } else {
                 $('#bbb-recordings-list-' + room_id).slideDown()
                 $(this)
@@ -64,7 +87,7 @@ const { __, _x, _n, _nx } = wp.i18n
                     .addClass('dashicons-arrow-down-alt2')
                 $(this)
                     .children('.bbb-expandable-header')
-                    .text(php_vars.collapse_recordings)
+                    .text(vcbbb_php_vars.collapse_recordings)
             }
         })
 
@@ -81,17 +104,17 @@ const { __, _x, _n, _nx } = wp.i18n
         // check if moderator has entered the meeting yet
         jQuery(document).on('heartbeat-send', function (event, data) {
             if (0 < $('#bbb-wait-for-mod-msg').length) {
-                data.check_bigbluebutton_meeting_state = true
-                data.bigbluebutton_room_id = $('#bbb-wait-for-mod-msg').data(
+                data.check_vcbbb_meeting_state = true
+                data.vcbbb_room_id = $('#bbb-wait-for-mod-msg').data(
                     'room-id'
                 )
                 if ($('#bbb-wait-for-mod-msg').data('temp-room-pass')) {
-                    data.bigbluebutton_temp_room_pass = $(
+                    data.vcbbb_temp_room_pass = $(
                         '#bbb-wait-for-mod-msg'
                     ).data('temp-room-pass')
                 }
                 if ($('#bbb-wait-for-mod-msg').data('room-username')) {
-                    data.bigbluebutton_room_username = $(
+                    data.vcbbb_room_username = $(
                         '#bbb-wait-for-mod-msg'
                     ).data('room-username')
                 }
@@ -100,10 +123,10 @@ const { __, _x, _n, _nx } = wp.i18n
 
         // handle response to checking if moderator has entered the meeting yet
         jQuery(document).on('heartbeat-tick', function (event, data) {
-            if (!data.bigbluebutton_admin_has_entered) {
+            if (!data.vcbbb_admin_has_entered) {
                 return
             }
-            window.location.replace(data.bigbluebutton_join_url)
+            window.location.replace(data.vcbbb_join_url)
         })
 
         // update join room form with new room id and access code input, if necessary
@@ -113,6 +136,7 @@ const { __, _x, _n, _nx } = wp.i18n
             let data = {
                 action: 'view_join_form',
                 room_id: room_id,
+                nonce: vcbbb_php_vars.join_form_nonce,
                 post_type: 'POST',
             }
 
@@ -124,7 +148,7 @@ const { __, _x, _n, _nx } = wp.i18n
                 'selected'
             )
             jQuery.post(
-                php_vars.ajax_url,
+                vcbbb_php_vars.ajax_url,
                 data,
                 function (response) {
                     if (response.success) {
@@ -159,7 +183,7 @@ const { __, _x, _n, _nx } = wp.i18n
 
         // publish/unpublish recordings
         $('.bbb_published_recording').click(function () {
-            /** global: php_vars */
+            /** global: vcbbb_php_vars */
             let current_icon = $(this)
             let recordID = $(this).data('record-id')
             let nonce = $(this).data('meta-nonce')
@@ -176,7 +200,7 @@ const { __, _x, _n, _nx } = wp.i18n
                 replace_class = 'not_published'
                 curr_icon_class = 'dashicons-visibility'
                 replace_icon_class = 'dashicons-hidden'
-                title = php_vars.unpublished
+                title = vcbbb_php_vars.unpublished
                 $('#bbb-recording-links-block-' + recordID).hide()
             } else {
                 value = 'true'
@@ -184,12 +208,12 @@ const { __, _x, _n, _nx } = wp.i18n
                 replace_class = 'is_published'
                 curr_icon_class = 'dashicons-hidden'
                 replace_icon_class = 'dashicons-visibility'
-                title = php_vars.published
+                title = vcbbb_php_vars.published
                 $('#bbb-recording-links-block-' + recordID).show()
             }
 
             let data = {
-                action: 'set_bbb_recording_publish_state',
+                action: 'set_vcbbb_recording_publish_state',
                 value: value,
                 post_type: 'POST',
                 meta_nonce: nonce,
@@ -197,7 +221,7 @@ const { __, _x, _n, _nx } = wp.i18n
             }
 
             jQuery.post(
-                php_vars.ajax_url,
+                vcbbb_php_vars.ajax_url,
                 data,
                 function (response) {
                     if (response.success) {
@@ -216,7 +240,7 @@ const { __, _x, _n, _nx } = wp.i18n
 
         // protect/unprotect recordings
         $('.bbb_protected_recording').click(function () {
-            /** global: php_vars */
+            /** global: vcbbb_php_vars */
             let current_icon = $(this)
             let recordID = $(this).data('record-id')
             let nonce = $(this).data('meta-nonce')
@@ -233,18 +257,18 @@ const { __, _x, _n, _nx } = wp.i18n
                 replace_class = 'not_protected'
                 curr_icon_class = 'dashicons-lock'
                 replace_icon_class = 'dashicons-unlock'
-                title = php_vars.unprotected
+                title = vcbbb_php_vars.unprotected
             } else {
                 value = 'true'
                 curr_class = 'not_protected'
                 replace_class = 'is_protected'
                 curr_icon_class = 'dashicons-unlock'
                 replace_icon_class = 'dashicons-lock'
-                title = php_vars.protected
+                title = vcbbb_php_vars.protected
             }
 
             let data = {
-                action: 'set_bbb_recording_protect_state',
+                action: 'set_vcbbb_recording_protect_state',
                 value: value,
                 post_type: 'POST',
                 meta_nonce: nonce,
@@ -252,7 +276,7 @@ const { __, _x, _n, _nx } = wp.i18n
             }
 
             jQuery.post(
-                php_vars.ajax_url,
+                vcbbb_php_vars.ajax_url,
                 data,
                 function (response) {
                     if (response.success) {
@@ -275,23 +299,23 @@ const { __, _x, _n, _nx } = wp.i18n
                 window.confirm(
                     __(
                         'Do you really want to delete this recording?',
-                        'bigbluebutton'
+                        'video-conferencing-with-bbb'
                     )
                 )
             ) {
-                /** global: php_vars */
+                /** global: vcbbb_php_vars */
                 let recordID = $(this).data('record-id')
                 let nonce = $(this).data('meta-nonce')
 
                 let data = {
-                    action: 'trash_bbb_recording',
+                    action: 'trash_vcbbb_recording',
                     post_type: 'POST',
                     meta_nonce: nonce,
                     record_id: recordID,
                 }
 
                 jQuery.post(
-                    php_vars.ajax_url,
+                    vcbbb_php_vars.ajax_url,
                     data,
                     function (response) {
                         if (response.success) {
@@ -310,12 +334,17 @@ const { __, _x, _n, _nx } = wp.i18n
         })
 
         // edit recording data in the table
-        $(document).on('click', '.bbb_edit_recording_data', function () {
-            /** global: php_vars */
-            let recordID = $(this).data('record-id')
-            let old_value = $(this).data('record-value')
-            let type = $(this).data('record-type')
-            let nonce = $(this).data('meta-nonce')
+        $(document).on('click', '.vcbbb_edit_recording_data, .bbb_edit_recording_data', function () {
+            /** global: vcbbb_php_vars */
+            let $btn = $(this)
+            // Use attr() so hyphenated data-* values are read reliably (jQuery .data() uses camelCase keys).
+            let recordID = $btn.attr('data-record-id')
+            let old_value = $btn.attr('data-record-value')
+            if (typeof old_value === 'undefined') {
+                old_value = ''
+            }
+            let type = $btn.attr('data-record-type')
+            let nonce = $btn.attr('data-meta-nonce')
             let form = '#bbb-recording-' + type + '-' + recordID
             let original_content = $(form).contents()
 
@@ -330,13 +359,23 @@ const { __, _x, _n, _nx } = wp.i18n
                 .appendTo(form)
                 .focus()
 
-            // submit changed recording data
-            $('#submit-recording-' + type + '-' + recordID).keyup(function (e) {
-                if ('Enter' === e.key) {
+            // submit changed recording data (keydown: Enter/Escape reliably across browsers)
+            $('#submit-recording-' + type + '-' + recordID).on('keydown', function (e) {
+                let enter = e.key === 'Enter' || e.which === 13 || e.keyCode === 13
+                let esc = e.key === 'Escape' || e.which === 27 || e.keyCode === 27
+                if (enter) {
+                    e.preventDefault()
+
+                    // Prevent duplicate submits if Enter is fired repeatedly.
+                    if ($(this).data('vcbbbSubmitting')) {
+                        return
+                    }
+                    $(this).data('vcbbbSubmitting', true)
+
                     let new_value = $(this).val()
 
                     let data = {
-                        action: 'set_bbb_recording_edits',
+                        action: 'set_vcbbb_recording_edits',
                         post_type: 'POST',
                         meta_nonce: nonce,
                         record_id: recordID,
@@ -345,27 +384,30 @@ const { __, _x, _n, _nx } = wp.i18n
                     }
 
                     jQuery.post(
-                        php_vars.ajax_url,
+                        vcbbb_php_vars.ajax_url,
                         data,
                         function (response) {
                             if (response.success) {
                                 $(form).text(new_value)
                                 $('<i>', {
-                                    class: 'dashicons dashicons-edit bbb-icon bbb_edit_recording_data',
-                                    id: 'edit-recording-' + type + recordID,
-                                    title: php_vars.edit,
+                                    class:
+                                        'dashicons dashicons-edit bbb-icon vcbbb-icon vcbbb_edit_recording_data bbb_edit_recording_data',
+                                    id: 'edit-recording-' + type + '-' + recordID,
+                                    title: vcbbb_php_vars.edit,
                                     'data-record-id': recordID,
                                     'data-record-type': type,
                                     'data-record-value': new_value,
                                     'data-meta-nonce': nonce,
                                 }).appendTo(form)
+                            } else {
+                                $(form).empty().append(original_content)
                             }
                         },
                         'json'
                     )
-                } else if ('Escape' === e.key) {
-                    // restore previous data
-                    $(form).html(original_content)
+                } else if (esc) {
+                    e.preventDefault()
+                    $(form).empty().append(original_content)
                 }
             })
         })
@@ -373,24 +415,25 @@ const { __, _x, _n, _nx } = wp.i18n
 })(jQuery)
 
 function copyToClipboard(elem) {
-    /* Copy the text inside the text field */
-    navigator.clipboard.writeText(elem.getAttribute('data-value'))
-
-    var tooltip = jQuery(elem)
-        .find('.recording-url-tooltip')
-        .html(__('Copied:', 'bigbluebutton'))
+    var val = elem.getAttribute('data-value');
+    if (val === null) { return; }
+    bbbCopyTextToClipboard(val).then(function () {
+        jQuery(elem).find('.recording-url-tooltip').html(__('Copied:', 'video-conferencing-with-bbb'));
+    });
 }
 
 function copyClipboardExit(elem) {
-    var tooltip = jQuery(elem)
+    jQuery(elem)
         .find('.recording-url-tooltip')
-        .html(__('Share Recording URL', 'bigbluebutton'))
+        .html(__('Share Recording URL', 'video-conferencing-with-bbb'))
 }
 
 function joinBBBRoomFromPage(URL, fullscreen = 0, self) {
     var req_form = jQuery(self).parents('form')
     var username = req_form.find('input[name="bbb_meeting_username"]').val()
     var room_id = req_form.find('input[name="room_id"]').val()
+    var requiresAuth = req_form.attr('data-vcbbb-requires-auth') === '1'
+    var guestAuthenticated = req_form.attr('data-vcbbb-guest-authenticated') === '1'
 
     if (fullscreen) {
         var target = '_system'
@@ -398,20 +441,91 @@ function joinBBBRoomFromPage(URL, fullscreen = 0, self) {
         var target = '_self'
     }
 
+    if (requiresAuth && !guestAuthenticated && !fullscreen) {
+        target = '_self'
+    }
+
+    vcbbbFlagEmptyGuestName(req_form)
+
     if (document.getElementById('joinroom' + room_id).reportValidity()) {
-        window.open(
+        var joinUrl =
             URL +
-                '&room_id=' +
-                room_id +
-                '&bbb_join_fullscreen=' +
-                fullscreen +
-                '&bbb_meeting_access_code=' +
-                req_form.find('input[name="bbb_meeting_access_code"]').val() +
-                '&bbb_meeting_username=' +
-                (username ? username : ''),
-            target
-        )
+            '&room_id=' +
+            room_id +
+            '&bbb_join_fullscreen=' +
+            fullscreen +
+            '&bbb_meeting_access_code=' +
+            encodeURIComponent(req_form.find('input[name="bbb_meeting_access_code"]').val()) +
+            '&bbb_meeting_username=' +
+            encodeURIComponent(username ? username : '')
+
+        if (guestAuthenticated) {
+            joinUrl += '&vcbbb_join_meeting=1'
+        }
+
+        var guestSession = req_form.find('input[name="vcbbb_guest_session"]').val()
+        if (guestSession) {
+            joinUrl += '&vcbbb_guest_session=' + encodeURIComponent(guestSession)
+        }
+
+        window.open(joinUrl, target)
     }
 
     return false
 }
+
+function vcbbbFlagEmptyGuestName(form) {
+    var nameInput = form.find('input[name="bbb_meeting_username"]').filter('[type!="hidden"]')
+    if (!nameInput.length) {
+        return
+    }
+    if (!String(nameInput.val() || '').trim()) {
+        nameInput.addClass('vcbbb-field-invalid')
+    } else {
+        nameInput.removeClass('vcbbb-field-invalid')
+    }
+}
+
+function vcbbbGuestViewRecordings(URL, self) {
+    var req_form = jQuery(self).parents('form')
+    var codeInput = req_form.find('input[name="bbb_meeting_access_code"]').filter('[type!="hidden"]')
+    var code = String(codeInput.val() || '')
+    if (!code.trim()) {
+        codeInput.addClass('vcbbb-field-invalid')
+        return false
+    }
+    codeInput.removeClass('vcbbb-field-invalid')
+
+    var room_id = req_form.find('input[name="room_id"]').val()
+    var username = req_form.find('input[name="bbb_meeting_username"]').val()
+    var joinUrl =
+        URL +
+        '&room_id=' +
+        encodeURIComponent(room_id || '') +
+        '&vcbbb_view_recordings=1' +
+        '&bbb_meeting_access_code=' +
+        encodeURIComponent(code) +
+        '&bbb_meeting_username=' +
+        encodeURIComponent(username || '')
+
+    window.open(joinUrl, '_self')
+    return false
+}
+
+jQuery(function ($) {
+    function vcbbbSyncAccessCodeBorder(input) {
+        input.classList.toggle('vcbbb-field-invalid', !String(input.value || '').trim())
+    }
+
+    $('input[name="bbb_meeting_access_code"]').filter('[type!="hidden"]').each(function () {
+        vcbbbSyncAccessCodeBorder(this)
+    }).on('input', function () {
+        vcbbbSyncAccessCodeBorder(this)
+    })
+
+    $('input[name="bbb_meeting_username"]').filter('[type!="hidden"]').on('input', function () {
+        if (String(this.value || '').trim()) {
+            this.classList.remove('vcbbb-field-invalid')
+        }
+    })
+})

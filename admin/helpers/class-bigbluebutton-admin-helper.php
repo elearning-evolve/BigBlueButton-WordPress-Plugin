@@ -18,7 +18,7 @@
  * @subpackage Bigbluebutton/public/helpers
  * @author     Blindside Networks <contact@blindsidenetworks.com>
  */
-class Bigbluebutton_Admin_Helper {
+class VCBBB_Admin_Helper {
 
 	/**
 	 * Generate random alphanumeric string.
@@ -31,25 +31,5 @@ class Bigbluebutton_Admin_Helper {
 	public static function generate_random_code( $length = 6 ) {
 		$default_code = bin2hex( random_bytes( $length / 2 ) );
 		return $default_code;
-	}
-
-	public static function check_posts() {
-		$args = array(
-			'post_type'   => 'bbb-room',
-			'post_status' => 'publish',
-			'numberposts' => 3,
-			'fields'      => 'ids',
-			'orderby'     => 'none',
-		);
-
-		$posts = get_posts( $args );
-
-		if ( ! Bigbluebutton_Loader::is_bbb_pro_active() ) {
-			if ( $posts && count( $posts ) >= ( 1 + 1 ) ) {
-				return true;
-			}
-		}
-
-		return false;
 	}
 }

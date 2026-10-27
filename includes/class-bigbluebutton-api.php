@@ -19,7 +19,7 @@
  * @subpackage Bigbluebutton/includes
  * @author     Blindside Networks <contact@blindsidenetworks.com>
  */
-class Bigbluebutton_Api {
+class VCBBB_Api {
 
 	/**
 	 * Create new meeting.
@@ -42,9 +42,13 @@ class Bigbluebutton_Api {
 		$moderator_code = get_post_meta( $rid, 'bbb-room-moderator-code', true );
 		$viewer_code    = get_post_meta( $rid, 'bbb-room-viewer-code', true );
 		$recordable     = get_post_meta( $rid, 'bbb-room-recordable', true );
+		if ( '' === $recordable ) {
+			$recordable = get_post_meta( $rid, 'vcbbb-room-recordable', true );
+		}
+		$record_param   = ( 'true' === $recordable ) ? 'true' : 'false';
 		$meeting_id     = get_post_meta( $rid, 'bbb-room-meeting-id', true );
 		$arr_params     = apply_filters(
-			'bbb_create_room_params',
+			'vcbbb_create_room_params',
 			array(
 				'name'        => esc_attr( $name ),
 				'rid'         => esc_attr( $rid ),
@@ -52,13 +56,13 @@ class Bigbluebutton_Api {
 				'attendeePW'  => rawurlencode( $viewer_code ),
 				'moderatorPW' => rawurlencode( $moderator_code ),
 				'logoutURL'   => esc_url_raw( $logout_url ),
-				'record'      => esc_attr( $recordable ),
+				'record'      => $record_param,
 			)
 		);
 
 		$url = self::build_url( 'create', $arr_params );
 
-		if ( Bigbluebutton_Loader::is_bbb_pro_active() && class_exists( 'Bigbluebuttonpro_Helper' ) ) {
+		if ( VCBBB_Loader::is_bbb_pro_active() && class_exists( 'Bigbluebuttonpro_Helper' ) ) {
 			$full_response = Bigbluebuttonpro_Helper::get_response( $url, 'get', $arr_params );
 		}
 
@@ -119,14 +123,14 @@ class Bigbluebutton_Api {
 			} else {
 				$code = self::create_meeting( $rid, $lo_url );
 				if ( 200 !== $code ) {
-					wp_die( esc_html__( $code, 'bigbluebutton' ) );
+					wp_die( esc_html( $code ) );
 				}
 			}
 		}
 
 		$meeting_id = get_post_meta( $rid, 'bbb-room-meeting-id', true );
 		$arr_params = apply_filters(
-			'bbb_join_room_params',
+			'vcbbb_join_room_params',
 			array(
 				'meetingID' => rawurlencode( $meeting_id ),
 				'fullName'  => $uname,
@@ -228,10 +232,16 @@ class Bigbluebutton_Api {
 		$meeting_ids = '';
 
 		foreach ( $room_ids as $rid ) {
-			$meeting_ids .= get_post_meta( sanitize_text_field( $rid ), 'bbb-room-meeting-id', true ) . ',';
+			$mid = get_post_meta( sanitize_text_field( $rid ), 'bbb-room-meeting-id', true );
+			if ( ! empty( trim( $mid ) ) ) {
+				$meeting_ids .= $mid . ',';
+			}
 		}
+		$meeting_ids = rtrim( $meeting_ids, ',' );
 
-		substr_replace( $meeting_ids, '', -1 );
+		if ( '' === $meeting_ids ) {
+			return $recordings;
+		}
 
 		$arr_params = array(
 			'meetingID' => $meeting_ids,
@@ -247,7 +257,10 @@ class Bigbluebutton_Api {
 
 		$response = self::response_to_xml( $full_response );
 		if ( property_exists( $response, 'recordings' ) && property_exists( $response->recordings, 'recording' ) ) {
-			$recordings = $response->recordings->recording;
+			$recordings = array();
+			foreach ( $response->recordings->recording as $rec ) {
+				$recordings[] = $rec;
+			}
 		}
 
 		return $recordings;
@@ -459,6 +472,84 @@ class Bigbluebutton_Api {
 	}
 
 	/**
+	 * Resolve configured BigBlueButton API base URL and shared secret (same source as API requests).
+	 *
+	 * @since 3.0.0
+	 *
+	 * @return array{0:string,1:string} API base URL (path ends before api/), salt.
+	 */
+	private static function get_bbb_endpoint_url_and_salt() {
+		if ( VCBBB_Loader::is_bbb_pro_active() ) {
+
+			$settings = array(
+				'vcbbb_url'  => get_option( 'vcbbb_url', get_option( 'bigbluebutton_url', VIDEO_CONF_WITH_BBB_ENDPOINT ) ),
+				'vcbbb_salt' => get_option( 'vcbbb_salt', get_option( 'bigbluebutton_salt', VIDEO_CONF_WITH_BBB_SALT ) ),
+			);
+
+			$settings = apply_filters( 'vcbbb_room_server_settings_display', $settings );
+			$settings = apply_filters( 'bbb_room_server_settings_display', $settings ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- Backward compatible Pro hook.
+
+			// Support both free (vcbbb_*) and Pro (bbb_*) key formats.
+			$url_val  = sanitize_text_field( isset( $settings['vcbbb_url'] ) ? $settings['vcbbb_url'] : ( isset( $settings['bbb_url'] ) ? $settings['bbb_url'] : '' ) );
+			$salt_val = sanitize_text_field( isset( $settings['vcbbb_salt'] ) ? $settings['vcbbb_salt'] : ( isset( $settings['bbb_salt'] ) ? $settings['bbb_salt'] : '' ) );
+
+			if ( empty( $url_val ) || empty( $salt_val ) ) {
+				$url_val  = sanitize_text_field( get_option( 'vcbbb_url', get_option( 'bigbluebutton_url', VIDEO_CONF_WITH_BBB_ENDPOINT ) ) );
+				$salt_val = sanitize_text_field( get_option( 'vcbbb_salt', get_option( 'bigbluebutton_salt', VIDEO_CONF_WITH_BBB_SALT ) ) );
+			}
+		} else {
+			$url_val  = sanitize_text_field( get_option( 'vcbbb_url', get_option( 'bigbluebutton_url', VIDEO_CONF_WITH_BBB_ENDPOINT ) ) );
+			$salt_val = sanitize_text_field( get_option( 'vcbbb_salt', get_option( 'bigbluebutton_salt', VIDEO_CONF_WITH_BBB_SALT ) ) );
+		}
+		return array( $url_val, $salt_val );
+	}
+
+	/**
+	 * Fix playback URLs when BBB returns host "unknown" (misconfigured server URL). Uses the host from
+	 * the plugin BigBlueButton API URL so Share / View recording links work behind proxies or staging.
+	 *
+	 * @since 3.0.0
+	 *
+	 * @param string $playback_url URL from getRecordings playback format.
+	 * @return string
+	 */
+	public static function normalize_recording_playback_url( $playback_url ) {
+		$playback_url = trim( (string) $playback_url );
+		if ( '' === $playback_url ) {
+			return $playback_url;
+		}
+		$parts = wp_parse_url( $playback_url );
+		if ( false === $parts || empty( $parts['host'] ) ) {
+			return $playback_url;
+		}
+		if ( 'unknown' !== strtolower( $parts['host'] ) ) {
+			return $playback_url;
+		}
+		list( $endpoint_base ) = self::get_bbb_endpoint_url_and_salt();
+		$ep = wp_parse_url( $endpoint_base );
+		if ( false === $ep || empty( $ep['host'] ) ) {
+			return $playback_url;
+		}
+		$scheme = isset( $ep['scheme'] ) ? strtolower( (string) $ep['scheme'] ) : 'https';
+		if ( 'http' !== $scheme && 'https' !== $scheme ) {
+			$scheme = 'https';
+		}
+		$origin = $scheme . '://' . $ep['host'];
+		if ( ! empty( $ep['port'] ) ) {
+			$origin .= ':' . (int) $ep['port'];
+		}
+		$path    = isset( $parts['path'] ) ? $parts['path'] : '';
+		$rebuilt = $origin . ( '' === $path ? '/' : $path );
+		if ( ! empty( $parts['query'] ) ) {
+			$rebuilt .= '?' . $parts['query'];
+		}
+		if ( ! empty( $parts['fragment'] ) ) {
+			$rebuilt .= '#' . $parts['fragment'];
+		}
+		return $rebuilt;
+	}
+
+	/**
 	 * Returns the complete url for the bigbluebutton server request.
 	 *
 	 * @since   3.0.0
@@ -470,20 +561,7 @@ class Bigbluebutton_Api {
 	private static function build_url( $request_type, $args ) {
 		$type = sanitize_text_field( $request_type );
 
-		if ( Bigbluebutton_Loader::is_bbb_pro_active() ) {
-
-			$settings = array(
-				'bbb_url'  => '',
-				'bbb_salt' => '',
-			);
-
-			$settings = apply_filters( 'bbb_room_server_settings_display', $settings );
-			$url_val  = sanitize_text_field( $settings['bbb_url'] );
-			$salt_val = sanitize_text_field( $settings['bbb_salt'] );
-		} else {
-			$url_val  = sanitize_text_field( get_option( 'bigbluebutton_url', VIDEO_CONF_WITH_BBB_ENDPOINT ) );
-			$salt_val = sanitize_text_field( get_option( 'bigbluebutton_salt', VIDEO_CONF_WITH_BBB_SALT ) );
-		}
+		list( $url_val, $salt_val ) = self::get_bbb_endpoint_url_and_salt();
 
 		$url = $url_val . 'api/' . $type . '?';
 

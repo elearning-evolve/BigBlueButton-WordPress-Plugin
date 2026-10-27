@@ -11,6 +11,10 @@
  * @package    Bigbluebutton
  * @subpackage Bigbluebutton/admin/partials
  */
+
+if ( ! defined( 'ABSPATH' ) ) {
+	die( 'No direct access' );
+}
 ?>
 
 <!-- This file should primarily consist of HTML with a little bit of PHP. -->

@@ -59,7 +59,8 @@
 }
 
 .flex-row-5 {
-    width: calc(100% / 4);
+    flex: 1 1 0;
+    min-width: 0;
 }
 
 .flex-row-6 {
@@ -89,11 +90,41 @@
     }
 }
 
-/* Media query for tablet and mobile */
+/* Media query for tablet and mobile - hide header only */
 @media (max-width: 768px) {
-    #bbb-recordings-table .bbb-header {
+    #bbb-recordings-table .bbb-header,
+    #vcbbb-recordings-table .bbb-header {
         display: none;
     }
+}
+
+/* Recordings table - ensure proper flex layout */
+.bbb-table-container .bbb-flex-table {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+}
+
+.bbb-table-container .bbb-flex-table .flex-row {
+    flex: 1 1 0;
+    min-width: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Manage cell - keep icons in a row */
+.bbb-table-container .vcbbb-recording-row .flex-row:last-child,
+.bbb-table-container .bbb-flex-table .flex-row[role="cell"]:last-of-type {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    gap: 0.25em;
+}
+
+.bbb-table-container .vcbbb-recording-row .flex-row:last-child .bbb-icon,
+.bbb-table-container .vcbbb-recording-row .flex-row:last-child .dashicons {
+    flex-shrink: 0;
 }
 
 .bbb-recording-table-input {
@@ -103,6 +134,15 @@
 .bbb-icon {
     color: #1976d2;
     cursor: pointer;
+}
+
+.bbb-table-container .bbb-icon {
+    display: inline-block;
+    transition: transform 0.15s ease;
+}
+
+.bbb-table-container .bbb-icon:hover {
+    transform: translateY(-3px);
 }
 
 .bbb-header-icon {
@@ -139,8 +179,18 @@
     text-decoration: none;
 }
 
-#joinroom .bbb-button:hover {
-    color: #fff;
+#joinroom .bbb-button,
+#joinroom .bbb-btn-join,
+.bbb-btn-join {
+    transition: transform 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease;
+}
+
+#joinroom .bbb-button:hover,
+#joinroom .bbb-btn-join:hover,
+.bbb-btn-join:hover {
+    color: #fff !important;
+    transform: translateY(-3px) !important;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.18) !important;
 }
 
 .bbb-recording-link:hover,
@@ -192,7 +242,7 @@
     margin-top: 10px;
 }
 
-[id^="bbb-recordings-list-"] {
+[id^="bbb-recordings-list-"], [id^="vcbbb-recordings-list-"] {
     margin-bottom: 20px;
 }
 
@@ -202,6 +252,10 @@
     border-bottom: groove;
 }
 
+.bbb-no-recordings-msg.is-hidden {
+    display: none;
+}
+
 #joinroom .bbb-join-room-label, .bbb-join-room-label {
     display: inline-block;
     width: 140px;
@@ -209,6 +263,73 @@
 
 #joinroom .bbb-join-room-input, .bbb-join-room-input {
     width: 310px;
+}
+
+#joinroom .bbb-join-room-input::placeholder,
+.bbb-join-room-input::placeholder {
+    color: #3c434a;
+    opacity: 1;
+}
+
+#joinroom .bbb-join-room-input:focus,
+.bbb-join-room-input:focus {
+    border: 1px solid #1d2327 !important;
+    border-radius: 14px !important;
+    outline: none !important;
+    box-shadow: 0 0 0 4px rgba(29, 35, 39, 0.22) !important;
+}
+
+#joinroom .bbb-join-room-input.vcbbb-field-invalid,
+.bbb-join-room-input.vcbbb-field-invalid,
+#joinroom .bbb-join-room-input.vcbbb-field-invalid:focus,
+.bbb-join-room-input.vcbbb-field-invalid:focus {
+    border: 1px solid #ff4d4f !important;
+    border-radius: 14px !important;
+    outline: none !important;
+    box-shadow: 0 0 0 4px rgba(255, 77, 79, 0.28) !important;
+}
+
+.bbb-recording-link-block {
+    width: auto;
+    max-width: 100%;
+}
+
+.vcbbb-view-recording,
+button.vcbbb-view-recording {
+    display: inline-block !important;
+    width: auto !important;
+    max-width: 100%;
+    color: #fff !important;
+    background-color: #007acc !important;
+    border: none !important;
+    padding: 0.35em 0.7em !important;
+    font-size: 14px !important;
+    font-weight: 400 !important;
+    line-height: 1.2 !important;
+    min-height: 0 !important;
+    height: auto !important;
+    white-space: nowrap !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    box-shadow: none !important;
+    cursor: pointer;
+    transition: transform 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease;
+}
+
+.vcbbb-view-recording:hover,
+button.vcbbb-view-recording:hover {
+    color: #fff !important;
+    background-color: #006799 !important;
+    transform: translateY(-3px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.18) !important;
+}
+
+.vcbbb-view-recording:focus,
+.vcbbb-view-recording:active,
+button.vcbbb-view-recording:focus,
+button.vcbbb-view-recording:active {
+    color: #fff !important;
+    background-color: #006799 !important;
 }
 
 .bbb-join-form-block {

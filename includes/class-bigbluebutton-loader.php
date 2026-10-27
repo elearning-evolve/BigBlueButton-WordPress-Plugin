@@ -21,7 +21,7 @@
  * @subpackage Bigbluebutton/includes
  * @author     Blindside Networks <contact@blindsidenetworks.com>
  */
-class Bigbluebutton_Loader {
+class VCBBB_Loader {
 
 	/**
 	 * The array of actions registered with WordPress.

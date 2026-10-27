@@ -19,7 +19,7 @@
  * @subpackage Bigbluebutton/includes
  * @author     Blindside Networks <contact@blindsidenetworks.com>
  */
-class Bigbluebutton_Migration {
+class VCBBB_Migration {
 
 	/**
 	 * The old version of the plugin that the user is updating from.
@@ -87,16 +87,15 @@ class Bigbluebutton_Migration {
 	 */
 	private function import_rooms() {
 		global $wpdb;
-		$old_rooms_table     = 'wp_bigbluebutton';
-		$old_room_logs_table = 'wp_bigbluebutton_logs';
+		$old_rooms_table     = $wpdb->prefix . 'bigbluebutton';
+		$old_room_logs_table = $wpdb->prefix . 'bigbluebutton_logs';
+		$old_rooms_table_sql = esc_sql( $old_rooms_table );
+		$old_room_logs_sql   = esc_sql( $old_room_logs_table );
 
 		// Import old rooms to new rooms.
-		$old_rooms_query            = $wpdb->prepare( 'SHOW TABLES LIKE %s;', $wpdb->esc_like( $old_rooms_table ) );
-		$old_room_logs_query        = $wpdb->prepare( 'SHOW TABLES LIKE %s;', $wpdb->esc_like( $old_room_logs_table ) );
-		$old_room_logs_table_exists = ( $wpdb->get_var( $old_room_logs_query ) === $old_room_logs_table );
-		if ( $wpdb->get_var( $old_rooms_query ) === $old_rooms_table ) {
-			$old_rooms = $wpdb->get_results( 'SELECT * FROM ' . $old_rooms_table );
-			// Import old rooms to new rooms.
+		$old_room_logs_table_exists = ( $wpdb->get_var( $wpdb->prepare( 'SHOW TABLES LIKE %s;', $wpdb->esc_like( $old_room_logs_table ) ) ) === $old_room_logs_table ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- One-time migration.
+		if ( $wpdb->get_var( $wpdb->prepare( 'SHOW TABLES LIKE %s;', $wpdb->esc_like( $old_rooms_table ) ) ) === $old_rooms_table ) { // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- One-time migration.
+			$old_rooms = $wpdb->get_results( 'SELECT * FROM `' . $old_rooms_table_sql . '`' ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.NotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Table identifiers cannot use prepare(); name is $wpdb->prefix + esc_sql.
 			foreach ( $old_rooms as $old_room ) {
 				$new_room_args = array(
 					'post_title' => $old_room->meetingName,
@@ -106,7 +105,11 @@ class Bigbluebutton_Migration {
 				$new_room_id = wp_insert_post( $new_room_args );
 
 				if ( 0 === $new_room_id ) {
-					$this->error_message = sprintf( wp_kses( __( 'Failed to import the room, %s.', 'bigbluebutton' ), array() ), $old_room->meetingNamen );
+					$this->error_message = sprintf(
+						/* translators: %s: room name */
+						wp_kses( __( 'Failed to import the room, %s.', 'video-conferencing-with-bbb' ), array() ),
+						$old_room->meetingNamen
+					);
 					return false;
 				} else {
 					wp_publish_post( $new_room_id );
@@ -124,7 +127,7 @@ class Bigbluebutton_Migration {
 					update_post_meta( $new_room_id, 'bbb-room-token', $old_room->meetingID );
 					update_post_meta( $new_room_id, 'bbb-room-meeting-id', $meeting_id );
 					if ( $old_room_logs_table_exists ) {
-						$wpdb->delete( $old_room_logs_table, array( 'meetingID' => $meeting_id ) );
+			$wpdb->delete( $old_room_logs_table, array( 'meetingID' => $meeting_id ) ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- One-time migration.
 					}
 
 					// Update room recordable value.
@@ -132,23 +135,23 @@ class Bigbluebutton_Migration {
 					update_post_meta( $new_room_id, 'bbb-room-wait-for-moderator', ( $old_room->waitForModerator ? 'true' : 'false' ) );
 
 					// Delete room from old table.
-					$wpdb->delete( $old_rooms_table, array( 'id' => $old_room->id ) );
+					$wpdb->delete( $old_rooms_table, array( 'id' => $old_room->id ) ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- One-time migration.
 				}
 			}
-			$check_old_rooms = $wpdb->get_results( 'SELECT * FROM ' . $old_rooms_table );
+			$check_old_rooms = $wpdb->get_results( 'SELECT * FROM `' . $old_rooms_table_sql . '`' ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.NotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Table identifiers cannot use prepare(); name is $wpdb->prefix + esc_sql.
 			if ( count( $check_old_rooms ) > 0 ) {
-				$this->error_message = __( 'Not all rooms were able to be imported to the new version.', 'bigbluebutton' );
+				$this->error_message = __( 'Not all rooms were able to be imported to the new version.', 'video-conferencing-with-bbb' );
 				return false;
 			} else {
-				$wpdb->query( 'DROP TABLE IF EXISTS ' . $old_rooms_table );
+				$wpdb->query( 'DROP TABLE IF EXISTS `' . $old_rooms_table_sql . '`' ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.DirectDatabaseQuery.SchemaChange, WordPress.DB.PreparedSQL.NotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- One-time migration drop; table name is prefix + esc_sql.
 			}
-			$check_room_logs = $wpdb->get_results( 'SELECT * FROM ' . $old_room_logs_table );
+			$check_room_logs = $wpdb->get_results( 'SELECT * FROM `' . $old_room_logs_sql . '`' ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.NotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Table identifiers cannot use prepare(); name is $wpdb->prefix + esc_sql.
 			if ( count( $check_room_logs ) > 0 ) {
-				$this->error_message = __( 'Not all room logs were able to be imported to the new version.' );
+				$this->error_message = __( 'Not all room logs were able to be imported to the new version.', 'video-conferencing-with-bbb' );
 				return false;
 			} else {
 				// Delete old log table.
-				$wpdb->query( 'DROP TABLE IF EXISTS ' . $old_room_logs_table );
+				$wpdb->query( 'DROP TABLE IF EXISTS `' . $old_room_logs_sql . '`' ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.DirectDatabaseQuery.SchemaChange, WordPress.DB.PreparedSQL.NotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- One-time migration drop; table name is prefix + esc_sql.
 			}
 		}
 		return true;
@@ -249,7 +252,7 @@ class Bigbluebutton_Migration {
 		global $wpdb;
 
 		// Sets the name of the table.
-		$table_name = $wpdb->prefix . 'bigbluebutton';
+		$table_name = $wpdb->prefix . 'video-conferencing-with-bbb';
 
 		// Updates for version 1.3.1 and earlier.
 		$bigbluebutton_plugin_version_installed = get_option( 'bigbluebutton_plugin_version' );
@@ -258,27 +261,29 @@ class Bigbluebutton_Migration {
 			// Initialize database will create the tables added for version 1.4.6.
 			$this->bigbluebutton_init_old_database();
 			// Transfer the data from old table to the new one.
-			$table_name_old   = $wpdb->prefix . 'bbb_meetingRooms';
-			$list_of_meetings = $wpdb->get_results( 'SELECT * FROM ' . $table_name_old . ' ORDER BY id;' );
+			$table_name_old     = $wpdb->prefix . 'bbb_meetingRooms';
+			$table_name_old_sql = esc_sql( $table_name_old );
+			$table_name_sql     = esc_sql( $table_name );
+			$list_of_meetings   = $wpdb->get_results( 'SELECT * FROM `' . $table_name_old_sql . '` ORDER BY id;' ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.NotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Table identifiers cannot use prepare(); name is $wpdb->prefix + esc_sql.
 			foreach ( $list_of_meetings as $meeting ) {
-				$sql = 'INSERT INTO ' . $table_name . ' (meetingID, meetingName, meetingVersion, attendeePW, moderatorPW) VALUES ( %s, %s, %s, %s, %s);';
-				$wpdb->query( $wpdb->prepare( $sql, Bigbluebutton_Admin_Helper::generate_random_code( 6 ), $meeting->meetingID, $meeting->meetingVersion, $meeting->attendeePW, $meeting->moderatorPW ) );
+				$sql = 'INSERT INTO `' . $table_name_sql . '` (meetingID, meetingName, meetingVersion, attendeePW, moderatorPW) VALUES ( %s, %s, %s, %s, %s);';
+				$wpdb->query( $wpdb->prepare( $sql, VCBBB_Admin_Helper::generate_random_code( 6 ), $meeting->meetingID, $meeting->meetingVersion, $meeting->attendeePW, $meeting->moderatorPW ) ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.NotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Values prepared; table name is prefix + esc_sql.
 			}
 			// Remove the old table.
-			$wpdb->query( 'DROP TABLE IF EXISTS ' . $table_name_old );
+			$wpdb->query( 'DROP TABLE IF EXISTS `' . $table_name_old_sql . '`' ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.DirectDatabaseQuery.SchemaChange, WordPress.DB.PreparedSQL.NotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- One-time migration drop; table name is prefix + esc_sql.
 
 			// Update settings.
 			if ( ! get_option( 'mt_bbb_url' ) ) {
-				update_option( 'bigbluebutton_url', VIDEO_CONF_WITH_BBB_ENDPOINT, false );
+				update_option( 'vcbbb_url', VIDEO_CONF_WITH_BBB_ENDPOINT, false );
 			} else {
-				update_option( 'bigbluebutton_url', get_option( 'mt_bbb_url' ), false );
+				update_option( 'vcbbb_url', get_option( 'mt_bbb_url' ), false );
 				delete_option( 'mt_bbb_url' );
 			}
 
 			if ( ! get_option( 'mt_salt' ) ) {
-				update_option( 'bigbluebutton_salt', VIDEO_CONF_WITH_BBB_SALT, false );
+				update_option( 'vcbbb_salt', VIDEO_CONF_WITH_BBB_SALT, false );
 			} else {
-				update_option( 'bigbluebutton_salt', get_option( 'mt_salt' ), false );
+				update_option( 'vcbbb_salt', get_option( 'mt_salt' ), false );
 				delete_option( 'mt_salt' );
 			}
 
@@ -340,7 +345,7 @@ class Bigbluebutton_Migration {
 		global $wpdb;
 
 		// Sets the name of the table.
-		$table_name      = $wpdb->prefix . 'bigbluebutton';
+		$table_name      = $wpdb->prefix . 'video-conferencing-with-bbb';
 		$table_logs_name = $wpdb->prefix . 'bigbluebutton_logs';
 
 		// Execute SQL.
@@ -358,11 +363,11 @@ class Bigbluebutton_Migration {
 		dbDelta( $sql );
 
 		$sql = 'INSERT INTO ' . $table_name . " (meetingID, meetingName, meetingVersion, attendeePW, moderatorPW)
-        VALUES ('" . Bigbluebutton_Admin_Helper::generate_random_code( 6 ) . "','Demo meeting', '" . time() . "', 'ap', 'mp');";
+        VALUES ('" . VCBBB_Admin_Helper::generate_random_code( 6 ) . "','Demo meeting', '" . time() . "', 'ap', 'mp');";
 		dbDelta( $sql );
 
 		$sql = 'INSERT INTO ' . $table_name . " (meetingID, meetingName, meetingVersion, attendeePW, moderatorPW, recorded)
-        VALUES ('" . Bigbluebutton_Admin_Helper::generate_random_code( 6 ) . "','Demo meeting (recorded)', '" . time() . "', 'ap', 'mp', TRUE);";
+        VALUES ('" . VCBBB_Admin_Helper::generate_random_code( 6 ) . "','Demo meeting (recorded)', '" . time() . "', 'ap', 'mp', TRUE);";
 		dbDelta( $sql );
 
 		$sql = 'CREATE TABLE ' . $table_logs_name . ' (

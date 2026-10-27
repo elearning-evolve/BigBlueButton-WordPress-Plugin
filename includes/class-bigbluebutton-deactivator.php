@@ -19,7 +19,7 @@
  * @subpackage Bigbluebutton/includes
  * @author     Blindside Networks <contact@blindsidenetworks.com>
  */
-class Bigbluebutton_Deactivator {
+class VCBBB_Deactivator {
 
 	/**
 	 * Placeholder for deactivating plugin.

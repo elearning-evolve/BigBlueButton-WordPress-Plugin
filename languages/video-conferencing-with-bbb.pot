@@ -12,7 +12,7 @@ msgstr ""
 "POT-Creation-Date: 2026-02-10T06:27:42+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.9.0\n"
-"X-Domain: bigbluebutton\n"
+"X-Domain: video-conferencing-with-bbb\n"
 
 #. Plugin Name of the plugin
 msgid "Virtual Classroom & Video Conferencing - BigBlueButton"
