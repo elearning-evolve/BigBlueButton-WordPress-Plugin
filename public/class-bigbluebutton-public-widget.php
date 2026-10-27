@@ -19,7 +19,7 @@
  * @subpackage Bigbluebutton/public
  * @author     Blindside Networks <contact@blindsidenetworks.com>
  */
-class Bigbluebutton_Public_Widget extends WP_Widget {
+class VCBBB_Public_Widget extends WP_Widget {
 
 	/**
 	 * Construct widget.
@@ -29,10 +29,10 @@ class Bigbluebutton_Public_Widget extends WP_Widget {
 	public function __construct() {
 		parent::__construct(
 			'bigbluebuttonwidget',
-			__( 'BBB Rooms', 'bigbluebutton' ),
+			__( 'BBB Rooms', 'video-conferencing-with-bbb' ),
 			array(
 				'customize_selective_refresh' => true,
-				'description'                 => __( 'Displays a BigBlueButton login form.', 'bigbluebutton' ),
+				'description'                 => __( 'Displays a BigBlueButton login form.', 'video-conferencing-with-bbb' ),
 				'panels_icon'                 => 'dashicons dashicons-video-alt2',
 			)
 		);
@@ -47,13 +47,15 @@ class Bigbluebutton_Public_Widget extends WP_Widget {
 	public function widget( $args, $instance ) {
 		$tokens_string  = isset( $instance['text'] ) ? $instance['text'] : '';
 		$author         = isset( $instance['author'] ) ? $instance['author'] : 0;
-		$display_helper = new Bigbluebutton_Display_Helper( plugin_dir_path( __FILE__ ) );
+		$display_helper = new VCBBB_Display_Helper( plugin_dir_path( __FILE__ ) );
 
-		echo $args['before_widget'] . $args['before_title'] . $args['widget_name'] . $args['after_title'];
+		VCBBB_Public::enqueue_frontend_assets();
 
-		echo Bigbluebutton_Tokens_Helper::join_form_from_tokens_string( $display_helper, $tokens_string, $author );
+		echo $args['before_widget'] . $args['before_title'] . esc_html( $args['widget_name'] ) . $args['after_title']; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Core widget wrappers are HTML.
 
-		echo $args['after_widget'];
+		echo VCBBB_Tokens_Helper::join_form_from_tokens_string( $display_helper, $tokens_string, $author ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Join form markup.
+
+		echo $args['after_widget']; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Core widget wrappers are HTML.
 	}
 
 	/**

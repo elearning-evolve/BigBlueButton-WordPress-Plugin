@@ -18,7 +18,7 @@
  * @subpackage Bigbluebutton/admin
  * @author     Blindside Networks <contact@blindsidenetworks.com>
  */
-class Bigbluebutton_Admin_Api {
+class VCBBB_Admin_Api {
 
 	/**
 	 * Save custom post meta to the room.
@@ -28,29 +28,37 @@ class Bigbluebutton_Admin_Api {
 	 * @param   Integer $post_id    Post ID of the new room.
 	 * @return  Integer $post_id    Post ID of the new room.
 	 */
-	public function save_bbb_room( $post_id, $post, $update ) {
+	public function save_vcbbb_room( $post_id, $post, $update ) {
 		if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
 			return $post_id;
 		}
 
-		if ( $this->can_save_room() ) {
-			$moderator_code = sanitize_text_field( $_POST['bbb-moderator-code'] );
-			$viewer_code    = sanitize_text_field( $_POST['bbb-viewer-code'] );
-			$recordable     = ( array_key_exists( 'bbb-room-recordable', $_POST ) && sanitize_text_field( $_POST['bbb-room-recordable'] ) == 'checked' );
+		if ( ! isset( $_POST['bbb-room-moderator-code-nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['bbb-room-moderator-code-nonce'] ) ), 'bbb-room-moderator-code-nonce' ) ) {
+			return $post_id;
+		}
 
-			$wait_for_mod = ( isset( $_POST['bbb-room-wait-for-moderator'] ) && sanitize_text_field( $_POST['bbb-room-wait-for-moderator'] ) == 'checked' );
+		if ( ! isset( $_POST['bbb-moderator-code'], $_POST['bbb-viewer-code'] ) ) {
+			return $post_id;
+		}
+
+		if ( $this->can_save_room() ) {
+			$moderator_code = sanitize_text_field( wp_unslash( $_POST['bbb-moderator-code'] ) );
+			$viewer_code    = sanitize_text_field( wp_unslash( $_POST['bbb-viewer-code'] ) );
+			$recordable     = ( array_key_exists( 'bbb-room-recordable', $_POST ) && sanitize_text_field( wp_unslash( $_POST['bbb-room-recordable'] ) ) == 'checked' );
+
+			$wait_for_mod = ( isset( $_POST['bbb-room-wait-for-moderator'] ) && sanitize_text_field( wp_unslash( $_POST['bbb-room-wait-for-moderator'] ) ) == 'checked' );
 
 			// Ensure neither code is empty.
 			if ( '' == $moderator_code ) {
-				$moderator_code = Bigbluebutton_Admin_Helper::generate_random_code();
+				$moderator_code = VCBBB_Admin_Helper::generate_random_code();
 			}
 			if ( '' == $viewer_code ) {
-				$viewer_code = Bigbluebutton_Admin_Helper::generate_random_code();
+				$viewer_code = VCBBB_Admin_Helper::generate_random_code();
 			}
 
 			// Ensure the Moderator Access Code is not the same as the Viewer Access Code.
 			if ( $moderator_code === $viewer_code ) {
-				$viewer_code = $moderator_code . Bigbluebutton_Admin_Helper::generate_random_code( 3 );
+				$viewer_code = $moderator_code . VCBBB_Admin_Helper::generate_random_code( 3 );
 			}
 
 			// Add room codes to postmeta data.
@@ -58,14 +66,14 @@ class Bigbluebutton_Admin_Api {
 			update_post_meta( $post_id, 'bbb-room-viewer-code', $viewer_code );
 
 			if ( ! get_post_meta( $post_id, 'bbb-room-meeting-id', true ) ) {
-				update_post_meta( $post_id, 'bbb-room-meeting-id', sha1( home_url() . Bigbluebutton_Admin_Helper::generate_random_code( 12 ) ) );
+				update_post_meta( $post_id, 'bbb-room-meeting-id', sha1( home_url() . VCBBB_Admin_Helper::generate_random_code( 12 ) ) );
 			}
 
 			// Update room recordable value.
 			update_post_meta( $post_id, 'bbb-room-recordable', ( $recordable ? 'true' : 'false' ) );
 			update_post_meta( $post_id, 'bbb-room-wait-for-moderator', ( $wait_for_mod ? 'true' : 'false' ) );
 
-			do_action( 'bbb_room_save_meta', $post_id );
+			do_action( 'vcbbb_room_save_meta', $post_id );
 		} else {
 			return $post_id;
 		}
@@ -77,9 +85,10 @@ class Bigbluebutton_Admin_Api {
 	 * @since 3.0.0
 	 */
 	public function dismiss_admin_notices() {
-		if ( isset( $_POST['type'] ) && 'bbb-' === substr( $_POST['type'], 0, 4 ) ) {
-			$type = sanitize_text_field( $_POST['type'] );
-			if ( wp_verify_nonce( $_POST['nonce'], $type ) ) {
+		if ( isset( $_POST['type'], $_POST['nonce'] ) && 'vcbbb-' === substr( sanitize_text_field( wp_unslash( $_POST['type'] ) ), 0, 6 ) ) {
+			$type  = sanitize_text_field( wp_unslash( $_POST['type'] ) );
+			$nonce = sanitize_text_field( wp_unslash( $_POST['nonce'] ) );
+			if ( wp_verify_nonce( $nonce, $type ) ) {
 				update_option( 'dismissed-' . $type, true, false );
 			}
 		}
@@ -94,7 +103,7 @@ class Bigbluebutton_Admin_Api {
 		return ( isset( $_POST['bbb-moderator-code'] ) &&
 			isset( $_POST['bbb-viewer-code'] ) &&
 			isset( $_POST['bbb-room-moderator-code-nonce'] ) &&
-			wp_verify_nonce( $_POST['bbb-room-moderator-code-nonce'], 'bbb-room-moderator-code-nonce' ) &&
+			wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['bbb-room-moderator-code-nonce'] ) ), 'bbb-room-moderator-code-nonce' ) &&
 			current_user_can( 'create_recordable_bbb_room' ) );
 	}
 }

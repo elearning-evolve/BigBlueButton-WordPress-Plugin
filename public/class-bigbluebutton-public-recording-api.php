@@ -19,33 +19,49 @@
  * @subpackage Bigbluebutton/public
  * @author     Blindside Networks <contact@blindsidenetworks.com>
  */
-class Bigbluebutton_Public_Recording_Api {
+class VCBBB_Public_Recording_Api {
 
 	/**
 	 * Handle publishing/unpublishing a recording
 	 *
 	 * @since   3.0.0
 	 *
-	 * @return  String  $response   JSON response to changing a recording's publication status.
+	 * @return  array  $response   JSON response to changing a recording's publication status.
 	 */
-	public function set_bbb_recording_publish_state() {
-		$response            = array();
-		$response['success'] = false;
-		if ( BigBlueButton_Permissions_Helper::user_has_bbb_cap( 'manage_bbb_room_recordings' ) ) {
-			if ( array_key_exists( 'meta_nonce', $_POST ) && array_key_exists( 'record_id', $_POST ) &&
-				array_key_exists( 'value', $_POST ) &&
-				( sanitize_text_field( $_POST['value'] ) == 'true' || sanitize_text_field( $_POST['value'] ) == 'false' ) &&
-				wp_verify_nonce( $_POST['meta_nonce'], 'bbb_manage_recordings_nonce' ) ) {
+	public function set_vcbbb_recording_publish_state() {
+		$response            = array( 'success' => false );
 
-				$record_id   = sanitize_text_field( $_POST['record_id'] );
-				$value       = sanitize_text_field( $_POST['value'] );
-				$return_code = Bigbluebutton_Api::set_recording_publish_state( $record_id, $value );
-
-				if ( $return_code == 200 ) {
-					$response['success'] = true;
-				}
-			}
+		if ( ! VCBBB_Permissions_Helper::user_has_bbb_cap( 'manage_bbb_room_recordings' ) ) {
+			wp_send_json( $response );
 		}
+
+		// Check required POST variables
+		if ( ! isset( $_POST['meta_nonce'], $_POST['record_id'], $_POST['value'] ) ) {
+			wp_send_json( $response );
+		}
+
+		// Sanitize POST variables
+		$meta_nonce = sanitize_text_field( wp_unslash( $_POST['meta_nonce'] ) );
+		$record_id  = sanitize_text_field( wp_unslash( $_POST['record_id'] ) );
+		$value      = sanitize_text_field( wp_unslash( $_POST['value'] ) );
+
+		// Validate value
+		if ( $value !== 'true' && $value !== 'false' ) {
+			wp_send_json( $response );
+		}
+
+		// Verify nonce
+		if ( ! wp_verify_nonce( $meta_nonce, 'vcbbb_manage_recordings_nonce' ) ) {
+			wp_die( esc_html__( 'Nonce verification failed', 'video-conferencing-with-bbb' ) );
+		}
+
+		// Call API to set publish state
+		$return_code = VCBBB_Api::set_recording_publish_state( $record_id, $value );
+
+		if ( $return_code === 200 ) {
+			$response['success'] = true;
+		}
+
 		wp_send_json( $response );
 	}
 
@@ -54,26 +70,37 @@ class Bigbluebutton_Public_Recording_Api {
 	 *
 	 * @since   3.0.0
 	 *
-	 * @return  String  $response   JSON response to changing a recording's protection status.
+	 * @return  array  $response   JSON response to changing a recording's protection status.
 	 */
-	public function set_bbb_recording_protect_state() {
-		$response            = array();
-		$response['success'] = false;
-		if ( BigBlueButton_Permissions_Helper::user_has_bbb_cap( 'manage_bbb_room_recordings' ) ) {
-			if ( array_key_exists( 'meta_nonce', $_POST ) && array_key_exists( 'record_id', $_POST ) &&
-				array_key_exists( 'value', $_POST ) &&
-				( sanitize_text_field( $_POST['value'] ) == 'true' || sanitize_text_field( $_POST['value'] ) == 'false' ) &&
-				wp_verify_nonce( $_POST['meta_nonce'], 'bbb_manage_recordings_nonce' ) ) {
+	public function set_vcbbb_recording_protect_state() {
+		$response            = array( 'success' => false );
 
-				$record_id   = sanitize_text_field( $_POST['record_id'] );
-				$value       = sanitize_text_field( $_POST['value'] );
-				$return_code = Bigbluebutton_Api::set_recording_protect_state( $record_id, $value );
-
-				if ( $return_code == 200 ) {
-					$response['success'] = true;
-				}
-			}
+		if ( ! VCBBB_Permissions_Helper::user_has_bbb_cap( 'manage_bbb_room_recordings' ) ) {
+			wp_send_json( $response );
 		}
+
+		if ( ! isset( $_POST['meta_nonce'], $_POST['record_id'], $_POST['value'] ) ) {
+			wp_send_json( $response );
+		}
+
+		$meta_nonce = sanitize_text_field( wp_unslash( $_POST['meta_nonce'] ) );
+		$record_id  = sanitize_text_field( wp_unslash( $_POST['record_id'] ) );
+		$value      = sanitize_text_field( wp_unslash( $_POST['value'] ) );
+
+		if ( $value !== 'true' && $value !== 'false' ) {
+			wp_send_json( $response );
+		}
+
+		if ( ! wp_verify_nonce( $meta_nonce, 'vcbbb_manage_recordings_nonce' ) ) {
+			wp_die( esc_html__( 'Nonce verification failed', 'video-conferencing-with-bbb' ) );
+		}
+
+		$return_code = VCBBB_Api::set_recording_protect_state( $record_id, $value );
+
+		if ( $return_code === 200 ) {
+			$response['success'] = true;
+		}
+
 		wp_send_json( $response );
 	}
 
@@ -82,23 +109,32 @@ class Bigbluebutton_Public_Recording_Api {
 	 *
 	 * @since   3.0.0
 	 *
-	 * @return  String  $response   JSON response to deleting a recording.
+	 * @return  array  $response   JSON response to deleting a recording.
 	 */
-	public function trash_bbb_recording() {
-		$response            = array();
-		$response['success'] = false;
-		if ( BigBlueButton_Permissions_Helper::user_has_bbb_cap( 'manage_bbb_room_recordings' ) ) {
-			if ( array_key_exists( 'meta_nonce', $_POST ) && array_key_exists( 'record_id', $_POST ) &&
-				wp_verify_nonce( $_POST['meta_nonce'], 'bbb_manage_recordings_nonce' ) ) {
+	public function trash_vcbbb_recording() {
+		$response            = array( 'success' => false );
 
-				$record_id   = sanitize_text_field( $_POST['record_id'] );
-				$return_code = Bigbluebutton_Api::delete_recording( $record_id );
-
-				if ( $return_code == 200 ) {
-					$response['success'] = true;
-				}
-			}
+		if ( ! VCBBB_Permissions_Helper::user_has_bbb_cap( 'manage_bbb_room_recordings' ) ) {
+			wp_send_json( $response );
 		}
+
+		if ( ! isset( $_POST['meta_nonce'], $_POST['record_id'] ) ) {
+			wp_send_json( $response );
+		}
+
+		$meta_nonce = sanitize_text_field( wp_unslash( $_POST['meta_nonce'] ) );
+		$record_id  = sanitize_text_field( wp_unslash( $_POST['record_id'] ) );
+
+		if ( ! wp_verify_nonce( $meta_nonce, 'vcbbb_manage_recordings_nonce' ) ) {
+			wp_die( esc_html__( 'Nonce verification failed', 'video-conferencing-with-bbb' ) );
+		}
+
+		$return_code = VCBBB_Api::delete_recording( $record_id );
+
+		if ( $return_code === 200 ) {
+			$response['success'] = true;
+		}
+
 		wp_send_json( $response );
 	}
 
@@ -107,31 +143,35 @@ class Bigbluebutton_Public_Recording_Api {
 	 *
 	 * @since   3.0.0
 	 *
-	 * @return  String  $response   JSON response to editing a recording's metadata.
+	 * @return  array  $response   JSON response to editing a recording's metadata.
 	 */
-	public function set_bbb_recording_edits() {
-		$response            = array();
-		$response['success'] = false;
+	public function set_vcbbb_recording_edits() {
+		$response            = array( 'success' => false );
 
-		if ( BigBlueButton_Permissions_Helper::user_has_bbb_cap( 'manage_bbb_room_recordings' ) ) {
-			if ( array_key_exists( 'meta_nonce', $_POST ) &&
-				array_key_exists( 'record_id', $_POST ) &&
-				array_key_exists( 'type', $_POST ) &&
-				array_key_exists( 'value', $_POST ) &&
-				wp_verify_nonce( $_POST['meta_nonce'], 'bbb_manage_recordings_nonce' )
-				) {
-
-				$record_id = sanitize_text_field( $_POST['record_id'] );
-				$type      = sanitize_text_field( $_POST['type'] );
-				$value     = wp_unslash( sanitize_text_field( $_POST['value'] ) );
-
-				$return_code = Bigbluebutton_Api::set_recording_edits( $record_id, $type, $value );
-
-				if ( $return_code == 200 ) {
-					$response['success'] = true;
-				}
-			}
+		if ( ! VCBBB_Permissions_Helper::user_has_bbb_cap( 'manage_bbb_room_recordings' ) ) {
+			wp_send_json( $response );
 		}
+
+		if ( ! isset( $_POST['meta_nonce'], $_POST['record_id'], $_POST['type'], $_POST['value'] ) ) {
+			wp_send_json( $response );
+		}
+
+		$meta_nonce = sanitize_text_field( wp_unslash( $_POST['meta_nonce'] ) );
+		$record_id  = sanitize_text_field( wp_unslash( $_POST['record_id'] ) );
+		$type       = sanitize_text_field( wp_unslash( $_POST['type'] ) );
+		$value      = sanitize_text_field( wp_unslash( $_POST['value'] ) );
+
+		if ( ! wp_verify_nonce( $meta_nonce, 'vcbbb_manage_recordings_nonce' ) ) {
+			wp_die( esc_html__( 'Nonce verification failed', 'video-conferencing-with-bbb' ) );
+		}
+
+		$return_code = VCBBB_Api::set_recording_edits( $record_id, $type, $value );
+
+		if ( $return_code === 200 ) {
+			$response['success'] = true;
+		}
+
 		wp_send_json( $response );
 	}
+
 }

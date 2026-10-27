@@ -18,7 +18,7 @@
  * @subpackage Bigbluebutton/public/helpers
  * @author     Blindside Networks <contact@blindsidenetworks.com>
  */
-class Bigbluebutton_Display_Helper {
+class VCBBB_Display_Helper {
 
 	/**
 	 * File location of the partials.
@@ -57,15 +57,16 @@ class Bigbluebutton_Display_Helper {
 		$is_join_web                      = 1;
 		$start_time                       = get_post_meta( $room_id, 'bbb-start-time', true );
 		$args['action']                   = 'join_room';
-		$args['bbb_join_room_meta_nonce'] = sanitize_text_field( $meta_nonce );
+		$args['vcbbb_join_room_meta_nonce'] = sanitize_text_field( $meta_nonce );
 		$args['current_page']             = get_permalink();
 		$args['post_id']                  = sanitize_text_field( ( isset( $post->ID ) ? $post->ID : 0 ) );
-		$url                              = get_permalink() . '?' . http_build_query( $args );
-		$_REQUEST['room_id']              = ( isset( $_REQUEST['room_id'] ) ? $_REQUEST['room_id'] : 0 );
+		$url                              = add_query_arg( $args, get_permalink() );
+		$_REQUEST['room_id']              = isset( $_REQUEST['room_id'] ) ? sanitize_text_field( wp_unslash( $_REQUEST['room_id'] ) ) : 0; // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Join form selected room.
 
 		if ( $start_time ) {
-			$dt     = new DateTime( $start_time, new DateTimeZone( wp_timezone_string() ) );
-			$dt_now = new DateTime( 'now', new DateTimeZone( wp_timezone_string() ) );
+			$vcbbb_timezone = EE_VCBBB_Helper::get_timezone_string();
+			$dt             = new DateTime( $start_time, new DateTimeZone( $vcbbb_timezone ) );
+			$dt_now         = new DateTime( 'now', new DateTimeZone( $vcbbb_timezone ) );
 
 			if ( $dt_now >= $dt ) {
 				// Meeting should start now
@@ -74,22 +75,41 @@ class Bigbluebutton_Display_Helper {
 		}
 
 		$heartbeat_available = wp_script_is( 'heartbeat', 'registered' );
-		if ( ! Bigbluebutton_Loader::is_bbb_pro_active() ) {
+		if ( ! VCBBB_Loader::is_bbb_pro_active() ) {
 			$form_target = '_blank';
-			$join_btn    = __( 'Join', 'bigbluebutton' );
+			$join_btn    = __( 'Join', 'video-conferencing-with-bbb' );
 		} else {
 			$form_target = '';
-			$join_btn    = __( 'Join Here', 'bigbluebutton' );
+			$join_btn    = __( 'Join Here', 'video-conferencing-with-bbb' );
 			$is_join_web = get_option( 'bbb_pro_join_web_iframe', 1 );
 		}
 
 		if ( $access_as_moderator ) {
-			$join_btn = str_replace( 'Join', __( 'Start', 'bigbluebutton' ), $join_btn );
+			$join_btn = str_replace( 'Join', __( 'Start', 'video-conferencing-with-bbb' ), $join_btn );
 		}
 
 		// If set from plugin settings then override all
 		if ( get_option( 'bbb_pro_join_here_text' ) ) {
 			$join_btn = get_option( 'bbb_pro_join_here_text' );
+		}
+
+		$requires_access_code_auth = VCBBB_Tokens_Helper::requires_access_code_auth_for_recordings( $room_id );
+		$guest_authenticated       = VCBBB_Tokens_Helper::is_authenticated_access_code_guest( $room_id );
+		$guest_room_auth           = $guest_authenticated ? VCBBB_Tokens_Helper::get_room_guest_auth( $room_id ) : null;
+
+		if ( $requires_access_code_auth && ! $guest_authenticated ) {
+			VCBBB_Tokens_Helper::clear_legacy_guest_room_cookies( $room_id );
+		}
+
+		if ( $guest_authenticated && ! empty( $guest_room_auth['token'] ) ) {
+			$args['current_page'] = add_query_arg(
+				array(
+					'vcbbb_guest_session' => $guest_room_auth['token'],
+					'room_id'             => $room_id,
+				),
+				$args['current_page']
+			);
+			$url = add_query_arg( $args, get_permalink() );
 		}
 
 		ob_start();
@@ -137,12 +157,12 @@ class Bigbluebutton_Display_Helper {
 		$recording_description_exist = null;
 		$sort_fields                 = $this->set_order_by_field();
 		ob_start();
-		$meta_nonce                                     = wp_create_nonce( 'bbb_manage_recordings_nonce' );
+		$meta_nonce                                     = wp_create_nonce( 'vcbbb_manage_recordings_nonce' );
 		$date_format                                    = ( get_option( 'date_format' ) ? get_option( 'date_format' ) : 'Y-m-d' );
 		$default_bbb_recording_format                   = 'presentation';
 		$bbb_recording_display_text                     = new stdClass();
-		$bbb_recording_display_text->presentation       = __( 'View', 'bigbluebutton' );
-		$bbb_recording_display_text->presentation_video = __( 'Download', 'bigbluebutton' );
+		$bbb_recording_display_text->presentation       = __( 'View', 'video-conferencing-with-bbb' );
+		$bbb_recording_display_text->presentation_video = __( 'Download', 'video-conferencing-with-bbb' );
 
 		foreach ( $recordings as $recording ) {
 			if ( ! empty( trim( $recording->metadata->{'recording-description'} ) ) ) {
@@ -166,17 +186,22 @@ class Bigbluebutton_Display_Helper {
 	private function set_order_by_field() {
 		$sort_asc_classes   = 'dashicons dashicons-arrow-up-alt2 bbb-header-icon';
 		$sort_desc_classes  = 'dashicons dashicons-arrow-down-alt2 bbb-header-icon';
-		$sort_meta_nounce   = wp_create_nonce( 'bbb_sort_recording_columns_nonce' );
+		$sort_meta_nounce   = wp_create_nonce( 'vcbbb_sort_recording_columns_nonce' );
 		$custom_sort_fields = array(
 			'name'        => null,
 			'description' => null,
 			'date'        => null,
 		);
 
-		if ( isset( $_GET['order'] ) && isset( $_GET['orderby'] ) && isset( $_GET['nonce'] ) && wp_verify_nonce( $_GET['nonce'], 'bbb_sort_recording_columns_nonce' ) ) {
-			$new_direction    = ( sanitize_text_field( $_GET['order'] ) == 'asc' ? 'desc' : 'asc' );
+		if ( isset( $_GET['order'] ) && isset( $_GET['orderby'] ) && isset( $_GET['nonce'] ) ) {
+			$nonce = sanitize_text_field( wp_unslash( $_GET['nonce'] ) );
+			if ( ! wp_verify_nonce( $nonce, 'vcbbb_sort_recording_columns_nonce' ) ) {
+				return $custom_sort_fields;
+			}
+
+			$new_direction    = ( sanitize_text_field( wp_unslash( $_GET['order'] ) ) == 'asc' ? 'desc' : 'asc' );
 			$new_sort_classes = ( 'asc' == $new_direction ? $sort_desc_classes : $sort_asc_classes ) . ' bbb-current-sort-icon';
-			$selected_field   = sanitize_text_field( $_GET['orderby'] );
+			$selected_field   = sanitize_text_field( wp_unslash( $_GET['orderby'] ) );
 
 			if ( array_key_exists( $selected_field, $custom_sort_fields ) ) {
 				$custom_sort_fields[ $selected_field ] = (object) array(

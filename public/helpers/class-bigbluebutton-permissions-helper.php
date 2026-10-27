@@ -19,7 +19,7 @@
  * @subpackage Bigbluebutton/public
  * @author     Blindside Networks <contact@blindsidenetworks.com>
  */
-class BigBlueButton_Permissions_Helper {
+class VCBBB_Permissions_Helper {
 
 	/**
 	 * Check if user can access room using type.
@@ -36,7 +36,7 @@ class BigBlueButton_Permissions_Helper {
 			$user_can = get_role( 'anonymous' )->has_cap( $type );
 		}
 
-		$user_can = apply_filters( 'bbb_user_has_this_cap', $user_can, $type );
+		$user_can = apply_filters( 'vcbbb_user_has_this_cap', $user_can, $type );
 
 		return $user_can;
 	}

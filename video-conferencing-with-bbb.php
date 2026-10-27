@@ -15,43 +15,49 @@
  * Plugin Name:       Virtual Classroom & Video Conferencing - BigBlueButton
  * Plugin URI:        https://wordpress.org/plugins/video-conferencing-with-bbb
  * Description:       This plugin allows teachers to manage their virtual classrooms right from WordPress using BigBlueButton
- * Version:           2.5.3
- * Author:            eLearning evolve <info@elearningevolve.com>
+ * Version:           3.2.22
+ * Author:            Evolve
  * Author URI:        https://elearningevolve.com/
  * License:           GPL-2.0+
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
- * Text Domain:       bigbluebutton
+ * Text Domain:       video-conferencing-with-bbb
  * Domain Path:       /languages
  */
-$plugin_version = '2.5.3';
-$plugin_name    = 'Virtual Classroom & Video Conferencing - BigBlueButton';
+$vcbbb_version     = '3.2.22';
+$vcbbb_plugin_name = 'Virtual Classroom & Video Conferencing - BigBlueButton';
 
 // If this file is called directly, abort.
 if ( ! defined( 'ABSPATH' ) ) {
 	die( 'No direct access' );
 }
 
-$eevolve_constants = array(
-	'VIDEO_CONF_WITH_BBB_VERSION'     => esc_html( $plugin_version ),
-	'VIDEO_CONF_WITH_BBB_ENDPOINT'    => 'https://test-install.blindsidenetworks.com/bigbluebutton/',
-	'VIDEO_CONF_WITH_BBB_SALT'        => '8cd8ef52e8e101574e400365b55e11a6',
-	'VIDEO_CONF_WITH_BBB_PLUGIN_NAME' => esc_html( $plugin_name ),
-	'VIDEO_CONF_WITH_BBB_PUBLIC_PATH' => __DIR__ . DIRECTORY_SEPARATOR . 'public' . DIRECTORY_SEPARATOR,
-	'VIDEO_CONF_WITH_BBB_IMG_URL'     => plugin_dir_url( __FILE__ ) . '/images',
-	'VIDEO_CONF_WITH_BBB_PRO'         => esc_url( 'https://elearningevolve.com/products/wp-virtual-classroom/' ),
-);
-
-foreach ( $eevolve_constants as $constant => $value ) {
-	if ( ! defined( $constant ) ) {
-		define( $constant, $value );
-	}
+if ( ! defined( 'VIDEO_CONF_WITH_BBB_VERSION' ) ) {
+	define( 'VIDEO_CONF_WITH_BBB_VERSION', esc_html( $vcbbb_version ) );
+}
+if ( ! defined( 'VIDEO_CONF_WITH_BBB_ENDPOINT' ) ) {
+	define( 'VIDEO_CONF_WITH_BBB_ENDPOINT', 'https://rp-evolve.api.rna1.blindsidenetworks.com/bigbluebutton/' );
+}
+if ( ! defined( 'VIDEO_CONF_WITH_BBB_SALT' ) ) {
+	define( 'VIDEO_CONF_WITH_BBB_SALT', '1db8f01d30a08703de5c35690c4266ad' );
+}
+if ( ! defined( 'VIDEO_CONF_WITH_BBB_PLUGIN_NAME' ) ) {
+	define( 'VIDEO_CONF_WITH_BBB_PLUGIN_NAME', esc_html( $vcbbb_plugin_name ) );
+}
+if ( ! defined( 'VIDEO_CONF_WITH_BBB_PUBLIC_PATH' ) ) {
+	define( 'VIDEO_CONF_WITH_BBB_PUBLIC_PATH', __DIR__ . DIRECTORY_SEPARATOR . 'public' . DIRECTORY_SEPARATOR );
+}
+if ( ! defined( 'VIDEO_CONF_WITH_BBB_IMG_URL' ) ) {
+	define( 'VIDEO_CONF_WITH_BBB_IMG_URL', plugin_dir_url( __FILE__ ) . '/images' );
+}
+if ( ! defined( 'VIDEO_CONF_WITH_BBB_PRO' ) ) {
+	define( 'VIDEO_CONF_WITH_BBB_PRO', esc_url( 'https://elearningevolve.com/products/wp-virtual-classroom/' ) );
 }
 
 // Show plugin conflict notice.
 add_action(
 	'admin_notices',
 	function () {
-		$notice = get_transient( 'video_conf_bbb_conflict_notice' );
+		$notice = get_transient( 'video_conf_vcbbb_conflict_notice' );
 		if ( $notice ) {
 			$allowed_html = array(
 				'strong' => array(),
@@ -67,9 +73,9 @@ add_action(
  *
  * @return bool True if conflict detected, false otherwise.
  */
-function video_conf_bbb_check_conflict_early() {
+function vcbbb_check_conflict_early() {
 	$conflict_basenames = array(
-		'bigbluebutton/bigbluebutton.php'                    => 'BigBlueButton',
+
 		'bbb-administration-panel/bigbluebutton-plugin.php' => 'BBB Administration Panel',
 	);
 
@@ -86,16 +92,19 @@ function video_conf_bbb_check_conflict_early() {
 		if ( is_plugin_active( $basename ) || is_plugin_active_for_network( $basename ) ) {
 			$deactivated_plugin = $plugin_name;
 
-			// Deactivate conflicting plugin immediately.
-			deactivate_plugins( $basename );
+			
 		}
 	}
 
 	if ( $deactivated_plugin ) {
 		// Set notice that we deactivated the conflicting plugin.
-		set_transient( 'video_conf_bbb_conflict_notice', '<strong>Virtual Classroom & Video Conferencing</strong> has been activated. <strong>' . $deactivated_plugin . '</strong> plugin was automatically deactivated.', 5 );
+		set_transient(
+	'video_conf_vcbbb_conflict_notice',
+	'<strong>Virtual Classroom & Video Conferencing</strong> is not compatible with <strong>' . esc_html( $deactivated_plugin ) . '</strong>. Please deactivate the conflicting plugin first.',
+	5
+);
 		// Continue loading our plugin.
-		return false;
+		return true;
 	}
 
 	return false;
@@ -107,10 +116,10 @@ function video_conf_bbb_check_conflict_early() {
  * @param bool $is_echo Whether to show notices.
  * @return bool|string False if no conflict, error message if conflict detected.
  */
-function video_conf_bbb_check_conflict( $is_echo = true ) {
+function vcbbb_check_conflict( $is_echo = true ) {
 
 	$conflict_basenames = array(
-		'bigbluebutton/bigbluebutton.php',
+
 		'bbb-administration-panel/bigbluebutton-plugin.php',
 	);
 
@@ -132,17 +141,17 @@ function video_conf_bbb_check_conflict( $is_echo = true ) {
 		foreach ( $plugins as $basename => $plugin ) {
 			if (
 				is_plugin_active( $basename ) || is_plugin_active_for_network( $basename )
-				|| defined( $plugin['class'] ) || ( isset( $_REQUEST['plugin'] ) && isset( $_REQUEST['action'] ) && 'activate' == $_REQUEST['action'] && $basename == $_REQUEST['plugin'] )
+				|| defined( $plugin['class'] ) || ( isset( $_REQUEST['plugin'], $_REQUEST['action'] ) && 'activate' === sanitize_text_field( wp_unslash( $_REQUEST['action'] ) ) && $basename === sanitize_text_field( wp_unslash( $_REQUEST['plugin'] ) ) ) // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Plugin activation request from WordPress.
 			) {
 
-				if ( isset( $_GET['activate'] ) ) {
+				if ( isset( $_GET['activate'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Core activation query flag.
 					unset( $_GET['activate'] );
 				}
 
-				deactivate_plugins( $basename );
+				
 
 				if ( $is_echo ) {
-					set_transient( 'video_conf_bbb_conflict_notice', $plugin['msg'], 3 );
+					set_transient( 'video_conf_vcbbb_conflict_notice', $plugin['msg'], 3 );
 				}
 
 				return $plugin['msg'];
@@ -154,7 +163,7 @@ function video_conf_bbb_check_conflict( $is_echo = true ) {
 }
 
 // Early conflict check to prevent fatal errors during activation.
-if ( video_conf_bbb_check_conflict_early() ) {
+if ( vcbbb_check_conflict_early() ) {
 	// Conflict detected - stop loading completely.
 	return;
 }
@@ -169,15 +178,15 @@ require plugin_dir_path( __FILE__ ) . 'includes/class-bigbluebutton.php';
  * The code that runs during plugin activation.
  * This action is documented in includes/class-bigbluebutton-activator.php
  */
-function ee_activate_video_conf_with_bbb() {
+function vcbbb_activate_plugin() {
 	require_once plugin_dir_path( __FILE__ ) . 'includes/class-bigbluebutton-activator.php';
 	// Load the classes required by the activator.
 	require_once plugin_dir_path( __FILE__ ) . 'includes/class-bigbluebutton-helper.php';
 	require_once plugin_dir_path( __FILE__ ) . 'admin/helpers/class-bigbluebutton-admin-helper.php';
 	require_once plugin_dir_path( __FILE__ ) . 'admin/class-bigbluebutton-register-custom-types.php';
-	Bigbluebutton_Activator::activate();
+	VCBBB_Activator::activate();
 }
-register_activation_hook( __FILE__, 'ee_activate_video_conf_with_bbb' );
+register_activation_hook( __FILE__, 'vcbbb_activate_plugin' );
 
 /**
  * Begins execution of the plugin.
@@ -192,13 +201,12 @@ add_action(
 	'plugins_loaded',
 	function () {
 		// Full conflict check with detailed messages.
-		if ( ! function_exists( 'run_video_conf_bbb' ) && ! video_conf_bbb_check_conflict() ) {
-			function run_video_conf_bbb() {
+		if ( ! function_exists( 'vcbbb_run_video_conf_bbb' ) && ! vcbbb_check_conflict() ) {
+			function vcbbb_run_video_conf_bbb() {
 				$plugin = new VideoConferencingWithBBB();
 				$plugin->run();
 			}
-			run_video_conf_bbb();
+			vcbbb_run_video_conf_bbb();
 		}
 	}
 );
-

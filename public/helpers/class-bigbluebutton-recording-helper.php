@@ -19,7 +19,7 @@
  * @subpackage Bigbluebutton/public/helpers
  * @author     Blindside Networks <contact@blindsidenetworks.com>
  */
-class Bigbluebutton_Recording_Helper {
+class VCBBB_Recording_Helper {
 
 	/**
 	 * Recordings.
@@ -64,11 +64,12 @@ class Bigbluebutton_Recording_Helper {
 	 * @return  Array $recordings  List of recordings.
 	 */
 	public function get_recordings_based_on_capability( $room_ids ) {
-		$manage_recordings = BigBlueButton_Permissions_Helper::user_has_bbb_cap( 'manage_bbb_room_recordings' );
+		$manage_recordings = VCBBB_Permissions_Helper::user_has_bbb_cap( 'manage_bbb_room_recordings' );
 		if ( $manage_recordings ) {
-			$this->recordings = Bigbluebutton_Api::get_recordings( $room_ids, 'published,unpublished' );
+			$this->recordings = VCBBB_Api::get_recordings( $room_ids, 'published,unpublished,processed,processing' );
+			$this->maybe_auto_publish_ready_recordings();
 		} else {
-			$this->recordings = Bigbluebutton_Api::get_recordings( $room_ids, 'published' );
+			$this->recordings = VCBBB_Api::get_recordings( $room_ids, 'published' );
 		}
 		return $this->recordings;
 	}
@@ -82,8 +83,57 @@ class Bigbluebutton_Recording_Helper {
 	 *
 	 * @since   3.0.0
 	 */
+	/**
+	 * Whether the recording XML includes at least one playback URL (processed / viewable).
+	 *
+	 * @param SimpleXMLElement $recording Recording node.
+	 * @return bool
+	 */
+	private function recording_has_playback( $recording ) {
+		if ( ! isset( $recording->playback->format ) ) {
+			return false;
+		}
+		$formats = $recording->playback->format;
+		if ( ! is_array( $formats ) ) {
+			$formats = array( $formats );
+		}
+		foreach ( $formats as $format ) {
+			if ( isset( $format->url ) && '' !== trim( (string) $format->url ) ) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	/**
+	 * Publish recordings that are ready (have playback) but still marked unpublished on the server.
+	 * Disable with add_filter( 'vcbbb_auto_publish_ready_recordings', '__return_false' ); in a small plugin or theme.
+	 *
+	 * @return void
+	 */
+	private function maybe_auto_publish_ready_recordings() {
+		if ( ! apply_filters( 'vcbbb_auto_publish_ready_recordings', true ) ) {
+			return;
+		}
+		foreach ( $this->recordings as $recording ) {
+			if ( 'false' !== (string) $recording->published ) {
+				continue;
+			}
+			if ( ! $this->recording_has_playback( $recording ) ) {
+				continue;
+			}
+			$record_id = (string) $recording->recordID;
+			if ( '' === $record_id ) {
+				continue;
+			}
+			if ( 200 === VCBBB_Api::set_recording_publish_state( $record_id, 'true' ) ) {
+				$recording->published = 'true';
+			}
+		}
+	}
+
 	private function filter_recordings() {
-		$manage_recordings   = BigBlueButton_Permissions_Helper::user_has_bbb_cap( 'manage_bbb_room_recordings' );
+		$manage_recordings   = VCBBB_Permissions_Helper::user_has_bbb_cap( 'manage_bbb_room_recordings' );
 		$filtered_recordings = array();
 		foreach ( $this->recordings as $recording ) {
 			// Set recording name to be meeting name if recording name is not yet set.
@@ -115,18 +165,18 @@ class Bigbluebutton_Recording_Helper {
 	private function filter_managed_recording( $recording ) {
 		if ( 'true' == $recording->protected ) {
 			$recording->protected_icon_classes = 'bbb-icon bbb_protected_recording is_protected dashicons dashicons-lock';
-			$recording->protected_icon_title   = __( 'Protected', 'bigbluebutton' );
+			$recording->protected_icon_title   = __( 'Protected', 'video-conferencing-with-bbb' );
 		} elseif ( 'false' == $recording->protected ) {
 			$recording->protected_icon_classes = 'bbb-icon bbb_protected_recording not_protected dashicons dashicons-unlock';
-			$recording->protected_icon_title   = __( 'Unprotected', 'bigbluebutton' );
+			$recording->protected_icon_title   = __( 'Unprotected', 'video-conferencing-with-bbb' );
 		}
 
 		if ( 'true' == $recording->published ) {
 			$recording->published_icon_classes = 'bbb-icon bbb_published_recording is_published dashicons dashicons-visibility';
-			$recording->published_icon_title   = __( 'Published' );
+			$recording->published_icon_title   = __( 'Published', 'video-conferencing-with-bbb' );
 		} else {
 			$recording->published_icon_classes = 'bbb-icon bbb_published_recording not_published dashicons dashicons-hidden';
-			$recording->published_icon_title   = __( 'Unpublished' );
+			$recording->published_icon_title   = __( 'Unpublished', 'video-conferencing-with-bbb' );
 		}
 
 		$recording->trash_icon_classes = 'bbb-icon bbb_trash_recording dashicons dashicons-trash';
@@ -145,8 +195,8 @@ class Bigbluebutton_Recording_Helper {
 	public function order_recordings( $order = '', $order_by = '' ) {
 		if ( '' !== $order && '' !== $order_by ) {
 
-			$direction = sanitize_text_field( $_GET['order'] );
-			$field     = sanitize_text_field( $_GET['orderby'] );
+			$direction = sanitize_text_field( $order );
+			$field     = sanitize_text_field( $order_by );
 			$self      = $this;
 
 			usort(
