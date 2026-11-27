@@ -23,6 +23,7 @@
  * Text Domain:       video-conferencing-with-bbb
  * Domain Path:       /languages
  */
+
 $vcbbb_version     = '3.2.22';
 $vcbbb_plugin_name = 'Virtual Classroom & Video Conferencing - BigBlueButton';
 
