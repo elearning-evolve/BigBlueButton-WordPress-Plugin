@@ -16,13 +16,14 @@
  * Plugin URI:        https://wordpress.org/plugins/video-conferencing-with-bbb
  * Description:       This plugin allows teachers to manage their virtual classrooms right from WordPress using BigBlueButton
  * Version:           3.2.22
- * Author:            Evolve
+ * Author:            EVOLVE
  * Author URI:        https://elearningevolve.com/
  * License:           GPL-2.0+
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
  * Text Domain:       video-conferencing-with-bbb
  * Domain Path:       /languages
  */
+
 $vcbbb_version     = '3.2.22';
 $vcbbb_plugin_name = 'Virtual Classroom & Video Conferencing - BigBlueButton';
 
@@ -92,17 +93,16 @@ function vcbbb_check_conflict_early() {
 		if ( is_plugin_active( $basename ) || is_plugin_active_for_network( $basename ) ) {
 			$deactivated_plugin = $plugin_name;
 
-			
 		}
 	}
 
 	if ( $deactivated_plugin ) {
 		// Set notice that we deactivated the conflicting plugin.
 		set_transient(
-	'video_conf_vcbbb_conflict_notice',
-	'<strong>Virtual Classroom & Video Conferencing</strong> is not compatible with <strong>' . esc_html( $deactivated_plugin ) . '</strong>. Please deactivate the conflicting plugin first.',
-	5
-);
+			'video_conf_vcbbb_conflict_notice',
+			'<strong>Virtual Classroom & Video Conferencing</strong> is not compatible with <strong>' . esc_html( $deactivated_plugin ) . '</strong>. Please deactivate the conflicting plugin first.',
+			5
+		);
 		// Continue loading our plugin.
 		return true;
 	}
@@ -147,8 +147,6 @@ function vcbbb_check_conflict( $is_echo = true ) {
 				if ( isset( $_GET['activate'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Core activation query flag.
 					unset( $_GET['activate'] );
 				}
-
-				
 
 				if ( $is_echo ) {
 					set_transient( 'video_conf_vcbbb_conflict_notice', $plugin['msg'], 3 );
