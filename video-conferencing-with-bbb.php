@@ -92,17 +92,16 @@ function vcbbb_check_conflict_early() {
 		if ( is_plugin_active( $basename ) || is_plugin_active_for_network( $basename ) ) {
 			$deactivated_plugin = $plugin_name;
 
-			
 		}
 	}
 
 	if ( $deactivated_plugin ) {
 		// Set notice that we deactivated the conflicting plugin.
 		set_transient(
-	'video_conf_vcbbb_conflict_notice',
-	'<strong>Virtual Classroom & Video Conferencing</strong> is not compatible with <strong>' . esc_html( $deactivated_plugin ) . '</strong>. Please deactivate the conflicting plugin first.',
-	5
-);
+			'video_conf_vcbbb_conflict_notice',
+			'<strong>Virtual Classroom & Video Conferencing</strong> is not compatible with <strong>' . esc_html( $deactivated_plugin ) . '</strong>. Please deactivate the conflicting plugin first.',
+			5
+		);
 		// Continue loading our plugin.
 		return true;
 	}
@@ -147,8 +146,6 @@ function vcbbb_check_conflict( $is_echo = true ) {
 				if ( isset( $_GET['activate'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Core activation query flag.
 					unset( $_GET['activate'] );
 				}
-
-				
 
 				if ( $is_echo ) {
 					set_transient( 'video_conf_vcbbb_conflict_notice', $plugin['msg'], 3 );
